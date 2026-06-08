@@ -8,9 +8,9 @@
     { id: "snake", label: "Snake", available: true },
     { id: "minesweeper", label: "Minesweeper", available: true },
     { id: "game2048", label: "2048", available: true },
-    { id: null, label: "Coming soon", available: false },
-    { id: null, label: "Coming soon", available: false },
-    { id: null, label: "Coming soon", available: false },
+    { id: "slitherlink", label: "Slitherlink", available: true },
+    { id: "kakuro", label: "Kakuro", available: true },
+    { id: "reversi", label: "Reversi", available: true },
   ];
 
   const TITLES = {
@@ -20,6 +20,9 @@
     snake: "magicSnake",
     minesweeper: "magicMinesweeper",
     game2048: "magic2048",
+    slitherlink: "magicSlitherlink",
+    kakuro: "magicKakuro",
+    reversi: "magicReversi",
   };
 
   const GAMES = GAME_CATALOG.filter((g) => g.available && g.id).map((g) => g.id);

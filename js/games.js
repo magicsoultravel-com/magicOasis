@@ -7,6 +7,9 @@
     snake: "magicSnake",
     minesweeper: "magicMinesweeper",
     game2048: "magic2048",
+    slitherlink: "magicSlitherlink",
+    kakuro: "magicKakuro",
+    reversi: "magicReversi",
   };
 
   const STORAGE_KEY = "magic-active-game";
@@ -21,6 +24,9 @@
   const snakePanel = document.getElementById("snake-panel");
   const minesweeperPanel = document.getElementById("minesweeper-panel");
   const game2048Panel = document.getElementById("game2048-panel");
+  const slitherlinkPanel = document.getElementById("slitherlink-panel");
+  const kakuroPanel = document.getElementById("kakuro-panel");
+  const reversiPanel = document.getElementById("reversi-panel");
 
   const PANELS = {
     sudoku: sudokuPanel,
@@ -29,6 +35,9 @@
     snake: snakePanel,
     minesweeper: minesweeperPanel,
     game2048: game2048Panel,
+    slitherlink: slitherlinkPanel,
+    kakuro: kakuroPanel,
+    reversi: reversiPanel,
   };
 
   let active = localStorage.getItem(STORAGE_KEY);
@@ -45,6 +54,9 @@
     if (active === "snake") window.SnakeApp?.saveGame?.();
     if (active === "minesweeper") window.MinesweeperApp?.saveGame?.();
     if (active === "game2048") window.Game2048App?.saveGame?.();
+    if (active === "slitherlink") window.SlitherlinkApp?.saveGame?.();
+    if (active === "kakuro") window.KakuroApp?.saveGame?.();
+    if (active === "reversi") window.ReversiApp?.saveGame?.();
   }
 
   function initGame(id) {
@@ -53,6 +65,9 @@
     if (id === "snake") window.SnakeApp?.init?.();
     if (id === "minesweeper") window.MinesweeperApp?.init?.();
     if (id === "game2048") window.Game2048App?.init?.();
+    if (id === "slitherlink") window.SlitherlinkApp?.init?.();
+    if (id === "kakuro") window.KakuroApp?.init?.();
+    if (id === "reversi") window.ReversiApp?.init?.();
   }
 
   function applyVisibility() {
@@ -106,6 +121,9 @@
     isSnake: () => active === "snake",
     isMinesweeper: () => active === "minesweeper",
     isGame2048: () => active === "game2048",
+    isSlitherlink: () => active === "slitherlink",
+    isKakuro: () => active === "kakuro",
+    isReversi: () => active === "reversi",
   };
 
   const hubOnLoad = window.Hub?.initHubOnLoad?.();

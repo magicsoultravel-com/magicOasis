@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>magicOasis</title>
-  <meta name="description" content="magicOasis — Sudoku, Mahjong, Solitaire, Snake, Minesweeper, 2048, and more games to unwind">
+  <meta name="description" content="magicOasis — Sudoku, Mahjong, Solitaire, Snake, Minesweeper, 2048, Slitherlink, Kakuro, Reversi, and more games to unwind">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/mahjong.css">
   <link rel="stylesheet" href="css/solitaire.css">
@@ -130,6 +130,42 @@
         <button id="btn-game2048-new" class="btn btn-icon game2048-only" type="button" aria-label="New 2048 game" title="New game">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <button id="btn-slitherlink-undo" class="btn btn-icon slitherlink-only" type="button" aria-label="Undo" title="Undo">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 7.5h6.5a3.5 3.5 0 0 0 0-7H9" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 4.5L4 7.5l3 3" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-slitherlink-restart" class="btn btn-icon slitherlink-only" type="button" aria-label="Restart slitherlink" title="Restart">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-slitherlink-new" class="btn btn-icon slitherlink-only" type="button" aria-label="New slitherlink puzzle" title="New puzzle">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-kakuro-guide" class="btn btn-icon kakuro-only" type="button" aria-label="How to play kakuro" title="How to play">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h7l3 3V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10 2.5V6H13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5h5M5.5 10.5h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-kakuro-pencil" class="btn btn-icon kakuro-only" type="button" aria-label="Pencil marks" title="Pencil marks">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12.5l1-3.5L10.5 3l2.5 2.5L6.5 12l-3.5 1z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-kakuro-clear" class="btn btn-icon kakuro-only" type="button" aria-label="Clear cell" title="Clear cell">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-kakuro-restart" class="btn btn-icon kakuro-only" type="button" aria-label="Restart kakuro" title="Restart">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-kakuro-new" class="btn btn-icon kakuro-only" type="button" aria-label="New kakuro puzzle" title="New puzzle">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-reversi-hints" class="btn btn-icon reversi-only active" type="button" aria-label="Move hints on" title="Move hints on">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4z" fill="currentColor"/><path d="M8 9v2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-reversi-pass" class="btn btn-icon reversi-only" type="button" aria-label="Pass" title="Pass">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 5.5l2.5 2.5L10 10.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-reversi-restart" class="btn btn-icon reversi-only" type="button" aria-label="Restart reversi" title="Restart">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-reversi-new" class="btn btn-icon reversi-only" type="button" aria-label="New reversi game" title="New game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
       <div class="menu-selects">
         <select id="difficulty" class="select sudoku-only" aria-label="Difficulty">
@@ -156,6 +192,16 @@
           <option value="easy">9×9</option>
           <option value="medium" selected>12×12</option>
           <option value="hard">16×16</option>
+        </select>
+        <select id="slitherlink-difficulty" class="select slitherlink-only" aria-label="Difficulty">
+          <option value="easy">7×7</option>
+          <option value="medium" selected>10×10</option>
+          <option value="hard">13×13</option>
+        </select>
+        <select id="kakuro-difficulty" class="select kakuro-only" aria-label="Difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
         </select>
         <div class="theme-picker">
           <button id="theme-picker-btn" class="btn theme-picker-btn" type="button" aria-label="Theme" aria-expanded="false" title="Theme">
@@ -364,6 +410,50 @@
         <span id="game2048-status" class="status" role="status"></span>
       </footer>
     </div>
+
+    <div id="slitherlink-panel" class="game-only" hidden>
+      <main class="main slitherlink-only">
+        <div id="slitherlink-board" class="sl-board" role="application" aria-label="Slitherlink board"></div>
+      </main>
+      <footer class="footer zen-hide slitherlink-only">
+        <span id="slitherlink-status" class="status" role="status"></span>
+      </footer>
+    </div>
+
+    <div id="kakuro-panel" class="game-only" hidden>
+      <main class="main kakuro-only">
+        <div id="kakuro-board" class="kk-board" role="grid" aria-label="Kakuro board"></div>
+        <div class="controls bottom-interface kakuro-only">
+          <div id="kakuro-pad" class="kk-pad" role="group" aria-label="Number pad">
+            <button class="btn btn-icon" type="button" data-kk-num="1">1</button>
+            <button class="btn btn-icon" type="button" data-kk-num="2">2</button>
+            <button class="btn btn-icon" type="button" data-kk-num="3">3</button>
+            <button class="btn btn-icon" type="button" data-kk-num="4">4</button>
+            <button class="btn btn-icon" type="button" data-kk-num="5">5</button>
+            <button class="btn btn-icon" type="button" data-kk-num="6">6</button>
+            <button class="btn btn-icon" type="button" data-kk-num="7">7</button>
+            <button class="btn btn-icon" type="button" data-kk-num="8">8</button>
+            <button class="btn btn-icon" type="button" data-kk-num="9">9</button>
+            <button class="btn btn-icon" type="button" data-kk-num="0" data-kk-action="clear">⌫</button>
+          </div>
+        </div>
+      </main>
+      <footer class="footer zen-hide kakuro-only">
+        <span id="kakuro-status" class="status" role="status"></span>
+      </footer>
+    </div>
+
+    <div id="reversi-panel" class="game-only" hidden>
+      <div class="game-stats zen-hide reversi-only" aria-label="Reversi score">
+        <span id="reversi-score">You 2 · AI 2</span>
+      </div>
+      <main class="main reversi-only">
+        <div id="reversi-board" class="rv-board" role="grid" aria-label="Reversi board"></div>
+      </main>
+      <footer class="footer zen-hide reversi-only">
+        <span id="reversi-status" class="status" role="status"></span>
+      </footer>
+    </div>
   </div>
 
   <dialog id="confirm-dialog" class="dialog confirm-dialog">
@@ -394,6 +484,16 @@
       </button>
     </div>
     <div id="settings-colors" class="dialog-body appearance-body"></div>
+  </dialog>
+
+  <dialog id="kakuro-guide-dialog" class="dialog">
+    <div class="dialog-header">
+      <h2 class="dialog-title">How to play</h2>
+      <button id="kakuro-guide-close" class="btn btn-icon" type="button" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div id="kakuro-guide-body" class="dialog-body"></div>
   </dialog>
 
   <dialog id="solitaire-guide-dialog" class="dialog">
@@ -476,6 +576,11 @@
   <script src="js/snake-app.js"></script>
   <script src="js/minesweeper-app.js"></script>
   <script src="js/game2048-app.js"></script>
+  <script src="js/kakuro-puzzles.js"></script>
+  <script src="js/kakuro-lessons.js"></script>
+  <script src="js/slitherlink-app.js"></script>
+  <script src="js/kakuro-app.js"></script>
+  <script src="js/reversi-app.js"></script>
   <script src="js/game-catalog.js"></script>
   <script src="js/hub.js"></script>
   <script src="js/games.js"></script>

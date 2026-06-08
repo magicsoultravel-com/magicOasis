@@ -1656,7 +1656,10 @@ body {
   .solitaire-only,
   .snake-only,
   .minesweeper-only,
-  .game2048-only
+  .game2048-only,
+  .slitherlink-only,
+  .kakuro-only,
+  .reversi-only
 ) {
   display: none !important;
 }
@@ -1666,7 +1669,10 @@ body {
 .app[data-game="solitaire"] .solitaire-only,
 .app[data-game="snake"] .snake-only,
 .app[data-game="minesweeper"] .minesweeper-only,
-.app[data-game="game2048"] .game2048-only {
+.app[data-game="game2048"] .game2048-only,
+.app[data-game="slitherlink"] .slitherlink-only,
+.app[data-game="kakuro"] .kakuro-only,
+.app[data-game="reversi"] .reversi-only {
   display: revert !important;
 }
 
@@ -1677,7 +1683,10 @@ body {
   .solitaire-only,
   .snake-only,
   .minesweeper-only,
-  .game2048-only
+  .game2048-only,
+  .slitherlink-only,
+  .kakuro-only,
+  .reversi-only
 ) {
   display: none !important;
 }
@@ -1692,7 +1701,10 @@ body {
   #solitaire-panel,
   #snake-panel,
   #minesweeper-panel,
-  #game2048-panel
+  #game2048-panel,
+  #slitherlink-panel,
+  #kakuro-panel,
+  #reversi-panel
 ) {
   display: none !important;
 }

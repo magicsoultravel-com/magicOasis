@@ -248,9 +248,318 @@
   opacity: 0.85;
 }
 
+/* Slitherlink */
+.app[data-game="slitherlink"] #slitherlink-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.app[data-game="slitherlink"] .main.slitherlink-only {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  overflow: auto;
+}
+
+.sl-board {
+  width: min(100%, 20rem);
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.sl-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.sl-dots,
+.sl-edges,
+.sl-cells {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(calc(var(--sl-cols) * 2 + 1), 1fr);
+  grid-template-rows: repeat(calc(var(--sl-rows) * 2 + 1), 1fr);
+}
+
+.sl-dot {
+  grid-row: calc(var(--dr) * 2 + 1);
+  grid-column: calc(var(--dc) * 2 + 1);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--border);
+  place-self: center;
+}
+
+.sl-cell {
+  grid-row: calc(var(--dr) * 2 + 2);
+  grid-column: calc(var(--dc) * 2 + 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: clamp(0.65rem, 3vw, 0.9rem);
+  color: var(--text);
+  user-select: none;
+}
+
+.sl-cell--clue.is-done {
+  color: var(--accent);
+}
+
+.sl-edge {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.sl-edge--h {
+  grid-row: calc(var(--dr) * 2 + 1);
+  grid-column: calc(var(--dc) * 2 + 2);
+  min-height: 1.25rem;
+  height: 100%;
+  width: 100%;
+  align-self: center;
+}
+
+.sl-edge--v {
+  grid-row: calc(var(--dr) * 2 + 2);
+  grid-column: calc(var(--dc) * 2 + 1);
+  min-width: 1.25rem;
+  width: 100%;
+  height: 100%;
+  justify-self: center;
+}
+
+.sl-edge--h::after,
+.sl-edge--v::after {
+  content: "";
+  display: block;
+  background: transparent;
+  border-radius: 2px;
+  transition: background 0.12s ease;
+}
+
+.sl-edge--h::after {
+  height: 3px;
+  width: 100%;
+}
+
+.sl-edge--v::after {
+  width: 3px;
+  height: 100%;
+}
+
+.sl-edge.is-on::after {
+  background: var(--accent);
+}
+
+.sl-edge.is-bad::after {
+  background: var(--error);
+}
+
+.sl-board--solved .sl-edge.is-on::after {
+  background: var(--success);
+}
+
+/* Kakuro */
+.app[data-game="kakuro"] #kakuro-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.app[data-game="kakuro"] .main.kakuro-only {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  overflow: auto;
+}
+
+.kk-board {
+  display: grid;
+  grid-template-columns: repeat(var(--kk-cols, 5), 1fr);
+  gap: 2px;
+  width: min(100%, 20rem);
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--border);
+}
+
+.kk-cell {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 3px;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+  position: relative;
+  min-height: 2.5rem;
+}
+
+.kk-cell--black {
+  background: color-mix(in srgb, var(--text) 88%, var(--bg));
+  cursor: default;
+}
+
+.kk-cell--white {
+  background: var(--surface);
+}
+
+.kk-cell--white.is-selected {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.kk-cell--white.is-error {
+  background: var(--error-bg);
+}
+
+.kk-cell--white.is-filled .kk-val {
+  font-weight: 700;
+  font-size: clamp(0.85rem, 4vw, 1.1rem);
+  color: var(--text);
+}
+
+.kk-board--solved .kk-cell--white.is-filled {
+  background: color-mix(in srgb, var(--success) 10%, var(--surface));
+}
+
+.kk-clue {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-size: clamp(0.5rem, 2.5vw, 0.7rem);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--bg) 85%, white);
+}
+
+.kk-clue-down {
+  position: absolute;
+  left: 3px;
+  bottom: 2px;
+}
+
+.kk-clue-across {
+  position: absolute;
+  right: 3px;
+  top: 2px;
+}
+
+.kk-notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  font-size: 0.45rem;
+  color: var(--text-muted);
+  padding: 1px;
+}
+
+.kk-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kk-note.is-on {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.kk-pad {
+  display: grid;
+  grid-template-columns: repeat(5, 2.5rem);
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.kk-pad .btn-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-weight: 600;
+}
+
+/* Reversi */
+.app[data-game="reversi"] #reversi-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.app[data-game="reversi"] .main.reversi-only {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+}
+
+.rv-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  width: min(100%, 20rem);
+  aspect-ratio: 1;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--success) 35%, var(--border));
+}
+
+.rv-cell {
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--success) 25%, var(--surface));
+  cursor: pointer;
+  padding: 0;
+  transform: scale(0.92);
+}
+
+.rv-cell--hint {
+  background: color-mix(in srgb, var(--accent-soft) 70%, var(--surface));
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.rv-cell--black {
+  background: #1a1a1a;
+  box-shadow: var(--shadow);
+  cursor: default;
+}
+
+.rv-cell--white {
+  background: #f4f4f5;
+  box-shadow: var(--shadow);
+  cursor: default;
+}
+
+.rv-board--over .rv-cell--hint {
+  box-shadow: none;
+  background: color-mix(in srgb, var(--success) 25%, var(--surface));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .g2048-tile,
-  .ms-board--lost .ms-cell--mine {
+  .ms-board--lost .ms-cell--mine,
+  .sl-edge--h::after,
+  .sl-edge--v::after {
     transition: none;
     animation: none;
   }
