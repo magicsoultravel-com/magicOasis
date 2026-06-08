@@ -16,6 +16,10 @@ const SolitaireGuide = [
     body: "Each foundation builds up by suit: Ace, then 2, 3, … through King. Double-tap a movable card to send it to the right foundation when possible.",
   },
   {
+    title: "Card sets",
+    body: "Use the deck button in the menu to switch between Classic, Vintage, and Midnight card designs.",
+  },
+  {
     title: "Tips",
     body: "Uncover hidden cards first. Move Kings to empty columns only when it helps. Use Undo freely — there is no penalty.",
   },

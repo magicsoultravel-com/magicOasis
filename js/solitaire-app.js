@@ -15,6 +15,8 @@
   const dealProgress = document.getElementById("solitaire-deal-progress");
   const guideDialog = document.getElementById("solitaire-guide-dialog");
   const guideBody = document.getElementById("solitaire-guide-body");
+  const btnDeck = document.getElementById("btn-solitaire-deck");
+  const appEl = document.querySelector(".app");
   const seedsDialog = document.getElementById("seeds-dialog");
   const currentSeedEl = document.getElementById("current-seed");
   const seedList = document.getElementById("seed-list");
@@ -22,6 +24,7 @@
   const STATE_KEY = "solitaire-game";
   const STATS_KEY = "solitaire-stats";
   const SEEDS_KEY = "solitaire-seeds";
+  const DECK_KEY = "solitaire-deck-set";
   const STATE_VERSION = 1;
   const MAX_SEEDS = 10;
   const HISTORY_LIMIT = 80;
@@ -42,6 +45,53 @@
   let dealToken = 0;
   let selected = null;
   let hintTarget = null;
+  let deckSet = "classic";
+
+  function stackStep(faceUp) {
+    if (!boardEl) return faceUp ? 14 : 5;
+    const name = faceUp ? "--sol-stack-face" : "--sol-stack-back";
+    const raw = getComputedStyle(boardEl).getPropertyValue(name).trim();
+    const n = parseFloat(raw);
+    return Number.isFinite(n) ? n : faceUp ? 14 : 5;
+  }
+
+  function cardHeightPx() {
+    if (!boardEl) return 56;
+    const raw = getComputedStyle(boardEl).getPropertyValue("--sol-card-h").trim();
+    const n = parseFloat(raw);
+    return Number.isFinite(n) ? n : 56;
+  }
+
+  function applyDeckSet(setId) {
+    deckSet = SolitaireCards.SETS[setId] ? setId : "classic";
+    if (appEl) appEl.dataset.solDeck = deckSet;
+    if (btnDeck) {
+      const label = SolitaireCards.setLabel(deckSet);
+      btnDeck.title = `Card set: ${label} — tap to change`;
+      btnDeck.setAttribute("aria-label", `Card set ${label}, tap to change`);
+      btnDeck.classList.toggle("active", deckSet !== "classic");
+    }
+    try {
+      localStorage.setItem(DECK_KEY, deckSet);
+    } catch {
+      /* storage unavailable */
+    }
+    if (state) renderBoard();
+  }
+
+  function loadDeckSet() {
+    try {
+      const saved = localStorage.getItem(DECK_KEY);
+      applyDeckSet(saved && SolitaireCards.SETS[saved] ? saved : "classic");
+    } catch {
+      applyDeckSet("classic");
+    }
+  }
+
+  function toggleDeckSet() {
+    window.SudokuApp?.closeMenu?.();
+    applyDeckSet(SolitaireCards.nextSet(deckSet));
+  }
 
   function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -231,36 +281,24 @@
     setDealProgress(0, "Dealing cards…");
   }
 
-  function createCardEl(card, { stackOffset = 0, selectable = true } = {}) {
+  function createCardEl(card, { stackOffset = 0, fanOffset = 0, selectable = true, layer = 0 } = {}) {
     const el = document.createElement("button");
     el.type = "button";
     el.className = "sol-card";
     el.dataset.cardId = String(card.id);
     el.style.setProperty("--stack-offset", String(stackOffset));
+    el.style.setProperty("--fan-offset", String(fanOffset));
+    el.style.setProperty("--card-layer", String(layer));
+
+    SolitaireCards.mount(el, card, deckSet);
 
     if (!card.faceUp) {
-      el.classList.add("sol-card--back");
       el.setAttribute("aria-label", "Face-down card");
       el.disabled = true;
       return el;
     }
 
-    const red = Solitaire.isRed(card.suit);
-    el.classList.add(red ? "sol-card--red" : "sol-card--black");
-    el.setAttribute(
-      "aria-label",
-      `${Solitaire.rankLabel(card.rank)} of ${card.suit}`
-    );
-
-    const rank = document.createElement("span");
-    rank.className = "sol-card-rank";
-    rank.textContent = Solitaire.rankLabel(card.rank);
-
-    const suit = document.createElement("span");
-    suit.className = "sol-card-suit";
-    suit.textContent = Solitaire.suitSymbol(card.suit);
-
-    el.append(rank, suit);
+    el.setAttribute("aria-label", `${Solitaire.rankLabel(card.rank)} of ${card.suit}`);
 
     if (selectable) {
       el.addEventListener("click", (e) => {
@@ -274,6 +312,17 @@
     }
 
     return el;
+  }
+
+  function appendBackPreview(parent, card, { stackOffset = 0, fanOffset = 0, layer = 0 } = {}) {
+    const el = document.createElement("span");
+    el.className = "sol-card sol-card--back sol-card--preview";
+    el.style.setProperty("--stack-offset", String(stackOffset));
+    el.style.setProperty("--fan-offset", String(fanOffset));
+    el.style.setProperty("--card-layer", String(layer));
+    el.setAttribute("aria-hidden", "true");
+    el.appendChild(SolitaireCards.renderBackSvg(deckSet, `p${card.id}-${layer}`));
+    parent.appendChild(el);
   }
 
   function isSelected(cardRef) {
@@ -465,9 +514,11 @@
     stockBtn.title = "Draw cards";
     if (state.stock.length) {
       stockBtn.classList.add("sol-pile--has-cards");
-      const back = document.createElement("span");
-      back.className = "sol-card sol-card--back sol-card--mini";
-      stockBtn.appendChild(back);
+      const layers = Math.min(3, state.stock.length);
+      for (let i = 0; i < layers; i++) {
+        const card = state.stock[state.stock.length - layers + i];
+        appendBackPreview(stockBtn, card, { stackOffset: i * 2, layer: i });
+      }
       const count = document.createElement("span");
       count.className = "sol-pile-count";
       count.textContent = String(state.stock.length);
@@ -479,14 +530,26 @@
     const wastePile = document.createElement("div");
     wastePile.className = "sol-pile sol-waste";
     wastePile.setAttribute("aria-label", "Waste pile");
-    const wasteTop = Solitaire.topCard(state.waste);
-    if (wasteTop) {
-      const wasteCard = createCardEl(wasteTop);
-      if (isSelected("waste")) wasteCard.classList.add("selected");
-      if (hintTarget?.type === "waste-foundation" || hintTarget?.type === "waste-tableau") {
-        wasteCard.classList.add("hint");
+    if (state.waste.length) {
+      const visible = Math.min(3, state.waste.length);
+      const start = state.waste.length - visible;
+      for (let i = 0; i < visible; i++) {
+        const card = state.waste[start + i];
+        const isTop = i === visible - 1;
+        const wasteCard = createCardEl(card, {
+          fanOffset: i * 10,
+          selectable: isTop,
+          layer: i,
+        });
+        if (isTop && isSelected("waste")) wasteCard.classList.add("selected");
+        if (
+          isTop &&
+          (hintTarget?.type === "waste-foundation" || hintTarget?.type === "waste-tableau")
+        ) {
+          wasteCard.classList.add("hint");
+        }
+        wastePile.appendChild(wasteCard);
       }
-      wastePile.appendChild(wasteCard);
     }
     topRow.appendChild(wastePile);
 
@@ -546,7 +609,7 @@
       let stackOffset = 0;
       column.forEach((card, idx) => {
         const cardEl = createCardEl(card, { stackOffset });
-        stackOffset += card.faceUp ? 18 : 8;
+        stackOffset += stackStep(card.faceUp);
         if (
           selected?.type === "tableau" &&
           selected.col === col &&
@@ -567,7 +630,7 @@
         stack.appendChild(cardEl);
       });
       if (column.length) {
-        stack.style.minHeight = `${stackOffset + 76}px`;
+        stack.style.minHeight = `${stackOffset + cardHeightPx()}px`;
       }
       colEl.appendChild(stack);
       tableau.appendChild(colEl);
@@ -608,6 +671,7 @@
       seconds,
       gameWon,
       difficultyPref: difficultyEl?.value,
+      deckSet,
     };
     try {
       localStorage.setItem(STATE_KEY, JSON.stringify(payload));
@@ -632,6 +696,7 @@
       history = [];
 
       if (data.difficultyPref && difficultyEl) difficultyEl.value = data.difficultyPref;
+      if (data.deckSet && SolitaireCards.SETS[data.deckSet]) applyDeckSet(data.deckSet);
 
       renderBoard();
       if (gameWon) {
@@ -759,6 +824,7 @@
 
     loadStats();
     loadSeedHistory();
+    loadDeckSet();
 
     btnUndo?.addEventListener("click", undo);
     btnHint?.addEventListener("click", showHint);
@@ -766,6 +832,7 @@
     document.getElementById("btn-solitaire-restart")?.addEventListener("click", restartGame);
     document.getElementById("btn-solitaire-guide")?.addEventListener("click", openGuide);
     document.getElementById("btn-solitaire-seeds")?.addEventListener("click", openSeeds);
+    btnDeck?.addEventListener("click", toggleDeckSet);
     document.getElementById("solitaire-guide-close")?.addEventListener("click", () => guideDialog?.close());
     guideDialog?.addEventListener("click", (e) => {
       if (e.target === guideDialog) guideDialog.close();
