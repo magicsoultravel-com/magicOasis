@@ -1,5 +1,7 @@
 # Design system — magicOasis
 
+Brand name: **magicOasis** (camelCase, no space).
+
 ## Aesthetic
 Minimal. Lightweight. Smooth. Modern.
 Default dark theme (slate). Support all existing themes via data-theme — never bypass CSS variables.
@@ -34,6 +36,11 @@ Default dark theme (slate). Support all existing themes via data-theme — never
 - Modes: data-theme on html, data-game on .app, .sudoku-only / .mahjong-only visibility
 - Boards: .board (sudoku), .mahjong-board (mahjong) — surface + border frame, no .card class
 
+## Modules (hub + games)
+- Shared shell: header (menu-row + title), `data-view="hub"|"game"`, `data-game` when in a game.
+- Hub: `hub-only` content; games: `game-only` + per-game `sudoku-only` / `mahjong-only` / `solitaire-only`.
+- Register new games in `js/game-catalog.js` first — hub and `games.js` read from there.
+
 ## Before shipping UI changes
 - Grep/read existing patterns in css/style.css and index.html.
-- Verify both themes and both games still work; no broken layout regressions.
+- Verify themes, hub/game switching, and all registered games still work.

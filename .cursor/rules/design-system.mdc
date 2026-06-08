@@ -1,5 +1,5 @@
 ---
-description: Magic Oasis visual design — tokens, components, hub layout
+description: magicOasis visual design — tokens, components, hub layout
 globs: "**/*.{html,css,js}"
 alwaysApply: false
 ---

@@ -314,11 +314,8 @@
     closeThemePicker();
   }
 
-  function toggleMenu() {
-    if (menuOpen) {
-      closeMenu();
-      return;
-    }
+  function openMenu() {
+    if (menuOpen) return;
     closeSettings();
     menuOpen = true;
     navMenu.hidden = false;
@@ -326,6 +323,14 @@
     menuScrim.setAttribute("aria-hidden", "false");
     btnMenu.classList.add("active");
     btnMenu.setAttribute("aria-expanded", "true");
+  }
+
+  function toggleMenu() {
+    if (menuOpen) {
+      closeMenu();
+      return;
+    }
+    openMenu();
   }
 
   function closeSettings() {
@@ -1373,11 +1378,8 @@
     lessonsDialog.showModal();
   }
 
-  function toggleSettings() {
-    if (settingsOpen) {
-      closeSettings();
-      return;
-    }
+  function openSettings() {
+    if (settingsOpen) return;
     closeMenu();
     settingsOpen = true;
     btnSettings.classList.add("active");
@@ -1387,6 +1389,14 @@
       Settings.syncPanel(settingsColors);
     }
     appearanceDialog.showModal();
+  }
+
+  function toggleSettings() {
+    if (settingsOpen) {
+      closeSettings();
+      return;
+    }
+    openSettings();
   }
 
   function handleKeydown(e) {
@@ -1591,5 +1601,12 @@
 
   boot();
 
-  window.SudokuApp = { saveGame, closeMenu, startFromHub };
+  window.SudokuApp = {
+    saveGame,
+    closeMenu,
+    openMenu,
+    openSettings,
+    openThemePicker: toggleThemePicker,
+    startFromHub,
+  };
 })();

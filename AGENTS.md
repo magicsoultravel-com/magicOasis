@@ -1,6 +1,6 @@
 # magicOasis
 
-Mobile-first SPA: Sudoku + Mahjong (+ more games). Vanilla HTML/CSS/JS, no build step.
+Mobile-first SPA: Sudoku, Mahjong, Solitaire (+ more games). Vanilla HTML/CSS/JS, no build step.
 
 ## Dev
 - Open index.html in a browser (or static host)
@@ -21,5 +21,12 @@ Cross-site principles:
 - Prefer concise delivery; explain tradeoffs when a decision isn't obvious.
 
 ## Key files
-- css/style.css, css/mahjong.css, index.html
-- js/games.js, js/hub.js, js/app.js, js/mahjong-app.js
+- index.html — shared shell (header, menu, hub panel, game panels); edit carefully when adding games
+- css/style.css, css/mahjong.css, css/solitaire.css
+- js/game-catalog.js — game list for hub + games.js (single source of truth)
+- js/games.js, js/hub.js, js/app.js, js/mahjong-app.js, js/solitaire-app.js
+
+## Adding a game
+1. Register in js/game-catalog.js
+2. Add panel + menu items in index.html (use `*-only` classes)
+3. Add *-app.js and wire init in games.js switchTo
