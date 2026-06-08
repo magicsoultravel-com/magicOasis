@@ -149,9 +149,6 @@
   document.getElementById("btn-hub-appearance")?.addEventListener("click", () => {
     window.SudokuApp?.openSettings?.({ view: "hub", gameId: null });
   });
-  document.getElementById("btn-hub-theme")?.addEventListener("click", () => {
-    window.SudokuApp?.openSettings?.({ view: "hub", gameId: null });
-  });
 
   window.Hub = {
     shouldShowHubOnLoad,

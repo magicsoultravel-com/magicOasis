@@ -390,6 +390,18 @@ body {
   text-align: center;
 }
 
+.game-toolbar,
+.game-extras {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.game-extras:empty {
+  display: none;
+}
+
 .menu-row {
   display: flex;
   justify-content: flex-start;
@@ -400,8 +412,7 @@ body {
   display: none;
 }
 
-.app.zen .menu-row .menu-toggle,
-.app.zen .menu-row .zen-toggle {
+.app.zen .menu-row .menu-toggle {
   display: none;
 }
 
@@ -415,27 +426,7 @@ body {
   margin-left: 0.125rem;
 }
 
-.menu-scrim {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: rgb(0 0 0 / 0.35);
-  border: none;
-  padding: 0;
-  cursor: default;
-}
-
-.menu-scrim[hidden] {
-  display: none;
-}
-
-.menu-overlay {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  margin-top: 0.25rem;
-  z-index: 101;
+.menu-panel {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -446,7 +437,7 @@ body {
   box-shadow: var(--shadow);
 }
 
-.menu-overlay[hidden] {
+.menu-panel[hidden] {
   display: none;
 }
 
@@ -478,6 +469,20 @@ body {
   letter-spacing: 0.02em;
   white-space: nowrap;
   padding: 0 0.125rem;
+}
+
+.menu-themes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.menu-themes-label {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .theme-picker {

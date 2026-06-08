@@ -64,23 +64,14 @@ const Appearance = (() => {
   }
 
   function syncThemeChips(activeId) {
-    if (!panelContainer) return;
-    panelContainer.querySelectorAll(".appearance-theme-chip").forEach((btn) => {
+    document.querySelectorAll(".appearance-theme-chip").forEach((btn) => {
       const selected = btn.dataset.theme === activeId;
       btn.classList.toggle("active", selected);
       btn.setAttribute("aria-selected", selected ? "true" : "false");
     });
   }
 
-  function buildThemeSection() {
-    const section = document.createElement("section");
-    section.className = "appearance-section appearance-section--global";
-
-    const heading = document.createElement("h3");
-    heading.className = "appearance-section-label";
-    heading.textContent = "Theme";
-    section.appendChild(heading);
-
+  function buildThemeChips() {
     const chips = document.createElement("div");
     chips.className = "appearance-chips appearance-theme-chips";
     chips.setAttribute("role", "listbox");
@@ -101,8 +92,17 @@ const Appearance = (() => {
       chips.appendChild(btn);
     });
 
-    section.appendChild(chips);
-    return section;
+    return chips;
+  }
+
+  function initMenuTheme(container) {
+    if (!container || container.dataset.ready) return;
+    const label = document.createElement("span");
+    label.className = "menu-themes-label";
+    label.textContent = "Theme";
+    container.appendChild(label);
+    container.appendChild(buildThemeChips());
+    container.dataset.ready = "1";
   }
 
   function buildChoiceRow(gameId, choice) {
@@ -274,8 +274,6 @@ const Appearance = (() => {
     panelContext = context;
     container.innerHTML = "";
 
-    container.appendChild(buildThemeSection());
-
     if (context.view === "game" && context.gameId) {
       const gameSection = buildGameSection(context.gameId);
       if (gameSection) container.appendChild(gameSection);
@@ -312,6 +310,7 @@ const Appearance = (() => {
     setTheme,
     getTheme,
     initTheme,
+    initMenuTheme,
     setOnThemeChanged,
   };
 })();

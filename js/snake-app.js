@@ -1,10 +1,13 @@
 (() => {
   const boardEl = document.getElementById("snake-board");
+  const startEl = document.getElementById("snake-start");
   const statusEl = document.getElementById("snake-status");
   const scoreEl = document.getElementById("snake-score");
   const bestEl = document.getElementById("snake-best");
   const difficultyEl = document.getElementById("snake-difficulty");
   const appEl = document.querySelector(".app");
+
+  const DEATH_LINES = ["Nein!", "Mein Leben!", "Scheiße!"];
 
   const STATE_KEY = "snake-game";
   const BEST_KEY = "snake-best";
@@ -25,10 +28,12 @@
   let score = 0;
   let best = 0;
   let running = false;
+  let waiting = true;
   let gameOver = false;
   let tickTimer = null;
   let initialized = false;
   let touchStart = null;
+  let germanVoice = null;
 
   function loadBest() {
     try {
@@ -64,6 +69,42 @@
 
   function setStatus(msg) {
     if (statusEl) statusEl.textContent = msg;
+  }
+
+  function pickGermanVoice() {
+    if (!window.speechSynthesis) return null;
+    const voices = speechSynthesis.getVoices();
+    const de = voices.filter((v) => /^de(-|_)/i.test(v.lang));
+    if (!de.length) return null;
+    return de.find((v) => /de-DE/i.test(v.lang)) || de[0];
+  }
+
+  function initVoice() {
+    if (!("speechSynthesis" in window)) return;
+    const refresh = () => {
+      germanVoice = pickGermanVoice();
+    };
+    refresh();
+    window.speechSynthesis.addEventListener("voiceschanged", refresh);
+  }
+
+  function speakDeath() {
+    if (!window.speechSynthesis) return;
+    const text = DEATH_LINES[Math.floor(Math.random() * DEATH_LINES.length)];
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "de-DE";
+    if (germanVoice) utterance.voice = germanVoice;
+    utterance.rate = 0.82;
+    utterance.pitch = 0.92;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function updateStartOverlay() {
+    if (!startEl) return;
+    const show = waiting || gameOver;
+    startEl.hidden = !show;
+    startEl.textContent = "START";
   }
 
   function updateScore() {
@@ -102,10 +143,20 @@
     nextDir = dir;
     score = 0;
     gameOver = false;
+    waiting = true;
     food = randomFood();
     updateScore();
-    setStatus("Arrow keys or swipe to move");
+    setStatus("Press START to play");
     render();
+    updateStartOverlay();
+  }
+
+  function startGame() {
+    if (gameOver) resetGame();
+    if (!waiting) return;
+    waiting = false;
+    setStatus("Arrow keys or swipe to move");
+    updateStartOverlay();
     startTick();
   }
 
@@ -149,21 +200,24 @@
 
   function endGame() {
     gameOver = true;
+    waiting = false;
     stopTick();
     saveBest();
+    speakDeath();
     setStatus(`Game over — score ${score}`);
     render();
+    updateStartOverlay();
   }
 
   function setDirection(key) {
     const d = DIR[key];
-    if (!d || gameOver) return;
+    if (!d || gameOver || waiting) return;
     const opposite = d.dr === -dir.dr && d.dc === -dir.dc;
     const pendingOpposite = d.dr === -nextDir.dr && d.dc === -nextDir.dc;
     if (!opposite && !pendingOpposite) {
       nextDir = d;
     }
-    if (!running && !gameOver) startTick();
+    if (!running && !gameOver && !waiting) startTick();
   }
 
   function render() {
@@ -196,9 +250,9 @@
     if (DIR[e.key]) {
       e.preventDefault();
       setDirection(e.key);
-    } else if (e.key === " " && gameOver) {
+    } else if (e.key === " " && (gameOver || waiting)) {
       e.preventDefault();
-      resetGame();
+      startGame();
     }
   }
 
@@ -241,11 +295,11 @@
   }
 
   function saveGame() {
-    if (!initialized || gameOver) return;
+    if (!initialized || gameOver || waiting) return;
     try {
       localStorage.setItem(
         STATE_KEY,
-        JSON.stringify({ snake, dir, nextDir, food, score, running })
+        JSON.stringify({ snake, dir, nextDir, food, score, running: running && !waiting })
       );
     } catch {
       /* storage unavailable */
@@ -264,10 +318,11 @@
       food = data.food;
       score = data.score || 0;
       gameOver = false;
+      waiting = true;
       updateScore();
+      setStatus("Press START to resume");
       render();
-      if (data.running) startTick();
-      else setStatus("Tap a direction to resume");
+      updateStartOverlay();
       return true;
     } catch {
       return false;
@@ -278,8 +333,10 @@
     if (!initialized) {
       initialized = true;
       loadBest();
+      initVoice();
       bindControls();
       document.addEventListener("keydown", onKeyDown);
+      startEl?.addEventListener("click", startGame);
       document.getElementById("btn-snake-new")?.addEventListener("click", resetGame);
       document.getElementById("btn-snake-restart")?.addEventListener("click", resetGame);
       difficultyEl?.addEventListener("change", () => {

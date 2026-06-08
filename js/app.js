@@ -22,7 +22,6 @@
   const seedsDialog = document.getElementById("seeds-dialog");
   const appearanceDialog = document.getElementById("appearance-dialog");
   const appEl = document.querySelector(".app");
-  const menuScrim = document.getElementById("menu-scrim");
   const confirmDialog = document.getElementById("confirm-dialog");
   const confirmMessage = document.getElementById("confirm-message");
   const confirmOk = document.getElementById("confirm-ok");
@@ -237,8 +236,7 @@
     if (!menuOpen) return;
     menuOpen = false;
     navMenu.hidden = true;
-    menuScrim.hidden = true;
-    menuScrim.setAttribute("aria-hidden", "true");
+    appEl.classList.remove("menu-open");
     btnMenu.classList.remove("active");
     btnMenu.setAttribute("aria-expanded", "false");
   }
@@ -248,8 +246,7 @@
     closeSettings();
     menuOpen = true;
     navMenu.hidden = false;
-    menuScrim.hidden = false;
-    menuScrim.setAttribute("aria-hidden", "false");
+    appEl.classList.add("menu-open");
     btnMenu.classList.add("active");
     btnMenu.setAttribute("aria-expanded", "true");
   }
@@ -316,6 +313,7 @@
 
   function initPreferences() {
     Appearance.initTheme();
+    Appearance.initMenuTheme(document.getElementById("menu-themes"));
     setZen(localStorage.getItem("sudoku-zen") === "1");
     const savedCat = localStorage.getItem("sudoku-cat");
     setCatEnabled(savedCat === "1" || (parseInt(savedCat, 10) || 0) > 0);
@@ -1420,7 +1418,6 @@
     e.preventDefault();
     closeConfirm();
   });
-  menuScrim.addEventListener("click", closeMenu);
   btnCat.addEventListener("click", () => toggleCat());
   document.getElementById("btn-lessons").addEventListener("click", openLessons);
   document.getElementById("btn-seeds").addEventListener("click", openSeeds);
@@ -1445,8 +1442,7 @@
     if (
       menuOpen &&
       !e.target.closest("#nav-menu") &&
-      !e.target.closest("#btn-menu") &&
-      !e.target.closest("#btn-zen")
+      !e.target.closest("#btn-menu")
     ) {
       closeMenu();
     }
