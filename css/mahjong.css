@@ -1,0 +1,631 @@
+/* Mahjong solitaire — separate from sudoku styles */
+
+.app[data-game="mahjong"] {
+  max-width: min(100vw, 56rem);
+  width: 100%;
+  padding: 0.5rem 0.75rem 0.75rem;
+}
+
+.app[data-game="mahjong"] #mahjong-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  gap: 0.5rem;
+}
+
+.app[data-game="mahjong"] .main.mahjong-only {
+  flex: 1;
+  min-height: 0;
+  gap: 0.5rem;
+}
+
+.mahjong-wrap {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: min(70vh, 36rem);
+  margin: 0 auto;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.mahjong-wrap.is-clearing .mahjong-board {
+  opacity: 0;
+  transform: scale(0.97);
+  pointer-events: none;
+}
+
+.mahjong-wrap.is-dealing .mahjong-board {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mahjong-deal-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 2px solid var(--board-border-strong, var(--border-strong));
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+}
+
+.mahjong-deal-overlay[hidden] {
+  display: none;
+}
+
+.mahjong-deal-panel {
+  width: min(100%, 16rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.mahjong-deal-label {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text);
+}
+
+.mahjong-deal-progress {
+  height: 0.375rem;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.mahjong-deal-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 0.16s ease;
+}
+
+.mj-tile.mj-enter {
+  animation: mj-tile-enter 0.36s ease backwards;
+}
+
+@keyframes mj-tile-enter {
+  from {
+    opacity: 0;
+    filter: brightness(1.15);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+.mj-guide-pron {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.lesson .mj-guide-pron {
+  margin-top: -0.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.mj-guide-samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.mj-guide-sample {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.mj-guide-sample .mj-guide-pron {
+  font-size: 0.625rem;
+  text-align: center;
+}
+
+.mj-guide-tile {
+  position: relative;
+  width: 2.5rem;
+  height: 3.25rem;
+  flex: 0 0 auto;
+  border: none;
+  padding: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.mj-guide-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--mj-tile-face, #f6f3eb);
+  border: 1px solid var(--mj-tile-edge, #c4bdb0);
+  border-radius: 3px;
+  box-shadow: 1px 2px 0 var(--mj-tile-side, #8a8378);
+}
+
+.mj-guide-tile .mj-face {
+  position: absolute;
+  inset: 2px 3px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mj-guide-tile .mj-chars-text,
+.mj-guide-tile .mj-wind-text,
+.mj-guide-tile .mj-dragon-text,
+.mj-guide-tile .mj-bonus-text {
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+/* Board — same language as sudoku .board */
+.mahjong-board {
+  --mj-layer-x: -5px;
+  --mj-layer-y: -4px;
+  --mj-tile-face: #f6f3eb;
+  --mj-tile-edge: #c4bdb0;
+  --mj-tile-side: #8a8378;
+  --mj-blocked-face: #e4e0d6;
+  --mj-blocked-edge: #b0a89a;
+  --mj-dot-color: #c41e1e;
+  --mj-bamboo-color: #1a7a3a;
+  --mj-bamboo-bird-eye: #facc15;
+  --mj-chars-color: #1d4ed8;
+  --mj-wind-color: #0f172a;
+  --mj-dragon-red: #dc2626;
+  --mj-dragon-green: #15803d;
+  --mj-white-color: #0f172a;
+  --mj-white-border: #0f172a;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: min(70vh, 36rem);
+  aspect-ratio: var(--mj-aspect, 1.85);
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 1.75rem;
+  background: var(--surface);
+  border: 2px solid var(--board-border-strong, var(--border-strong));
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  overflow: visible;
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.mj-tile {
+  --mj-lift: 0px;
+  position: absolute;
+  width: var(--mj-tile-w, 6.5%);
+  height: var(--mj-tile-h, 11%);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transform: translate(
+      calc(var(--mj-z, 0) * var(--mj-layer-x)),
+      calc(var(--mj-z, 0) * var(--mj-layer-y))
+    )
+    translateY(var(--mj-lift));
+  transition: transform 0.14s ease, filter 0.14s ease;
+}
+
+.mj-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--mj-tile-face);
+  border: 1px solid var(--mj-tile-edge);
+  border-bottom: 2px solid var(--mj-tile-side);
+  border-right: 2px solid var(--mj-tile-side);
+  box-shadow:
+    2px 0 0 var(--mj-tile-side),
+    0 3px 0 color-mix(in srgb, var(--mj-tile-side) 80%, #000);
+  z-index: 1;
+}
+
+.mj-tile:hover:not(:disabled) {
+  --mj-lift: -2px;
+}
+
+.mj-tile.selected {
+  --mj-lift: -4px;
+  z-index: calc(50 + var(--mj-z, 0)) !important;
+}
+
+.mj-tile.selected::before {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.mj-tile.hint {
+  animation: mj-hint-glow 1.1s ease-in-out infinite;
+  z-index: calc(60 + var(--mj-z, 0)) !important;
+}
+
+@keyframes mj-hint-glow {
+  0%,
+  100% {
+    filter: none;
+  }
+  50% {
+    filter: drop-shadow(0 0 4px var(--success));
+  }
+}
+
+.mj-tile.mj-removing {
+  pointer-events: none;
+  animation: mj-remove 0.32s ease forwards;
+  z-index: 200 !important;
+}
+
+@keyframes mj-remove {
+  0% {
+    opacity: 1;
+    transform: translate(
+        calc(var(--mj-z, 0) * var(--mj-layer-x)),
+        calc(var(--mj-z, 0) * var(--mj-layer-y))
+      )
+      scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(var(--mj-z, 0) * var(--mj-layer-x)),
+        calc(var(--mj-z, 0) * var(--mj-layer-y) - 10px)
+      )
+      scale(0.85);
+  }
+}
+
+.mj-tile.blocked:not(.selected):not(.hint)::before {
+  background: var(--mj-blocked-face);
+  border-color: var(--mj-blocked-edge);
+}
+
+.mj-tile.blocked:not(.selected):not(.hint) .mj-face {
+  opacity: 0.65;
+}
+
+.mj-tile:disabled {
+  cursor: default;
+}
+
+.mj-face {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2% 3%;
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.mj-face .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Dots */
+.mj-dots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10%;
+  width: 76%;
+  height: 76%;
+}
+
+.mj-dot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  min-width: 3px;
+  min-height: 3px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.mj-dot.on {
+  background: var(--mj-dot-color);
+}
+
+/* Bamboo */
+.mj-bamboo-sticks {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 2px;
+  width: 68%;
+  height: 74%;
+}
+
+.mj-stick {
+  display: block;
+  width: 16%;
+  min-width: 2px;
+  height: 76%;
+  border-radius: 1px;
+  background: var(--mj-bamboo-color);
+}
+
+.mj-bamboo-4 .mj-stick,
+.mj-bamboo-5 .mj-stick {
+  height: 62%;
+}
+
+.mj-bamboo-sticks.mj-bamboo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(0.45rem, 1fr);
+  align-content: center;
+  justify-items: center;
+  gap: 2px;
+  width: 72%;
+  height: 72%;
+}
+
+.mj-bamboo-sticks.mj-bamboo-grid .mj-stick {
+  width: 0.34rem;
+  height: 0.95rem;
+  min-width: 3px;
+  min-height: 0.45rem;
+  flex: none;
+  justify-self: center;
+  align-self: center;
+}
+
+.mj-bamboo-one .mj-bird {
+  display: block;
+  width: 55%;
+  height: 65%;
+  border-radius: 50% 50% 40% 40%;
+  background: var(--mj-bamboo-color);
+  position: relative;
+}
+
+.mj-bamboo-one .mj-bird::after {
+  content: "";
+  position: absolute;
+  top: 28%;
+  left: 55%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--mj-bamboo-bird-eye);
+}
+
+/* Characters — larger relative to tile */
+.mj-chars-text {
+  font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+  font-size: clamp(1rem, 72%, 2.45rem);
+  color: var(--mj-chars-color);
+  letter-spacing: -0.05em;
+  font-weight: 800;
+  line-height: 1;
+  transform: scaleX(0.96);
+  transform-origin: center;
+}
+
+/* Winds */
+.mj-wind-text {
+  font-size: clamp(1.05rem, 84%, 2.6rem);
+  color: var(--mj-wind-color);
+  font-weight: 800;
+}
+
+/* Dragons */
+.mj-dragon-text {
+  font-size: clamp(1.05rem, 84%, 2.6rem);
+  font-weight: 800;
+}
+
+.mj-dragon-1 {
+  color: var(--mj-dragon-red);
+}
+
+.mj-dragon-2 {
+  color: var(--mj-dragon-green);
+}
+
+.mj-white-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.2em;
+  min-height: 1.2em;
+  font-size: 0.98em;
+  color: var(--mj-white-color);
+  border: 2px solid var(--mj-white-border);
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Flowers & seasons */
+.mj-bonus-text {
+  font-size: clamp(1rem, 80%, 2.4rem);
+  font-weight: 800;
+}
+
+#btn-mahjong-voice {
+  position: relative;
+}
+
+#btn-mahjong-voice .mj-voice-on,
+#btn-mahjong-voice .mj-voice-off {
+  display: block;
+}
+
+#btn-mahjong-voice .mj-voice-off[hidden] {
+  display: none;
+}
+
+.mj-flower-1 { color: #db2777; }
+.mj-flower-2 { color: #7c3aed; }
+.mj-flower-3 { color: #ea580c; }
+.mj-flower-4 { color: #16a34a; }
+
+.mj-season-1 { color: #ec4899; }
+.mj-season-2 { color: #f59e0b; }
+.mj-season-3 { color: #d97706; }
+.mj-season-4 { color: #0ea5e9; }
+
+/* Black tile set */
+.app[data-mj-tiles="black"] .mahjong-board {
+  --mj-tile-face: #232328;
+  --mj-tile-edge: #48484f;
+  --mj-tile-side: #101012;
+  --mj-blocked-face: #2c2c32;
+  --mj-blocked-edge: #3f3f46;
+  --mj-dot-color: #f87171;
+  --mj-bamboo-color: #4ade80;
+  --mj-bamboo-bird-eye: #fde047;
+  --mj-chars-color: #93c5fd;
+  --mj-wind-color: #e2e8f0;
+  --mj-dragon-red: #f87171;
+  --mj-dragon-green: #4ade80;
+  --mj-white-color: #f8fafc;
+  --mj-white-border: #e2e8f0;
+}
+
+.app[data-mj-tiles="black"] .mj-guide-tile::before {
+  background: #232328;
+  border-color: #48484f;
+  box-shadow: 1px 2px 0 #101012;
+}
+
+.mj-atlas-intro {
+  margin: 0 0 0.75rem;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.mj-atlas-section .mj-atlas-rule {
+  margin: 0 0 0.625rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.mj-atlas-section .mj-atlas-english {
+  margin: 0 0 0.25rem;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.mj-atlas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4.75rem, 1fr));
+  gap: 0.5rem 0.375rem;
+  margin-bottom: 0.25rem;
+}
+
+.mj-atlas-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-align: center;
+}
+
+.mj-atlas-entry .mj-guide-tile {
+  width: 2.85rem;
+  height: 3.65rem;
+}
+
+.mj-atlas-entry .mj-chars-text,
+.mj-atlas-entry .mj-wind-text,
+.mj-atlas-entry .mj-dragon-text,
+.mj-atlas-entry .mj-bonus-text {
+  font-size: 0.8rem;
+}
+
+.mj-atlas-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.mj-atlas-chinese {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.mj-atlas-label {
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  line-height: 1.25;
+}
+
+.mahjong-actions {
+  justify-content: center;
+}
+
+#mahjong-stats {
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+#mahjong-tile-count {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 480px) {
+  .app[data-game="mahjong"] {
+    max-width: 100%;
+    padding: 0.35rem 0.25rem 0.5rem;
+  }
+
+  .mahjong-wrap,
+  .mahjong-board {
+    min-height: min(62vh, 28rem);
+  }
+
+  .mahjong-board {
+    --mj-layer-x: -4px;
+    --mj-layer-y: -3px;
+    padding: 0.75rem 0.5rem 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .app[data-game="mahjong"] {
+    max-width: min(94vw, 56rem);
+  }
+
+  .mahjong-board {
+    --mj-layer-x: -6px;
+    --mj-layer-y: -5px;
+    min-height: min(72vh, 40rem);
+  }
+}

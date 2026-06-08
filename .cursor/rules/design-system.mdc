@@ -1,0 +1,22 @@
+---
+description: Magic Oasis visual design — tokens, components, hub layout
+globs: "**/*.{html,css,js}"
+alwaysApply: false
+---
+
+# Design system
+
+Read `docs/design-system.md` before changing UI.
+
+## Non-negotiables
+- Use CSS variables from `css/style.css` — never hardcode colors in components.
+- kebab-case class names; state via `.active` or `.is-*`.
+- Inline SVG icons with `currentColor` (16px header, ~48px hub tiles).
+- Reuse `.btn`, `.btn-icon`, `.dialog`, surface+border patterns before inventing new components.
+
+## Hub
+- 3×3 grid: `.hub-grid`, `.hub-tile`, `.hub-tile--soon` for unavailable games.
+- Tiles extend button surface language (border, radius, hover).
+
+## Key files
+- `css/style.css`, `css/mahjong.css`, `index.html`, `js/hub.js`

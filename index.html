@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="slate">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic Sudoku</title>
+  <meta name="description" content="Magic Sudoku and Magic Mahjong solitaire">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/mahjong.css">
+</head>
+<body>
+  <div id="hub-panel" class="hub" hidden>
+    <header class="hub-header">
+      <h1 class="hub-title">Magic Oasis</h1>
+      <p class="hub-tagline">Pick a game to unwind</p>
+    </header>
+    <div id="hub-grid" class="hub-grid" role="list" aria-label="Games"></div>
+  </div>
+
+  <div id="quote-splash" class="quote-splash" hidden aria-live="polite">
+    <blockquote id="quote-text" class="quote-text"></blockquote>
+    <cite id="quote-author" class="quote-author"></cite>
+    <button id="quote-proceed" class="quote-proceed" type="button" aria-label="Proceed">
+      <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <div class="app">
+    <div id="game-stats" class="game-stats zen-hide sudoku-only" aria-label="Games started and completed">
+      <span id="stats-started">0</span> started · <span id="stats-completed">0</span> done
+    </div>
+    <header class="header">
+      <div class="title-row zen-hide">
+        <button id="game-prev" class="btn btn-icon game-switch-btn" type="button" aria-label="Previous game" title="Previous game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h1 id="game-title" class="title">Magic Sudoku</h1>
+        <button id="game-next" class="btn btn-icon game-switch-btn" type="button" aria-label="Next game" title="Next game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="menu-row">
+        <button id="btn-home" class="btn btn-icon zen-hide" type="button" aria-label="Home" title="Home — pick a game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 7.5L8 3l5 4.5V13a.5.5 0 0 1-.5.5H10v-4H6v4H3.5A.5.5 0 0 1 3 13V7.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-menu" class="btn btn-icon menu-toggle" type="button" aria-label="Menu" aria-expanded="false" title="Menu">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-zen" class="btn btn-icon zen-toggle" type="button" aria-label="Zen mode" title="Zen mode — focus on the puzzle">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-zen-exit" class="btn btn-icon zen-exit" type="button" aria-label="Exit zen mode" title="Exit zen mode">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <nav id="nav-menu" class="menu-overlay" hidden aria-label="Game menu">
+      <div class="menu-icons">
+        <button id="btn-lessons" class="btn btn-icon sudoku-only" type="button" aria-label="Lessons and tips" title="Lessons & tips">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h7l3 3V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10 2.5V6H13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5h5M5.5 10.5h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-mahjong-guide" class="btn btn-icon mahjong-only" type="button" aria-label="How to play mahjong" title="How to play & tile symbols">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h7l3 3V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10 2.5V6H13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5h5M5.5 10.5h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-mahjong-seeds" class="btn btn-icon mahjong-only" type="button" aria-label="Board seeds" title="Board seeds">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5h6v2a4 4 0 0 1-6 0v-2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 9.5v3M6.5 12.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-mahjong-tiles" class="btn btn-icon mahjong-only" type="button" aria-label="Toggle tile set" title="Tile set: Ivory">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="2.5" width="9" height="11" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="10" cy="10" r="1" fill="currentColor"/></svg>
+        </button>
+        <button id="btn-mahjong-voice" class="btn btn-icon mahjong-only active" type="button" aria-label="Tile pronunciation on" title="Tile pronunciation on — speaks when you select a tile">
+          <svg class="mj-voice-on" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6.5h2.5L8 3.5v9L6 9.5H3.5a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5z" fill="currentColor"/><path d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12 4a5.5 5.5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <svg class="mj-voice-off" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M3.5 6.5h2.5L8 3.5v9L6 9.5H3.5a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5z" fill="currentColor"/><path d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12 4a5.5 5.5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M2.5 2.5l11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-seeds" class="btn btn-icon sudoku-only" type="button" aria-label="Puzzle seeds" title="Puzzle seeds">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5h6v2a4 4 0 0 1-6 0v-2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 9.5v3M6.5 12.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-companion-cat" class="btn btn-icon sudoku-only" type="button" aria-label="Companion cat" title="Companion cat — drag to toss">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges"><rect x="3" y="2" width="2" height="2" fill="currentColor"/><rect x="11" y="2" width="2" height="2" fill="currentColor"/><rect x="2" y="4" width="12" height="2" fill="currentColor"/><rect x="4" y="6" width="1" height="1" fill="var(--accent)"/><rect x="11" y="6" width="1" height="1" fill="var(--accent)"/><rect x="2" y="7" width="12" height="4" fill="currentColor"/><rect x="3" y="11" width="4" height="3" fill="currentColor"/><rect x="9" y="11" width="4" height="3" fill="currentColor"/></svg>
+        </button>
+        <button id="btn-settings" class="btn btn-icon" type="button" aria-label="Appearance settings" title="Appearance">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 4.85A3.15 3.15 0 1 0 8 11.15 3.15 3.15 0 0 0 8 4.85zm4.78 1.93 1.1-.82-.82-1.43-1.28.47a4.6 4.6 0 0 0-1.1-.64l-.22-1.34H7.24l-.22 1.34c-.39.18-.75.38-1.1.64l-1.28-.47-.82 1.43 1.1.82a4.5 4.5 0 0 0-.02 1.28l-1.1.82.82 1.43 1.28-.47c.35.26.71.46 1.1.64l.22 1.34h1.52l.22-1.34c.39-.18.75-.38 1.1-.64l1.28.47.82-1.43-1.1-.82a4.5 4.5 0 0 0 .02-1.28z"/></svg>
+        </button>
+        <button id="btn-restart" class="btn btn-icon sudoku-only" type="button" aria-label="Restart puzzle" title="Restart puzzle">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-mahjong-restart" class="btn btn-icon mahjong-only" type="button" aria-label="Restart mahjong" title="Restart puzzle">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-new" class="btn btn-icon sudoku-only" type="button" aria-label="New game" title="New game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-mahjong-new" class="btn btn-icon mahjong-only" type="button" aria-label="New mahjong game" title="New game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="menu-selects">
+        <select id="difficulty" class="select sudoku-only" aria-label="Difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <select id="mahjong-difficulty" class="select mahjong-only" aria-label="Difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <div class="theme-picker">
+          <button id="theme-picker-btn" class="btn theme-picker-btn" type="button" aria-label="Theme" aria-expanded="false" title="Theme">
+            <span id="theme-swatch" class="theme-swatch"></span>
+            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </button>
+          <div id="theme-picker-menu" class="theme-picker-menu" hidden role="listbox" aria-label="Themes"></div>
+        </div>
+        <span id="app-version" class="menu-version" aria-label="Version"></span>
+      </div>
+      </nav>
+    </header>
+
+    <div id="menu-scrim" class="menu-scrim" hidden aria-hidden="true"></div>
+
+    <div id="sudoku-panel">
+    <div id="timer" class="timer zen-hide sudoku-only" aria-live="off">0:00</div>
+
+    <main class="main sudoku-only">
+      <div class="board-wrap">
+        <div id="generate-overlay" class="generate-overlay" hidden aria-hidden="true">
+          <div class="generate-panel">
+            <p id="generate-label" class="generate-label">Generating puzzle…</p>
+            <div id="generate-progress" class="generate-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="generate-label">
+              <div id="generate-bar" class="generate-bar"></div>
+            </div>
+          </div>
+        </div>
+        <div id="board" class="board" role="grid" aria-label="Sudoku board"></div>
+        <div id="cell-picker" class="cell-picker" hidden role="group" aria-label="Pick a number"></div>
+        <div id="board-cat" class="board-cat" data-pose="walk" hidden aria-hidden="true" title="Click to pet · drag to toss"></div>
+        <div id="cat-speech" class="cat-speech" hidden aria-hidden="true"><span>Meow!</span></div>
+        <svg id="board-cat-mouse" class="cat-mouse" viewBox="0 0 10 8" width="10" height="8" hidden aria-hidden="true" shape-rendering="crispEdges">
+          <rect class="cf" x="2" y="2" width="6" height="4"/>
+          <rect class="cf" x="7" y="1" width="2" height="2"/>
+          <rect class="ce" x="8" y="2" width="1" height="1"/>
+          <rect class="cf" x="1" y="4" width="1" height="1"/><rect class="cf" x="0" y="3" width="1" height="1"/>
+          <rect class="cf" x="3" y="6" width="1" height="1"/><rect class="cf" x="6" y="6" width="1" height="1"/>
+        </svg>
+      </div>
+
+      <div class="controls bottom-interface">
+          <div id="numpad" class="numpad" role="group" aria-label="Number pad"></div>
+          <div class="action-row">
+            <button id="btn-undo" class="btn btn-icon" type="button" aria-label="Undo" title="Undo" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5a3 3 0 1 0 0-6H9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 5L3 8l3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button id="btn-redo" class="btn btn-icon" type="button" aria-label="Redo" title="Redo" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3.5a3 3 0 1 1 0-6H7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button id="btn-pencil" class="btn btn-icon" type="button" aria-label="Pencil marks" title="Pencil marks">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M11.5 2.5l2 2-8 8H3.5v-2l8-8z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M10 4l2 2" stroke="currentColor" stroke-width="1.2"/></svg>
+            </button>
+            <button id="btn-erase" class="btn btn-icon" type="button" aria-label="Erase" title="Erase">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 9.5l5-5 5 5-5 5-5-5z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2.5 13.5h11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </button>
+            <button id="btn-check" class="btn btn-icon" type="button" aria-label="Check" title="Check">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button id="btn-pencil-fill" class="btn btn-icon" type="button" aria-label="Fill all pencil marks" title="Fill all pencil marks">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="5.5" cy="5.5" r=".65" fill="currentColor"/><circle cx="8" cy="5.5" r=".65" fill="currentColor"/><circle cx="10.5" cy="5.5" r=".65" fill="currentColor"/><circle cx="5.5" cy="8" r=".65" fill="currentColor"/><circle cx="8" cy="8" r=".65" fill="currentColor"/><circle cx="10.5" cy="8" r=".65" fill="currentColor"/><circle cx="5.5" cy="10.5" r=".65" fill="currentColor"/><circle cx="8" cy="10.5" r=".65" fill="currentColor"/><circle cx="10.5" cy="10.5" r=".65" fill="currentColor"/></svg>
+            </button>
+            <button id="btn-pencil-clear" class="btn btn-icon" type="button" aria-label="Clear all pencil marks" title="Clear all pencil marks">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 11.5l4.5-4.5 5.5 5.5-2 2H2.5v-3z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M7 7l2-2 4 4-2 2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2.5 13.5h11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+    </main>
+
+    <footer class="footer zen-hide sudoku-only">
+      <span id="status" class="status" role="status"></span>
+    </footer>
+    </div>
+
+    <div id="mahjong-panel" hidden>
+      <div id="mahjong-stats" class="game-stats zen-hide mahjong-only" aria-label="Mahjong games started and completed">
+        <span id="mahjong-stats-started">0</span> started · <span id="mahjong-stats-completed">0</span> done
+        · <span id="mahjong-tile-count" aria-live="polite">144 tiles</span>
+      </div>
+      <div id="mahjong-timer" class="timer zen-hide mahjong-only" aria-live="off">0:00</div>
+      <main class="main mahjong-only">
+        <div id="mahjong-wrap" class="mahjong-wrap">
+          <div id="mahjong-deal-overlay" class="mahjong-deal-overlay" hidden aria-hidden="true">
+            <div class="mahjong-deal-panel">
+              <p id="mahjong-deal-label" class="mahjong-deal-label">Dealing tiles…</p>
+              <div id="mahjong-deal-progress" class="mahjong-deal-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="mahjong-deal-label">
+                <div id="mahjong-deal-bar" class="mahjong-deal-bar"></div>
+              </div>
+            </div>
+          </div>
+          <div id="mahjong-board" class="mahjong-board" role="grid" aria-label="Mahjong board"></div>
+        </div>
+        <div class="controls bottom-interface mahjong-only">
+          <div class="action-row mahjong-actions">
+            <button id="btn-mahjong-undo" class="btn btn-icon" type="button" aria-label="Undo" title="Undo" disabled>
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5a3 3 0 1 0 0-6H9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 5L3 8l3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button id="btn-mahjong-hint" class="btn btn-icon" type="button" aria-label="Hint" title="Hint">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4z" fill="currentColor"/><path d="M8 9v2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </main>
+      <footer class="footer zen-hide mahjong-only">
+        <span id="mahjong-status" class="status" role="status"></span>
+      </footer>
+    </div>
+  </div>
+
+  <dialog id="confirm-dialog" class="dialog confirm-dialog">
+    <div class="dialog-body">
+      <p id="confirm-message" class="confirm-message"></p>
+      <div class="confirm-actions">
+        <button id="confirm-cancel" class="btn" type="button">Cancel</button>
+        <button id="confirm-ok" class="btn btn-primary" type="button">Confirm</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="color-picker-dialog" class="dialog color-picker-dialog">
+    <div class="dialog-header">
+      <h2 id="color-picker-title" class="dialog-title">Color</h2>
+      <button id="color-picker-close" class="btn btn-icon" type="button" aria-label="Close color picker">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div id="color-picker-body" class="dialog-body color-picker-body"></div>
+  </dialog>
+
+  <dialog id="appearance-dialog" class="dialog appearance-dialog">
+    <div class="dialog-header">
+      <h2 class="dialog-title">Appearance</h2>
+      <button id="settings-close" class="btn btn-icon" type="button" aria-label="Close appearance">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div id="settings-colors" class="dialog-body appearance-body"></div>
+  </dialog>
+
+  <dialog id="mahjong-guide-dialog" class="dialog">
+    <div class="dialog-header">
+      <h2 class="dialog-title">How to play</h2>
+      <button id="mahjong-guide-close" class="btn btn-icon" type="button" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="dialog-tabs" role="tablist">
+      <button id="tab-mj-basics" class="tab active" type="button" role="tab" aria-selected="true" data-tab="basics">How to play</button>
+      <button id="tab-mj-atlas" class="tab" type="button" role="tab" aria-selected="false" data-tab="atlas">All tiles</button>
+    </div>
+    <div id="mahjong-guide-basics" class="dialog-body tab-panel" role="tabpanel"></div>
+    <div id="mahjong-guide-atlas" class="dialog-body tab-panel" role="tabpanel" hidden></div>
+  </dialog>
+
+  <dialog id="lessons-dialog" class="dialog">
+    <div class="dialog-header">
+      <h2 class="dialog-title">Lessons &amp; tips</h2>
+      <button id="lessons-close" class="btn btn-icon" type="button" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="dialog-tabs" role="tablist">
+      <button id="tab-basics" class="tab active" type="button" role="tab" aria-selected="true" data-tab="basics">Basics</button>
+      <button id="tab-advanced" class="tab" type="button" role="tab" aria-selected="false" data-tab="advanced">Advanced</button>
+    </div>
+    <div id="lessons-basics" class="dialog-body tab-panel" role="tabpanel"></div>
+    <div id="lessons-advanced" class="dialog-body tab-panel" role="tabpanel" hidden></div>
+  </dialog>
+
+  <dialog id="seeds-dialog" class="dialog">
+    <div class="dialog-header">
+      <h2 class="dialog-title sudoku-only">Puzzle seeds</h2>
+      <h2 class="dialog-title mahjong-only">Board seeds</h2>
+      <button id="seeds-close" class="btn btn-icon" type="button" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="dialog-body">
+      <p class="dialog-hint sudoku-only">Same seed + difficulty always gives the same puzzle. Cleared if you wipe browser data.</p>
+      <p class="dialog-hint mahjong-only">Same seed + difficulty always deals the same board. Restart replays the current seed. Cleared if you wipe browser data.</p>
+      <div class="seeds-current">
+        <span class="seeds-label">Current</span>
+        <span id="current-seed" class="current-seed">—</span>
+      </div>
+      <p class="seeds-label">Last 10</p>
+      <ol id="seed-list" class="seed-list" aria-label="Last 10 seeds"></ol>
+    </div>
+  </dialog>
+
+  <script src="js/sudoku.js"></script>
+  <script src="js/mahjong.js"></script>
+  <script src="js/mahjong-lessons.js"></script>
+  <script src="js/quotes.js"></script>
+  <script src="js/lessons.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/version.js"></script>
+  <script src="js/cat-models.js"></script>
+  <script src="js/cat.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/mahjong-app.js"></script>
+  <script src="js/hub.js"></script>
+  <script src="js/games.js"></script>
+</body>
+</html>
