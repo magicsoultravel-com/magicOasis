@@ -29,7 +29,6 @@
 
 .snake-board {
   display: grid;
-  grid-template-columns: repeat(16, 1fr);
   gap: 1px;
   width: 100%;
   height: 100%;
@@ -41,18 +40,49 @@
   user-select: none;
 }
 
-.snake-start {
+.snake-board-wrap--large {
+  width: min(100%, 20rem);
+}
+
+.snake-start,
+.snake-pause {
   position: absolute;
   inset: 0;
   margin: auto;
   width: fit-content;
   height: fit-content;
+  z-index: 1;
+}
+
+.snake-start {
   padding: 0.55rem 1.35rem;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.06em;
-  z-index: 1;
   box-shadow: 0 2px 12px color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+.snake-pause {
+  padding: 0.45rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  pointer-events: none;
+  box-shadow: 0 2px 12px color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+.snake-board-wrap--paused::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg) 35%, transparent);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .snake-cell {
@@ -65,13 +95,57 @@
 }
 
 .snake-cell--head {
+  position: relative;
   background: var(--accent);
 }
+
+.snake-face {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.snake-eye,
+.snake-mouth {
+  position: absolute;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 82%, var(--text));
+}
+
+.snake-eye {
+  width: 17%;
+  height: 17%;
+}
+
+.snake-mouth {
+  width: 14%;
+  height: 14%;
+}
+
+.snake-cell--head-right .snake-eye:nth-child(1) { top: 24%; left: 30%; }
+.snake-cell--head-right .snake-eye:nth-child(2) { bottom: 24%; left: 30%; }
+.snake-cell--head-right .snake-mouth { top: 43%; right: 20%; }
+
+.snake-cell--head-left .snake-eye:nth-child(1) { top: 24%; right: 30%; }
+.snake-cell--head-left .snake-eye:nth-child(2) { bottom: 24%; right: 30%; }
+.snake-cell--head-left .snake-mouth { top: 43%; left: 20%; }
+
+.snake-cell--head-up .snake-eye:nth-child(1) { top: 30%; left: 24%; }
+.snake-cell--head-up .snake-eye:nth-child(2) { top: 30%; right: 24%; }
+.snake-cell--head-up .snake-mouth { bottom: 22%; left: 43%; }
+
+.snake-cell--head-down .snake-eye:nth-child(1) { bottom: 30%; left: 24%; }
+.snake-cell--head-down .snake-eye:nth-child(2) { bottom: 30%; right: 24%; }
+.snake-cell--head-down .snake-mouth { top: 22%; left: 43%; }
 
 .snake-cell--food {
   background: var(--success);
   border-radius: 50%;
   transform: scale(0.72);
+}
+
+.snake-board--grid-24 .snake-cell--food {
+  transform: scale(0.58);
 }
 
 .snake-board--over .snake-cell--head {

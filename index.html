@@ -153,10 +153,10 @@
           <option value="medium" selected>Draw 3</option>
           <option value="hard">Draw 3 · once</option>
         </select>
-        <select id="snake-difficulty" class="select snake-only" aria-label="Speed">
-          <option value="easy">Slow</option>
-          <option value="medium" selected>Medium</option>
-          <option value="hard">Fast</option>
+        <select id="snake-difficulty" class="select snake-only" aria-label="Board size">
+          <option value="easy">12×12</option>
+          <option value="medium" selected>16×16</option>
+          <option value="hard">24×24</option>
         </select>
         <select id="minesweeper-difficulty" class="select minesweeper-only" aria-label="Difficulty">
           <option value="easy">9×9</option>
@@ -274,12 +274,13 @@
 
     <div id="snake-panel" class="game-only" hidden>
       <div class="snake-stats zen-hide snake-only" aria-label="Snake score">
-        Score <span id="snake-score">0</span> · Best <span id="snake-best">0</span>
+        Score <span id="snake-score">0</span> · Best <span id="snake-best">0</span> · Speed <span id="snake-level">1</span>
       </div>
       <main class="main snake-only">
         <div class="snake-board-wrap">
           <div id="snake-board" class="snake-board" role="application" aria-label="Snake board"></div>
           <button id="snake-start" class="snake-start btn btn-primary" type="button" hidden>START</button>
+          <div id="snake-pause" class="snake-pause" hidden aria-hidden="true">PAUSED</div>
         </div>
         <div class="controls snake-only">
           <div class="snake-pad" role="group" aria-label="Direction pad">
