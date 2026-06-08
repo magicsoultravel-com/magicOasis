@@ -17,7 +17,7 @@ const SolitaireGuide = [
   },
   {
     title: "Card sets",
-    body: "Use the deck button in the menu to switch between Classic, Vintage, and Midnight card designs.",
+    body: "Tap the deck button in the menu to cycle art styles: Classic (international French), Vintage (Victorian engraved), Bavarian (Bayerisches Bild folk style), and Midnight. Each set has its own courts, suits, frames, and backs.",
   },
   {
     title: "Tips",

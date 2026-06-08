@@ -11,6 +11,9 @@
     sudoku: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="6" width="36" height="36" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M18 6v36M30 6v36M6 18h36M6 30h36" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="24" cy="24" r="2" fill="currentColor"/><circle cx="36" cy="36" r="2" fill="currentColor"/></svg>`,
     mahjong: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="8" width="28" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><rect x="14" y="12" width="28" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/><circle cx="20" cy="20" r="3" fill="currentColor"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg>`,
     solitaire: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="22" height="30" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="18" y="8" width="22" height="30" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M24 8v8M21 11h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="29" cy="22" r="3" fill="currentColor"/></svg>`,
+    snake: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="8" width="32" height="32" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 20h4v4h-4zM18 24h4v4h-4zM22 28h4v4h-4zM26 24h4v4h-4zM30 20h4v4h-4z" fill="currentColor" opacity="0.85"/><circle cx="34" cy="22" r="2" fill="currentColor"/></svg>`,
+    minesweeper: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 18l4 4-4 4M28 18l-4 4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="32" r="2.5" fill="currentColor"/></svg>`,
+    game2048: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="8" width="32" height="32" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="12" y="12" width="11" height="11" rx="2" fill="currentColor" opacity="0.35"/><rect x="25" y="12" width="11" height="11" rx="2" fill="currentColor" opacity="0.55"/><rect x="12" y="25" width="11" height="11" rx="2" fill="currentColor" opacity="0.75"/><text x="29" y="33" font-size="9" font-weight="700" fill="currentColor" font-family="system-ui,sans-serif">8</text></svg>`,
     soon: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M24 20v8M20 24h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
   };
 
@@ -70,6 +73,15 @@
     if (window.Games?.active === "solitaire" && typeof window.SolitaireApp?.saveGame === "function") {
       window.SolitaireApp.saveGame();
     }
+    if (window.Games?.active === "snake" && typeof window.SnakeApp?.saveGame === "function") {
+      window.SnakeApp.saveGame();
+    }
+    if (window.Games?.active === "minesweeper" && typeof window.MinesweeperApp?.saveGame === "function") {
+      window.MinesweeperApp.saveGame();
+    }
+    if (window.Games?.active === "game2048" && typeof window.Game2048App?.saveGame === "function") {
+      window.Game2048App.saveGame();
+    }
 
     window.SudokuApp?.closeMenu?.();
     setHubView(true);
@@ -96,7 +108,13 @@
       } else {
         appEl.classList.add("is-ready");
       }
-    } else if (gameId === "mahjong" || gameId === "solitaire") {
+    } else if (
+      gameId === "mahjong" ||
+      gameId === "solitaire" ||
+      gameId === "snake" ||
+      gameId === "minesweeper" ||
+      gameId === "game2048"
+    ) {
       appEl.classList.add("is-ready");
     }
   }

@@ -5,18 +5,21 @@
     { id: "sudoku", label: "Sudoku", available: true },
     { id: "mahjong", label: "Mahjong", available: true },
     { id: "solitaire", label: "Solitaire", available: true },
-    { id: null, label: "Coming soon", available: false },
-    { id: null, label: "Coming soon", available: false },
-    { id: null, label: "Coming soon", available: false },
+    { id: "snake", label: "Snake", available: true },
+    { id: "minesweeper", label: "Minesweeper", available: true },
+    { id: "game2048", label: "2048", available: true },
     { id: null, label: "Coming soon", available: false },
     { id: null, label: "Coming soon", available: false },
     { id: null, label: "Coming soon", available: false },
   ];
 
   const TITLES = {
-    sudoku: "Magic Sudoku",
-    mahjong: "Magic Mahjong",
-    solitaire: "Magic Solitaire",
+    sudoku: "magicSudoku",
+    mahjong: "magicMahjong",
+    solitaire: "magicSolitaire",
+    snake: "magicSnake",
+    minesweeper: "magicMinesweeper",
+    game2048: "magic2048",
   };
 
   const GAMES = GAME_CATALOG.filter((g) => g.available && g.id).map((g) => g.id);

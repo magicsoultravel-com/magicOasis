@@ -1,9 +1,17 @@
 /* Klondike solitaire */
 
 .app[data-game="solitaire"] {
-  max-width: min(100vw, 40rem);
+  --sol-card-w-user: 2.35rem;
+  --sol-app-max: 40rem;
+  --sol-stack-face: 14;
+  --sol-stack-back: 5;
+  --sol-fan-step: 10px;
+  --sol-tableau-gap: 0.3rem;
+
+  max-width: min(100vw, var(--sol-app-max));
   width: 100%;
   padding: 0.5rem 0.75rem 0.75rem;
+  transition: max-width 0.2s ease;
 }
 
 .app[data-game="solitaire"] #solitaire-panel {
@@ -89,10 +97,8 @@
 }
 
 .solitaire-board {
-  --sol-card-w: clamp(2.35rem, 6.8vw, 3rem);
+  --sol-card-w: var(--sol-card-w-user);
   --sol-card-h: calc(var(--sol-card-w) * 1.43);
-  --sol-stack-face: 14;
-  --sol-stack-back: 5;
 
   display: flex;
   flex-direction: column;
@@ -172,7 +178,7 @@
 }
 
 .sol-waste {
-  width: calc(var(--sol-card-w) + 1.15rem);
+  width: calc(var(--sol-card-w) + var(--sol-fan-step) * 2);
   border-style: solid;
   border-color: transparent;
   background: transparent;
@@ -186,7 +192,7 @@
 .sol-tableau {
   display: flex;
   justify-content: center;
-  gap: 0.3rem;
+  gap: var(--sol-tableau-gap);
   flex: 1;
   min-height: 10rem;
   padding: 0 0.05rem;
@@ -311,17 +317,11 @@
 }
 
 @media (max-width: 480px) {
-  .solitaire-board {
-    --sol-card-w: clamp(2.1rem, 19vw, 2.55rem);
+  .app[data-game="solitaire"]:not([data-sol-zoom]) {
+    --sol-card-w-user: 2.1rem;
     --sol-stack-face: 12;
     --sol-stack-back: 4;
-  }
-
-  .sol-tableau {
-    gap: 0.2rem;
-  }
-
-  .sol-waste {
-    width: calc(var(--sol-card-w) + 0.85rem);
+    --sol-fan-step: 8px;
+    --sol-tableau-gap: 0.2rem;
   }
 }

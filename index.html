@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>magicOasis</title>
-  <meta name="description" content="magicOasis — Sudoku, Mahjong, Solitaire, and more games to unwind">
+  <meta name="description" content="magicOasis — Sudoku, Mahjong, Solitaire, Snake, Minesweeper, 2048, and more games to unwind">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/mahjong.css">
   <link rel="stylesheet" href="css/solitaire.css">
+  <link rel="stylesheet" href="css/mini-games.css">
 </head>
 <body>
   <div id="quote-splash" class="quote-splash" hidden aria-live="polite">
@@ -30,7 +31,7 @@
         <button id="game-prev" class="btn btn-icon game-switch-btn" type="button" aria-label="Previous game" title="Previous game">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <h1 id="game-title" class="title">Magic Sudoku</h1>
+        <h1 id="game-title" class="title">magicSudoku</h1>
         <button id="game-next" class="btn btn-icon game-switch-btn" type="button" aria-label="Next game" title="Next game">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -48,6 +49,14 @@
         <button id="btn-zen-exit" class="btn btn-icon zen-exit game-only" type="button" aria-label="Exit zen mode" title="Exit zen mode">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
         </button>
+        <div class="sol-zoom-group solitaire-only game-only" role="group" aria-label="Card size">
+          <button id="btn-sol-zoom-out" class="btn btn-icon" type="button" aria-label="Smaller cards" title="Smaller cards">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <button id="btn-sol-zoom-in" class="btn btn-icon" type="button" aria-label="Larger cards" title="Larger cards">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4v8M4 8h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+        </div>
       </div>
       <nav id="nav-menu" class="menu-overlay" hidden aria-label="Game menu">
       <div class="menu-icons">
@@ -103,6 +112,24 @@
         <button id="btn-solitaire-new" class="btn btn-icon solitaire-only" type="button" aria-label="New solitaire game" title="New game">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <button id="btn-snake-restart" class="btn btn-icon snake-only" type="button" aria-label="Restart snake" title="Restart">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-snake-new" class="btn btn-icon snake-only" type="button" aria-label="New snake game" title="New game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-minesweeper-restart" class="btn btn-icon minesweeper-only" type="button" aria-label="Restart minesweeper" title="Restart">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-minesweeper-new" class="btn btn-icon minesweeper-only" type="button" aria-label="New minesweeper game" title="New game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-game2048-restart" class="btn btn-icon game2048-only" type="button" aria-label="Restart 2048" title="Restart">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-game2048-new" class="btn btn-icon game2048-only" type="button" aria-label="New 2048 game" title="New game">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
       <div class="menu-selects">
         <select id="difficulty" class="select sudoku-only" aria-label="Difficulty">
@@ -119,6 +146,16 @@
           <option value="easy">Draw 1</option>
           <option value="medium" selected>Draw 3</option>
           <option value="hard">Draw 3 · once</option>
+        </select>
+        <select id="snake-difficulty" class="select snake-only" aria-label="Speed">
+          <option value="easy">Slow</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Fast</option>
+        </select>
+        <select id="minesweeper-difficulty" class="select minesweeper-only" aria-label="Difficulty">
+          <option value="easy">9×9</option>
+          <option value="medium" selected>12×12</option>
+          <option value="hard">16×16</option>
         </select>
         <div class="theme-picker">
           <button id="theme-picker-btn" class="btn theme-picker-btn" type="button" aria-label="Theme" aria-expanded="false" title="Theme">
@@ -280,6 +317,53 @@
         <span id="solitaire-status" class="status" role="status"></span>
       </footer>
     </div>
+
+    <div id="snake-panel" class="game-only" hidden>
+      <div class="snake-stats zen-hide snake-only" aria-label="Snake score">
+        Score <span id="snake-score">0</span> · Best <span id="snake-best">0</span>
+      </div>
+      <main class="main snake-only">
+        <div id="snake-board" class="snake-board" role="application" aria-label="Snake board"></div>
+        <div class="controls bottom-interface snake-only">
+          <div class="snake-pad" role="group" aria-label="Direction pad">
+            <span class="snake-pad-spacer"></span>
+            <button class="btn btn-icon" type="button" data-snake-dir="ArrowUp" aria-label="Up">↑</button>
+            <span class="snake-pad-spacer"></span>
+            <button class="btn btn-icon" type="button" data-snake-dir="ArrowLeft" aria-label="Left">←</button>
+            <button class="btn btn-icon" type="button" data-snake-dir="ArrowDown" aria-label="Down">↓</button>
+            <button class="btn btn-icon" type="button" data-snake-dir="ArrowRight" aria-label="Right">→</button>
+          </div>
+        </div>
+      </main>
+      <footer class="footer zen-hide snake-only">
+        <span id="snake-status" class="status" role="status"></span>
+      </footer>
+    </div>
+
+    <div id="minesweeper-panel" class="game-only" hidden>
+      <div class="game-stats zen-hide minesweeper-only" aria-label="Minesweeper status">
+        <span id="minesweeper-mines-left">10</span> flags left
+      </div>
+      <div id="minesweeper-timer" class="timer zen-hide minesweeper-only" aria-live="off">0:00</div>
+      <main class="main minesweeper-only">
+        <div id="minesweeper-board" class="ms-board" role="grid" aria-label="Minesweeper board"></div>
+      </main>
+      <footer class="footer zen-hide minesweeper-only">
+        <span id="minesweeper-status" class="status" role="status"></span>
+      </footer>
+    </div>
+
+    <div id="game2048-panel" class="game-only" hidden>
+      <div class="g2048-stats zen-hide game2048-only" aria-label="2048 score">
+        Score <span id="game2048-score">0</span> · Best <span id="game2048-best">0</span>
+      </div>
+      <main class="main game2048-only">
+        <div id="game2048-board" class="g2048-board" role="application" aria-label="2048 board"></div>
+      </main>
+      <footer class="footer zen-hide game2048-only">
+        <span id="game2048-status" class="status" role="status"></span>
+      </footer>
+    </div>
   </div>
 
   <dialog id="confirm-dialog" class="dialog confirm-dialog">
@@ -389,6 +473,9 @@
   <script src="js/app.js"></script>
   <script src="js/mahjong-app.js"></script>
   <script src="js/solitaire-app.js"></script>
+  <script src="js/snake-app.js"></script>
+  <script src="js/minesweeper-app.js"></script>
+  <script src="js/game2048-app.js"></script>
   <script src="js/game-catalog.js"></script>
   <script src="js/hub.js"></script>
   <script src="js/games.js"></script>

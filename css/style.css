@@ -409,6 +409,12 @@ body {
   display: flex;
 }
 
+.sol-zoom-group {
+  display: flex;
+  gap: 0.125rem;
+  margin-left: 0.125rem;
+}
+
 .menu-scrim {
   position: fixed;
   inset: 0;
@@ -1644,25 +1650,35 @@ body {
   opacity: 1;
 }
 
-.app[data-game="sudoku"] .mahjong-only,
-.app[data-game="sudoku"] .solitaire-only {
+.app[data-game] :is(
+  .sudoku-only,
+  .mahjong-only,
+  .solitaire-only,
+  .snake-only,
+  .minesweeper-only,
+  .game2048-only
+) {
   display: none !important;
 }
 
-.app[data-game="mahjong"] .sudoku-only,
-.app[data-game="mahjong"] .solitaire-only {
-  display: none !important;
-}
-
-.app[data-game="solitaire"] .sudoku-only,
-.app[data-game="solitaire"] .mahjong-only {
-  display: none !important;
+.app[data-game="sudoku"] .sudoku-only,
+.app[data-game="mahjong"] .mahjong-only,
+.app[data-game="solitaire"] .solitaire-only,
+.app[data-game="snake"] .snake-only,
+.app[data-game="minesweeper"] .minesweeper-only,
+.app[data-game="game2048"] .game2048-only {
+  display: revert !important;
 }
 
 .app[data-view="hub"] .game-only,
-.app[data-view="hub"] .sudoku-only,
-.app[data-view="hub"] .mahjong-only,
-.app[data-view="hub"] .solitaire-only {
+.app[data-view="hub"] :is(
+  .sudoku-only,
+  .mahjong-only,
+  .solitaire-only,
+  .snake-only,
+  .minesweeper-only,
+  .game2048-only
+) {
   display: none !important;
 }
 
@@ -1670,8 +1686,13 @@ body {
   display: none !important;
 }
 
-.app[data-view="hub"] #sudoku-panel,
-.app[data-view="hub"] #mahjong-panel,
-.app[data-view="hub"] #solitaire-panel {
+.app[data-view="hub"] :is(
+  #sudoku-panel,
+  #mahjong-panel,
+  #solitaire-panel,
+  #snake-panel,
+  #minesweeper-panel,
+  #game2048-panel
+) {
   display: none !important;
 }

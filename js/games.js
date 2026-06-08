@@ -1,9 +1,12 @@
 (() => {
   const GAMES = window.GameCatalog?.GAMES ?? ["sudoku", "mahjong", "solitaire"];
   const TITLES = window.GameCatalog?.TITLES ?? {
-    sudoku: "Magic Sudoku",
-    mahjong: "Magic Mahjong",
-    solitaire: "Magic Solitaire",
+    sudoku: "magicSudoku",
+    mahjong: "magicMahjong",
+    solitaire: "magicSolitaire",
+    snake: "magicSnake",
+    minesweeper: "magicMinesweeper",
+    game2048: "magic2048",
   };
 
   const STORAGE_KEY = "magic-active-game";
@@ -15,12 +18,41 @@
   const sudokuPanel = document.getElementById("sudoku-panel");
   const mahjongPanel = document.getElementById("mahjong-panel");
   const solitairePanel = document.getElementById("solitaire-panel");
+  const snakePanel = document.getElementById("snake-panel");
+  const minesweeperPanel = document.getElementById("minesweeper-panel");
+  const game2048Panel = document.getElementById("game2048-panel");
+
+  const PANELS = {
+    sudoku: sudokuPanel,
+    mahjong: mahjongPanel,
+    solitaire: solitairePanel,
+    snake: snakePanel,
+    minesweeper: minesweeperPanel,
+    game2048: game2048Panel,
+  };
 
   let active = localStorage.getItem(STORAGE_KEY);
   if (active && !GAMES.includes(active)) active = null;
 
   function gameIndex(id) {
     return GAMES.indexOf(id);
+  }
+
+  function saveActiveGame() {
+    if (active === "sudoku") window.SudokuApp?.saveGame?.();
+    if (active === "mahjong") window.MahjongApp?.saveGame?.();
+    if (active === "solitaire") window.SolitaireApp?.saveGame?.();
+    if (active === "snake") window.SnakeApp?.saveGame?.();
+    if (active === "minesweeper") window.MinesweeperApp?.saveGame?.();
+    if (active === "game2048") window.Game2048App?.saveGame?.();
+  }
+
+  function initGame(id) {
+    if (id === "mahjong") window.MahjongApp?.init?.();
+    if (id === "solitaire") window.SolitaireApp?.init?.();
+    if (id === "snake") window.SnakeApp?.init?.();
+    if (id === "minesweeper") window.MinesweeperApp?.init?.();
+    if (id === "game2048") window.Game2048App?.init?.();
   }
 
   function applyVisibility() {
@@ -32,9 +64,9 @@
     document.title = TITLES[active];
     if (titleEl) titleEl.textContent = TITLES[active];
 
-    if (sudokuPanel) sudokuPanel.hidden = active !== "sudoku";
-    if (mahjongPanel) mahjongPanel.hidden = active !== "mahjong";
-    if (solitairePanel) solitairePanel.hidden = active !== "solitaire";
+    for (const [id, panel] of Object.entries(PANELS)) {
+      if (panel) panel.hidden = active !== id;
+    }
 
     if (btnPrev) btnPrev.disabled = GAMES.length <= 1;
     if (btnNext) btnNext.disabled = GAMES.length <= 1;
@@ -43,26 +75,12 @@
   function switchTo(gameId) {
     if (!GAMES.includes(gameId) || gameId === active) return;
 
-    if (active === "sudoku" && typeof window.SudokuApp?.saveGame === "function") {
-      window.SudokuApp.saveGame();
-    }
-    if (active === "mahjong" && typeof window.MahjongApp?.saveGame === "function") {
-      window.MahjongApp.saveGame();
-    }
-    if (active === "solitaire" && typeof window.SolitaireApp?.saveGame === "function") {
-      window.SolitaireApp.saveGame();
-    }
+    saveActiveGame();
 
     active = gameId;
     localStorage.setItem(STORAGE_KEY, active);
     applyVisibility();
-
-    if (active === "mahjong") {
-      window.MahjongApp?.init?.();
-    }
-    if (active === "solitaire") {
-      window.SolitaireApp?.init?.();
-    }
+    initGame(active);
   }
 
   function cycle(delta) {
@@ -85,6 +103,9 @@
     isSudoku: () => active === "sudoku",
     isMahjong: () => active === "mahjong",
     isSolitaire: () => active === "solitaire",
+    isSnake: () => active === "snake",
+    isMinesweeper: () => active === "minesweeper",
+    isGame2048: () => active === "game2048",
   };
 
   const hubOnLoad = window.Hub?.initHubOnLoad?.();
@@ -95,11 +116,6 @@
       localStorage.setItem(STORAGE_KEY, active);
     }
     applyVisibility();
-    if (active === "mahjong") {
-      window.MahjongApp?.init?.();
-    }
-    if (active === "solitaire") {
-      window.SolitaireApp?.init?.();
-    }
+    initGame(active);
   }
 })();

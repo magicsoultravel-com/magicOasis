@@ -16,6 +16,8 @@
   const guideDialog = document.getElementById("solitaire-guide-dialog");
   const guideBody = document.getElementById("solitaire-guide-body");
   const btnDeck = document.getElementById("btn-solitaire-deck");
+  const btnZoomIn = document.getElementById("btn-sol-zoom-in");
+  const btnZoomOut = document.getElementById("btn-sol-zoom-out");
   const appEl = document.querySelector(".app");
   const seedsDialog = document.getElementById("seeds-dialog");
   const currentSeedEl = document.getElementById("current-seed");
@@ -25,6 +27,22 @@
   const STATS_KEY = "solitaire-stats";
   const SEEDS_KEY = "solitaire-seeds";
   const DECK_KEY = "solitaire-deck-set";
+  const ZOOM_KEY = "solitaire-zoom";
+  const DEFAULT_ZOOM_INDEX = 2;
+  const ZOOM_STEPS = [
+    { card: 1.85, window: 34, fan: 7, gap: 0.2 },
+    { card: 2.1, window: 36, fan: 8, gap: 0.22 },
+    { card: 2.35, window: 40, fan: 10, gap: 0.3 },
+    { card: 2.6, window: 40, fan: 11, gap: 0.3 },
+    { card: 2.85, window: 40, fan: 12, gap: 0.32 },
+    { card: 3.1, window: 40, fan: 13, gap: 0.34 },
+    { card: 3.35, window: 40, fan: 14, gap: 0.36 },
+    { card: 3.6, window: 40, fan: 15, gap: 0.38 },
+    { card: 3.6, window: 44, fan: 15, gap: 0.4 },
+    { card: 3.6, window: 48, fan: 15, gap: 0.42 },
+    { card: 3.6, window: 52, fan: 15, gap: 0.44 },
+    { card: 3.6, window: 56, fan: 15, gap: 0.46 },
+  ];
   const STATE_VERSION = 1;
   const MAX_SEEDS = 10;
   const HISTORY_LIMIT = 80;
@@ -46,6 +64,83 @@
   let selected = null;
   let hintTarget = null;
   let deckSet = "classic";
+  let zoomIndex = DEFAULT_ZOOM_INDEX;
+
+  function fanStepPx() {
+    if (!boardEl) return 10;
+    const raw = getComputedStyle(boardEl).getPropertyValue("--sol-fan-step").trim();
+    const n = parseFloat(raw);
+    return Number.isFinite(n) ? n : 10;
+  }
+
+  function updateZoomButtons() {
+    if (btnZoomOut) {
+      btnZoomOut.disabled = zoomIndex <= 0;
+      btnZoomOut.title = zoomIndex <= 0 ? "Cards already smallest" : "Smaller cards";
+    }
+    if (btnZoomIn) {
+      btnZoomIn.disabled = zoomIndex >= ZOOM_STEPS.length - 1;
+      const next = ZOOM_STEPS[Math.min(zoomIndex + 1, ZOOM_STEPS.length - 1)];
+      btnZoomIn.title =
+        zoomIndex >= ZOOM_STEPS.length - 1
+          ? "Already at maximum"
+          : zoomIndex >= 7
+            ? `Wider board (${next.window}rem)`
+            : `Larger cards (${next.card}rem)`;
+    }
+  }
+
+  function applyZoom(index, { persist = true } = {}) {
+    zoomIndex = Math.max(0, Math.min(ZOOM_STEPS.length - 1, index));
+    const step = ZOOM_STEPS[zoomIndex];
+    const ratio = step.card / ZOOM_STEPS[DEFAULT_ZOOM_INDEX].card;
+
+    if (appEl) {
+      appEl.style.setProperty("--sol-card-w-user", `${step.card}rem`);
+      appEl.style.setProperty("--sol-app-max", `${step.window}rem`);
+      appEl.style.setProperty("--sol-stack-face", String(Math.round(14 * ratio)));
+      appEl.style.setProperty("--sol-stack-back", String(Math.max(4, Math.round(5 * ratio))));
+      appEl.style.setProperty("--sol-fan-step", `${step.fan}px`);
+      appEl.style.setProperty("--sol-tableau-gap", `${step.gap}rem`);
+      if (zoomIndex === DEFAULT_ZOOM_INDEX) {
+        appEl.removeAttribute("data-sol-zoom");
+      } else {
+        appEl.dataset.solZoom = String(zoomIndex);
+      }
+    }
+
+    updateZoomButtons();
+
+    if (persist) {
+      try {
+        localStorage.setItem(ZOOM_KEY, String(zoomIndex));
+      } catch {
+        /* storage unavailable */
+      }
+    }
+
+    if (state) renderBoard();
+  }
+
+  function loadZoom() {
+    try {
+      const raw = localStorage.getItem(ZOOM_KEY);
+      const saved = raw != null ? parseInt(raw, 10) : DEFAULT_ZOOM_INDEX;
+      applyZoom(Number.isFinite(saved) ? saved : DEFAULT_ZOOM_INDEX, { persist: false });
+    } catch {
+      applyZoom(DEFAULT_ZOOM_INDEX, { persist: false });
+    }
+  }
+
+  function zoomIn() {
+    if (zoomIndex >= ZOOM_STEPS.length - 1) return;
+    applyZoom(zoomIndex + 1);
+  }
+
+  function zoomOut() {
+    if (zoomIndex <= 0) return;
+    applyZoom(zoomIndex - 1);
+  }
 
   function stackStep(faceUp) {
     if (!boardEl) return faceUp ? 14 : 5;
@@ -537,7 +632,7 @@
         const card = state.waste[start + i];
         const isTop = i === visible - 1;
         const wasteCard = createCardEl(card, {
-          fanOffset: i * 10,
+          fanOffset: i * fanStepPx(),
           selectable: isTop,
           layer: i,
         });
@@ -672,6 +767,7 @@
       gameWon,
       difficultyPref: difficultyEl?.value,
       deckSet,
+      zoomIndex,
     };
     try {
       localStorage.setItem(STATE_KEY, JSON.stringify(payload));
@@ -697,6 +793,7 @@
 
       if (data.difficultyPref && difficultyEl) difficultyEl.value = data.difficultyPref;
       if (data.deckSet && SolitaireCards.SETS[data.deckSet]) applyDeckSet(data.deckSet);
+      if (Number.isFinite(data.zoomIndex)) applyZoom(data.zoomIndex, { persist: false });
 
       renderBoard();
       if (gameWon) {
@@ -825,6 +922,7 @@
     loadStats();
     loadSeedHistory();
     loadDeckSet();
+    loadZoom();
 
     btnUndo?.addEventListener("click", undo);
     btnHint?.addEventListener("click", showHint);
@@ -833,6 +931,8 @@
     document.getElementById("btn-solitaire-guide")?.addEventListener("click", openGuide);
     document.getElementById("btn-solitaire-seeds")?.addEventListener("click", openSeeds);
     btnDeck?.addEventListener("click", toggleDeckSet);
+    btnZoomIn?.addEventListener("click", zoomIn);
+    btnZoomOut?.addEventListener("click", zoomOut);
     document.getElementById("solitaire-guide-close")?.addEventListener("click", () => guideDialog?.close());
     guideDialog?.addEventListener("click", (e) => {
       if (e.target === guideDialog) guideDialog.close();
