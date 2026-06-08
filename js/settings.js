@@ -1,5 +1,6 @@
 const Settings = (() => {
-  const STORAGE_KEY = "sudoku-colors";
+  const STORAGE_KEY = "appearance-colors";
+  const LEGACY_KEY = "sudoku-colors";
 
   const PRESETS = [
     "#ffffff", "#000000", "#ef4444", "#f97316",
@@ -8,25 +9,15 @@ const Settings = (() => {
     "#78716c", "#64748b", "#1e293b", "#94a3b8",
   ];
 
-  const FIELDS = [
-    { id: "borderStrong", label: "Outer borders", var: "--board-border-strong", themeVar: "--border-strong" },
-    { id: "border", label: "Grid lines", var: "--board-border", themeVar: "--border" },
-    { id: "fontColor", label: "Numbers", var: "--board-font", themeVar: "--user" },
-    { id: "highlightValue", label: "Selection tint", var: "--board-highlight-value", themeVar: "--highlight-value" },
-    { id: "highlightPeer", label: "Blocked tint", var: "--board-highlight-peer", themeVar: "--highlight-peer" },
-    { id: "catColor", label: "Companion cat", var: "--board-cat-color", themeVar: "--text" },
-  ];
-
-  let colors = {};
+  let allColors = {};
+  let activeGameId = null;
+  let activeFields = [];
   let panelContainer = null;
   let pickerDialog = null;
   let pickerBody = null;
   let pickerTitle = null;
   let activeField = null;
-
-  function getField(id) {
-    return FIELDS.find((f) => f.id === id);
-  }
+  let activePickerGameId = null;
 
   function getThemeColor(field) {
     return getComputedStyle(document.documentElement)
@@ -34,57 +25,108 @@ const Settings = (() => {
       .trim();
   }
 
-  function getResolvedColor(field) {
-    const custom = getColor(field.id);
+  function getResolvedColor(gameId, field) {
+    const custom = getColor(gameId, field.id);
     return custom || getThemeColor(field);
+  }
+
+  function migrateLegacy() {
+    try {
+      const legacy = localStorage.getItem(LEGACY_KEY);
+      if (!legacy) return;
+      const parsed = JSON.parse(legacy);
+      if (parsed && typeof parsed === "object" && Object.keys(parsed).length) {
+        if (!allColors.sudoku) allColors.sudoku = {};
+        Object.assign(allColors.sudoku, parsed);
+        save();
+      }
+      localStorage.removeItem(LEGACY_KEY);
+    } catch {
+      localStorage.removeItem(LEGACY_KEY);
+    }
   }
 
   function load() {
     try {
-      colors = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      allColors = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
     } catch {
-      colors = {};
+      allColors = {};
     }
-    apply();
+    migrateLegacy();
+    if (activeGameId) applyForGame(activeGameId);
   }
 
   function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(colors));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allColors));
   }
 
-  function apply() {
-    FIELDS.forEach(({ id, var: cssVar }) => {
-      const value = colors[id];
+  function gameColors(gameId) {
+    if (!allColors[gameId]) allColors[gameId] = {};
+    return allColors[gameId];
+  }
+
+  function allBoardVars() {
+    const vars = new Set();
+    const fromRegistry = window.Appearance?.getAllColorFields?.() || activeFields;
+    fromRegistry.forEach(({ var: cssVar }) => vars.add(cssVar));
+    return vars;
+  }
+
+  function applyForGame(gameId) {
+    activeGameId = gameId;
+    const fields = gameId
+      ? window.Appearance?.getSectionFields?.(gameId) || activeFields
+      : [];
+    if (fields.length) setActiveFields(fields);
+
+    allBoardVars().forEach((cssVar) => {
+      document.documentElement.style.removeProperty(cssVar);
+    });
+
+    if (!gameId) return;
+    const colors = gameColors(gameId);
+    fields.forEach((field) => {
+      const value = colors[field.id];
       if (value) {
-        document.documentElement.style.setProperty(cssVar, value);
-      } else {
-        document.documentElement.style.removeProperty(cssVar);
+        document.documentElement.style.setProperty(field.var, value);
       }
     });
   }
 
-  function setColor(id, value) {
-    if (!value) delete colors[id];
-    else colors[id] = value;
+  function setActiveFields(fields) {
+    activeFields = fields || [];
+  }
+
+  function setColor(gameId, id, value) {
+    const map = gameColors(gameId);
+    if (!value) delete map[id];
+    else map[id] = value;
+    if (!Object.keys(map).length) delete allColors[gameId];
     save();
-    apply();
-    if (panelContainer) syncPanel(panelContainer);
+    if (gameId === activeGameId) applyForGame(gameId);
+    if (panelContainer) {
+      const fields = window.Appearance?.getSectionFields?.(gameId) || activeFields;
+      syncColorRowsForGame(panelContainer, gameId, fields);
+    }
   }
 
-  function getColor(id) {
-    return colors[id] || "";
+  function getColor(gameId, id) {
+    return gameColors(gameId)[id] || "";
   }
 
-  function reset() {
-    colors = {};
-    localStorage.removeItem(STORAGE_KEY);
-    apply();
-    if (panelContainer) syncPanel(panelContainer);
+  function reset(gameId) {
+    delete allColors[gameId];
+    save();
+    if (gameId === activeGameId) applyForGame(gameId);
+    if (panelContainer && gameId) {
+      const fields = window.Appearance?.getSectionFields?.(gameId) || activeFields;
+      syncColorRowsForGame(panelContainer, gameId, fields);
+    }
   }
 
-  function updateCurrentSwatch(swatch, field) {
-    const custom = getColor(field.id);
-    const resolved = getResolvedColor(field);
+  function updateCurrentSwatch(swatch, gameId, field) {
+    const custom = getColor(gameId, field.id);
+    const resolved = getResolvedColor(gameId, field);
     swatch.style.backgroundColor = resolved;
     swatch.classList.toggle("is-theme", !custom);
     swatch.title = custom ? custom : `Theme default (${resolved})`;
@@ -96,7 +138,7 @@ const Settings = (() => {
     btn.title = `Theme default (${themeColor})`;
   }
 
-  function buildPickerContent(field) {
+  function buildPickerContent(gameId, field) {
     pickerBody.innerHTML = "";
 
     const grid = document.createElement("div");
@@ -106,7 +148,7 @@ const Settings = (() => {
     defaultBtn.type = "button";
     defaultBtn.className = "color-opt theme-default";
     defaultBtn.addEventListener("click", () => {
-      setColor(field.id, "");
+      setColor(gameId, field.id, "");
       pickerDialog.close();
     });
     updateThemeDefaultBtn(defaultBtn, field);
@@ -120,7 +162,7 @@ const Settings = (() => {
       btn.title = hex;
       btn.dataset.color = hex;
       btn.addEventListener("click", () => {
-        setColor(field.id, hex);
+        setColor(gameId, field.id, hex);
         pickerDialog.close();
       });
       grid.appendChild(btn);
@@ -133,26 +175,27 @@ const Settings = (() => {
     const picker = document.createElement("input");
     picker.type = "color";
     picker.className = "color-menu-picker";
-    picker.value = getColor(field.id) || "#3b82f6";
+    picker.value = getColor(gameId, field.id) || "#3b82f6";
     picker.addEventListener("input", () => {
-      setColor(field.id, picker.value);
+      setColor(gameId, field.id, picker.value);
     });
 
     pickerWrap.appendChild(picker);
     pickerBody.append(grid, pickerWrap);
 
-    const value = getColor(field.id);
+    const value = getColor(gameId, field.id);
     grid.querySelectorAll(".color-opt:not(.theme-default)").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.color === value);
     });
     defaultBtn.classList.toggle("active", !value);
   }
 
-  function openPicker(field) {
+  function openPicker(gameId, field) {
     if (!pickerDialog) return;
     activeField = field;
+    activePickerGameId = gameId;
     pickerTitle.textContent = field.label;
-    buildPickerContent(field);
+    buildPickerContent(gameId, field);
     pickerDialog.showModal();
   }
 
@@ -170,14 +213,19 @@ const Settings = (() => {
     });
   }
 
-  function buildPanel(container) {
+  function buildColorRows(container, gameId, fields) {
     panelContainer = container;
-    container.innerHTML = "";
+    const wrap = document.createElement("div");
+    wrap.className = "appearance-color-rows";
+    wrap.dataset.game = gameId;
 
-    FIELDS.forEach((field) => {
+    fields.forEach((field) => {
       const item = document.createElement("div");
       item.className = "settings-item";
       item.dataset.field = field.id;
+      item.dataset.game = gameId;
+      item.dataset.themeVar = field.themeVar;
+      item.dataset.cssVar = field.var;
 
       const head = document.createElement("div");
       head.className = "settings-item-head";
@@ -186,53 +234,46 @@ const Settings = (() => {
       label.className = "settings-item-label";
       label.textContent = field.label;
 
-      const current = document.createElement("span");
+      const current = document.createElement("button");
+      current.type = "button";
       current.className = "color-current-swatch";
-      current.title = "Current color";
+      current.setAttribute("aria-label", `Choose color for ${field.label}`);
+      current.addEventListener("click", () => openPicker(gameId, field));
 
-      const toggle = document.createElement("button");
-      toggle.type = "button";
-      toggle.className = "btn btn-icon color-toggle";
-      toggle.setAttribute("aria-label", `Choose color for ${field.label}`);
-      toggle.innerHTML =
-        '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h4v1H4zm0 3h4v1H4zm0 3h4v1H4z" fill="currentColor"/></svg>';
-
-      toggle.addEventListener("click", (e) => {
-        e.stopPropagation();
-        openPicker(field);
-      });
-
-      head.append(label, current, toggle);
+      head.append(label, current);
       item.append(head);
-      container.appendChild(item);
+      wrap.appendChild(item);
 
-      updateCurrentSwatch(current, field);
+      updateCurrentSwatch(current, gameId, field);
     });
 
-    const resetBtn = document.createElement("button");
-    resetBtn.type = "button";
-    resetBtn.className = "btn btn-reset";
-    resetBtn.textContent = "Reset to theme defaults";
-    resetBtn.addEventListener("click", () => {
-      document.dispatchEvent(new CustomEvent("sudoku:reset-appearance"));
-    });
-    container.appendChild(resetBtn);
+    return wrap;
   }
 
-  function syncPanel(container) {
-    FIELDS.forEach((field) => {
-      const item = container.querySelector(`[data-field="${field.id}"]`);
+  function syncColorRowsForGame(container, gameId, fields) {
+    setActiveFields(fields);
+    fields.forEach((field) => {
+      const item = container.querySelector(
+        `[data-game="${gameId}"][data-field="${field.id}"]`
+      );
       if (!item) return;
       const swatch = item.querySelector(".color-current-swatch");
-      updateCurrentSwatch(swatch, field);
+      if (swatch) updateCurrentSwatch(swatch, gameId, field);
     });
-    if (activeField && pickerDialog?.open) {
-      buildPickerContent(activeField);
-    }
   }
 
   function onThemeChange() {
-    if (panelContainer) syncPanel(panelContainer);
+    if (panelContainer) {
+      const section = panelContainer.querySelector(".appearance-game-section");
+      if (section) {
+        const gameId = section.dataset.game;
+        const fields = window.Appearance?.getSectionFields?.(gameId) || activeFields;
+        syncColorRowsForGame(panelContainer, gameId, fields);
+      }
+    }
+    if (activeField && activePickerGameId && pickerDialog?.open) {
+      buildPickerContent(activePickerGameId, activeField);
+    }
   }
 
   function closeAllMenus() {
@@ -244,8 +285,10 @@ const Settings = (() => {
     reset,
     getColor,
     setColor,
-    buildPanel,
-    syncPanel,
+    applyForGame,
+    setActiveFields,
+    buildColorRows,
+    syncColorRowsForGame,
     closeAllMenus,
     onThemeChange,
     initPickerDialog,

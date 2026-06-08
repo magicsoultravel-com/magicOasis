@@ -16,7 +16,6 @@
   const guideDialog = document.getElementById("mahjong-guide-dialog");
   const guideBasics = document.getElementById("mahjong-guide-basics");
   const guideAtlas = document.getElementById("mahjong-guide-atlas");
-  const btnTileSet = document.getElementById("btn-mahjong-tiles");
   const btnVoice = document.getElementById("btn-mahjong-voice");
   const appEl = document.querySelector(".app");
   const seedsDialog = document.getElementById("seeds-dialog");
@@ -220,25 +219,11 @@
     if (appEl) {
       appEl.dataset.mjTiles = tileSet;
     }
-    if (btnTileSet) {
-      const isBlack = tileSet === "black";
-      btnTileSet.classList.toggle("active", isBlack);
-      btnTileSet.title = isBlack ? "Tile set: Black — tap for Ivory" : "Tile set: Ivory — tap for Black";
-      btnTileSet.setAttribute(
-        "aria-label",
-        isBlack ? "Tile set Black, switch to Ivory" : "Tile set Ivory, switch to Black"
-      );
-    }
     try {
       localStorage.setItem(TILE_SET_KEY, tileSet);
     } catch {
       /* storage unavailable */
     }
-  }
-
-  function toggleTileSet() {
-    window.SudokuApp?.closeMenu?.();
-    applyTileSet(tileSet === "black" ? "ivory" : "black");
   }
 
   function loadTileSet() {
@@ -1106,7 +1091,6 @@
     document.getElementById("btn-mahjong-restart")?.addEventListener("click", restartGame);
     document.getElementById("btn-mahjong-guide")?.addEventListener("click", openGuide);
     document.getElementById("btn-mahjong-seeds")?.addEventListener("click", openSeeds);
-    btnTileSet?.addEventListener("click", toggleTileSet);
     btnVoice?.addEventListener("click", toggleVoice);
     document.getElementById("mahjong-guide-close")?.addEventListener("click", () => guideDialog?.close());
     guideDialog?.addEventListener("click", (e) => {
@@ -1139,6 +1123,8 @@
     newGame,
     restartGame,
     openSeeds,
+    getTileSet: () => tileSet,
+    applyTileSet,
     isActive() {
       return window.Games?.active === "mahjong";
     },

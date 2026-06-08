@@ -49,14 +49,6 @@
         <button id="btn-zen-exit" class="btn btn-icon zen-exit game-only" type="button" aria-label="Exit zen mode" title="Exit zen mode">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
         </button>
-        <div class="sol-zoom-group solitaire-only game-only" role="group" aria-label="Card size">
-          <button id="btn-sol-zoom-out" class="btn btn-icon" type="button" aria-label="Smaller cards" title="Smaller cards">
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-          <button id="btn-sol-zoom-in" class="btn btn-icon" type="button" aria-label="Larger cards" title="Larger cards">
-            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4v8M4 8h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </button>
-        </div>
       </div>
       <nav id="nav-menu" class="menu-overlay" hidden aria-label="Game menu">
       <div class="menu-icons">
@@ -68,9 +60,6 @@
         </button>
         <button id="btn-mahjong-seeds" class="btn btn-icon mahjong-only" type="button" aria-label="Board seeds" title="Board seeds">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5h6v2a4 4 0 0 1-6 0v-2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 9.5v3M6.5 12.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        </button>
-        <button id="btn-mahjong-tiles" class="btn btn-icon mahjong-only" type="button" aria-label="Toggle tile set" title="Tile set: Ivory">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="2.5" width="9" height="11" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="10" cy="10" r="1" fill="currentColor"/></svg>
         </button>
         <button id="btn-mahjong-voice" class="btn btn-icon mahjong-only active" type="button" aria-label="Tile pronunciation on" title="Tile pronunciation on — speaks when you select a tile">
           <svg class="mj-voice-on" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6.5h2.5L8 3.5v9L6 9.5H3.5a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5z" fill="currentColor"/><path d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12 4a5.5 5.5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -96,9 +85,6 @@
         </button>
         <button id="btn-mahjong-new" class="btn btn-icon mahjong-only" type="button" aria-label="New mahjong game" title="New game">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button id="btn-solitaire-deck" class="btn btn-icon solitaire-only" type="button" aria-label="Card set Classic" title="Card set: Classic — tap to change">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3" width="8" height="11" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="5.5" y="2" width="8" height="11" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.55"/><path d="M4.5 6.5h4M4.5 8.5h2.5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
         </button>
         <button id="btn-solitaire-guide" class="btn btn-icon solitaire-only" type="button" aria-label="How to play solitaire" title="How to play">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h7l3 3V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10 2.5V6H13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5h5M5.5 10.5h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
@@ -203,13 +189,6 @@
           <option value="medium" selected>Medium</option>
           <option value="hard">Hard</option>
         </select>
-        <div class="theme-picker">
-          <button id="theme-picker-btn" class="btn theme-picker-btn" type="button" aria-label="Theme" aria-expanded="false" title="Theme">
-            <span id="theme-swatch" class="theme-swatch"></span>
-            <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </button>
-          <div id="theme-picker-menu" class="theme-picker-menu" hidden role="listbox" aria-label="Themes"></div>
-        </div>
         <span id="app-version" class="menu-version" aria-label="Version"></span>
       </div>
       </nav>
@@ -567,12 +546,14 @@
   <script src="js/quotes.js"></script>
   <script src="js/lessons.js"></script>
   <script src="js/settings.js"></script>
+  <script src="js/appearance.js"></script>
   <script src="js/version.js"></script>
   <script src="js/cat-models.js"></script>
   <script src="js/cat.js"></script>
   <script src="js/app.js"></script>
   <script src="js/mahjong-app.js"></script>
   <script src="js/solitaire-app.js"></script>
+  <script src="js/appearance-games.js"></script>
   <script src="js/snake-app.js"></script>
   <script src="js/minesweeper-app.js"></script>
   <script src="js/game2048-app.js"></script>

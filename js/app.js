@@ -5,9 +5,6 @@
   const statusEl = document.getElementById("status");
   const timerEl = document.getElementById("timer");
   const difficultyEl = document.getElementById("difficulty");
-  const themePickerBtn = document.getElementById("theme-picker-btn");
-  const themePickerMenu = document.getElementById("theme-picker-menu");
-  const themeSwatch = document.getElementById("theme-swatch");
   const versionEl = document.getElementById("app-version");
   const colorPickerDialog = document.getElementById("color-picker-dialog");
   const quoteSplash = document.getElementById("quote-splash");
@@ -57,15 +54,6 @@
   const statsCompletedEl = document.getElementById("stats-completed");
   const MAX_SEEDS = 10;
   const HISTORY_LIMIT = 10;
-  const THEMES = [
-    { id: "slate", label: "Slate", swatch: "#1a2332" },
-    { id: "light", label: "Light", swatch: "#f4f4f5" },
-    { id: "ocean", label: "Ocean", swatch: "#e8f5f2" },
-    { id: "dusk", label: "Dusk", swatch: "#1c1824" },
-    { id: "oled", label: "OLED", swatch: "#09090b" },
-  ];
-  const DEFAULT_THEME = "slate";
-
   let puzzle = [];
   let solution = [];
   let given = [];
@@ -238,69 +226,11 @@
     saveGame();
   }
 
-  function themeById(id) {
-    return THEMES.find((t) => t.id === id) || THEMES[0];
-  }
-
-  function setTheme(themeId) {
-    const theme = themeById(themeId);
-    document.documentElement.setAttribute("data-theme", theme.id);
-    localStorage.setItem("sudoku-theme", theme.id);
-    updateThemePickerUI(theme.id);
-    Settings.onThemeChange();
-    saveGame();
-  }
-
-  function updateThemePickerUI(activeId) {
-    if (themeSwatch) {
-      themeSwatch.style.backgroundColor = themeById(activeId).swatch;
+  function getSettingsContext() {
+    if (window.Hub?.isVisible?.()) {
+      return { view: "hub", gameId: null };
     }
-    if (!themePickerMenu) return;
-    themePickerMenu.querySelectorAll(".theme-option").forEach((btn) => {
-      const selected = btn.dataset.theme === activeId;
-      btn.classList.toggle("active", selected);
-      btn.setAttribute("aria-selected", selected ? "true" : "false");
-    });
-  }
-
-  function buildThemePicker() {
-    if (!themePickerMenu) return;
-    themePickerMenu.innerHTML = "";
-    THEMES.forEach((theme) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "theme-option";
-      btn.dataset.theme = theme.id;
-      btn.setAttribute("role", "option");
-      btn.title = theme.label;
-      btn.innerHTML = `<span class="theme-option-swatch" style="background:${theme.swatch}"></span><span class="theme-option-label">${theme.label}</span>`;
-      btn.addEventListener("click", () => {
-        setTheme(theme.id);
-        closeThemePicker();
-      });
-      themePickerMenu.appendChild(btn);
-    });
-  }
-
-  function closeThemePicker() {
-    if (!themePickerMenu) return;
-    themePickerMenu.hidden = true;
-    themePickerBtn?.setAttribute("aria-expanded", "false");
-  }
-
-  function toggleThemePicker() {
-    if (!themePickerMenu) return;
-    const willOpen = themePickerMenu.hidden;
-    themePickerMenu.hidden = !willOpen;
-    themePickerBtn?.setAttribute("aria-expanded", willOpen ? "true" : "false");
-  }
-
-  function resetAppearance() {
-    Settings.reset();
-    if (settingsColors.childElementCount) {
-      Settings.syncPanel(settingsColors);
-    }
-    saveGame();
+    return { view: "game", gameId: window.Games?.active || null };
   }
 
   function closeMenu() {
@@ -311,7 +241,6 @@
     menuScrim.setAttribute("aria-hidden", "true");
     btnMenu.classList.remove("active");
     btnMenu.setAttribute("aria-expanded", "false");
-    closeThemePicker();
   }
 
   function openMenu() {
@@ -386,13 +315,13 @@
   }
 
   function initPreferences() {
-    let savedTheme = localStorage.getItem("sudoku-theme");
-    if (savedTheme === "dark") savedTheme = "oled";
-    setTheme(THEMES.some((t) => t.id === savedTheme) ? savedTheme : DEFAULT_THEME);
+    Appearance.initTheme();
     setZen(localStorage.getItem("sudoku-zen") === "1");
     const savedCat = localStorage.getItem("sudoku-cat");
     setCatEnabled(savedCat === "1" || (parseInt(savedCat, 10) || 0) > 0);
     Settings.load();
+    const activeGame = window.Games?.active;
+    if (activeGame) Settings.applyForGame(activeGame);
   }
 
   function formatTime(s) {
@@ -1378,16 +1307,13 @@
     lessonsDialog.showModal();
   }
 
-  function openSettings() {
+  function openSettings(context) {
     if (settingsOpen) return;
     closeMenu();
+    const ctx = context || getSettingsContext();
     settingsOpen = true;
-    btnSettings.classList.add("active");
-    if (!settingsColors.childElementCount) {
-      Settings.buildPanel(settingsColors);
-    } else {
-      Settings.syncPanel(settingsColors);
-    }
+    if (btnSettings && ctx.view === "game") btnSettings.classList.add("active");
+    Appearance.buildPanel(settingsColors, ctx);
     appearanceDialog.showModal();
   }
 
@@ -1458,10 +1384,6 @@
     selectCell(nr, nc);
   }
 
-  themePickerBtn?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    toggleThemePicker();
-  });
   btnMenu.addEventListener("click", toggleMenu);
   btnZen.addEventListener("click", () => {
     setZen(true);
@@ -1529,13 +1451,6 @@
       closeMenu();
     }
     if (
-      themePickerMenu &&
-      !themePickerMenu.hidden &&
-      !e.target.closest(".theme-picker")
-    ) {
-      closeThemePicker();
-    }
-    if (
       cellPickerOpen &&
       !e.target.closest("#cell-picker") &&
       !e.target.closest(".cell")
@@ -1543,7 +1458,6 @@
       closeCellPicker();
     }
   });
-  document.addEventListener("sudoku:reset-appearance", resetAppearance);
   document.querySelectorAll(".dialog-tabs .tab").forEach((tab) => {
     tab.addEventListener("click", () => switchLessonTab(tab.dataset.tab));
   });
@@ -1565,7 +1479,7 @@
     document.getElementById("color-picker-close")
   );
 
-  buildThemePicker();
+  Appearance.setOnThemeChanged(saveGame);
 
   async function startFromHub() {
     await Quotes.init();
@@ -1606,7 +1520,6 @@
     closeMenu,
     openMenu,
     openSettings,
-    openThemePicker: toggleThemePicker,
     startFromHub,
   };
 })();

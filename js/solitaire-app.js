@@ -15,9 +15,6 @@
   const dealProgress = document.getElementById("solitaire-deal-progress");
   const guideDialog = document.getElementById("solitaire-guide-dialog");
   const guideBody = document.getElementById("solitaire-guide-body");
-  const btnDeck = document.getElementById("btn-solitaire-deck");
-  const btnZoomIn = document.getElementById("btn-sol-zoom-in");
-  const btnZoomOut = document.getElementById("btn-sol-zoom-out");
   const appEl = document.querySelector(".app");
   const seedsDialog = document.getElementById("seeds-dialog");
   const currentSeedEl = document.getElementById("current-seed");
@@ -73,23 +70,6 @@
     return Number.isFinite(n) ? n : 10;
   }
 
-  function updateZoomButtons() {
-    if (btnZoomOut) {
-      btnZoomOut.disabled = zoomIndex <= 0;
-      btnZoomOut.title = zoomIndex <= 0 ? "Cards already smallest" : "Smaller cards";
-    }
-    if (btnZoomIn) {
-      btnZoomIn.disabled = zoomIndex >= ZOOM_STEPS.length - 1;
-      const next = ZOOM_STEPS[Math.min(zoomIndex + 1, ZOOM_STEPS.length - 1)];
-      btnZoomIn.title =
-        zoomIndex >= ZOOM_STEPS.length - 1
-          ? "Already at maximum"
-          : zoomIndex >= 7
-            ? `Wider board (${next.window}rem)`
-            : `Larger cards (${next.card}rem)`;
-    }
-  }
-
   function applyZoom(index, { persist = true } = {}) {
     zoomIndex = Math.max(0, Math.min(ZOOM_STEPS.length - 1, index));
     const step = ZOOM_STEPS[zoomIndex];
@@ -108,8 +88,6 @@
         appEl.dataset.solZoom = String(zoomIndex);
       }
     }
-
-    updateZoomButtons();
 
     if (persist) {
       try {
@@ -132,14 +110,22 @@
     }
   }
 
-  function zoomIn() {
-    if (zoomIndex >= ZOOM_STEPS.length - 1) return;
-    applyZoom(zoomIndex + 1);
+  function getZoomMax() {
+    return ZOOM_STEPS.length - 1;
   }
 
-  function zoomOut() {
-    if (zoomIndex <= 0) return;
-    applyZoom(zoomIndex - 1);
+  function getZoomLabel(index) {
+    const step = ZOOM_STEPS[index];
+    if (!step) return String(index);
+    if (index === DEFAULT_ZOOM_INDEX) return "Default";
+    if (index >= 7) return `${step.window}rem`;
+    return `${step.card}rem`;
+  }
+
+  function stepZoom(delta) {
+    const next = zoomIndex + delta;
+    if (next < 0 || next > getZoomMax()) return;
+    applyZoom(next);
   }
 
   function stackStep(faceUp) {
@@ -160,12 +146,6 @@
   function applyDeckSet(setId) {
     deckSet = SolitaireCards.SETS[setId] ? setId : "classic";
     if (appEl) appEl.dataset.solDeck = deckSet;
-    if (btnDeck) {
-      const label = SolitaireCards.setLabel(deckSet);
-      btnDeck.title = `Card set: ${label} — tap to change`;
-      btnDeck.setAttribute("aria-label", `Card set ${label}, tap to change`);
-      btnDeck.classList.toggle("active", deckSet !== "classic");
-    }
     try {
       localStorage.setItem(DECK_KEY, deckSet);
     } catch {
@@ -181,11 +161,6 @@
     } catch {
       applyDeckSet("classic");
     }
-  }
-
-  function toggleDeckSet() {
-    window.SudokuApp?.closeMenu?.();
-    applyDeckSet(SolitaireCards.nextSet(deckSet));
   }
 
   function wait(ms) {
@@ -930,9 +905,6 @@
     document.getElementById("btn-solitaire-restart")?.addEventListener("click", restartGame);
     document.getElementById("btn-solitaire-guide")?.addEventListener("click", openGuide);
     document.getElementById("btn-solitaire-seeds")?.addEventListener("click", openSeeds);
-    btnDeck?.addEventListener("click", toggleDeckSet);
-    btnZoomIn?.addEventListener("click", zoomIn);
-    btnZoomOut?.addEventListener("click", zoomOut);
     document.getElementById("solitaire-guide-close")?.addEventListener("click", () => guideDialog?.close());
     guideDialog?.addEventListener("click", (e) => {
       if (e.target === guideDialog) guideDialog.close();
@@ -959,6 +931,13 @@
     newGame,
     restartGame,
     openSeeds,
+    getDeckSet: () => deckSet,
+    applyDeckSet,
+    getZoomIndex: () => zoomIndex,
+    applyZoom,
+    stepZoom,
+    getZoomMax,
+    getZoomLabel,
     isActive() {
       return window.Games?.active === "solitaire";
     },

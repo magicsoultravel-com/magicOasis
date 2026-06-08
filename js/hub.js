@@ -147,11 +147,10 @@
 
   document.getElementById("btn-home")?.addEventListener("click", showHub);
   document.getElementById("btn-hub-appearance")?.addEventListener("click", () => {
-    window.SudokuApp?.openSettings?.();
+    window.SudokuApp?.openSettings?.({ view: "hub", gameId: null });
   });
   document.getElementById("btn-hub-theme")?.addEventListener("click", () => {
-    window.SudokuApp?.openMenu?.();
-    window.SudokuApp?.openThemePicker?.();
+    window.SudokuApp?.openSettings?.({ view: "hub", gameId: null });
   });
 
   window.Hub = {

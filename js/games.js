@@ -95,6 +95,7 @@
     active = gameId;
     localStorage.setItem(STORAGE_KEY, active);
     applyVisibility();
+    Settings.applyForGame(active);
     initGame(active);
   }
 
@@ -134,6 +135,7 @@
       localStorage.setItem(STORAGE_KEY, active);
     }
     applyVisibility();
+    Settings.applyForGame(active);
     initGame(active);
   }
 })();
