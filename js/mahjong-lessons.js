@@ -21,7 +21,7 @@ const MahjongGuideBasics = [
   },
   {
     title: "New game & restart",
-    body: "New game deals a fresh layout. Restart reshuffles the same seed so you can retry the same deal. Difficulty in the menu tweaks which seed family is used.",
+    body: "New game deals a fresh layout. Restart replays the same deal from the current seed. Difficulty in the menu tweaks which seed family is used.",
   },
 ];
 
@@ -226,6 +226,25 @@ const MahjongPhrases = {
       chinese: tile.label,
       pronunciation: "",
       english: "",
+    };
+  },
+
+  captionForMatch(tileA, tileB) {
+    const lineA = MahjongPhrases.fromTile(tileA);
+    const lineB = MahjongPhrases.fromTile(tileB);
+
+    if (tileA.kind === tileB.kind && tileA.rank === tileB.rank) {
+      return lineA;
+    }
+
+    const pron = [lineA.pronunciation, lineB.pronunciation].filter(Boolean).join(" · ");
+    const english = [lineA.english, lineB.english].filter(Boolean).join("; ");
+    const groupLabel = tileA.kind === "flower" ? "Flowers match" : "Seasons match";
+
+    return {
+      chinese: `${lineA.chinese} · ${lineB.chinese}`,
+      pronunciation: pron,
+      english: english ? `${groupLabel} — ${english}` : groupLabel,
     };
   },
 };

@@ -69,6 +69,9 @@
   let currentCaptionLine = null;
   let captionHideTimer = null;
   let charZoomOpen = false;
+  let speechToken = 0;
+  let initialDealSnapshot = null;
+  let snapshotSeed = null;
 
   function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -324,8 +327,8 @@
   function setVoiceEnabled(enabled) {
     voiceEnabled = enabled && voiceSupported;
     if (!voiceEnabled) {
+      speechToken++;
       window.speechSynthesis?.cancel();
-      hideCaption();
     }
     try {
       localStorage.setItem(VOICE_KEY, voiceEnabled ? "1" : "0");
@@ -344,7 +347,7 @@
     const parts = [];
     if (line.pronunciation) parts.push(line.pronunciation);
     if (line.english) parts.push(line.english);
-    return parts.length ? ` · ${parts.join(" · ")}` : "";
+    return parts.join(" · ");
   }
 
   function clearCaptionHideTimer() {
@@ -408,13 +411,19 @@
     captionEl.hidden = false;
   }
 
-  function speakLine(line) {
+  function speakLine(line, options = {}) {
     if (!line?.chinese) return;
     hideCharZoom();
-
-    if (!voiceEnabled || !voiceSupported) return;
+    clearCaptionHideTimer();
 
     showCaption(line);
+    const token = ++speechToken;
+
+    if (!voiceEnabled || !voiceSupported) {
+      scheduleCaptionHide();
+      return;
+    }
+
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(line.chinese);
@@ -422,9 +431,14 @@
     if (chineseVoice) utterance.voice = chineseVoice;
     utterance.rate = 0.9;
     utterance.pitch = 1.02;
-    utterance.onend = () => scheduleCaptionHide();
+    utterance.onend = () => {
+      if (token !== speechToken) return;
+      if (typeof options.then === "function") options.then();
+      else scheduleCaptionHide();
+    };
     utterance.onerror = () => {
-      if (!charZoomOpen) hideCaption();
+      if (token !== speechToken) return;
+      if (!charZoomOpen) scheduleCaptionHide();
     };
     window.speechSynthesis.speak(utterance);
   }
@@ -436,6 +450,17 @@
   function speakPhrase(kind) {
     const line = MahjongPhrases.next(kind);
     if (line) speakLine(line);
+  }
+
+  function speakMatch(tileA, tileB) {
+    const matchLine = MahjongPhrases.captionForMatch(tileA, tileB);
+    const approval = MahjongPhrases.next("approval");
+    speakLine(matchLine, {
+      then: () => {
+        if (approval) speakLine(approval);
+        else scheduleCaptionHide();
+      },
+    });
   }
 
   function clearSavedGame() {
@@ -495,6 +520,15 @@
     }));
   }
 
+  function cloneSnapshot(snapshot) {
+    return snapshot.map((t) => ({ ...t, removed: false }));
+  }
+
+  function setInitialSnapshot(dealtTiles, dealtSeed) {
+    initialDealSnapshot = compactTiles(dealtTiles);
+    snapshotSeed = dealtSeed;
+  }
+
   function saveGame() {
     if (!tiles.length || tiles.length !== Mahjong.TILE_COUNT) return;
     const state = {
@@ -506,6 +540,10 @@
       selected: gameWon ? null : selected,
       difficultyPref: difficultyEl?.value,
       dealWasSolvable,
+      initialTiles:
+        initialDealSnapshot && snapshotSeed === seed
+          ? compactTiles(initialDealSnapshot)
+          : undefined,
     };
     try {
       localStorage.setItem(STATE_KEY, JSON.stringify(state));
@@ -533,6 +571,29 @@
 
       tiles = compactTiles(state.tiles);
       seed = Number.isFinite(state.seed) ? state.seed : null;
+      if (
+        Array.isArray(state.initialTiles) &&
+        state.initialTiles.length === Mahjong.TILE_COUNT &&
+        seed != null
+      ) {
+        let valid = true;
+        for (let i = 0; i < state.initialTiles.length; i++) {
+          if (!isValidTile({ ...state.initialTiles[i], removed: false }, i)) {
+            valid = false;
+            break;
+          }
+        }
+        if (valid) {
+          initialDealSnapshot = compactTiles(state.initialTiles);
+          snapshotSeed = seed;
+        } else {
+          initialDealSnapshot = null;
+          snapshotSeed = null;
+        }
+      } else {
+        initialDealSnapshot = null;
+        snapshotSeed = null;
+      }
       currentDifficulty = state.difficultyPref || difficultyEl?.value || "medium";
       dealWasSolvable = state.dealWasSolvable !== false;
       seconds = Number.isFinite(state.seconds) ? state.seconds : 0;
@@ -877,7 +938,7 @@
       Mahjong.isFree(tile, tiles) &&
       Mahjong.canMatch(first, tile)
     ) {
-      speakPhrase("approval");
+      speakMatch(first, tile);
       removePair(first.id, tile.id);
       return;
     }
@@ -1009,6 +1070,7 @@
     if (token !== dealToken) return;
 
     tiles = result.tiles;
+    setInitialSnapshot(result.tiles, result.seed);
     dealWasSolvable = result.solvable !== false;
     boardSolvable = dealWasSolvable ? true : null;
     if (recordStart) {
@@ -1048,8 +1110,41 @@
     dealBoard({ dealSeed, recordStart: true });
   }
 
+  async function replayBoard() {
+    const token = ++dealToken;
+    speechToken++;
+    window.speechSynthesis?.cancel();
+    hideCaption();
+
+    gameWon = false;
+    selected = null;
+    history = [];
+    animating = false;
+    boardSolvable = dealWasSolvable ? true : null;
+    solvabilityToken++;
+    clearHint();
+    setStatus("");
+
+    boardWrap.classList.add("is-clearing");
+    await wait(140);
+    if (token !== dealToken) return;
+
+    tiles = cloneSnapshot(initialDealSnapshot);
+
+    boardWrap.classList.remove("is-clearing");
+    renderBoard(false);
+    resetTimer();
+    btnUndo.disabled = true;
+    saveGame();
+    speakPhrase("greet");
+  }
+
   function restartGame() {
     if (!tiles.length && seed == null) return;
+    if (initialDealSnapshot && seed != null && snapshotSeed === seed) {
+      replayBoard();
+      return;
+    }
     dealBoard({ dealSeed: seed ?? Date.now(), recordStart: false });
   }
 
