@@ -17,6 +17,7 @@
     slitherlink: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 18h8v12h12v-8h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><text x="16" y="28" font-size="8" font-weight="700" fill="currentColor" font-family="system-ui,sans-serif">3</text></svg>`,
     kakuro: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 12h20v24H14z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 12l20 24" stroke="currentColor" stroke-width="1.2"/><text x="26" y="22" font-size="7" fill="currentColor" font-family="system-ui,sans-serif">9</text><text x="16" y="32" font-size="7" fill="currentColor" font-family="system-ui,sans-serif">12</text></svg>`,
     reversi: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="20" cy="20" r="5" fill="currentColor"/><circle cx="28" cy="28" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg>`,
+    quotes: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 12h14c4 0 7 3 7 7v10H21c-4 0-7-3-7-7V12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 32v4l5-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
     soon: `<svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M24 20v8M20 24h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
   };
 
@@ -94,9 +95,13 @@
     if (window.Games?.active === "reversi" && typeof window.ReversiApp?.saveGame === "function") {
       window.ReversiApp.saveGame();
     }
+    if (window.Games?.active === "quotes" && typeof window.QuotesApp?.saveGame === "function") {
+      window.QuotesApp.saveGame();
+    }
 
     window.SudokuApp?.closeMenu?.();
     setHubView(true);
+    window.QuoteFooter?.applyVisibility?.();
   }
 
   function hideHub() {
@@ -128,10 +133,14 @@
       gameId === "game2048" ||
       gameId === "slitherlink" ||
       gameId === "kakuro" ||
-      gameId === "reversi"
+      gameId === "reversi" ||
+      gameId === "quotes"
     ) {
       appEl.classList.add("is-ready");
     }
+
+    window.QuoteFooter?.init?.();
+    window.QuoteFooter?.applyVisibility?.();
   }
 
   function initHubOnLoad() {

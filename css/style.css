@@ -1790,7 +1790,8 @@ body {
   .game2048-only,
   .slitherlink-only,
   .kakuro-only,
-  .reversi-only
+  .reversi-only,
+  .quotes-only
 ) {
   display: none !important;
 }
@@ -1803,7 +1804,8 @@ body {
 .app[data-game="game2048"] .game2048-only,
 .app[data-game="slitherlink"] .slitherlink-only,
 .app[data-game="kakuro"] .kakuro-only,
-.app[data-game="reversi"] .reversi-only {
+.app[data-game="reversi"] .reversi-only,
+.app[data-game="quotes"] .quotes-only {
   display: revert !important;
 }
 
@@ -1817,7 +1819,8 @@ body {
   .game2048-only,
   .slitherlink-only,
   .kakuro-only,
-  .reversi-only
+  .reversi-only,
+  .quotes-only
 ) {
   display: none !important;
 }
@@ -1835,7 +1838,8 @@ body {
   #game2048-panel,
   #slitherlink-panel,
   #kakuro-panel,
-  #reversi-panel
+  #reversi-panel,
+  #quotes-panel
 ) {
   display: none !important;
 }

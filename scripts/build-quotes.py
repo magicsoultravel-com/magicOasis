@@ -4,42 +4,17 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "scripts" / "build-quotes.mjs"
-OUT = ROOT / "data" / "quotes.json"
-
-CATEGORIES = ("uplifting", "cunning", "funny", "strategic")
-QUOTE_RE = re.compile(r'\{ text: "(.*?)", author: "(.*?)" \}', re.DOTALL)
-
-
-def extract_array(name: str, text: str) -> list[dict]:
-    m = re.search(rf"const {name} = \[(.*?)\n\];", text, re.DOTALL)
-    if not m:
-        raise SystemExit(f"Could not find array: {name}")
-    return [{"text": t, "author": a} for t, a in QUOTE_RE.findall(m.group(1))]
-
-
-def extract_authors(text: str) -> dict:
-    m = re.search(r"const authors = \{(.*?)\n\};", text, re.DOTALL)
-    if not m:
-        raise SystemExit("Could not find authors map")
-    authors = {}
-    for line in m.group(1).splitlines():
-        line = line.strip().rstrip(",")
-        if not line:
-            continue
-        km = re.match(r'"([^"]+)":\s*"(.*)"$', line)
-        if km:
-            authors[km.group(1)] = km.group(2)
-            continue
-        km = re.match(r"(\w+):\s*\"(.*)\"$", line)
-        if km:
-            authors[km.group(1)] = km.group(2)
-    return authors
-
-
-def normalize(s: str) -> str:
-    return " ".join(s.lower().split())
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from quotes_lib import (  # noqa: E402
+    MJS,
+    OUT,
+    ROOT,
+    extract_array,
+    extract_authors,
+    load_categories,
+    normalize_quote_text,
+    read_mjs,
+)
 
 
 def sanitize(text: str) -> str:
@@ -52,21 +27,94 @@ def sanitize(text: str) -> str:
     return text
 
 
-def main() -> None:
-    text = SRC.read_text(encoding="utf-8")
-    authors = extract_authors(text)
-    by_category = {name: extract_array(name, text) for name in CATEGORIES}
+def parse_year_token(token: str) -> int | None:
+    token = token.strip().lower()
+    if not token:
+        return None
+    bc = "bc" in token
+    token = re.sub(r"\s*(bc|ad)\s*$", "", token, flags=re.I).strip()
+    token = re.sub(r"^c\.?\s*", "", token)
+    m = re.match(r"^(\d+)(?:st|nd|rd|th)?\s+century$", token)
+    if m:
+        century = int(m.group(1))
+        year = (century - 1) * 100 + 50
+        return -year if bc else year
+    if not re.match(r"^\d+$", token):
+        return None
+    year = int(token)
+    return -year if bc else year
 
-    for name, arr in by_category.items():
-        if len(arr) != 100:
-            print(f"ERROR {name}: expected 100, got {len(arr)}", file=sys.stderr)
-            sys.exit(1)
+
+def parse_lifespan(lifespan: str) -> dict:
+    """Return {lifespan, birth, death, mid} with numeric years (BC negative)."""
+    raw = lifespan.strip()
+    if not raw or raw in ("origin unknown", "date unknown"):
+        return {"lifespan": raw, "birth": None, "death": None, "mid": None}
+    if "contemporary" in raw.lower():
+        return {"lifespan": raw, "birth": None, "death": None, "mid": None}
+
+    cleaned = re.sub(r"^c\.?\s*", "", raw, flags=re.I).strip()
+    birth_only = re.match(r"^b\.?\s*(\d+)\s*(bc|ad)?$", cleaned, flags=re.I)
+    if birth_only:
+        birth = parse_year_token(birth_only.group(1) + (birth_only.group(2) or ""))
+        return {"lifespan": raw, "birth": birth, "death": None, "mid": birth}
+
+    century_only = re.match(r"^(\d+)(?:st|nd|rd|th)?\s+century\s*(bc|ad)?$", cleaned, flags=re.I)
+    if century_only:
+        mid = parse_year_token(f"{century_only.group(1)}th century {century_only.group(2) or ''}".strip())
+        return {"lifespan": raw, "birth": None, "death": None, "mid": mid}
+
+    range_suffix = ""
+    range_m = re.search(r"\s*(bc|ad)\s*$", cleaned, flags=re.I)
+    if range_m:
+        range_suffix = f" {range_m.group(1)}"
+        cleaned = cleaned[: range_m.start()].strip()
+
+    parts = re.split(r"[–—\-]", cleaned, maxsplit=1)
+    if len(parts) == 2:
+        left, right = parts[0].strip(), parts[1].strip()
+        if range_suffix and "bc" not in left.lower() and "ad" not in left.lower():
+            left += range_suffix
+        if range_suffix and "bc" not in right.lower() and "ad" not in right.lower():
+            right += range_suffix
+        birth = parse_year_token(left)
+        death = parse_year_token(right)
+        if birth is not None and death is not None:
+            mid = round((birth + death) / 2)
+            return {"lifespan": raw, "birth": birth, "death": death, "mid": mid}
+        if birth is not None:
+            return {"lifespan": raw, "birth": birth, "death": death, "mid": birth}
+        if death is not None:
+            return {"lifespan": raw, "birth": birth, "death": death, "mid": death}
+
+    single = parse_year_token(cleaned)
+    if single is not None:
+        return {"lifespan": raw, "birth": single, "death": None, "mid": single}
+
+    return {"lifespan": raw, "birth": None, "death": None, "mid": None}
+
+
+def build_authors_meta(authors: dict) -> dict:
+    return {name: parse_lifespan(lifespan) for name, lifespan in authors.items()}
+
+
+def main() -> None:
+    categories = load_categories()
+    text = read_mjs()
+    authors = extract_authors(text)
+    by_category = {}
+    for name in categories:
+        arr = extract_array(name, text)
+        if not arr:
+            print(f"WARNING {name}: no quotes found (empty or missing array)", file=sys.stderr)
+        by_category[name] = arr
 
     quotes = []
     for category, arr in by_category.items():
-        for q in arr:
+        for i, q in enumerate(arr, start=1):
             quotes.append(
                 {
+                    "id": f"{category}-{i:03d}",
                     "text": sanitize(q["text"]),
                     "author": q["author"],
                     "category": category,
@@ -76,7 +124,7 @@ def main() -> None:
     seen: dict[str, dict] = {}
     dupes = []
     for q in quotes:
-        key = normalize(q["text"])
+        key = normalize_quote_text(q["text"])
         if key in seen:
             dupes.append(q["text"])
         else:
@@ -139,13 +187,15 @@ def main() -> None:
         "Rickson Gracie": "b. 1958",
     }
     authors.update(extra_authors)
+    authors_meta = build_authors_meta(authors)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(
         json.dumps(
             {
                 "authors": authors,
-                "categories": list(CATEGORIES),
+                "authorsMeta": authors_meta,
+                "categories": list(categories),
                 "quotes": quotes,
             },
             indent=2,
@@ -154,7 +204,8 @@ def main() -> None:
         + "\n",
         encoding="utf-8",
     )
-    print(f"Wrote {OUT.relative_to(ROOT)} — {len(quotes)} quotes in {len(CATEGORIES)} categories")
+    counts = ", ".join(f"{name}: {len(by_category[name])}" for name in categories)
+    print(f"Wrote {OUT.relative_to(ROOT)} — {len(quotes)} quotes in {len(categories)} categories ({counts})")
 
 
 if __name__ == "__main__":

@@ -30,3 +30,11 @@ Cross-site principles:
 1. Register in js/game-catalog.js
 2. Add panel + menu items in index.html (use `*-only` classes)
 3. Add *-app.js and wire init in games.js switchTo
+
+## Quotes database
+- Source: `scripts/build-quotes.mjs` — category arrays + authors map
+- Categories list: `data/quotes-categories.json`
+- Add quotes (interactive): `py scripts/quotes-cli.py`
+- Add quote (one-liner): `py scripts/quotes-cli.py add -c uplifting -a "Author" -t "Quote text"`
+- Add category: `py scripts/quotes-cli.py add-category witty`
+- Rebuild JSON: `py scripts/build-quotes.py`

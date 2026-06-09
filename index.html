@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/mahjong.css">
   <link rel="stylesheet" href="css/solitaire.css">
   <link rel="stylesheet" href="css/mini-games.css">
+  <link rel="stylesheet" href="css/quotes.css">
 </head>
 <body>
   <div id="quote-splash" class="quote-splash" hidden aria-live="polite">
@@ -92,6 +93,9 @@
       <nav id="nav-menu" class="menu-panel" hidden aria-label="Game menu">
       <div class="menu-icons">
         <button id="btn-home" class="btn btn-icon game-only" type="button" aria-label="Home" title="Home — pick a game"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 7.5L8 3l5 4.5V13a.5.5 0 0 1-.5.5H10v-4H6v4H3.5A.5.5 0 0 1 3 13V7.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+        <button id="btn-quote-footer" class="btn btn-icon game-only active" type="button" aria-label="Quote footer on" title="Quote footer on">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 4.5h7c1.4 0 2.5 1.1 2.5 2.5v5H7.5c-1.4 0-2.5-1.1-2.5-2.5v-5z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6.5 12.5v2l2.5-2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
         <button id="btn-lessons" class="btn btn-icon sudoku-only" type="button" aria-label="Lessons and tips" title="Lessons & tips">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h7l3 3V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10 2.5V6H13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5h5M5.5 10.5h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         </button>
@@ -101,7 +105,7 @@
         <button id="btn-mahjong-seeds" class="btn btn-icon mahjong-only" type="button" aria-label="Board seeds" title="Board seeds">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3.5h6v2a4 4 0 0 1-6 0v-2z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M8 9.5v3M6.5 12.5h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         </button>
-        <button id="btn-mahjong-voice" class="btn btn-icon mahjong-only active" type="button" aria-label="Tile pronunciation on" title="Tile pronunciation on — speaks when you select a tile">
+        <button id="btn-mahjong-voice" class="btn btn-icon mahjong-only active" type="button" aria-label="Chinese voice on" title="Chinese voice on — tiles, phrases, and subtitles">
           <svg class="mj-voice-on" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6.5h2.5L8 3.5v9L6 9.5H3.5a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5z" fill="currentColor"/><path d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12 4a5.5 5.5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
           <svg class="mj-voice-off" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M3.5 6.5h2.5L8 3.5v9L6 9.5H3.5a.5.5 0 0 1-.5-.5V7a.5.5 0 0 1 .5-.5z" fill="currentColor"/><path d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12 4a5.5 5.5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M2.5 2.5l11 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
         </button>
@@ -224,7 +228,7 @@
     </footer>
     </div>
 
-    <div id="mahjong-panel" class="game-only" hidden>
+    <div id="mahjong-panel" class="game-only mahjong-panel" hidden>
       <div id="mahjong-stats" class="game-stats zen-hide mahjong-only" aria-label="Mahjong games started and completed">
         <span id="mahjong-stats-started">0</span> started · <span id="mahjong-stats-completed">0</span> done
         · <span id="mahjong-tile-count" aria-live="polite">144 tiles</span>
@@ -243,7 +247,19 @@
           <div id="mahjong-board" class="mahjong-board" role="grid" aria-label="Mahjong board"></div>
         </div>
       </main>
+      <div id="mahjong-char-zoom" class="mahjong-char-zoom" hidden aria-hidden="true">
+        <button type="button" class="mahjong-char-zoom-backdrop" aria-label="Close enlarged characters"></button>
+        <div class="mahjong-char-zoom-card" role="dialog" aria-modal="true" aria-labelledby="mahjong-char-zoom-text">
+          <p id="mahjong-char-zoom-text" class="mahjong-char-zoom-chinese"></p>
+          <p id="mahjong-char-zoom-pinyin" class="mahjong-char-zoom-pinyin"></p>
+          <p id="mahjong-char-zoom-english" class="mahjong-char-zoom-english"></p>
+        </div>
+      </div>
       <footer class="footer zen-hide mahjong-only">
+        <p id="mahjong-caption" class="mahjong-caption" hidden aria-live="polite">
+          <button type="button" id="mahjong-caption-chinese" class="mahjong-caption-chinese" aria-label="Tap to enlarge Chinese characters"></button>
+          <span class="mahjong-caption-meta"></span>
+        </p>
         <span id="mahjong-status" class="status" role="status"></span>
       </footer>
     </div>
@@ -366,6 +382,51 @@
         <span id="reversi-status" class="status" role="status"></span>
       </footer>
     </div>
+
+    <div id="quotes-panel" class="game-only" hidden>
+      <main class="main quotes-only">
+        <div class="quotes-shell quotes-only">
+          <p id="quotes-stats" class="quotes-stats" aria-live="polite"></p>
+          <div class="dialog-tabs" role="tablist" aria-label="Quotes views">
+            <button class="tab active" type="button" role="tab" aria-selected="true" data-quotes-tab="browse">Browse</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-quotes-tab="authors">Authors</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" data-quotes-tab="timeline">Timeline</button>
+          </div>
+          <div id="quotes-browse" class="quotes-pane">
+            <input id="quotes-search" class="quotes-search" type="search" placeholder="Search quotes or authors…" aria-label="Search quotes">
+            <div id="quotes-chips" class="quotes-chips" role="group" aria-label="Filter by category"></div>
+            <div id="quotes-list" class="quotes-list" role="list"></div>
+          </div>
+          <div id="quotes-authors" class="quotes-pane" hidden>
+            <div id="quotes-authors-list" class="quotes-authors-list" role="list"></div>
+          </div>
+          <div id="quotes-timeline" class="quotes-pane" hidden>
+            <div class="quotes-timeline-wrap">
+              <div class="quotes-timeline-scroll">
+                <div class="quotes-timeline-inner">
+                  <div id="quotes-timeline-track" class="quotes-timeline-track"></div>
+                  <div id="quotes-timeline-axis" class="quotes-timeline-axis" aria-hidden="true"></div>
+                </div>
+              </div>
+              <p id="quotes-timeline-note" class="quotes-timeline-note"></p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer id="quote-footer" class="quote-footer game-only zen-hide" aria-live="polite">
+      <button id="quote-footer-prev" class="btn btn-icon" type="button" aria-label="Previous quote" title="Previous quote">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="quote-footer-body">
+        <p id="quote-footer-text" class="quote-footer-text"></p>
+        <p id="quote-footer-author" class="quote-footer-author"></p>
+      </div>
+      <button id="quote-footer-next" class="btn btn-icon" type="button" aria-label="Next quote" title="Next quote">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </footer>
   </div>
 
   <dialog id="confirm-dialog" class="dialog confirm-dialog">
@@ -495,6 +556,8 @@
   <script src="js/slitherlink-app.js"></script>
   <script src="js/kakuro-app.js"></script>
   <script src="js/reversi-app.js"></script>
+  <script src="js/quotes-app.js"></script>
+  <script src="js/quote-footer.js"></script>
   <script src="js/game-catalog.js"></script>
   <script src="js/hub.js"></script>
   <script src="js/games.js"></script>

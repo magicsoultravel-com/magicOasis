@@ -11,6 +11,7 @@
     { id: "slitherlink", label: "Slitherlink", available: true },
     { id: "kakuro", label: "Kakuro", available: true },
     { id: "reversi", label: "Reversi", available: true },
+    { id: "quotes", label: "Quotes", available: true },
   ];
 
   const TITLES = {
@@ -23,6 +24,7 @@
     slitherlink: "magicSlitherlink",
     kakuro: "magicKakuro",
     reversi: "magicReversi",
+    quotes: "magicQuotes",
   };
 
   const GAMES = GAME_CATALOG.filter((g) => g.available && g.id).map((g) => g.id);

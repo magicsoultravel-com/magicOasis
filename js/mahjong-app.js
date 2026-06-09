@@ -17,6 +17,14 @@
   const guideBasics = document.getElementById("mahjong-guide-basics");
   const guideAtlas = document.getElementById("mahjong-guide-atlas");
   const btnVoice = document.getElementById("btn-mahjong-voice");
+  const captionEl = document.getElementById("mahjong-caption");
+  const captionChineseEl = document.getElementById("mahjong-caption-chinese");
+  const captionMetaEl = captionEl?.querySelector(".mahjong-caption-meta");
+  const charZoomEl = document.getElementById("mahjong-char-zoom");
+  const charZoomBackdrop = charZoomEl?.querySelector(".mahjong-char-zoom-backdrop");
+  const charZoomTextEl = document.getElementById("mahjong-char-zoom-text");
+  const charZoomPinyinEl = document.getElementById("mahjong-char-zoom-pinyin");
+  const charZoomEnglishEl = document.getElementById("mahjong-char-zoom-english");
   const appEl = document.querySelector(".app");
   const seedsDialog = document.getElementById("seeds-dialog");
   const currentSeedEl = document.getElementById("current-seed");
@@ -32,6 +40,7 @@
   const ACCEPT_VERSIONS = [2, 3, 4];
   const MAX_SAVE_BYTES = 250_000;
   const REMOVE_MS = 320;
+  const CAPTION_HIDE_MS = 4000;
 
   let tiles = [];
   let selected = null;
@@ -57,6 +66,9 @@
   let voiceEnabled = true;
   let voiceSupported = false;
   let chineseVoice = null;
+  let currentCaptionLine = null;
+  let captionHideTimer = null;
+  let charZoomOpen = false;
 
   function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -274,13 +286,13 @@
     }
 
     if (voiceEnabled) {
-      btnVoice.title = "Tile pronunciation on — speaks when you select a tile";
-      btnVoice.setAttribute("aria-label", "Tile pronunciation on, speaks when you select a tile");
+      btnVoice.title = "Chinese voice on — tiles, phrases, and subtitles";
+      btnVoice.setAttribute("aria-label", "Chinese voice on, tiles phrases and subtitles");
       onIcon?.removeAttribute("hidden");
       offIcon?.setAttribute("hidden", "");
     } else {
-      btnVoice.title = "Tile pronunciation muted — tap to enable";
-      btnVoice.setAttribute("aria-label", "Tile pronunciation muted, tap to enable");
+      btnVoice.title = "Chinese voice muted — tap to enable";
+      btnVoice.setAttribute("aria-label", "Chinese voice muted, tap to enable");
       onIcon?.setAttribute("hidden", "");
       offIcon?.removeAttribute("hidden");
     }
@@ -313,6 +325,7 @@
     voiceEnabled = enabled && voiceSupported;
     if (!voiceEnabled) {
       window.speechSynthesis?.cancel();
+      hideCaption();
     }
     try {
       localStorage.setItem(VOICE_KEY, voiceEnabled ? "1" : "0");
@@ -327,24 +340,102 @@
     setVoiceEnabled(!voiceEnabled);
   }
 
-  function tileSpeakText(tile) {
-    const meta = MahjongTileMeta.get(`${tile.kind}:${tile.rank}`);
-    return meta?.chinese || tile.label;
+  function formatCaptionMeta(line) {
+    const parts = [];
+    if (line.pronunciation) parts.push(line.pronunciation);
+    if (line.english) parts.push(line.english);
+    return parts.length ? ` · ${parts.join(" · ")}` : "";
   }
 
-  function speakTile(tile) {
+  function clearCaptionHideTimer() {
+    if (captionHideTimer) {
+      clearTimeout(captionHideTimer);
+      captionHideTimer = null;
+    }
+  }
+
+  function scheduleCaptionHide() {
+    clearCaptionHideTimer();
+    captionHideTimer = setTimeout(() => {
+      captionHideTimer = null;
+      if (!charZoomOpen) hideCaption();
+    }, CAPTION_HIDE_MS);
+  }
+
+  function hideCharZoom() {
+    if (!charZoomEl) return;
+    charZoomOpen = false;
+    charZoomEl.hidden = true;
+    charZoomEl.setAttribute("aria-hidden", "true");
+  }
+
+  function showCharZoom() {
+    if (!charZoomEl || !currentCaptionLine || captionEl?.hidden) return;
+
+    charZoomTextEl.textContent = currentCaptionLine.chinese;
+    charZoomPinyinEl.textContent = currentCaptionLine.pronunciation || "";
+    charZoomEnglishEl.textContent = currentCaptionLine.english || "";
+    charZoomPinyinEl.hidden = !currentCaptionLine.pronunciation;
+    charZoomEnglishEl.hidden = !currentCaptionLine.english;
+
+    charZoomEl.hidden = false;
+    charZoomEl.setAttribute("aria-hidden", "false");
+    charZoomOpen = true;
+    clearCaptionHideTimer();
+  }
+
+  function hideCaption() {
+    clearCaptionHideTimer();
+    hideCharZoom();
+    currentCaptionLine = null;
+    if (!captionEl) return;
+    captionEl.hidden = true;
+    if (captionChineseEl) {
+      captionChineseEl.textContent = "";
+      captionChineseEl.disabled = true;
+    }
+    if (captionMetaEl) captionMetaEl.textContent = "";
+  }
+
+  function showCaption(line) {
+    if (!captionEl || !line?.chinese) return;
+    currentCaptionLine = line;
+    if (captionChineseEl) {
+      captionChineseEl.textContent = line.chinese;
+      captionChineseEl.disabled = false;
+    }
+    if (captionMetaEl) captionMetaEl.textContent = formatCaptionMeta(line);
+    captionEl.hidden = false;
+  }
+
+  function speakLine(line) {
+    if (!line?.chinese) return;
+    hideCharZoom();
+
     if (!voiceEnabled || !voiceSupported) return;
 
-    const text = tileSpeakText(tile);
-    if (!text) return;
-
+    showCaption(line);
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
+
+    const utterance = new SpeechSynthesisUtterance(line.chinese);
     utterance.lang = "zh-CN";
     if (chineseVoice) utterance.voice = chineseVoice;
     utterance.rate = 0.9;
     utterance.pitch = 1.02;
+    utterance.onend = () => scheduleCaptionHide();
+    utterance.onerror = () => {
+      if (!charZoomOpen) hideCaption();
+    };
     window.speechSynthesis.speak(utterance);
+  }
+
+  function speakTile(tile) {
+    speakLine(MahjongPhrases.fromTile(tile));
+  }
+
+  function speakPhrase(kind) {
+    const line = MahjongPhrases.next(kind);
+    if (line) speakLine(line);
   }
 
   function clearSavedGame() {
@@ -696,6 +787,7 @@
       stopTimer();
       recordGameCompleted();
       setStatus("Cleared!", "ok");
+      speakPhrase("win");
       btnUndo.disabled = true;
     } else if (!Mahjong.hasAvailableMove(tiles)) {
       setStatus("No matching pairs left — start a new game", "err");
@@ -772,6 +864,7 @@
 
     if (selected === id) {
       selected = null;
+      hideCaption();
       renderBoard();
       saveGame();
       return;
@@ -784,14 +877,14 @@
       Mahjong.isFree(tile, tiles) &&
       Mahjong.canMatch(first, tile)
     ) {
-      speakTile(tile);
+      speakPhrase("approval");
       removePair(first.id, tile.id);
       return;
     }
 
     if (!Mahjong.isFree(tile, tiles)) return;
+    speakPhrase("disapproval");
     selected = id;
-    speakTile(tile);
     renderBoard();
     saveGame();
   }
@@ -881,6 +974,7 @@
   async function dealBoard({ dealSeed, recordStart = false } = {}) {
     const token = ++dealToken;
     window.speechSynthesis?.cancel();
+    hideCaption();
 
     gameWon = false;
     selected = null;
@@ -943,6 +1037,7 @@
     resetTimer();
     btnUndo.disabled = true;
     saveGame();
+    speakPhrase("greet");
   }
 
   function newGame() {
@@ -1092,6 +1187,11 @@
     document.getElementById("btn-mahjong-guide")?.addEventListener("click", openGuide);
     document.getElementById("btn-mahjong-seeds")?.addEventListener("click", openSeeds);
     btnVoice?.addEventListener("click", toggleVoice);
+    captionChineseEl?.addEventListener("click", () => showCharZoom());
+    charZoomBackdrop?.addEventListener("click", () => hideCharZoom());
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && charZoomOpen) hideCharZoom();
+    });
     document.getElementById("mahjong-guide-close")?.addEventListener("click", () => guideDialog?.close());
     guideDialog?.addEventListener("click", (e) => {
       if (e.target === guideDialog) guideDialog.close();

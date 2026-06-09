@@ -114,6 +114,686 @@
     "Thomas Mann": "1875–1955",
     "Rickson Gracie": "b. 1958"
   },
+  "authorsMeta": {
+    "Marcus Aurelius": {
+      "lifespan": "c. 121–180",
+      "birth": 121,
+      "death": 180,
+      "mid": 150
+    },
+    "Seneca": {
+      "lifespan": "c. 4 BC–65 AD",
+      "birth": -4,
+      "death": 65,
+      "mid": 30
+    },
+    "Epictetus": {
+      "lifespan": "c. 50–135",
+      "birth": 50,
+      "death": 135,
+      "mid": 92
+    },
+    "Socrates": {
+      "lifespan": "c. 470–399 BC",
+      "birth": -470,
+      "death": -399,
+      "mid": -434
+    },
+    "Plato": {
+      "lifespan": "c. 428–348 BC",
+      "birth": -428,
+      "death": -348,
+      "mid": -388
+    },
+    "Dalai Lama": {
+      "lifespan": "b. 1935",
+      "birth": 1935,
+      "death": null,
+      "mid": 1935
+    },
+    "Buddha": {
+      "lifespan": "c. 563–483 BC",
+      "birth": -563,
+      "death": -483,
+      "mid": -523
+    },
+    "Ram Dass": {
+      "lifespan": "1931–2019",
+      "birth": 1931,
+      "death": 2019,
+      "mid": 1975
+    },
+    "Lao Tzu": {
+      "lifespan": "c. 6th century BC",
+      "birth": null,
+      "death": null,
+      "mid": -550
+    },
+    "Confucius": {
+      "lifespan": "c. 551–479 BC",
+      "birth": -551,
+      "death": -479,
+      "mid": -515
+    },
+    "Eleanor Roosevelt": {
+      "lifespan": "1884–1962",
+      "birth": 1884,
+      "death": 1962,
+      "mid": 1923
+    },
+    "Dean Inge": {
+      "lifespan": "1860–1954",
+      "birth": 1860,
+      "death": 1954,
+      "mid": 1907
+    },
+    "Mark Twain": {
+      "lifespan": "1835–1910",
+      "birth": 1835,
+      "death": 1910,
+      "mid": 1872
+    },
+    "Leonardo da Vinci": {
+      "lifespan": "1452–1519",
+      "birth": 1452,
+      "death": 1519,
+      "mid": 1486
+    },
+    "Thich Nhat Hanh": {
+      "lifespan": "1926–2022",
+      "birth": 1926,
+      "death": 2022,
+      "mid": 1974
+    },
+    "Rumi": {
+      "lifespan": "1207–1273",
+      "birth": 1207,
+      "death": 1273,
+      "mid": 1240
+    },
+    "Mary Anne Radmacher": {
+      "lifespan": "b. 1955",
+      "birth": 1955,
+      "death": null,
+      "mid": 1955
+    },
+    "Deepak Chopra": {
+      "lifespan": "b. 1946",
+      "birth": 1946,
+      "death": null,
+      "mid": 1946
+    },
+    "Jon Kabat-Zinn": {
+      "lifespan": "b. 1944",
+      "birth": 1944,
+      "death": null,
+      "mid": 1944
+    },
+    "Caroline Myss": {
+      "lifespan": "b. 1952",
+      "birth": 1952,
+      "death": null,
+      "mid": 1952
+    },
+    "Ma Jaya Sati Bhagavati": {
+      "lifespan": "1940–2012",
+      "birth": 1940,
+      "death": 2012,
+      "mid": 1976
+    },
+    "Jean-Jacques Rousseau": {
+      "lifespan": "1712–1778",
+      "birth": 1712,
+      "death": 1778,
+      "mid": 1745
+    },
+    "Prasad Mahes": {
+      "lifespan": "c. contemporary",
+      "birth": null,
+      "death": null,
+      "mid": null
+    },
+    "Naval Ravikant": {
+      "lifespan": "b. 1974",
+      "birth": 1974,
+      "death": null,
+      "mid": 1974
+    },
+    "Paramahansa Yogananda": {
+      "lifespan": "1893–1952",
+      "birth": 1893,
+      "death": 1952,
+      "mid": 1922
+    },
+    "William Wordsworth": {
+      "lifespan": "1770–1850",
+      "birth": 1770,
+      "death": 1850,
+      "mid": 1810
+    },
+    "Anne Lamott": {
+      "lifespan": "b. 1954",
+      "birth": 1954,
+      "death": null,
+      "mid": 1954
+    },
+    "Oprah Winfrey": {
+      "lifespan": "b. 1954",
+      "birth": 1954,
+      "death": null,
+      "mid": 1954
+    },
+    "William James": {
+      "lifespan": "1842–1910",
+      "birth": 1842,
+      "death": 1910,
+      "mid": 1876
+    },
+    "Ralph Waldo Emerson": {
+      "lifespan": "1803–1882",
+      "birth": 1803,
+      "death": 1882,
+      "mid": 1842
+    },
+    "Johann Wolfgang von Goethe": {
+      "lifespan": "1749–1832",
+      "birth": 1749,
+      "death": 1832,
+      "mid": 1790
+    },
+    "Chinese proverb": {
+      "lifespan": "origin unknown",
+      "birth": null,
+      "death": null,
+      "mid": null
+    },
+    "Hermann Hesse": {
+      "lifespan": "1877–1962",
+      "birth": 1877,
+      "death": 1962,
+      "mid": 1920
+    },
+    "Sri Chinmoy": {
+      "lifespan": "1931–2007",
+      "birth": 1931,
+      "death": 2007,
+      "mid": 1969
+    },
+    "Sun Tzu": {
+      "lifespan": "c. 6th century BC",
+      "birth": null,
+      "death": null,
+      "mid": -550
+    },
+    "Machiavelli": {
+      "lifespan": "1469–1527",
+      "birth": 1469,
+      "death": 1527,
+      "mid": 1498
+    },
+    "Baltasar Gracián": {
+      "lifespan": "1601–1658",
+      "birth": 1601,
+      "death": 1658,
+      "mid": 1630
+    },
+    "Winston Churchill": {
+      "lifespan": "1874–1965",
+      "birth": 1874,
+      "death": 1965,
+      "mid": 1920
+    },
+    "Benjamin Franklin": {
+      "lifespan": "1706–1790",
+      "birth": 1706,
+      "death": 1790,
+      "mid": 1748
+    },
+    "Otto von Bismarck": {
+      "lifespan": "1815–1898",
+      "birth": 1815,
+      "death": 1898,
+      "mid": 1856
+    },
+    "Talleyrand": {
+      "lifespan": "1754–1838",
+      "birth": 1754,
+      "death": 1838,
+      "mid": 1796
+    },
+    "Clausewitz": {
+      "lifespan": "1780–1831",
+      "birth": 1780,
+      "death": 1831,
+      "mid": 1806
+    },
+    "Kautilya": {
+      "lifespan": "c. 4th century BC",
+      "birth": null,
+      "death": null,
+      "mid": -350
+    },
+    "Francis Bacon": {
+      "lifespan": "1561–1626",
+      "birth": 1561,
+      "death": 1626,
+      "mid": 1594
+    },
+    "Han Fei": {
+      "lifespan": "c. 280–233 BC",
+      "birth": -280,
+      "death": -233,
+      "mid": -256
+    },
+    "Oscar Wilde": {
+      "lifespan": "1854–1900",
+      "birth": 1854,
+      "death": 1900,
+      "mid": 1877
+    },
+    "Groucho Marx": {
+      "lifespan": "1890–1977",
+      "birth": 1890,
+      "death": 1977,
+      "mid": 1934
+    },
+    "W.C. Fields": {
+      "lifespan": "1880–1946",
+      "birth": 1880,
+      "death": 1946,
+      "mid": 1913
+    },
+    "Mae West": {
+      "lifespan": "1893–1980",
+      "birth": 1893,
+      "death": 1980,
+      "mid": 1936
+    },
+    "Mitch Hedberg": {
+      "lifespan": "1968–2005",
+      "birth": 1968,
+      "death": 2005,
+      "mid": 1986
+    },
+    "Phyllis Diller": {
+      "lifespan": "1917–2012",
+      "birth": 1917,
+      "death": 2012,
+      "mid": 1964
+    },
+    "George Carlin": {
+      "lifespan": "1937–2008",
+      "birth": 1937,
+      "death": 2008,
+      "mid": 1972
+    },
+    "Dorothy Parker": {
+      "lifespan": "1893–1967",
+      "birth": 1893,
+      "death": 1967,
+      "mid": 1930
+    },
+    "Will Rogers": {
+      "lifespan": "1879–1935",
+      "birth": 1879,
+      "death": 1935,
+      "mid": 1907
+    },
+    "Steven Wright": {
+      "lifespan": "b. 1955",
+      "birth": 1955,
+      "death": null,
+      "mid": 1955
+    },
+    "Woody Allen": {
+      "lifespan": "b. 1935",
+      "birth": 1935,
+      "death": null,
+      "mid": 1935
+    },
+    "Jerry Seinfeld": {
+      "lifespan": "b. 1954",
+      "birth": 1954,
+      "death": null,
+      "mid": 1954
+    },
+    "Rodney Dangerfield": {
+      "lifespan": "1921–2004",
+      "birth": 1921,
+      "death": 2004,
+      "mid": 1962
+    },
+    "Jack Handey": {
+      "lifespan": "b. 1949",
+      "birth": 1949,
+      "death": null,
+      "mid": 1949
+    },
+    "P.J. O'Rourke": {
+      "lifespan": "1947–2022",
+      "birth": 1947,
+      "death": 2022,
+      "mid": 1984
+    },
+    "Terry Pratchett": {
+      "lifespan": "1948–2015",
+      "birth": 1948,
+      "death": 2015,
+      "mid": 1982
+    },
+    "Douglas Adams": {
+      "lifespan": "1952–2001",
+      "birth": 1952,
+      "death": 2001,
+      "mid": 1976
+    },
+    "Napoleon Bonaparte": {
+      "lifespan": "1769–1821",
+      "birth": 1769,
+      "death": 1821,
+      "mid": 1795
+    },
+    "Petrarch": {
+      "lifespan": "1304–1374",
+      "birth": 1304,
+      "death": 1374,
+      "mid": 1339
+    },
+    "Niccolò Machiavelli": {
+      "lifespan": "1469–1527",
+      "birth": 1469,
+      "death": 1527,
+      "mid": 1498
+    },
+    "Fred Allen": {
+      "lifespan": "1894–1956",
+      "birth": 1894,
+      "death": 1956,
+      "mid": 1925
+    },
+    "Orson Welles": {
+      "lifespan": "1915–1985",
+      "birth": 1915,
+      "death": 1985,
+      "mid": 1950
+    },
+    "Dwight D. Eisenhower": {
+      "lifespan": "1890–1969",
+      "birth": 1890,
+      "death": 1969,
+      "mid": 1930
+    },
+    "Helmuth von Moltke": {
+      "lifespan": "1800–1891",
+      "birth": 1800,
+      "death": 1891,
+      "mid": 1846
+    },
+    "Michael Porter": {
+      "lifespan": "b. 1947",
+      "birth": 1947,
+      "death": null,
+      "mid": 1947
+    },
+    "Peter Drucker": {
+      "lifespan": "1909–2005",
+      "birth": 1909,
+      "death": 2005,
+      "mid": 1957
+    },
+    "Andy Grove": {
+      "lifespan": "1936–2016",
+      "birth": 1936,
+      "death": 2016,
+      "mid": 1976
+    },
+    "Jack Welch": {
+      "lifespan": "1935–2020",
+      "birth": 1935,
+      "death": 2020,
+      "mid": 1978
+    },
+    "George S. Patton": {
+      "lifespan": "1885–1945",
+      "birth": 1885,
+      "death": 1945,
+      "mid": 1915
+    },
+    "Douglas MacArthur": {
+      "lifespan": "1880–1964",
+      "birth": 1880,
+      "death": 1964,
+      "mid": 1922
+    },
+    "Omar Bradley": {
+      "lifespan": "1893–1981",
+      "birth": 1893,
+      "death": 1981,
+      "mid": 1937
+    },
+    "B.H. Liddell Hart": {
+      "lifespan": "1895–1970",
+      "birth": 1895,
+      "death": 1970,
+      "mid": 1932
+    },
+    "José Raúl Capablanca": {
+      "lifespan": "1888–1942",
+      "birth": 1888,
+      "death": 1942,
+      "mid": 1915
+    },
+    "Aron Nimzowitsch": {
+      "lifespan": "1886–1935",
+      "birth": 1886,
+      "death": 1935,
+      "mid": 1910
+    },
+    "Garry Kasparov": {
+      "lifespan": "b. 1963",
+      "birth": 1963,
+      "death": null,
+      "mid": 1963
+    },
+    "Bobby Fischer": {
+      "lifespan": "1943–2008",
+      "birth": 1943,
+      "death": 2008,
+      "mid": 1976
+    },
+    "John Boyd": {
+      "lifespan": "1927–1997",
+      "birth": 1927,
+      "death": 1997,
+      "mid": 1962
+    },
+    "Miyamoto Musashi": {
+      "lifespan": "c. 1584–1645",
+      "birth": 1584,
+      "death": 1645,
+      "mid": 1614
+    },
+    "Alfred Sloan": {
+      "lifespan": "1875–1966",
+      "birth": 1875,
+      "death": 1966,
+      "mid": 1920
+    },
+    "Warren Buffett": {
+      "lifespan": "b. 1930",
+      "birth": 1930,
+      "death": null,
+      "mid": 1930
+    },
+    "Charlie Munger": {
+      "lifespan": "1924–2023",
+      "birth": 1924,
+      "death": 2023,
+      "mid": 1974
+    },
+    "Jeff Bezos": {
+      "lifespan": "b. 1964",
+      "birth": 1964,
+      "death": null,
+      "mid": 1964
+    },
+    "Reed Hastings": {
+      "lifespan": "b. 1960",
+      "birth": 1960,
+      "death": null,
+      "mid": 1960
+    },
+    "Abraham Lincoln": {
+      "lifespan": "1809–1865",
+      "birth": 1809,
+      "death": 1865,
+      "mid": 1837
+    },
+    "George Washington": {
+      "lifespan": "1732–1799",
+      "birth": 1732,
+      "death": 1799,
+      "mid": 1766
+    },
+    "Thomas Edison": {
+      "lifespan": "1847–1931",
+      "birth": 1847,
+      "death": 1931,
+      "mid": 1889
+    },
+    "Steve Martin": {
+      "lifespan": "b. 1945",
+      "birth": 1945,
+      "death": null,
+      "mid": 1945
+    },
+    "A. Whitney Brown": {
+      "lifespan": "b. 1952",
+      "birth": 1952,
+      "death": null,
+      "mid": 1952
+    },
+    "Les Dawson": {
+      "lifespan": "1931–1993",
+      "birth": 1931,
+      "death": 1993,
+      "mid": 1962
+    },
+    "Paul Merton": {
+      "lifespan": "b. 1957",
+      "birth": 1957,
+      "death": null,
+      "mid": 1957
+    },
+    "Richard Dawkins": {
+      "lifespan": "b. 1941",
+      "birth": 1941,
+      "death": null,
+      "mid": 1941
+    },
+    "James A. Garfield": {
+      "lifespan": "1831–1881",
+      "birth": 1831,
+      "death": 1881,
+      "mid": 1856
+    },
+    "Charles Lamb": {
+      "lifespan": "1775–1834",
+      "birth": 1775,
+      "death": 1834,
+      "mid": 1804
+    },
+    "Deng Xiaoping": {
+      "lifespan": "1904–1997",
+      "birth": 1904,
+      "death": 1997,
+      "mid": 1950
+    },
+    "Benjamin Graham": {
+      "lifespan": "1894–1976",
+      "birth": 1894,
+      "death": 1976,
+      "mid": 1935
+    },
+    "Matsuo Bashō": {
+      "lifespan": "1644–1694",
+      "birth": 1644,
+      "death": 1694,
+      "mid": 1669
+    },
+    "Thomas Huxley": {
+      "lifespan": "1825–1895",
+      "birth": 1825,
+      "death": 1895,
+      "mid": 1860
+    },
+    "Henry Mintzberg": {
+      "lifespan": "b. 1939",
+      "birth": 1939,
+      "death": null,
+      "mid": 1939
+    },
+    "Proverbs": {
+      "lifespan": "origin unknown",
+      "birth": null,
+      "death": null,
+      "mid": null
+    },
+    "Antoine de Saint-Exupéry": {
+      "lifespan": "1900–1944",
+      "birth": 1900,
+      "death": 1944,
+      "mid": 1922
+    },
+    "Frederick the Great": {
+      "lifespan": "1712–1786",
+      "birth": 1712,
+      "death": 1786,
+      "mid": 1749
+    },
+    "Mother Teresa": {
+      "lifespan": "1910–1997",
+      "birth": 1910,
+      "death": 1997,
+      "mid": 1954
+    },
+    "Walt Disney": {
+      "lifespan": "1901–1966",
+      "birth": 1901,
+      "death": 1966,
+      "mid": 1934
+    },
+    "Margaret Mead": {
+      "lifespan": "1901–1978",
+      "birth": 1901,
+      "death": 1978,
+      "mid": 1940
+    },
+    "Steve Jobs": {
+      "lifespan": "1955–2011",
+      "birth": 1955,
+      "death": 2011,
+      "mid": 1983
+    },
+    "Coco Chanel": {
+      "lifespan": "1883–1971",
+      "birth": 1883,
+      "death": 1971,
+      "mid": 1927
+    },
+    "Thomas Mann": {
+      "lifespan": "1875–1955",
+      "birth": 1875,
+      "death": 1955,
+      "mid": 1915
+    },
+    "Rickson Gracie": {
+      "lifespan": "b. 1958",
+      "birth": 1958,
+      "death": null,
+      "mid": 1958
+    }
+  },
   "categories": [
     "uplifting",
     "cunning",
@@ -122,2001 +802,2401 @@
   ],
   "quotes": [
     {
+      "id": "uplifting-001",
       "text": "The happiness of your life depends upon the quality of your thoughts.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-002",
       "text": "You have power over your mind — not outside events. Realize this, and you will find strength.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-003",
       "text": "Waste no more time arguing about what a good man should be. Be one.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-004",
       "text": "It is not death that a man should fear, but never beginning to live.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-005",
       "text": "The soul becomes dyed with the color of its thoughts.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-006",
       "text": "Dwell on the beauty of life. Watch the stars, and see yourself running with them.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-007",
       "text": "Accept the things to which fate binds you, and love the people with whom fate brings you together.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-008",
       "text": "If it is not right, do not do it; if it is not true, do not say it.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-009",
       "text": "The best revenge is not to be like your enemy.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-010",
       "text": "Very little is needed to make a happy life; it is all within yourself, in your way of thinking.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-011",
       "text": "We suffer more often in imagination than in reality.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-012",
       "text": "Luck is what happens when preparation meets opportunity.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-013",
       "text": "He who is brave is free.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-014",
       "text": "Begin at once to live, and count each separate day as a separate life.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-015",
       "text": "It is not the man who has too little, but the man who craves more, that is poor.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-016",
       "text": "Difficulties strengthen the mind, as labor does the body.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-017",
       "text": "As is a tale, so is life: not how long it is, but how good it is, is what matters.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-018",
       "text": "Hang on to your youthful enthusiasms — you'll be able to use them better when you're older.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-019",
       "text": "True happiness is to enjoy the present, without anxious dependence upon the future.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-020",
       "text": "While we wait for life, life passes.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-021",
       "text": "It's not what happens to you, but how you react to it that matters.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-022",
       "text": "First say to yourself what you would be; and then do what you have to do.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-023",
       "text": "No man is free who is not master of himself.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-024",
       "text": "We cannot choose our external circumstances, but we can always choose how we respond to them.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-025",
       "text": "Don't explain your philosophy. Embody it.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-026",
       "text": "He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-027",
       "text": "Only the educated are free.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-028",
       "text": "Make the best use of what is in your power, and take the rest as it happens.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-029",
       "text": "The key is to keep company only with people who uplift you, whose presence calls forth your best.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-030",
       "text": "Freedom is the only worthy goal in life. It is won by disregarding things that lie beyond our control.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-031",
       "text": "The unexamined life is not worth living.",
       "author": "Socrates",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-032",
       "text": "Wonder is the beginning of wisdom.",
       "author": "Socrates",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-033",
       "text": "To find yourself, think for yourself.",
       "author": "Socrates",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-034",
       "text": "He who is not contented with what he has, would not be contented with what he would like to have.",
       "author": "Socrates",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-035",
       "text": "Be kind, for everyone you meet is fighting a hard battle.",
       "author": "Plato",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-036",
       "text": "Courage is knowing what not to fear.",
       "author": "Plato",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-037",
       "text": "The measure of a man is what he does with power.",
       "author": "Plato",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-038",
       "text": "Happiness is not something ready made. It comes from your own actions.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-039",
       "text": "Be kind whenever possible. It is always possible.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-040",
       "text": "Sleep is the best meditation.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-041",
       "text": "Our prime purpose in this life is to help others. And if you can't help them, at least don't hurt them.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-042",
       "text": "Peace comes from within. Do not seek it without.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-043",
       "text": "The mind is everything. What you think you become.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-044",
       "text": "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-045",
       "text": "Health is the greatest gift, contentment the greatest wealth, faithfulness the best relationship.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-046",
       "text": "Three things cannot be long hidden: the sun, the moon, and the truth.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-047",
       "text": "You yourself, as much as anybody in the entire universe, deserve your love and affection.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-048",
       "text": "Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-049",
       "text": "In the end, only three things matter: how much you loved, how gently you lived, and how gracefully you let go of things not meant for you.",
       "author": "Buddha",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-050",
       "text": "The quieter you become, the more you can hear.",
       "author": "Ram Dass",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-051",
       "text": "Nature does not hurry, yet everything is accomplished.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-052",
       "text": "When I let go of what I am, I become what I might be.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-053",
       "text": "Knowing others is intelligence; knowing yourself is true wisdom.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-054",
       "text": "The journey of a thousand miles begins with a single step.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-055",
       "text": "Silence is a source of great strength.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-056",
       "text": "He who knows he has enough is rich.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-057",
       "text": "Respond intelligently even to unintelligent treatment.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-058",
       "text": "Act without expectation.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-059",
       "text": "The soft overcomes the hard. The slow overcomes the fast.",
       "author": "Lao Tzu",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-060",
       "text": "Life is really simple, but we insist on making it complicated.",
       "author": "Confucius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-061",
       "text": "It does not matter how slowly you go as long as you do not stop.",
       "author": "Confucius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-062",
       "text": "Our greatest glory is not in never falling, but in rising every time we fall.",
       "author": "Confucius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-063",
       "text": "Wherever you go, go with all your heart.",
       "author": "Confucius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-064",
       "text": "The man who moves a mountain begins by carrying away small stones.",
       "author": "Confucius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-065",
       "text": "Everything has beauty, but not everyone sees it.",
       "author": "Confucius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-066",
       "text": "Yesterday is history, tomorrow is a mystery, today is a gift. That is why it is called the present.",
       "author": "Eleanor Roosevelt",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-067",
       "text": "The only true wisdom is in knowing you know nothing.",
       "author": "Socrates",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-068",
       "text": "Man is not worried by real problems so much as by his imagined anxieties about real problems.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-069",
       "text": "He who fears death will never do anything worth of a man who is alive.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-070",
       "text": "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-071",
       "text": "The soul is dyed the color of its leisure thoughts.",
       "author": "Dean Inge",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-072",
       "text": "Let us live so that when we come to die even the undertaker will be sorry.",
       "author": "Mark Twain",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-073",
       "text": "Simplicity is the ultimate sophistication.",
       "author": "Leonardo da Vinci",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-074",
       "text": "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-075",
       "text": "Smile, breathe, and go slowly.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-076",
       "text": "Feelings come and go like clouds in a windy sky. Conscious breathing is my anchor.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-077",
       "text": "Walk as if you are kissing the Earth with your feet.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-078",
       "text": "The wound is the place where the Light enters you.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-079",
       "text": "What you seek is seeking you.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-080",
       "text": "Let yourself be silently drawn by the strange pull of what you really love.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-081",
       "text": "The quieter you become, the more you are able to hear.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-082",
       "text": "Do not feel lonely, the entire universe is inside you.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-083",
       "text": "Where there is ruin, there is hope for a treasure.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-084",
       "text": "Sell your cleverness and buy bewilderment.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-085",
       "text": "Be like a tree and let the dead leaves drop.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-086",
       "text": "The art of living is more like wrestling than dancing.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-087",
       "text": "How much more grievous are the consequences of anger than the causes of it.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-088",
       "text": "Look well into thyself; there is a source of strength which will always spring up if thou wilt always look.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-089",
       "text": "Receive without pride, let go without attachment.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-090",
       "text": "Think of yourself as dead. You have lived your life. Now take what's left and live it properly.",
       "author": "Marcus Aurelius",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-091",
       "text": "No person has the power to have everything they want, but it is in their power not to want what they don't have.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-092",
       "text": "Associate with people who are likely to improve you.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-093",
       "text": "Sometimes even to live is an act of courage.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-094",
       "text": "Life is long if you know how to use it.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-095",
       "text": "He suffers more than necessary, who suffers before it is necessary.",
       "author": "Seneca",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-096",
       "text": "Man is not disturbed by things, but by the views he takes of them.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-097",
       "text": "Seek not the good in external things; seek it in yourselves.",
       "author": "Epictetus",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-098",
       "text": "Caretake this moment. Immerse yourself in its particulars.",
       "author": "Mary Anne Radmacher",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-099",
       "text": "In the midst of movement and chaos, keep stillness inside of you.",
       "author": "Deepak Chopra",
       "category": "uplifting"
     },
     {
+      "id": "uplifting-100",
       "text": "You can't stop the waves, but you can learn to surf.",
       "author": "Jon Kabat-Zinn",
       "category": "uplifting"
     },
     {
+      "id": "cunning-001",
       "text": "All warfare is based on deception.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-002",
       "text": "Appear weak when you are strong, and strong when you are weak.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-003",
       "text": "Victorious warriors win first and then go to war, while defeated warriors go to war first and then seek to win.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-004",
       "text": "In the midst of chaos, there is also opportunity.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-005",
       "text": "He will win who knows when to fight and when not to fight.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-006",
       "text": "The supreme art of war is to subdue the enemy without fighting.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-007",
       "text": "Pretend inferiority and encourage his arrogance.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-008",
       "text": "Opportunities multiply as they are seized.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-009",
       "text": "Know yourself and you will win all battles.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-010",
       "text": "Let your plans be dark and impenetrable as night.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-011",
       "text": "The greatest victory is that which requires no battle.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-012",
       "text": "Build your opponent a golden bridge to retreat across.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-013",
       "text": "He who knows when he can fight and when he cannot will be victorious.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-014",
       "text": "Engage people with what they expect; it is what they are able to discern and confirms their projections.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-015",
       "text": "There is no instance of a nation benefiting from prolonged warfare.",
       "author": "Sun Tzu",
       "category": "cunning"
     },
     {
+      "id": "cunning-016",
       "text": "Everyone sees what you appear to be, few experience what you really are.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-017",
       "text": "It is better to be feared than loved, if you cannot be both.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-018",
       "text": "Never attempt to win by force what can be won by deception.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-019",
       "text": "The first method for estimating the intelligence of a ruler is to look at the men he has around him.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-020",
       "text": "Men judge generally more by the eye than by the hand.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-021",
       "text": "Where the willingness is great, the difficulties cannot be great.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-022",
       "text": "The wise man does at once what the fool does finally.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-023",
       "text": "Never was anything great achieved without danger.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-024",
       "text": "Before all else, be armed.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-025",
       "text": "Whosoever desires constant success must change his conduct with the times.",
       "author": "Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-026",
       "text": "A wise man gets more use from his enemies than a fool from his friends.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-027",
       "text": "Never contend with a man who has nothing to lose.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-028",
       "text": "Never open the door to a lesser evil, for other and greater ones invariably slink in after it.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-029",
       "text": "Know or listen to those who know.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-030",
       "text": "A single lie destroys a whole reputation for integrity.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-031",
       "text": "Never do anything when you are in a passion, for you will get everything wrong.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-032",
       "text": "Don't show off every day, or you'll stop surprising people.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-033",
       "text": "It is better to sleep on things beforehand than lie awake about them afterwards.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-034",
       "text": "Attempt easy tasks as if they were difficult, and difficult as if they were easy.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-035",
       "text": "Don't take the wrong side of an argument just because your opponent has taken the right side.",
       "author": "Baltasar Gracián",
       "category": "cunning"
     },
     {
+      "id": "cunning-036",
       "text": "The enemy of my enemy is my friend.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-037",
       "text": "Before you start some work, always ask yourself three questions: why, what, and how.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-038",
       "text": "Education is the best friend. An educated person is respected everywhere.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-039",
       "text": "As soon as the fear approaches near, attack and destroy it.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-040",
       "text": "A man is great by deeds, not by birth.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-041",
       "text": "Test a servant while in the discharge of his duty, a relative in difficulty, a friend in adversity, and a wife in misfortune.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-042",
       "text": "Once you start working on something, don't be afraid of failure and don't abandon it.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-043",
       "text": "The serpent, the king, the tiger, the stinging wasp, the small child, the dog owned by other people, and the fool: these seven ought not to be awakened from sleep.",
       "author": "Kautilya",
       "category": "cunning"
     },
     {
+      "id": "cunning-044",
       "text": "Never interrupt your enemy when he is making a mistake.",
       "author": "Napoleon Bonaparte",
       "category": "cunning"
     },
     {
+      "id": "cunning-045",
       "text": "Ability is nothing without opportunity.",
       "author": "Napoleon Bonaparte",
       "category": "cunning"
     },
     {
+      "id": "cunning-046",
       "text": "Victory belongs to the most persevering.",
       "author": "Napoleon Bonaparte",
       "category": "cunning"
     },
     {
+      "id": "cunning-047",
       "text": "A leader is a dealer in hope.",
       "author": "Napoleon Bonaparte",
       "category": "cunning"
     },
     {
+      "id": "cunning-048",
       "text": "In politics, stupidity is not a handicap.",
       "author": "Napoleon Bonaparte",
       "category": "cunning"
     },
     {
+      "id": "cunning-049",
       "text": "Four hostile newspapers are more to be feared than a thousand bayonets.",
       "author": "Napoleon Bonaparte",
       "category": "cunning"
     },
     {
+      "id": "cunning-050",
       "text": "Courage is like love; it must have hope for nourishment.",
       "author": "Napoleon Bonaparte",
       "category": "cunning"
     },
     {
+      "id": "cunning-051",
       "text": "Politics is the art of the possible.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-052",
       "text": "Only a fool learns from his own mistakes. The wise man learns from the mistakes of others.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-053",
       "text": "Fools say that they learn by experience. I prefer to profit by others' experience.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-054",
       "text": "Never believe anything in politics until it has been officially denied.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-055",
       "text": "When you want to fool the world, tell the truth.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-056",
       "text": "Laws are like sausages, it is better not to see them being made.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-057",
       "text": "The main thing is to make history, not to write it.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-058",
       "text": "Whoever speaks of Europe is wrong: it is a geographical expression.",
       "author": "Otto von Bismarck",
       "category": "cunning"
     },
     {
+      "id": "cunning-059",
       "text": "War is not merely a political act but a real political instrument.",
       "author": "Clausewitz",
       "category": "cunning"
     },
     {
+      "id": "cunning-060",
       "text": "The political object is the goal, war is the means of reaching it.",
       "author": "Clausewitz",
       "category": "cunning"
     },
     {
+      "id": "cunning-061",
       "text": "Friction is the force that makes the apparently easy so difficult.",
       "author": "Clausewitz",
       "category": "cunning"
     },
     {
+      "id": "cunning-062",
       "text": "Everything in war is simple, but the simplest thing is difficult.",
       "author": "Clausewitz",
       "category": "cunning"
     },
     {
+      "id": "cunning-063",
       "text": "The best strategy is always to be very strong.",
       "author": "Clausewitz",
       "category": "cunning"
     },
     {
+      "id": "cunning-064",
       "text": "If the enemy is to be coerced, you must put him in a situation that is even more unpleasant than the sacrifice you call on him to make.",
       "author": "Clausewitz",
       "category": "cunning"
     },
     {
+      "id": "cunning-065",
       "text": "Pursue one great decisive aim with force and determination.",
       "author": "Clausewitz",
       "category": "cunning"
     },
     {
+      "id": "cunning-066",
       "text": "Knowledge is power.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-067",
       "text": "A wise man will make more opportunities than he finds.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-068",
       "text": "Silence is the virtue of fools.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-069",
       "text": "Prosperity doth best discover vice, but adversity doth best discover virtue.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-070",
       "text": "He that will not apply new remedies must expect new evils.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-071",
       "text": "In taking revenge, a man is but even with his enemy; but in passing it over, he is superior.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-072",
       "text": "It is impossible to love and to be wise.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-073",
       "text": "Revenge is a kind of wild justice.",
       "author": "Francis Bacon",
       "category": "cunning"
     },
     {
+      "id": "cunning-074",
       "text": "The cautious seldom err.",
       "author": "Confucius",
       "category": "cunning"
     },
     {
+      "id": "cunning-075",
       "text": "Study the past if you would define the future.",
       "author": "Confucius",
       "category": "cunning"
     },
     {
+      "id": "cunning-076",
       "text": "When anger rises, think of the consequences.",
       "author": "Confucius",
       "category": "cunning"
     },
     {
+      "id": "cunning-077",
       "text": "Before you embark on a journey of revenge, dig two graves.",
       "author": "Confucius",
       "category": "cunning"
     },
     {
+      "id": "cunning-078",
       "text": "The superior man understands what is right; the inferior man understands what will sell.",
       "author": "Confucius",
       "category": "cunning"
     },
     {
+      "id": "cunning-079",
       "text": "When you know a thing, to hold that you know it; and when you do not know a thing, to allow that you do not know it — this is knowledge.",
       "author": "Confucius",
       "category": "cunning"
     },
     {
+      "id": "cunning-080",
       "text": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light.",
       "author": "Plato",
       "category": "cunning"
     },
     {
+      "id": "cunning-081",
       "text": "One of the penalties for refusing to participate in politics is that you end up being governed by your inferiors.",
       "author": "Plato",
       "category": "cunning"
     },
     {
+      "id": "cunning-082",
       "text": "The price good men pay for indifference to public affairs is to be ruled by evil men.",
       "author": "Plato",
       "category": "cunning"
     },
     {
+      "id": "cunning-083",
       "text": "Good people do not need laws to tell them to act responsibly, while bad people will find a way around the laws.",
       "author": "Plato",
       "category": "cunning"
     },
     {
+      "id": "cunning-084",
       "text": "Wise men talk because they have something to say; fools, because they have to say something.",
       "author": "Plato",
       "category": "cunning"
     },
     {
+      "id": "cunning-085",
       "text": "No one ever teaches well who wants to teach, or governs well who wants to govern.",
       "author": "Plato",
       "category": "cunning"
     },
     {
+      "id": "cunning-086",
       "text": "He who is not a good servant will not be a good master.",
       "author": "Plato",
       "category": "cunning"
     },
     {
+      "id": "cunning-087",
       "text": "Keep your friends close, and your enemies closer.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-088",
       "text": "Since love and fear can hardly exist together, if we must choose between them, it is far safer to be feared than loved.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-089",
       "text": "The promise given was a necessity of the past; the word broken is a necessity of the present.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-090",
       "text": "Tardiness often robs us opportunity, and the dispatch of our forces.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-091",
       "text": "There is nothing more difficult to take in hand, more perilous to conduct, or more uncertain in its success, than to take the lead in the introduction of a new order of things.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-092",
       "text": "A prince never lacks legitimate reasons to break his promises.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-093",
       "text": "The first impression that one gets of a ruler and of his brains is from seeing the men that he has about him.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-094",
       "text": "He who wishes to be obeyed must know how to command.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-095",
       "text": "Men are so simple of mind, and so much dominated by their immediate needs, that a deceitful man will always find plenty who are ready to be deceived.",
       "author": "Niccolò Machiavelli",
       "category": "cunning"
     },
     {
+      "id": "cunning-096",
       "text": "Sincerity is found in very few men, and is often the cleverest of ruses.",
       "author": "Talleyrand",
       "category": "cunning"
     },
     {
+      "id": "cunning-097",
       "text": "Speech was given to man to disguise his thoughts.",
       "author": "Talleyrand",
       "category": "cunning"
     },
     {
+      "id": "cunning-098",
       "text": "I am more afraid of an army of one hundred sheep led by a lion than an army of one hundred lions led by a sheep.",
       "author": "Talleyrand",
       "category": "cunning"
     },
     {
+      "id": "cunning-099",
       "text": "War is much too serious a matter to be entrusted to the military.",
       "author": "Talleyrand",
       "category": "cunning"
     },
     {
+      "id": "cunning-100",
       "text": "Hide your strength, bide your time.",
       "author": "Deng Xiaoping",
       "category": "cunning"
     },
     {
+      "id": "funny-001",
       "text": "I can resist everything except temptation.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-002",
       "text": "Be yourself; everyone else is already taken.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-003",
       "text": "Always forgive your enemies; nothing annoys them so much.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-004",
       "text": "I am so clever that sometimes I don't understand a single word of what I am saying.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-005",
       "text": "Life is far too important a thing ever to talk seriously about.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-006",
       "text": "Some cause happiness wherever they go; others whenever they go.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-007",
       "text": "The truth is rarely pure and never simple.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-008",
       "text": "Experience is simply the name we give our mistakes.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-009",
       "text": "I never travel without my diary. One should always have something sensational to read in the train.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-010",
       "text": "There is only one thing in the world worse than being talked about, and that is not being talked about.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-011",
       "text": "I have not failed. I've just found 10,000 ways that won't work.",
       "author": "Thomas Edison",
       "category": "funny"
     },
     {
+      "id": "funny-012",
       "text": "Get your facts first, then you can distort them as you please.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-013",
       "text": "The secret of getting ahead is getting started.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-014",
       "text": "Clothes make the man. Naked people have little or no influence on society.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-015",
       "text": "Never put off till tomorrow what you can do the day after tomorrow.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-016",
       "text": "Age is an issue of mind over matter. If you don't mind, it doesn't matter.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-017",
       "text": "It is better to keep your mouth closed and let people think you are a fool than to open it and remove all doubt.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-018",
       "text": "The reports of my death have been greatly exaggerated.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-019",
       "text": "I have never let my schooling interfere with my education.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-020",
       "text": "When in doubt, tell the truth.",
       "author": "Mark Twain",
       "category": "funny"
     },
     {
+      "id": "funny-021",
       "text": "I refuse to join any club that would have me as a member.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-022",
       "text": "Outside of a dog, a book is a man's best friend. Inside of a dog it's too dark to read.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-023",
       "text": "Those are my principles, and if you don't like them... well, I have others.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-024",
       "text": "I find television very educating. Every time somebody turns on the set, I go into the other room and read a book.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-025",
       "text": "A black cat crossing your path signifies that the animal is going somewhere.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-026",
       "text": "I intend to live forever, or die trying.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-027",
       "text": "Politics is the art of looking for trouble, finding it everywhere, diagnosing it incorrectly and applying the wrong remedies.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-028",
       "text": "Time flies like an arrow; fruit flies like a banana.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-029",
       "text": "Behind every successful man is a woman, behind her is his wife.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-030",
       "text": "Well, art is art, isn't it? Still, on the other hand, water is water. And east is east and west is west and if you take cranberries and stew them like applesauce they taste much more like prunes than rhubarb does.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-031",
       "text": "A day without sunshine is like, you know, night.",
       "author": "Steve Martin",
       "category": "funny"
     },
     {
+      "id": "funny-032",
       "text": "I like a woman with a head on her shoulders. I hate necks.",
       "author": "Steve Martin",
       "category": "funny"
     },
     {
+      "id": "funny-033",
       "text": "A celebrity is anyone who looks like he spends more than two hours working on his hair.",
       "author": "Steve Martin",
       "category": "funny"
     },
     {
+      "id": "funny-034",
       "text": "Boy, those French. They have a different word for everything.",
       "author": "Steve Martin",
       "category": "funny"
     },
     {
+      "id": "funny-035",
       "text": "I believe in equality. Equality for everybody. No matter how stupid they are or how superior I am to them.",
       "author": "Steve Martin",
       "category": "funny"
     },
     {
+      "id": "funny-036",
       "text": "I never forget a face, but in your case I'll be glad to make an exception.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-037",
       "text": "I'm not a vegetarian because I love animals. I'm a vegetarian because I hate plants.",
       "author": "A. Whitney Brown",
       "category": "funny"
     },
     {
+      "id": "funny-038",
       "text": "I told my wife the truth. I told her I was seeing a psychiatrist. Then she told me the truth: that she was seeing a psychiatrist, two plumbers, and a bartender.",
       "author": "Rodney Dangerfield",
       "category": "funny"
     },
     {
+      "id": "funny-039",
       "text": "I get no respect. The way my luck is running, if I was a politician I would be honest.",
       "author": "Rodney Dangerfield",
       "category": "funny"
     },
     {
+      "id": "funny-040",
       "text": "My psychiatrist told me I was crazy and I said I want a second opinion. He said okay, you're ugly too.",
       "author": "Rodney Dangerfield",
       "category": "funny"
     },
     {
+      "id": "funny-041",
       "text": "I haven't spoken to my wife in years. I didn't want to interrupt her.",
       "author": "Rodney Dangerfield",
       "category": "funny"
     },
     {
+      "id": "funny-042",
       "text": "My wife and I were happy for twenty years. Then we met.",
       "author": "Rodney Dangerfield",
       "category": "funny"
     },
     {
+      "id": "funny-043",
       "text": "I'm at an age where my back goes out more than I do.",
       "author": "Phyllis Diller",
       "category": "funny"
     },
     {
+      "id": "funny-044",
       "text": "Housework can't kill you, but why take a chance?",
       "author": "Phyllis Diller",
       "category": "funny"
     },
     {
+      "id": "funny-045",
       "text": "A smile is a curve that sets everything straight.",
       "author": "Phyllis Diller",
       "category": "funny"
     },
     {
+      "id": "funny-046",
       "text": "Best way to get rid of kitchen odors: eat out.",
       "author": "Phyllis Diller",
       "category": "funny"
     },
     {
+      "id": "funny-047",
       "text": "Never go to bed mad. Stay up and fight.",
       "author": "Phyllis Diller",
       "category": "funny"
     },
     {
+      "id": "funny-048",
       "text": "I want my children to have all the things I couldn't afford. Then I want to move in with them.",
       "author": "Phyllis Diller",
       "category": "funny"
     },
     {
+      "id": "funny-049",
       "text": "Cleaning your house while your kids are still growing is like shoveling the walk before it stops snowing.",
       "author": "Phyllis Diller",
       "category": "funny"
     },
     {
+      "id": "funny-050",
       "text": "If it weren't for pick-pockets I'd have no sex life at all.",
       "author": "Rodney Dangerfield",
       "category": "funny"
     },
     {
+      "id": "funny-051",
       "text": "I used to sell furniture for a living. The trouble was, it was my own.",
       "author": "Les Dawson",
       "category": "funny"
     },
     {
+      "id": "funny-052",
       "text": "I'm writing a book. I've got the page numbers done.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-053",
       "text": "I intend to live forever. So far, so good.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-054",
       "text": "I woke up one morning and all of my stuff had been stolen... and replaced by exact duplicates.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-055",
       "text": "Curiosity killed the cat, but for a while I was a suspect.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-056",
       "text": "I have an existential map. It has 'You are here' written all over it.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-057",
       "text": "If at first you don't succeed, destroy all evidence that you tried.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-058",
       "text": "The early bird gets the worm, but the second mouse gets the cheese.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-059",
       "text": "I couldn't repair your brakes, so I made your horn louder.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-060",
       "text": "I went to a restaurant that serves 'breakfast at any time'. So I ordered French Toast during the Renaissance.",
       "author": "Steven Wright",
       "category": "funny"
     },
     {
+      "id": "funny-061",
       "text": "Rice is great if you're really hungry and want to eat two thousand of something.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-062",
       "text": "An escalator can never break: it can only become stairs.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-063",
       "text": "I'm sick of following my dreams. I'm just going to ask them where they're going and hook up with them later.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-064",
       "text": "My fake plants died because I did not pretend to water them.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-065",
       "text": "I used to do drugs. I still do, but I used to, too.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-066",
       "text": "The depressing thing about tennis is that no matter how good I get, I'll never be as good as a wall.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-067",
       "text": "Dogs are forever in the push up position.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-068",
       "text": "I haven't slept for ten days, because that would be too long.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-069",
       "text": "Every book is a children's book if the kid can read.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-070",
       "text": "I don't have a girlfriend. But I do know a woman who'd be mad at me for saying that.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-071",
       "text": "I think Bigfoot is blurry, that's the problem.",
       "author": "Mitch Hedberg",
       "category": "funny"
     },
     {
+      "id": "funny-072",
       "text": "By all means let's be open-minded, but not so open-minded that our brains drop out.",
       "author": "Richard Dawkins",
       "category": "funny"
     },
     {
+      "id": "funny-073",
       "text": "I love deadlines. I like the whooshing sound they make as they fly by.",
       "author": "Douglas Adams",
       "category": "funny"
     },
     {
+      "id": "funny-074",
       "text": "The knack of flying is learning how to throw yourself at the ground and miss.",
       "author": "Douglas Adams",
       "category": "funny"
     },
     {
+      "id": "funny-075",
       "text": "In the beginning the Universe was created. This has made a lot of people very angry and been widely regarded as a bad move.",
       "author": "Douglas Adams",
       "category": "funny"
     },
     {
+      "id": "funny-076",
       "text": "Time is an illusion. Lunchtime doubly so.",
       "author": "Douglas Adams",
       "category": "funny"
     },
     {
+      "id": "funny-077",
       "text": "I may not have gone where I intended to go, but I think I have ended up where I needed to be.",
       "author": "Douglas Adams",
       "category": "funny"
     },
     {
+      "id": "funny-078",
       "text": "A common mistake that people make when trying to design something completely foolproof is to underestimate the ingenuity of complete fools.",
       "author": "Douglas Adams",
       "category": "funny"
     },
     {
+      "id": "funny-079",
       "text": "Human beings, who are almost unique in having the ability to learn from the experience of others, are also remarkable for their apparent disinclination to do so.",
       "author": "Douglas Adams",
       "category": "funny"
     },
     {
+      "id": "funny-080",
       "text": "Give a man a fish and he will eat for a day. Teach him how to fish, and he will sit in a boat and drink beer all day.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-081",
       "text": "Have you ever noticed that anybody driving slower than you is an idiot, and anyone going faster than you is a maniac?",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-082",
       "text": "The reason I talk to myself is because I'm the only one whose answers I accept.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-083",
       "text": "Inside every cynical person, there is a disappointed idealist.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-084",
       "text": "Some people see things that are and ask, Why? Some people dream of things that never were and ask, Why not? Those people are out of their minds.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-085",
       "text": "If you can't beat them, arrange to have them beaten.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-086",
       "text": "Electricity is really just organized lightning.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-087",
       "text": "The planet is fine. The people are f*****.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-088",
       "text": "Think of how stupid the average person is, and realize half of them are stupider than that.",
       "author": "George Carlin",
       "category": "funny"
     },
     {
+      "id": "funny-089",
       "text": "Marriage is a wonderful institution, but who wants to live in an institution?",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-090",
       "text": "Quote me as saying I was misquoted.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-091",
       "text": "No one is completely unhappy at the failure of his best friend.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-092",
       "text": "I have a mind to join a club and beat you over the head with it.",
       "author": "Groucho Marx",
       "category": "funny"
     },
     {
+      "id": "funny-093",
       "text": "Man cannot live by bread alone; he must have peanut butter.",
       "author": "James A. Garfield",
       "category": "funny"
     },
     {
+      "id": "funny-094",
       "text": "I always arrive late at the office, but I make up for it by leaving early.",
       "author": "Charles Lamb",
       "category": "funny"
     },
     {
+      "id": "funny-095",
       "text": "I am not young enough to know everything.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-096",
       "text": "Work is the curse of the drinking classes.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-097",
       "text": "What is a cynic? A man who knows the price of everything and the value of nothing.",
       "author": "Oscar Wilde",
       "category": "funny"
     },
     {
+      "id": "funny-098",
       "text": "I don't have a bank account because I don't know my mother's maiden name.",
       "author": "Paul Merton",
       "category": "funny"
     },
     {
+      "id": "funny-099",
       "text": "I like long walks, especially when they are taken by people who annoy me.",
       "author": "Fred Allen",
       "category": "funny"
     },
     {
+      "id": "funny-100",
       "text": "My doctor told me I had to stop throwing intimate dinners for four unless there are three other people.",
       "author": "Orson Welles",
       "category": "funny"
     },
     {
+      "id": "strategic-001",
       "text": "Plans are worthless, but planning is everything.",
       "author": "Dwight D. Eisenhower",
       "category": "strategic"
     },
     {
+      "id": "strategic-002",
       "text": "No battle plan survives contact with the enemy.",
       "author": "Helmuth von Moltke",
       "category": "strategic"
     },
     {
+      "id": "strategic-003",
       "text": "Strategy without tactics is the slowest route to victory. Tactics without strategy is the noise before defeat.",
       "author": "Sun Tzu",
       "category": "strategic"
     },
     {
+      "id": "strategic-004",
       "text": "The essence of strategy is choosing what not to do.",
       "author": "Michael Porter",
       "category": "strategic"
     },
     {
+      "id": "strategic-005",
       "text": "Culture eats strategy for breakfast.",
       "author": "Peter Drucker",
       "category": "strategic"
     },
     {
+      "id": "strategic-006",
       "text": "What gets measured gets managed.",
       "author": "Peter Drucker",
       "category": "strategic"
     },
     {
+      "id": "strategic-007",
       "text": "The best way to predict the future is to create it.",
       "author": "Peter Drucker",
       "category": "strategic"
     },
     {
+      "id": "strategic-008",
       "text": "Management is doing things right; leadership is doing the right things.",
       "author": "Peter Drucker",
       "category": "strategic"
     },
     {
+      "id": "strategic-009",
       "text": "Only the paranoid survive.",
       "author": "Andy Grove",
       "category": "strategic"
     },
     {
+      "id": "strategic-010",
       "text": "A strategic inflection point is a time in the life of a business when its fundamentals are about to change.",
       "author": "Andy Grove",
       "category": "strategic"
     },
     {
+      "id": "strategic-011",
       "text": "Control your own destiny or someone else will.",
       "author": "Jack Welch",
       "category": "strategic"
     },
     {
+      "id": "strategic-012",
       "text": "An organization's ability to learn, and translate that learning into action rapidly, is the ultimate competitive advantage.",
       "author": "Jack Welch",
       "category": "strategic"
     },
     {
+      "id": "strategic-013",
       "text": "Good tactics can save even the worst strategy. Bad tactics will destroy even the best strategy.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-014",
       "text": "A good plan violently executed now is better than a perfect plan executed next week.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-015",
       "text": "Accept the challenges so that you can feel the exhilaration of victory.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-016",
       "text": "Never tell people how to do things. Tell them what to do and they will surprise you with their ingenuity.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-017",
       "text": "In preparing for battle I have always found that plans are useless, but planning is indispensable.",
       "author": "Dwight D. Eisenhower",
       "category": "strategic"
     },
     {
+      "id": "strategic-018",
       "text": "Amateurs talk strategy. Professionals talk logistics.",
       "author": "Omar Bradley",
       "category": "strategic"
     },
     {
+      "id": "strategic-019",
       "text": "The object of war is not to die for your country but to make the other bastard die for his.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-020",
       "text": "You are remembered for the rules you break.",
       "author": "Douglas MacArthur",
       "category": "strategic"
     },
     {
+      "id": "strategic-021",
       "text": "A true leader has the confidence to stand alone, the courage to make tough decisions, and the compassion to listen to the needs of others.",
       "author": "Douglas MacArthur",
       "category": "strategic"
     },
     {
+      "id": "strategic-022",
       "text": "The defensive is the stronger form of war.",
       "author": "Clausewitz",
       "category": "strategic"
     },
     {
+      "id": "strategic-023",
       "text": "The backbone of surprise is fusing speed with secrecy.",
       "author": "B.H. Liddell Hart",
       "category": "strategic"
     },
     {
+      "id": "strategic-024",
       "text": "The chief incalculable in war is the human will.",
       "author": "B.H. Liddell Hart",
       "category": "strategic"
     },
     {
+      "id": "strategic-025",
       "text": "In strategy the longest way round is often the shortest way there.",
       "author": "B.H. Liddell Hart",
       "category": "strategic"
     },
     {
+      "id": "strategic-026",
       "text": "In order to win, you must first survive.",
       "author": "Garry Kasparov",
       "category": "strategic"
     },
     {
+      "id": "strategic-027",
       "text": "Tactics is knowing what to do when there is something to do; strategy is knowing what to do when there is nothing to do.",
       "author": "José Raúl Capablanca",
       "category": "strategic"
     },
     {
+      "id": "strategic-028",
       "text": "The threat is stronger than the execution.",
       "author": "Aron Nimzowitsch",
       "category": "strategic"
     },
     {
+      "id": "strategic-029",
       "text": "First restrain, next blockade, finally destroy.",
       "author": "Aron Nimzowitsch",
       "category": "strategic"
     },
     {
+      "id": "strategic-030",
       "text": "Chess is war over the board. The object is to crush the opponent's mind.",
       "author": "Bobby Fischer",
       "category": "strategic"
     },
     {
+      "id": "strategic-031",
       "text": "Tactics flow from a superior position.",
       "author": "Bobby Fischer",
       "category": "strategic"
     },
     {
+      "id": "strategic-032",
       "text": "Speed is the essence of war. Take advantage of the enemy's unpreparedness.",
       "author": "Sun Tzu",
       "category": "strategic"
     },
     {
+      "id": "strategic-033",
       "text": "He who is prudent and lies in wait for an enemy who is not, will be victorious.",
       "author": "Sun Tzu",
       "category": "strategic"
     },
     {
+      "id": "strategic-034",
       "text": "The general who thoroughly understands the advantages that accompany variation of tactics knows how to handle his troops.",
       "author": "Sun Tzu",
       "category": "strategic"
     },
     {
+      "id": "strategic-035",
       "text": "In strategy it is important to see distant things as if they were close and to take a distanced view of close things.",
       "author": "Miyamoto Musashi",
       "category": "strategic"
     },
     {
+      "id": "strategic-036",
       "text": "Do nothing which is of no use.",
       "author": "Miyamoto Musashi",
       "category": "strategic"
     },
     {
+      "id": "strategic-037",
       "text": "Perceive that which cannot be seen with the eye.",
       "author": "Miyamoto Musashi",
       "category": "strategic"
     },
     {
+      "id": "strategic-038",
       "text": "Speed is the key to victory.",
       "author": "John Boyd",
       "category": "strategic"
     },
     {
+      "id": "strategic-039",
       "text": "He who can handle the quickest rate of change survives.",
       "author": "John Boyd",
       "category": "strategic"
     },
     {
+      "id": "strategic-040",
       "text": "People, ideas, hardware — in that order.",
       "author": "John Boyd",
       "category": "strategic"
     },
     {
+      "id": "strategic-041",
       "text": "Give me six hours to chop down a tree and I will spend the first four sharpening the axe.",
       "author": "Abraham Lincoln",
       "category": "strategic"
     },
     {
+      "id": "strategic-042",
       "text": "The best way to destroy an enemy is to make him a friend.",
       "author": "Abraham Lincoln",
       "category": "strategic"
     },
     {
+      "id": "strategic-043",
       "text": "Discipline is the soul of an army.",
       "author": "George Washington",
       "category": "strategic"
     },
     {
+      "id": "strategic-044",
       "text": "Perseverance and spirit have done wonders in all ages.",
       "author": "George Washington",
       "category": "strategic"
     },
     {
+      "id": "strategic-045",
       "text": "A competitive strategy is about being different.",
       "author": "Michael Porter",
       "category": "strategic"
     },
     {
+      "id": "strategic-046",
       "text": "The worst error in strategy is to act without a clear objective.",
       "author": "Michael Porter",
       "category": "strategic"
     },
     {
+      "id": "strategic-047",
       "text": "Strategy is about making choices, trade-offs; it's about deliberately choosing to be different.",
       "author": "Michael Porter",
       "category": "strategic"
     },
     {
+      "id": "strategic-048",
       "text": "The successful strategist is not one who always wins, but one who can recover from setbacks.",
       "author": "Michael Porter",
       "category": "strategic"
     },
     {
+      "id": "strategic-049",
       "text": "Take time to deliberate, but when the time for action comes, stop thinking and go in.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-050",
       "text": "The truest wisdom is a resolute determination.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-051",
       "text": "Until you spread your wings, you'll have no idea how far you can fly.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-052",
       "text": "You must not fight too often with one enemy, or you will teach him all your art of war.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-053",
       "text": "The battlefield is a scene of constant chaos. The winner will be the one who controls that chaos.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-054",
       "text": "Victory has a hundred fathers and defeat is an orphan.",
       "author": "Winston Churchill",
       "category": "strategic"
     },
     {
+      "id": "strategic-055",
       "text": "However beautiful the strategy, you should occasionally look at the results.",
       "author": "Winston Churchill",
       "category": "strategic"
     },
     {
+      "id": "strategic-056",
       "text": "To improve is to change; to be perfect is to change often.",
       "author": "Winston Churchill",
       "category": "strategic"
     },
     {
+      "id": "strategic-057",
       "text": "The farther backward you can look, the farther forward you are likely to see.",
       "author": "Winston Churchill",
       "category": "strategic"
     },
     {
+      "id": "strategic-058",
       "text": "A pessimist sees the difficulty in every opportunity; an optimist sees the opportunity in every difficulty.",
       "author": "Winston Churchill",
       "category": "strategic"
     },
     {
+      "id": "strategic-059",
       "text": "By failing to prepare, you are preparing to fail.",
       "author": "Benjamin Franklin",
       "category": "strategic"
     },
     {
+      "id": "strategic-060",
       "text": "An investment in knowledge pays the best interest.",
       "author": "Benjamin Franklin",
       "category": "strategic"
     },
     {
+      "id": "strategic-061",
       "text": "Well done is better than well said.",
       "author": "Benjamin Franklin",
       "category": "strategic"
     },
     {
+      "id": "strategic-062",
       "text": "Lost time is never found again.",
       "author": "Benjamin Franklin",
       "category": "strategic"
     },
     {
+      "id": "strategic-063",
       "text": "Diligence is the mother of good luck.",
       "author": "Benjamin Franklin",
       "category": "strategic"
     },
     {
+      "id": "strategic-064",
       "text": "Price is what you pay. Value is what you get.",
       "author": "Warren Buffett",
       "category": "strategic"
     },
     {
+      "id": "strategic-065",
       "text": "Risk comes from not knowing what you're doing.",
       "author": "Warren Buffett",
       "category": "strategic"
     },
     {
+      "id": "strategic-066",
       "text": "Someone's sitting in the shade today because someone planted a tree a long time ago.",
       "author": "Warren Buffett",
       "category": "strategic"
     },
     {
+      "id": "strategic-067",
       "text": "It takes 20 years to build a reputation and five minutes to ruin it.",
       "author": "Warren Buffett",
       "category": "strategic"
     },
     {
+      "id": "strategic-068",
       "text": "In the short run, the market is a voting machine but in the long run, it is a weighing machine.",
       "author": "Benjamin Graham",
       "category": "strategic"
     },
     {
+      "id": "strategic-069",
       "text": "Invert, always invert.",
       "author": "Charlie Munger",
       "category": "strategic"
     },
     {
+      "id": "strategic-070",
       "text": "Take a simple idea and take it seriously.",
       "author": "Charlie Munger",
       "category": "strategic"
     },
     {
+      "id": "strategic-071",
       "text": "The big money is not in the buying and selling, but in the waiting.",
       "author": "Charlie Munger",
       "category": "strategic"
     },
     {
+      "id": "strategic-072",
       "text": "Show me the incentive and I will show you the outcome.",
       "author": "Charlie Munger",
       "category": "strategic"
     },
     {
+      "id": "strategic-073",
       "text": "We have three pillars: speed, selection, and customer service.",
       "author": "Jeff Bezos",
       "category": "strategic"
     },
     {
+      "id": "strategic-074",
       "text": "If you double the number of experiments you do per year you're going to double your inventiveness.",
       "author": "Jeff Bezos",
       "category": "strategic"
     },
     {
+      "id": "strategic-075",
       "text": "Your margin is my opportunity.",
       "author": "Jeff Bezos",
       "category": "strategic"
     },
     {
+      "id": "strategic-076",
       "text": "We are stubborn on vision. We are flexible on details.",
       "author": "Jeff Bezos",
       "category": "strategic"
     },
     {
+      "id": "strategic-077",
       "text": "Most companies overestimate what they can do in one year and underestimate what they can do in ten.",
       "author": "Jeff Bezos",
       "category": "strategic"
     },
     {
+      "id": "strategic-078",
       "text": "Stone Age. Bronze Age. Iron Age. We define entire epochs of humanity by how they mastered materials.",
       "author": "Reed Hastings",
       "category": "strategic"
     },
     {
+      "id": "strategic-079",
       "text": "Do not seek to follow in the footsteps of the wise. Seek what they sought.",
       "author": "Matsuo Bashō",
       "category": "strategic"
     },
     {
+      "id": "strategic-080",
       "text": "The chess-board is the world, the pieces are the phenomena of the universe.",
       "author": "Thomas Huxley",
       "category": "strategic"
     },
     {
+      "id": "strategic-081",
       "text": "Strategy is a pattern in a stream of decisions.",
       "author": "Henry Mintzberg",
       "category": "strategic"
     },
     {
+      "id": "strategic-082",
       "text": "Where there is no vision, the people perish.",
       "author": "Proverbs",
       "category": "strategic"
     },
     {
+      "id": "strategic-083",
       "text": "A goal without a plan is just a wish.",
       "author": "Antoine de Saint-Exupéry",
       "category": "strategic"
     },
     {
+      "id": "strategic-084",
       "text": "The general who advances without coveting fame and retreats without fearing disgrace is a jewel of the kingdom.",
       "author": "Sun Tzu",
       "category": "strategic"
     },
     {
+      "id": "strategic-085",
       "text": "Strategy is the art of making use of time and space.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-086",
       "text": "Concentrate your forces at the decisive point.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-087",
       "text": "The whole art of war consists in a well-reasoned and extremely circumspect defensive, followed by rapid and audacious attack.",
       "author": "Napoleon Bonaparte",
       "category": "strategic"
     },
     {
+      "id": "strategic-088",
       "text": "The flank is the most vulnerable part of any position.",
       "author": "B.H. Liddell Hart",
       "category": "strategic"
     },
     {
+      "id": "strategic-089",
       "text": "The indirect approach is as fundamental in politics as in war.",
       "author": "B.H. Liddell Hart",
       "category": "strategic"
     },
     {
+      "id": "strategic-090",
       "text": "The profoundest truth of war is that the issue of battle is usually decided in the minds of the opposing commanders.",
       "author": "B.H. Liddell Hart",
       "category": "strategic"
     },
     {
+      "id": "strategic-091",
       "text": "Grand strategy is the art of coordinating and directing all the resources of a nation toward the attainment of the political object of the war.",
       "author": "B.H. Liddell Hart",
       "category": "strategic"
     },
     {
+      "id": "strategic-092",
       "text": "Position before submission.",
       "author": "Rickson Gracie",
       "category": "strategic"
     },
     {
+      "id": "strategic-093",
       "text": "He who defends everything defends nothing.",
       "author": "Frederick the Great",
       "category": "strategic"
     },
     {
+      "id": "strategic-094",
       "text": "Audacity, audacity, always audacity.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-095",
       "text": "Better to fight for something than live for nothing.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-096",
       "text": "Courage is fear holding on a minute longer.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-097",
       "text": "Success is how high you bounce when you hit bottom.",
       "author": "George S. Patton",
       "category": "strategic"
     },
     {
+      "id": "strategic-098",
       "text": "Focus is about saying no.",
       "author": "Steve Jobs",
       "category": "strategic"
     },
     {
+      "id": "strategic-099",
       "text": "Innovation distinguishes between a leader and a follower.",
       "author": "Steve Jobs",
       "category": "strategic"
     },
     {
+      "id": "strategic-100",
       "text": "The people who are crazy enough to think they can change the world are the ones who do.",
       "author": "Steve Jobs",
       "category": "strategic"

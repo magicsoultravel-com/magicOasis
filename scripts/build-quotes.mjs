@@ -1,3 +1,4 @@
+// Source data for quotes. Add quotes: py scripts/quotes-cli.py | Build: py scripts/build-quotes.py
 import { writeFileSync, mkdirSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -95,6 +96,7 @@ const authors = {
   "Reed Hastings": "b. 1960",
   "Abraham Lincoln": "1809–1865",
   "George Washington": "1732–1799",
+
 };
 
 const uplifting = [
@@ -198,6 +200,7 @@ const uplifting = [
   { text: "Caretake this moment. Immerse yourself in its particulars.", author: "Mary Anne Radmacher" },
   { text: "In the midst of movement and chaos, keep stillness inside of you.", author: "Deepak Chopra" },
   { text: "You can't stop the waves, but you can learn to surf.", author: "Jon Kabat-Zinn" },
+
 ];
 
 const cunning = [

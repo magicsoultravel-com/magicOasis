@@ -10,6 +10,7 @@
     slitherlink: "magicSlitherlink",
     kakuro: "magicKakuro",
     reversi: "magicReversi",
+    quotes: "magicQuotes",
   };
 
   const STORAGE_KEY = "magic-active-game";
@@ -27,6 +28,7 @@
   const slitherlinkPanel = document.getElementById("slitherlink-panel");
   const kakuroPanel = document.getElementById("kakuro-panel");
   const reversiPanel = document.getElementById("reversi-panel");
+  const quotesPanel = document.getElementById("quotes-panel");
 
   const PANELS = {
     sudoku: sudokuPanel,
@@ -38,6 +40,7 @@
     slitherlink: slitherlinkPanel,
     kakuro: kakuroPanel,
     reversi: reversiPanel,
+    quotes: quotesPanel,
   };
 
   let active = localStorage.getItem(STORAGE_KEY);
@@ -57,6 +60,7 @@
     if (active === "slitherlink") window.SlitherlinkApp?.saveGame?.();
     if (active === "kakuro") window.KakuroApp?.saveGame?.();
     if (active === "reversi") window.ReversiApp?.saveGame?.();
+    if (active === "quotes") window.QuotesApp?.saveGame?.();
   }
 
   function initGame(id) {
@@ -68,6 +72,7 @@
     if (id === "slitherlink") window.SlitherlinkApp?.init?.();
     if (id === "kakuro") window.KakuroApp?.init?.();
     if (id === "reversi") window.ReversiApp?.init?.();
+    if (id === "quotes") window.QuotesApp?.init?.();
   }
 
   function applyVisibility() {
@@ -97,6 +102,8 @@
     applyVisibility();
     Settings.applyForGame(active);
     initGame(active);
+    window.QuoteFooter?.init?.();
+    window.QuoteFooter?.applyVisibility?.();
   }
 
   function cycle(delta) {
@@ -125,6 +132,7 @@
     isSlitherlink: () => active === "slitherlink",
     isKakuro: () => active === "kakuro",
     isReversi: () => active === "reversi",
+    isQuotes: () => active === "quotes",
   };
 
   const hubOnLoad = window.Hub?.initHubOnLoad?.();
@@ -137,5 +145,7 @@
     applyVisibility();
     Settings.applyForGame(active);
     initGame(active);
+    window.QuoteFooter?.init?.();
+    window.QuoteFooter?.applyVisibility?.();
   }
 })();

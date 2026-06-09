@@ -1,0 +1,304 @@
+.quotes-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 2rem;
+  min-height: 0;
+}
+
+.quotes-stats {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.quotes-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0;
+}
+
+.quotes-pane[hidden] {
+  display: none !important;
+}
+
+.quotes-search {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.quotes-search:focus {
+  outline: 2px solid var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.quotes-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.quotes-category-chip {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.65rem;
+}
+
+.quotes-category-chip.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.quotes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: min(62vh, 32rem);
+  overflow-y: auto;
+  padding-right: 0.15rem;
+}
+
+.quotes-item {
+  position: relative;
+  margin: 0;
+  padding: 0.75rem 0.85rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.quotes-item.is-highlighted {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.quotes-item-text {
+  max-width: none;
+  text-align: left;
+  font-size: 0.9375rem;
+  margin-bottom: 0.35rem;
+}
+
+.quotes-item-meta {
+  text-align: left;
+  font-size: 0.8125rem;
+}
+
+.quotes-badge {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.quotes-badge--cunning {
+  background: color-mix(in srgb, var(--accent) 22%, var(--surface) 78%);
+  color: var(--text);
+}
+
+.quotes-badge--funny {
+  background: color-mix(in srgb, var(--accent) 35%, var(--highlight) 65%);
+  color: var(--text);
+}
+
+.quotes-badge--strategic {
+  background: color-mix(in srgb, var(--accent) 50%, var(--bg) 50%);
+  color: var(--accent);
+}
+
+.quotes-filter-note,
+.quotes-empty {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.quotes-authors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: min(62vh, 32rem);
+  overflow-y: auto;
+}
+
+.quotes-author-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quotes-author-row:hover {
+  border-color: var(--accent);
+}
+
+.quotes-author-name {
+  font-weight: 500;
+}
+
+.quotes-author-meta {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.quotes-timeline-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quotes-timeline-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.quotes-timeline-inner {
+  position: relative;
+  min-width: 48rem;
+  height: 7.5rem;
+}
+
+.quotes-timeline-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.75rem;
+  height: 5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.quotes-timeline-dot {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-left: -0.275rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.quotes-timeline-dot:hover,
+.quotes-timeline-dot:focus-visible {
+  transform: scale(1.45);
+  outline: 2px solid var(--accent-soft);
+}
+
+.quotes-timeline-dot[data-category="uplifting"] {
+  background: var(--accent);
+}
+
+.quotes-timeline-dot[data-category="cunning"] {
+  background: color-mix(in srgb, var(--accent) 55%, var(--text) 45%);
+}
+
+.quotes-timeline-dot[data-category="funny"] {
+  background: color-mix(in srgb, var(--accent) 40%, var(--highlight) 60%);
+}
+
+.quotes-timeline-dot[data-category="strategic"] {
+  background: color-mix(in srgb, var(--accent) 75%, var(--bg) 25%);
+}
+
+.quotes-timeline-axis {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.25rem;
+}
+
+.quotes-timeline-tick {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.quotes-timeline-note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.app[data-game="quotes"] .main.quotes-only {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.quote-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: auto;
+  padding: 0.65rem 0.25rem 0.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.quote-footer[hidden] {
+  display: none !important;
+}
+
+.quote-footer-body {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.quote-footer-text {
+  margin: 0;
+  max-width: none;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  font-weight: 400;
+  text-align: center;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.quote-footer-author {
+  margin: 0.2rem 0 0;
+  font-size: 0.6875rem;
+  font-style: normal;
+  text-align: center;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quote-footer .btn-icon {
+  flex-shrink: 0;
+}

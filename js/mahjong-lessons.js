@@ -154,3 +154,78 @@ function formatMahjongMatchPeers(peers) {
     .map((p) => `${p.chinese} (${p.pronunciation}) — ${p.english}`)
     .join("; ");
 }
+
+const MahjongPhrasePools = {
+  approval: [
+    { chinese: "是的", pronunciation: "shì de", english: "Yes" },
+    { chinese: "对了", pronunciation: "duì le", english: "That's right" },
+    { chinese: "很好", pronunciation: "hěn hǎo", english: "Very good" },
+    { chinese: "正确", pronunciation: "zhèngquè", english: "Correct" },
+    { chinese: "没错", pronunciation: "méi cuò", english: "Exactly" },
+  ],
+  disapproval: [
+    { chinese: "不是", pronunciation: "bù shì", english: "No" },
+    { chinese: "不对", pronunciation: "bù duì", english: "Not right" },
+    { chinese: "错了", pronunciation: "cuò le", english: "Wrong" },
+    { chinese: "再试试", pronunciation: "zài shì shi", english: "Try again" },
+    { chinese: "不对哦", pronunciation: "bù duì ó", english: "Not quite" },
+  ],
+  win: [
+    { chinese: "谢谢", pronunciation: "xiè xie", english: "Thank you" },
+    { chinese: "恭喜", pronunciation: "gōng xǐ", english: "Congratulations" },
+    { chinese: "做得好", pronunciation: "zuò de hǎo", english: "Great job" },
+    { chinese: "太棒了", pronunciation: "tài bàng le", english: "Awesome" },
+    { chinese: "你赢了", pronunciation: "nǐ yíng le", english: "You won" },
+  ],
+  greet: [
+    { chinese: "你好", pronunciation: "nǐ hǎo", english: "Hello" },
+    { chinese: "欢迎", pronunciation: "huān yíng", english: "Welcome" },
+    { chinese: "开始吧", pronunciation: "kāi shǐ ba", english: "Let's begin" },
+    { chinese: "加油", pronunciation: "jiā yóu", english: "Good luck" },
+    { chinese: "祝你好运", pronunciation: "zhù nǐ hǎo yùn", english: "Best of luck" },
+  ],
+};
+
+const MahjongPhraseDecks = {};
+
+function shufflePhraseOrder(length) {
+  const order = Array.from({ length }, (_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
+const MahjongPhrases = {
+  next(kind) {
+    const pool = MahjongPhrasePools[kind];
+    if (!pool?.length) return null;
+
+    let deck = MahjongPhraseDecks[kind];
+    if (!deck || deck.pos >= pool.length) {
+      deck = { order: shufflePhraseOrder(pool.length), pos: 0 };
+      MahjongPhraseDecks[kind] = deck;
+    }
+
+    const line = pool[deck.order[deck.pos]];
+    deck.pos += 1;
+    return line;
+  },
+
+  fromTile(tile) {
+    const meta = MahjongTileMeta.get(`${tile.kind}:${tile.rank}`);
+    if (meta) {
+      return {
+        chinese: meta.chinese,
+        pronunciation: meta.pronunciation,
+        english: meta.english,
+      };
+    }
+    return {
+      chinese: tile.label,
+      pronunciation: "",
+      english: "",
+    };
+  },
+};
