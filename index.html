@@ -25,19 +25,26 @@
       <span id="stats-started">0</span> started · <span id="stats-completed">0</span> done
     </div>
     <header class="header">
-      <div class="title-row zen-hide hub-only">
-        <h1 class="title">magicOasis</h1>
+      <div class="header-bar zen-hide">
+        <div class="title-row hub-only">
+          <h1 class="title">magicOasis</h1>
+        </div>
+        <div class="title-row game-only">
+          <button id="game-prev" class="btn btn-icon switch-btn" type="button" aria-label="Previous game" title="Previous game">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <h1 id="game-title" class="title">magicSudoku</h1>
+          <button id="game-next" class="btn btn-icon switch-btn" type="button" aria-label="Next game" title="Next game">
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <div class="header-actions">
+          <button id="btn-menu" class="btn btn-icon menu-toggle" type="button" aria-label="Menu" aria-expanded="false" title="Menu"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+          <button id="btn-zen-exit" class="btn btn-icon zen-exit game-only" type="button" aria-label="Exit zen mode" title="Exit zen mode"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></button>
+        </div>
       </div>
-      <div class="title-row zen-hide game-only">
-        <button id="game-prev" class="btn btn-icon game-switch-btn" type="button" aria-label="Previous game" title="Previous game">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <h1 id="game-title" class="title">magicSudoku</h1>
-        <button id="game-next" class="btn btn-icon game-switch-btn" type="button" aria-label="Next game" title="Next game">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-      <div class="game-toolbar game-only zen-hide" role="toolbar" aria-label="Game controls">
+      <nav id="nav-menu" class="menu-panel" hidden aria-label="Game menu">
+      <div class="menu-icons menu-icons--game" role="toolbar" aria-label="Game controls">
         <button id="btn-new" class="btn btn-icon sudoku-only" type="button" aria-label="New game" title="New game"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="3" width="10" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="5.75" cy="5.75" r=".75" fill="currentColor"/><circle cx="10.25" cy="10.25" r=".75" fill="currentColor"/><path d="M10 3.5v2.5h2.5" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button id="btn-restart" class="btn btn-icon sudoku-only" type="button" aria-label="Restart puzzle" title="Restart"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button id="btn-undo" class="btn btn-icon sudoku-only" type="button" aria-label="Undo" title="Undo" disabled><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5a3 3 0 1 0 0-6H9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 5L3 8l3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -74,9 +81,6 @@
         <button id="btn-reversi-restart" class="btn btn-icon reversi-only" type="button" aria-label="Restart reversi" title="Restart"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 4.5V2.5h-2M3 11.5v2h2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 6.5a5 5 0 0 1 8.2-1.8L13 4.5M12 9.5a5 5 0 0 1-8.2 1.8L3 11.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button id="btn-reversi-undo" class="btn btn-icon reversi-only" type="button" aria-label="Undo" title="Undo" disabled><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9.5a3 3 0 1 0 0-6H9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 5L3 8l3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button id="btn-reversi-redo" class="btn btn-icon reversi-only" type="button" aria-label="Redo" title="Redo" disabled><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3.5a3 3 0 1 1 0-6H7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button id="btn-zen" class="btn btn-icon zen-toggle game-only" type="button" aria-label="Zen mode" title="Zen mode — focus on the puzzle"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></button>
-      </div>
-      <div class="game-extras game-only zen-hide">
         <button id="btn-pencil" class="btn btn-icon sudoku-only" type="button" aria-label="Pencil marks" title="Pencil marks"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M11.5 2.5l2 2-8 8H3.5v-2l8-8z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M10 4l2 2" stroke="currentColor" stroke-width="1.2"/></svg></button>
         <button id="btn-erase" class="btn btn-icon sudoku-only" type="button" aria-label="Erase" title="Erase"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 9.5l5-5 5 5-5 5-5-5z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2.5 13.5h11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>
         <button id="btn-check" class="btn btn-icon sudoku-only" type="button" aria-label="Check" title="Check"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -84,18 +88,26 @@
         <button id="btn-pencil-clear" class="btn btn-icon sudoku-only" type="button" aria-label="Clear all pencil marks" title="Clear all pencil marks"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 11.5l4.5-4.5 5.5 5.5-2 2H2.5v-3z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M7 7l2-2 4 4-2 2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2.5 13.5h11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></button>
         <button id="btn-mahjong-hint" class="btn btn-icon mahjong-only" type="button" aria-label="Hint" title="Hint"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4z" fill="currentColor"/><path d="M8 9v2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
         <button id="btn-solitaire-hint" class="btn btn-icon solitaire-only" type="button" aria-label="Hint" title="Hint"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4z" fill="currentColor"/><path d="M8 9v2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button>
+        <button id="btn-kakuro-pencil" class="btn btn-icon kakuro-only" type="button" aria-label="Pencil marks" title="Pencil marks">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12.5l1-3.5L10.5 3l2.5 2.5L6.5 12l-3.5 1z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </button>
+        <button id="btn-kakuro-clear" class="btn btn-icon kakuro-only" type="button" aria-label="Clear cell" title="Clear cell">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-reversi-hints" class="btn btn-icon reversi-only active" type="button" aria-label="Move hints on" title="Move hints on">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4z" fill="currentColor"/><path d="M8 9v2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-reversi-pass" class="btn btn-icon reversi-only" type="button" aria-label="Pass" title="Pass">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 5.5l2.5 2.5L10 10.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-      <div class="menu-row zen-hide">
+      <div class="menu-icons menu-icons--common">
         <button id="btn-hub-appearance" class="btn btn-icon hub-only" type="button" aria-label="Appearance" title="Appearance"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 4.85A3.15 3.15 0 1 0 8 11.15 3.15 3.15 0 0 0 8 4.85zm4.78 1.93 1.1-.82-.82-1.43-1.28.47a4.6 4.6 0 0 0-1.1-.64l-.22-1.34H7.24l-.22 1.34c-.39.18-.75.38-1.1.64l-1.28-.47-.82 1.43 1.1.82a4.5 4.5 0 0 0-.02 1.28l-1.1.82.82 1.43 1.28-.47c.35.26.71.46 1.1.64l.22 1.34h1.52l.22-1.34c.39-.18.75-.38 1.1-.64l1.28.47.82-1.43-1.1-.82a4.5 4.5 0 0 0 .02-1.28z"/></svg></button>
-        <button id="btn-menu" class="btn btn-icon menu-toggle" type="button" aria-label="Menu" aria-expanded="false" title="Menu"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4.5h11M2.5 8h11M2.5 11.5h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
-        <button id="btn-zen-exit" class="btn btn-icon zen-exit game-only" type="button" aria-label="Exit zen mode" title="Exit zen mode"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></button>
-      </div>
-      <nav id="nav-menu" class="menu-panel" hidden aria-label="Game menu">
-      <div class="menu-icons">
         <button id="btn-home" class="btn btn-icon game-only" type="button" aria-label="Home" title="Home — pick a game"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 7.5L8 3l5 4.5V13a.5.5 0 0 1-.5.5H10v-4H6v4H3.5A.5.5 0 0 1 3 13V7.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
         <button id="btn-quote-footer" class="btn btn-icon game-only active" type="button" aria-label="Quote footer on" title="Quote footer on">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 4.5h7c1.4 0 2.5 1.1 2.5 2.5v5H7.5c-1.4 0-2.5-1.1-2.5-2.5v-5z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6.5 12.5v2l2.5-2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
+        <button id="btn-zen" class="btn btn-icon zen-toggle game-only" type="button" aria-label="Zen mode" title="Zen mode — focus on the puzzle"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.2 6.4c.45-.45 1.05-.45 1.5 0M9.3 6.4c.45-.45 1.05-.45 1.5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M5.5 10.2c1.15 1 3.85 1 5 0" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></button>
         <button id="btn-lessons" class="btn btn-icon sudoku-only" type="button" aria-label="Lessons and tips" title="Lessons & tips">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h7l3 3V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10 2.5V6H13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5h5M5.5 10.5h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
         </button>
@@ -126,18 +138,6 @@
         </button>
         <button id="btn-kakuro-guide" class="btn btn-icon kakuro-only" type="button" aria-label="How to play kakuro" title="How to play">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h7l3 3V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M10 2.5V6H13" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 8.5h5M5.5 10.5h3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-        </button>
-        <button id="btn-kakuro-pencil" class="btn btn-icon kakuro-only" type="button" aria-label="Pencil marks" title="Pencil marks">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 12.5l1-3.5L10.5 3l2.5 2.5L6.5 12l-3.5 1z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
-        </button>
-        <button id="btn-kakuro-clear" class="btn btn-icon kakuro-only" type="button" aria-label="Clear cell" title="Clear cell">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        </button>
-        <button id="btn-reversi-hints" class="btn btn-icon reversi-only active" type="button" aria-label="Move hints on" title="Move hints on">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.2a1.2 1.2 0 1 0 0-2.4 1.2 1.2 0 0 0 0 2.4z" fill="currentColor"/><path d="M8 9v2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-        </button>
-        <button id="btn-reversi-pass" class="btn btn-icon reversi-only" type="button" aria-label="Pass" title="Pass">
-          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 8h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10 5.5l2.5 2.5L10 10.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
       <div id="menu-themes" class="menu-themes" aria-label="Theme"></div>
@@ -416,14 +416,14 @@
     </div>
 
     <footer id="quote-footer" class="quote-footer game-only zen-hide" aria-live="polite">
-      <button id="quote-footer-prev" class="btn btn-icon" type="button" aria-label="Previous quote" title="Previous quote">
+      <button id="quote-footer-prev" class="btn btn-icon switch-btn" type="button" aria-label="Previous quote" title="Previous quote">
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 4l-4 4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="quote-footer-body">
         <p id="quote-footer-text" class="quote-footer-text"></p>
         <p id="quote-footer-author" class="quote-footer-author"></p>
       </div>
-      <button id="quote-footer-next" class="btn btn-icon" type="button" aria-label="Next quote" title="Next quote">
+      <button id="quote-footer-next" class="btn btn-icon switch-btn" type="button" aria-label="Next quote" title="Next quote">
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </footer>

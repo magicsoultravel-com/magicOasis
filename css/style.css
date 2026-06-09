@@ -390,33 +390,33 @@ body {
   text-align: center;
 }
 
-.game-toolbar,
-.game-extras {
+.header-bar {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 0.25rem;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
-.game-extras:empty {
-  display: none;
+.header-bar .title-row {
+  flex: 1;
+  min-width: 0;
 }
 
-.menu-row {
+.header-actions {
   display: flex;
-  justify-content: flex-start;
+  flex-shrink: 0;
   gap: 0.25rem;
 }
 
-.menu-row .zen-exit {
+.header-actions .zen-exit {
   display: none;
 }
 
-.app.zen .menu-row .menu-toggle {
+.app.zen .header-actions .menu-toggle {
   display: none;
 }
 
-.app.zen .menu-row .zen-exit {
+.app.zen .header-actions .zen-exit {
   display: flex;
 }
 
@@ -447,6 +447,11 @@ body {
   align-items: center;
   justify-content: flex-start;
   gap: 0.25rem;
+}
+
+.app[data-view="hub"] .menu-icons--game,
+.app[data-game="quotes"] .menu-icons--game {
+  display: none;
 }
 
 .menu-selects {
@@ -1772,12 +1777,12 @@ body {
   min-width: 0;
 }
 
-.game-switch-btn {
+.switch-btn {
   flex-shrink: 0;
   opacity: 0.7;
 }
 
-.game-switch-btn:hover {
+.switch-btn:hover {
   opacity: 1;
 }
 
