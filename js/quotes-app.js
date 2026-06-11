@@ -11,8 +11,9 @@
   const statsEl = document.getElementById("quotes-stats");
   const browsePane = document.getElementById("quotes-browse");
   const authorsPane = document.getElementById("quotes-authors");
-  const timelinePane = document.getElementById("quotes-timeline");
-  const searchEl = document.getElementById("quotes-search");
+  const searchEl = document.getElementById("quotes-menu-search");
+  const searchWrapEl = document.getElementById("quotes-menu-search-wrap");
+  const searchBtnEl = document.getElementById("btn-quotes-search");
   const chipsEl = document.getElementById("quotes-chips");
   const listEl = document.getElementById("quotes-list");
   const authorsListEl = document.getElementById("quotes-authors-list");
@@ -29,8 +30,10 @@
       const raw = localStorage.getItem(STATE_KEY);
       if (!raw) return { tab: "browse", category: "all", author: null, search: "", highlightId: null };
       const parsed = JSON.parse(raw);
+      let tab = parsed.tab || "browse";
+      if (tab === "timeline") tab = "browse";
       return {
-        tab: parsed.tab || "browse",
+        tab,
         category: parsed.category || "all",
         author: parsed.author || null,
         search: parsed.search || "",
@@ -58,6 +61,19 @@
   function truncate(text, max = 72) {
     if (text.length <= max) return text;
     return `${text.slice(0, max - 1)}…`;
+  }
+
+  function syncSearchUi() {
+    const hasSearch = Boolean(state.search.trim());
+    if (searchEl) searchEl.value = state.search;
+    if (searchWrapEl && searchWrapEl.hidden && hasSearch) {
+      searchWrapEl.hidden = false;
+    }
+    if (searchBtnEl) {
+      searchBtnEl.classList.toggle("active", hasSearch || (searchWrapEl && !searchWrapEl.hidden));
+      const expanded = searchWrapEl && !searchWrapEl.hidden;
+      searchBtnEl.setAttribute("aria-expanded", expanded ? "true" : "false");
+    }
   }
 
   function renderStats() {
@@ -135,17 +151,18 @@
 
     for (const q of items) {
       const article = document.createElement("article");
-      article.className = "lesson quotes-item";
+      article.className = "quotes-item";
+      article.setAttribute("role", "listitem");
       if (state.highlightId === q.id) article.classList.add("is-highlighted");
       article.dataset.quoteId = q.id;
 
       const text = document.createElement("p");
-      text.className = "quote-text quotes-item-text";
+      text.className = "quotes-item-text";
       text.textContent = `"${q.text}"`;
       article.appendChild(text);
 
       const meta = document.createElement("p");
-      meta.className = "quote-author quotes-item-meta";
+      meta.className = "quotes-item-meta";
       meta.textContent = q.attribution;
       article.appendChild(meta);
 
@@ -178,14 +195,22 @@
       const row = document.createElement("button");
       row.type = "button";
       row.className = "quotes-author-row";
-      row.innerHTML = `<span class="quotes-author-name">${author.name}</span><span class="quotes-author-meta">${author.quoteCount} · ${author.lifespan}</span>`;
+      row.setAttribute("role", "listitem");
+      const name = document.createElement("span");
+      name.className = "quotes-author-name";
+      name.textContent = author.name;
+      const meta = document.createElement("span");
+      meta.className = "quotes-author-meta";
+      meta.textContent = `${author.quoteCount} · ${author.lifespan}`;
+      row.appendChild(name);
+      row.appendChild(meta);
       row.addEventListener("click", () => {
         state.tab = "browse";
         state.author = author.name;
         state.category = "all";
         saveState();
         switchTab("browse");
-        if (searchEl) searchEl.value = state.search;
+        syncSearchUi();
         renderChips();
         renderBrowseList();
       });
@@ -230,7 +255,7 @@
         dot.title = `${q.author}: ${truncate(q.text, 90)}`;
         dot.setAttribute("aria-label", `${q.author}, ${formatYear(year)}: ${truncate(q.text, 60)}`);
         const jitter = (index % 3 - 1) * 0.15;
-        const stack = Math.floor(index / 3) * 10;
+        const stack = Math.floor(index / 3) * 12;
         dot.style.left = `calc(${baseLeft}% + ${jitter}px)`;
         dot.style.bottom = `${8 + stack}px`;
         dot.addEventListener("click", () => {
@@ -238,10 +263,10 @@
           state.highlightId = q.id;
           state.author = null;
           state.category = "all";
-          if (searchEl) searchEl.value = "";
           state.search = "";
           saveState();
           switchTab("browse");
+          syncSearchUi();
           renderChips();
           renderBrowseList();
         });
@@ -256,6 +281,7 @@
   }
 
   function switchTab(tab) {
+    if (tab === "timeline") tab = "browse";
     state.tab = tab;
     saveState();
     tabButtons.forEach((btn) => {
@@ -265,9 +291,19 @@
     });
     if (browsePane) browsePane.hidden = tab !== "browse";
     if (authorsPane) authorsPane.hidden = tab !== "authors";
-    if (timelinePane) timelinePane.hidden = tab !== "timeline";
     if (tab === "authors") renderAuthors();
-    if (tab === "timeline") renderTimeline();
+  }
+
+  function toggleSearchField() {
+    if (!searchWrapEl) return;
+    if (!searchWrapEl.hidden) {
+      searchWrapEl.hidden = true;
+      syncSearchUi();
+      return;
+    }
+    searchWrapEl.hidden = false;
+    syncSearchUi();
+    searchEl?.focus();
   }
 
   function bindControls() {
@@ -278,17 +314,52 @@
     searchEl?.addEventListener("input", () => {
       state.search = searchEl.value;
       saveState();
+      syncSearchUi();
       renderBrowseList();
     });
+
+    searchBtnEl?.addEventListener("click", () => {
+      if (searchWrapEl && !searchWrapEl.hidden && state.search.trim()) {
+        state.search = "";
+        if (searchEl) searchEl.value = "";
+        saveState();
+        syncSearchUi();
+        renderBrowseList();
+        return;
+      }
+      if (searchWrapEl && !searchWrapEl.hidden && !state.search.trim()) {
+        searchWrapEl.hidden = true;
+        syncSearchUi();
+        return;
+      }
+      toggleSearchField();
+    });
+  }
+
+  function showLoadError() {
+    if (statsEl) statsEl.textContent = "";
+    if (listEl) {
+      listEl.innerHTML = "";
+      const empty = document.createElement("p");
+      empty.className = "quotes-empty";
+      empty.textContent = "Could not load quotes — check your connection.";
+      listEl.appendChild(empty);
+    }
   }
 
   async function init() {
     if (initialized || !panel) return;
+    try {
+      await Quotes.init();
+    } catch {
+      showLoadError();
+      return;
+    }
     initialized = true;
-    await Quotes.init();
-    if (searchEl) searchEl.value = state.search;
+    syncSearchUi();
     renderStats();
     renderChips();
+    renderTimeline();
     bindControls();
     switchTab(state.tab);
     renderBrowseList();

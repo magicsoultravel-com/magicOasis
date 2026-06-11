@@ -4,12 +4,15 @@
   gap: 0.75rem;
   max-width: 36rem;
   margin: 0 auto;
-  padding: 0.5rem 1rem 2rem;
+  padding: 0.5rem 0 1.5rem;
   min-height: 0;
+  flex: 1;
 }
 
 .quotes-stats {
   margin: 0;
+  margin-top: auto;
+  padding-top: 0.5rem;
   font-size: 0.8125rem;
   color: var(--text-muted);
   text-align: center;
@@ -20,25 +23,16 @@
   flex-direction: column;
   gap: 0.75rem;
   min-height: 0;
+  flex: 1;
 }
 
 .quotes-pane[hidden] {
   display: none !important;
 }
 
-.quotes-search {
-  width: 100%;
-  padding: 0.55rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  background: var(--surface);
-  color: var(--text);
-  font: inherit;
-}
-
-.quotes-search:focus {
-  outline: 2px solid var(--accent-soft);
-  border-color: var(--accent);
+.quotes-timeline-section {
+  flex-shrink: 0;
+  margin: 0 -0.75rem;
 }
 
 .quotes-chips {
@@ -61,7 +55,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: min(62vh, 32rem);
+  max-height: min(52vh, 28rem);
   overflow-y: auto;
   padding-right: 0.15rem;
 }
@@ -70,8 +64,15 @@
   position: relative;
   margin: 0;
   padding: 0.75rem 0.85rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
   cursor: pointer;
-  transition: background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.quotes-item:hover {
+  border-color: var(--accent);
 }
 
 .quotes-item.is-highlighted {
@@ -83,12 +84,16 @@
   max-width: none;
   text-align: left;
   font-size: 0.9375rem;
-  margin-bottom: 0.35rem;
+  margin: 0 0 0.35rem;
+  color: var(--text);
+  line-height: 1.5;
 }
 
 .quotes-item-meta {
+  margin: 0;
   text-align: left;
   font-size: 0.8125rem;
+  color: var(--text-muted);
 }
 
 .quotes-badge {
@@ -129,7 +134,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  max-height: min(62vh, 32rem);
+  max-height: min(52vh, 28rem);
   overflow-y: auto;
 }
 
@@ -166,20 +171,20 @@
 .quotes-timeline-wrap {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .quotes-timeline-scroll {
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 0.5rem;
+  padding: 0 0.75rem 0.5rem;
   -webkit-overflow-scrolling: touch;
 }
 
 .quotes-timeline-inner {
   position: relative;
-  min-width: 48rem;
-  height: 7.5rem;
+  min-width: 64rem;
+  height: 8.5rem;
 }
 
 .quotes-timeline-track {
@@ -187,42 +192,58 @@
   left: 0;
   right: 0;
   bottom: 1.75rem;
-  height: 5rem;
+  height: 5.5rem;
   border-bottom: 2px solid var(--border);
 }
 
 .quotes-timeline-dot {
   position: absolute;
-  width: 0.55rem;
-  height: 0.55rem;
-  margin-left: -0.275rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: -1.375rem;
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: var(--accent);
+  background: transparent;
   cursor: pointer;
+}
+
+.quotes-timeline-dot::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin: -0.275rem 0 0 -0.275rem;
+  border-radius: 50%;
+  background: var(--accent);
   transition: transform 0.12s ease;
 }
 
-.quotes-timeline-dot:hover,
-.quotes-timeline-dot:focus-visible {
+.quotes-timeline-dot:hover::after,
+.quotes-timeline-dot:focus-visible::after {
   transform: scale(1.45);
-  outline: 2px solid var(--accent-soft);
 }
 
-.quotes-timeline-dot[data-category="uplifting"] {
+.quotes-timeline-dot:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 2px;
+}
+
+.quotes-timeline-dot[data-category="uplifting"]::after {
   background: var(--accent);
 }
 
-.quotes-timeline-dot[data-category="cunning"] {
+.quotes-timeline-dot[data-category="cunning"]::after {
   background: color-mix(in srgb, var(--accent) 55%, var(--text) 45%);
 }
 
-.quotes-timeline-dot[data-category="funny"] {
+.quotes-timeline-dot[data-category="funny"]::after {
   background: color-mix(in srgb, var(--accent) 40%, var(--highlight) 60%);
 }
 
-.quotes-timeline-dot[data-category="strategic"] {
+.quotes-timeline-dot[data-category="strategic"]::after {
   background: color-mix(in srgb, var(--accent) 75%, var(--bg) 25%);
 }
 
@@ -244,6 +265,7 @@
 
 .quotes-timeline-note {
   margin: 0;
+  padding: 0 0.75rem;
   font-size: 0.75rem;
   color: var(--text-muted);
   text-align: center;
@@ -298,4 +320,3 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-

@@ -5,7 +5,6 @@
   const statusEl = document.getElementById("status");
   const timerEl = document.getElementById("timer");
   const difficultyEl = document.getElementById("difficulty");
-  const versionEl = document.getElementById("app-version");
   const colorPickerDialog = document.getElementById("color-picker-dialog");
   const quoteSplash = document.getElementById("quote-splash");
   const quoteTextEl = document.getElementById("quote-text");
@@ -29,8 +28,10 @@
   const settingsColors = document.getElementById("settings-colors");
   const btnSettings = document.getElementById("btn-settings");
   const btnMenu = document.getElementById("btn-menu");
+  const btnMenuPin = document.getElementById("btn-menu-pin");
   const btnZenExit = document.getElementById("btn-zen-exit");
   const navMenu = document.getElementById("nav-menu");
+  const MENU_PIN_KEY = "magic-menu-pinned";
   const seedList = document.getElementById("seed-list");
   const currentSeedEl = document.getElementById("current-seed");
 
@@ -76,6 +77,7 @@
   let seedHistory = [];
   let settingsOpen = false;
   let menuOpen = false;
+  let menuPinned = false;
   let confirmCallback = null;
   let quoteSplashActive = false;
   let cellPickerOpen = false;
@@ -232,6 +234,24 @@
     return { view: "game", gameId: window.Games?.active || null };
   }
 
+  function syncMenuPinButton() {
+    if (!btnMenuPin) return;
+    btnMenuPin.classList.toggle("active", menuPinned);
+    btnMenuPin.setAttribute("aria-pressed", menuPinned ? "true" : "false");
+    btnMenuPin.setAttribute("aria-label", menuPinned ? "Menu pinned open" : "Keep menu open");
+    btnMenuPin.title = menuPinned ? "Menu pinned open" : "Keep menu open";
+  }
+
+  function setMenuPinned(on) {
+    menuPinned = !!on;
+    try {
+      localStorage.setItem(MENU_PIN_KEY, menuPinned ? "1" : "0");
+    } catch {
+      /* storage unavailable */
+    }
+    syncMenuPinButton();
+  }
+
   function closeMenu() {
     if (!menuOpen) return;
     menuOpen = false;
@@ -314,6 +334,8 @@
   function initPreferences() {
     Appearance.initTheme();
     Appearance.initMenuTheme(document.getElementById("menu-themes"));
+    menuPinned = localStorage.getItem(MENU_PIN_KEY) === "1";
+    syncMenuPinButton();
     setZen(localStorage.getItem("sudoku-zen") === "1");
     const savedCat = localStorage.getItem("sudoku-cat");
     setCatEnabled(savedCat === "1" || (parseInt(savedCat, 10) || 0) > 0);
@@ -1383,7 +1405,10 @@
   }
 
   btnMenu.addEventListener("click", toggleMenu);
-  btnZen.addEventListener("click", () => {
+  btnMenuPin?.addEventListener("click", () => {
+    setMenuPinned(!menuPinned);
+  });
+  btnZen?.addEventListener("click", () => {
     setZen(true);
     saveGame();
   });
@@ -1441,6 +1466,7 @@
   document.addEventListener("click", (e) => {
     if (
       menuOpen &&
+      !menuPinned &&
       !e.target.closest("#nav-menu") &&
       !e.target.closest("#btn-menu")
     ) {
@@ -1454,7 +1480,7 @@
       closeCellPicker();
     }
   });
-  document.querySelectorAll(".dialog-tabs .tab").forEach((tab) => {
+  document.querySelectorAll("#lessons-dialog .dialog-tabs .tab").forEach((tab) => {
     tab.addEventListener("click", () => switchLessonTab(tab.dataset.tab));
   });
   btnUndo.addEventListener("click", undo);
@@ -1487,9 +1513,6 @@
   }
 
   async function boot() {
-    if (versionEl && window.APP_VERSION) {
-      versionEl.textContent = window.APP_VERSION;
-    }
     initPreferences();
     loadStats();
     loadSeedHistory();
@@ -1517,5 +1540,6 @@
     openMenu,
     openSettings,
     startFromHub,
+    setZen,
   };
 })();

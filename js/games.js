@@ -99,6 +99,7 @@
 
     active = gameId;
     localStorage.setItem(STORAGE_KEY, active);
+    if (gameId === "quotes") window.SudokuApp?.setZen?.(false);
     applyVisibility();
     Settings.applyForGame(active);
     initGame(active);
@@ -142,6 +143,7 @@
       active = "sudoku";
       localStorage.setItem(STORAGE_KEY, active);
     }
+    if (active === "quotes") window.SudokuApp?.setZen?.(false);
     applyVisibility();
     Settings.applyForGame(active);
     initGame(active);
