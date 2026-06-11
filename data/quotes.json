@@ -90,6 +90,21 @@
     "Reed Hastings": "b. 1960",
     "Abraham Lincoln": "1809–1865",
     "George Washington": "1732–1799",
+    "Bible": "ancient",
+    "Quran": "c. 7th century",
+    "Torah": "ancient",
+    "Aristotle": "384–322 BC",
+    "Immanuel Kant": "1724–1804",
+    "Friedrich Nietzsche": "1844–1900",
+    "René Descartes": "1596–1650",
+    "David Hume": "1711–1776",
+    "Arthur Schopenhauer": "1788–1860",
+    "Albert Camus": "1913–1960",
+    "Baruch Spinoza": "1632–1677",
+    "Jean-Paul Sartre": "1905–1980",
+    "Voltaire": "1694–1778",
+    "Heraclitus": "c. 535–475 BC",
+    "Diogenes": "c. 412–323 BC",
     "Thomas Edison": "1847–1931",
     "Steve Martin": "b. 1945",
     "A. Whitney Brown": "b. 1952",
@@ -655,6 +670,96 @@
       "death": 1799,
       "mid": 1766
     },
+    "Bible": {
+      "lifespan": "ancient",
+      "birth": null,
+      "death": null,
+      "mid": null
+    },
+    "Quran": {
+      "lifespan": "c. 7th century",
+      "birth": null,
+      "death": null,
+      "mid": 650
+    },
+    "Torah": {
+      "lifespan": "ancient",
+      "birth": null,
+      "death": null,
+      "mid": null
+    },
+    "Aristotle": {
+      "lifespan": "384–322 BC",
+      "birth": -384,
+      "death": -322,
+      "mid": -353
+    },
+    "Immanuel Kant": {
+      "lifespan": "1724–1804",
+      "birth": 1724,
+      "death": 1804,
+      "mid": 1764
+    },
+    "Friedrich Nietzsche": {
+      "lifespan": "1844–1900",
+      "birth": 1844,
+      "death": 1900,
+      "mid": 1872
+    },
+    "René Descartes": {
+      "lifespan": "1596–1650",
+      "birth": 1596,
+      "death": 1650,
+      "mid": 1623
+    },
+    "David Hume": {
+      "lifespan": "1711–1776",
+      "birth": 1711,
+      "death": 1776,
+      "mid": 1744
+    },
+    "Arthur Schopenhauer": {
+      "lifespan": "1788–1860",
+      "birth": 1788,
+      "death": 1860,
+      "mid": 1824
+    },
+    "Albert Camus": {
+      "lifespan": "1913–1960",
+      "birth": 1913,
+      "death": 1960,
+      "mid": 1936
+    },
+    "Baruch Spinoza": {
+      "lifespan": "1632–1677",
+      "birth": 1632,
+      "death": 1677,
+      "mid": 1654
+    },
+    "Jean-Paul Sartre": {
+      "lifespan": "1905–1980",
+      "birth": 1905,
+      "death": 1980,
+      "mid": 1942
+    },
+    "Voltaire": {
+      "lifespan": "1694–1778",
+      "birth": 1694,
+      "death": 1778,
+      "mid": 1736
+    },
+    "Heraclitus": {
+      "lifespan": "c. 535–475 BC",
+      "birth": -535,
+      "death": -475,
+      "mid": -505
+    },
+    "Diogenes": {
+      "lifespan": "c. 412–323 BC",
+      "birth": -412,
+      "death": -323,
+      "mid": -368
+    },
     "Thomas Edison": {
       "lifespan": "1847–1931",
       "birth": 1847,
@@ -798,606 +903,608 @@
     "uplifting",
     "cunning",
     "funny",
-    "strategic"
+    "strategic",
+    "philosophical",
+    "scripture"
   ],
   "quotes": [
     {
       "id": "uplifting-001",
-      "text": "The happiness of your life depends upon the quality of your thoughts.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-002",
-      "text": "You have power over your mind — not outside events. Realize this, and you will find strength.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-003",
-      "text": "Waste no more time arguing about what a good man should be. Be one.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-004",
-      "text": "It is not death that a man should fear, but never beginning to live.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-005",
-      "text": "The soul becomes dyed with the color of its thoughts.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-006",
-      "text": "Dwell on the beauty of life. Watch the stars, and see yourself running with them.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-007",
-      "text": "Accept the things to which fate binds you, and love the people with whom fate brings you together.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-008",
-      "text": "If it is not right, do not do it; if it is not true, do not say it.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-009",
-      "text": "The best revenge is not to be like your enemy.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-010",
-      "text": "Very little is needed to make a happy life; it is all within yourself, in your way of thinking.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-011",
-      "text": "We suffer more often in imagination than in reality.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-012",
-      "text": "Luck is what happens when preparation meets opportunity.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-013",
-      "text": "He who is brave is free.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-014",
-      "text": "Begin at once to live, and count each separate day as a separate life.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-015",
-      "text": "It is not the man who has too little, but the man who craves more, that is poor.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-016",
-      "text": "Difficulties strengthen the mind, as labor does the body.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-017",
-      "text": "As is a tale, so is life: not how long it is, but how good it is, is what matters.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-018",
-      "text": "Hang on to your youthful enthusiasms — you'll be able to use them better when you're older.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-019",
-      "text": "True happiness is to enjoy the present, without anxious dependence upon the future.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-020",
-      "text": "While we wait for life, life passes.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-021",
-      "text": "It's not what happens to you, but how you react to it that matters.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-022",
-      "text": "First say to yourself what you would be; and then do what you have to do.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-023",
-      "text": "No man is free who is not master of himself.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-024",
-      "text": "We cannot choose our external circumstances, but we can always choose how we respond to them.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-025",
-      "text": "Don't explain your philosophy. Embody it.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-026",
-      "text": "He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-027",
-      "text": "Only the educated are free.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-028",
-      "text": "Make the best use of what is in your power, and take the rest as it happens.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-029",
-      "text": "The key is to keep company only with people who uplift you, whose presence calls forth your best.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-030",
-      "text": "Freedom is the only worthy goal in life. It is won by disregarding things that lie beyond our control.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-031",
-      "text": "The unexamined life is not worth living.",
-      "author": "Socrates",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-032",
-      "text": "Wonder is the beginning of wisdom.",
-      "author": "Socrates",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-033",
-      "text": "To find yourself, think for yourself.",
-      "author": "Socrates",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-034",
-      "text": "He who is not contented with what he has, would not be contented with what he would like to have.",
-      "author": "Socrates",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-035",
-      "text": "Be kind, for everyone you meet is fighting a hard battle.",
-      "author": "Plato",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-036",
-      "text": "Courage is knowing what not to fear.",
-      "author": "Plato",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-037",
-      "text": "The measure of a man is what he does with power.",
-      "author": "Plato",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-038",
       "text": "Happiness is not something ready made. It comes from your own actions.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-039",
+      "id": "uplifting-002",
       "text": "Be kind whenever possible. It is always possible.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-040",
+      "id": "uplifting-003",
       "text": "Sleep is the best meditation.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-041",
+      "id": "uplifting-004",
       "text": "Our prime purpose in this life is to help others. And if you can't help them, at least don't hurt them.",
       "author": "Dalai Lama",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-042",
-      "text": "Peace comes from within. Do not seek it without.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-043",
-      "text": "The mind is everything. What you think you become.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-044",
-      "text": "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-045",
-      "text": "Health is the greatest gift, contentment the greatest wealth, faithfulness the best relationship.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-046",
-      "text": "Three things cannot be long hidden: the sun, the moon, and the truth.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-047",
-      "text": "You yourself, as much as anybody in the entire universe, deserve your love and affection.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-048",
-      "text": "Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-049",
-      "text": "In the end, only three things matter: how much you loved, how gently you lived, and how gracefully you let go of things not meant for you.",
-      "author": "Buddha",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-050",
+      "id": "uplifting-005",
       "text": "The quieter you become, the more you can hear.",
       "author": "Ram Dass",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-051",
-      "text": "Nature does not hurry, yet everything is accomplished.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-052",
-      "text": "When I let go of what I am, I become what I might be.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-053",
-      "text": "Knowing others is intelligence; knowing yourself is true wisdom.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-054",
-      "text": "The journey of a thousand miles begins with a single step.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-055",
-      "text": "Silence is a source of great strength.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-056",
-      "text": "He who knows he has enough is rich.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-057",
-      "text": "Respond intelligently even to unintelligent treatment.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-058",
-      "text": "Act without expectation.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-059",
-      "text": "The soft overcomes the hard. The slow overcomes the fast.",
-      "author": "Lao Tzu",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-060",
-      "text": "Life is really simple, but we insist on making it complicated.",
-      "author": "Confucius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-061",
-      "text": "It does not matter how slowly you go as long as you do not stop.",
-      "author": "Confucius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-062",
-      "text": "Our greatest glory is not in never falling, but in rising every time we fall.",
-      "author": "Confucius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-063",
-      "text": "Wherever you go, go with all your heart.",
-      "author": "Confucius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-064",
-      "text": "The man who moves a mountain begins by carrying away small stones.",
-      "author": "Confucius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-065",
-      "text": "Everything has beauty, but not everyone sees it.",
-      "author": "Confucius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-066",
+      "id": "uplifting-006",
       "text": "Yesterday is history, tomorrow is a mystery, today is a gift. That is why it is called the present.",
       "author": "Eleanor Roosevelt",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-067",
-      "text": "The only true wisdom is in knowing you know nothing.",
-      "author": "Socrates",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-068",
-      "text": "Man is not worried by real problems so much as by his imagined anxieties about real problems.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-069",
-      "text": "He who fears death will never do anything worth of a man who is alive.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-070",
-      "text": "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-071",
+      "id": "uplifting-007",
       "text": "The soul is dyed the color of its leisure thoughts.",
       "author": "Dean Inge",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-072",
+      "id": "uplifting-008",
       "text": "Let us live so that when we come to die even the undertaker will be sorry.",
       "author": "Mark Twain",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-073",
+      "id": "uplifting-009",
       "text": "Simplicity is the ultimate sophistication.",
       "author": "Leonardo da Vinci",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-074",
+      "id": "uplifting-010",
       "text": "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-075",
+      "id": "uplifting-011",
       "text": "Smile, breathe, and go slowly.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-076",
+      "id": "uplifting-012",
       "text": "Feelings come and go like clouds in a windy sky. Conscious breathing is my anchor.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-077",
+      "id": "uplifting-013",
       "text": "Walk as if you are kissing the Earth with your feet.",
       "author": "Thich Nhat Hanh",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-078",
+      "id": "uplifting-014",
       "text": "The wound is the place where the Light enters you.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-079",
+      "id": "uplifting-015",
       "text": "What you seek is seeking you.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-080",
+      "id": "uplifting-016",
       "text": "Let yourself be silently drawn by the strange pull of what you really love.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-081",
+      "id": "uplifting-017",
       "text": "The quieter you become, the more you are able to hear.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-082",
+      "id": "uplifting-018",
       "text": "Do not feel lonely, the entire universe is inside you.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-083",
+      "id": "uplifting-019",
       "text": "Where there is ruin, there is hope for a treasure.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-084",
+      "id": "uplifting-020",
       "text": "Sell your cleverness and buy bewilderment.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-085",
+      "id": "uplifting-021",
       "text": "Be like a tree and let the dead leaves drop.",
       "author": "Rumi",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-086",
-      "text": "The art of living is more like wrestling than dancing.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-087",
-      "text": "How much more grievous are the consequences of anger than the causes of it.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-088",
-      "text": "Look well into thyself; there is a source of strength which will always spring up if thou wilt always look.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-089",
-      "text": "Receive without pride, let go without attachment.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-090",
-      "text": "Think of yourself as dead. You have lived your life. Now take what's left and live it properly.",
-      "author": "Marcus Aurelius",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-091",
-      "text": "No person has the power to have everything they want, but it is in their power not to want what they don't have.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-092",
-      "text": "Associate with people who are likely to improve you.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-093",
-      "text": "Sometimes even to live is an act of courage.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-094",
-      "text": "Life is long if you know how to use it.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-095",
-      "text": "He suffers more than necessary, who suffers before it is necessary.",
-      "author": "Seneca",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-096",
-      "text": "Man is not disturbed by things, but by the views he takes of them.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-097",
-      "text": "Seek not the good in external things; seek it in yourselves.",
-      "author": "Epictetus",
-      "category": "uplifting"
-    },
-    {
-      "id": "uplifting-098",
+      "id": "uplifting-022",
       "text": "Caretake this moment. Immerse yourself in its particulars.",
       "author": "Mary Anne Radmacher",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-099",
+      "id": "uplifting-023",
       "text": "In the midst of movement and chaos, keep stillness inside of you.",
       "author": "Deepak Chopra",
       "category": "uplifting"
     },
     {
-      "id": "uplifting-100",
+      "id": "uplifting-024",
       "text": "You can't stop the waves, but you can learn to surf.",
+      "author": "Jon Kabat-Zinn",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-025",
+      "text": "If you want others to be happy, practice compassion. If you want to be happy, practice compassion.",
+      "author": "Dalai Lama",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-026",
+      "text": "Just one small positive thought in the morning can change your whole day.",
+      "author": "Dalai Lama",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-027",
+      "text": "Calm mind brings inner strength and self-confidence.",
+      "author": "Dalai Lama",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-028",
+      "text": "Share your knowledge. It is a way to achieve immortality.",
+      "author": "Dalai Lama",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-029",
+      "text": "There is no way to happiness. Happiness is the way.",
+      "author": "Thich Nhat Hanh",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-030",
+      "text": "Sometimes your joy is the source of your smile, but sometimes your smile can be the source of your joy.",
+      "author": "Thich Nhat Hanh",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-031",
+      "text": "Breathing in, I calm body and mind. Breathing out, I smile.",
+      "author": "Thich Nhat Hanh",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-032",
+      "text": "The most precious gift we can offer anyone is our attention.",
+      "author": "Thich Nhat Hanh",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-033",
+      "text": "When you do things from your soul, you feel a river moving in you, a joy.",
+      "author": "Rumi",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-034",
+      "text": "Try not to resist life's changes. Let life flow through you.",
+      "author": "Rumi",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-035",
+      "text": "You were born with wings, why prefer to crawl through life?",
+      "author": "Rumi",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-036",
+      "text": "Let the beauty of what you love be what you do.",
+      "author": "Rumi",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-037",
+      "text": "No one can make you feel inferior without your consent.",
+      "author": "Eleanor Roosevelt",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-038",
+      "text": "The future belongs to those who believe in the beauty of their dreams.",
+      "author": "Eleanor Roosevelt",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-039",
+      "text": "Do one thing every day that scares you.",
+      "author": "Eleanor Roosevelt",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-040",
+      "text": "With the new day comes new strength and new thoughts.",
+      "author": "Eleanor Roosevelt",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-041",
+      "text": "You must do the thing you think you cannot do.",
+      "author": "Eleanor Roosevelt",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-042",
+      "text": "Turn your wounds into wisdom.",
+      "author": "Oprah Winfrey",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-043",
+      "text": "The biggest adventure you can take is to live the life of your dreams.",
+      "author": "Oprah Winfrey",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-044",
+      "text": "Doing the best at this moment puts you in the best place for the next moment.",
+      "author": "Oprah Winfrey",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-045",
+      "text": "The more you praise and celebrate your life, the more there is in life to celebrate.",
+      "author": "Oprah Winfrey",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-046",
+      "text": "Think like a queen. A queen is not afraid to fail.",
+      "author": "Oprah Winfrey",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-047",
+      "text": "Hope begins in the dark, the stubborn hope that if you just show up and try, the dawn will come.",
+      "author": "Anne Lamott",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-048",
+      "text": "Almost everything will work again if you unplug it for a few minutes, including you.",
+      "author": "Anne Lamott",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-049",
+      "text": "Lighthouses do not go running all over an island for boats to save; they just stand there shining.",
+      "author": "Anne Lamott",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-050",
+      "text": "Joy is the best makeup.",
+      "author": "Anne Lamott",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-051",
+      "text": "Perfection is the voice of the oppressor.",
+      "author": "Anne Lamott",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-052",
+      "text": "Nothing ever goes away until it has taught us what we need to know.",
+      "author": "Pema Chodron",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-053",
+      "text": "You are the sky. Everything else is just the weather.",
+      "author": "Pema Chodron",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-054",
+      "text": "Compassion for others begins with kindness to ourselves.",
+      "author": "Pema Chodron",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-055",
+      "text": "The most difficult times for many of us are the ones we give ourselves.",
+      "author": "Pema Chodron",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-056",
+      "text": "We work on ourselves in order to help others, but also we help others in order to work on ourselves.",
+      "author": "Pema Chodron",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-057",
+      "text": "Imperfections are not inadequacies; they are reminders that we are all in this together.",
+      "author": "Brene Brown",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-058",
+      "text": "Talk to yourself like you would to someone you love.",
+      "author": "Brene Brown",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-059",
+      "text": "Courage starts with showing up and letting ourselves be seen.",
+      "author": "Brene Brown",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-060",
+      "text": "Owning our story can be hard but not nearly as difficult as spending our lives running from it.",
+      "author": "Brene Brown",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-061",
+      "text": "Vulnerability is the birthplace of innovation, creativity and change.",
+      "author": "Brene Brown",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-062",
+      "text": "I am in the right place, at the right time, doing the right thing.",
+      "author": "Louise Hay",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-063",
+      "text": "Every thought we think is creating our future.",
+      "author": "Louise Hay",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-064",
+      "text": "I forgive myself and set myself free.",
+      "author": "Louise Hay",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-065",
+      "text": "Life loves you.",
+      "author": "Louise Hay",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-066",
+      "text": "As I say yes to life, life says yes to me.",
+      "author": "Louise Hay",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-067",
+      "text": "Try to be a rainbow in someone's cloud.",
+      "author": "Maya Angelou",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-068",
+      "text": "Nothing can dim the light which shines from within.",
+      "author": "Maya Angelou",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-069",
+      "text": "You alone are enough. You have nothing to prove to anybody.",
+      "author": "Maya Angelou",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-070",
+      "text": "We delight in the beauty of the butterfly, but rarely admit the changes it has gone through.",
+      "author": "Maya Angelou",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-071",
+      "text": "Success is liking yourself, liking what you do, and liking how you do it.",
+      "author": "Maya Angelou",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-072",
+      "text": "The best way out is always through.",
+      "author": "Robert Frost",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-073",
+      "text": "In three words I can sum up everything I've learned about life: it goes on.",
+      "author": "Robert Frost",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-074",
+      "text": "Happiness makes up in height for what it lacks in length.",
+      "author": "Robert Frost",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-075",
+      "text": "Freedom lies in being bold.",
+      "author": "Robert Frost",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-076",
+      "text": "When we are no longer able to change a situation, we are challenged to change ourselves.",
+      "author": "Viktor Frankl",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-077",
+      "text": "Between stimulus and response there is a space. In that space is our power to choose our response.",
+      "author": "Viktor Frankl",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-078",
+      "text": "What is to give light must endure burning.",
+      "author": "Viktor Frankl",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-079",
+      "text": "Life is never made unbearable by circumstances, but only by lack of meaning and purpose.",
+      "author": "Viktor Frankl",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-080",
+      "text": "The privilege of a lifetime is to become who you truly are.",
+      "author": "Carl Jung",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-081",
+      "text": "I am not what happened to me, I am what I choose to become.",
+      "author": "Carl Jung",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-082",
+      "text": "Your visions will become clear only when you can look into your own heart.",
+      "author": "Carl Jung",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-083",
+      "text": "Who looks outside, dreams; who looks inside, awakes.",
+      "author": "Carl Jung",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-084",
+      "text": "Know all the theories, master all the techniques, but as you touch a human soul be just another human soul.",
+      "author": "Carl Jung",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-085",
+      "text": "Wherever you are, and whatever you do, be in love.",
+      "author": "Rumi",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-086",
+      "text": "Raise your words, not your voice. It is rain that grows flowers, not thunder.",
+      "author": "Rumi",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-087",
+      "text": "Start where you are. Use what you have. Do what you can.",
+      "author": "Arthur Ashe",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-088",
+      "text": "Success is a journey, not a destination.",
+      "author": "Arthur Ashe",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-089",
+      "text": "One important key to success is self-confidence. An important key to self-confidence is preparation.",
+      "author": "Arthur Ashe",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-090",
+      "text": "From what we get, we can make a living; what we give, however, makes a life.",
+      "author": "Arthur Ashe",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-091",
+      "text": "Clarity and simplicity are the antidotes to complexity and uncertainty.",
+      "author": "General George Casey",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-092",
+      "text": "Your calm mind is the ultimate weapon against your challenges.",
+      "author": "Bryant McGill",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-093",
+      "text": "There is no greater agony than bearing an untold story inside you.",
+      "author": "Maya Angelou",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-094",
+      "text": "Caring for myself is not self-indulgence, it is self-preservation.",
+      "author": "Audre Lorde",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-095",
+      "text": "Hope is being able to see that there is light despite all of the darkness.",
+      "author": "Desmond Tutu",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-096",
+      "text": "Live quietly in the moment and see the beauty of all before you.",
+      "author": "Paramahansa Yogananda",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-097",
+      "text": "The season of failure is the best time for sowing the seeds of success.",
+      "author": "Paramahansa Yogananda",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-098",
+      "text": "Every time you are tempted to react in the same old way, ask if you want to be a prisoner of the past or a pioneer of the future.",
+      "author": "Deepak Chopra",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-099",
+      "text": "The best way to capture moments is to pay attention.",
+      "author": "Jon Kabat-Zinn",
+      "category": "uplifting"
+    },
+    {
+      "id": "uplifting-100",
+      "text": "Mindfulness means being awake. It means knowing what you are doing.",
       "author": "Jon Kabat-Zinn",
       "category": "uplifting"
     },
@@ -3200,6 +3307,2706 @@
       "text": "The people who are crazy enough to think they can change the world are the ones who do.",
       "author": "Steve Jobs",
       "category": "strategic"
+    },
+    {
+      "id": "philosophical-001",
+      "text": "The happiness of your life depends upon the quality of your thoughts.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-002",
+      "text": "You have power over your mind — not outside events. Realize this, and you will find strength.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-003",
+      "text": "Waste no more time arguing about what a good man should be. Be one.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-004",
+      "text": "It is not death that a man should fear, but never beginning to live.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-005",
+      "text": "The soul becomes dyed with the color of its thoughts.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-006",
+      "text": "Dwell on the beauty of life. Watch the stars, and see yourself running with them.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-007",
+      "text": "Accept the things to which fate binds you, and love the people with whom fate brings you together.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-008",
+      "text": "If it is not right, do not do it; if it is not true, do not say it.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-009",
+      "text": "The best revenge is not to be like your enemy.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-010",
+      "text": "Very little is needed to make a happy life; it is all within yourself, in your way of thinking.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-011",
+      "text": "We suffer more often in imagination than in reality.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-012",
+      "text": "Luck is what happens when preparation meets opportunity.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-013",
+      "text": "He who is brave is free.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-014",
+      "text": "Begin at once to live, and count each separate day as a separate life.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-015",
+      "text": "It is not the man who has too little, but the man who craves more, that is poor.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-016",
+      "text": "Difficulties strengthen the mind, as labor does the body.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-017",
+      "text": "As is a tale, so is life: not how long it is, but how good it is, is what matters.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-018",
+      "text": "Hang on to your youthful enthusiasms — you'll be able to use them better when you're older.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-019",
+      "text": "True happiness is to enjoy the present, without anxious dependence upon the future.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-020",
+      "text": "While we wait for life, life passes.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-021",
+      "text": "It's not what happens to you, but how you react to it that matters.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-022",
+      "text": "First say to yourself what you would be; and then do what you have to do.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-023",
+      "text": "No man is free who is not master of himself.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-024",
+      "text": "We cannot choose our external circumstances, but we can always choose how we respond to them.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-025",
+      "text": "Don't explain your philosophy. Embody it.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-026",
+      "text": "He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-027",
+      "text": "Only the educated are free.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-028",
+      "text": "Make the best use of what is in your power, and take the rest as it happens.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-029",
+      "text": "The key is to keep company only with people who uplift you, whose presence calls forth your best.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-030",
+      "text": "Freedom is the only worthy goal in life. It is won by disregarding things that lie beyond our control.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-031",
+      "text": "The unexamined life is not worth living.",
+      "author": "Socrates",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-032",
+      "text": "Wonder is the beginning of wisdom.",
+      "author": "Socrates",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-033",
+      "text": "To find yourself, think for yourself.",
+      "author": "Socrates",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-034",
+      "text": "He who is not contented with what he has, would not be contented with what he would like to have.",
+      "author": "Socrates",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-035",
+      "text": "Be kind, for everyone you meet is fighting a hard battle.",
+      "author": "Plato",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-036",
+      "text": "Courage is knowing what not to fear.",
+      "author": "Plato",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-037",
+      "text": "The measure of a man is what he does with power.",
+      "author": "Plato",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-038",
+      "text": "Peace comes from within. Do not seek it without.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-039",
+      "text": "The mind is everything. What you think you become.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-040",
+      "text": "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-041",
+      "text": "Health is the greatest gift, contentment the greatest wealth, faithfulness the best relationship.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-042",
+      "text": "Three things cannot be long hidden: the sun, the moon, and the truth.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-043",
+      "text": "You yourself, as much as anybody in the entire universe, deserve your love and affection.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-044",
+      "text": "Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-045",
+      "text": "In the end, only three things matter: how much you loved, how gently you lived, and how gracefully you let go of things not meant for you.",
+      "author": "Buddha",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-046",
+      "text": "Nature does not hurry, yet everything is accomplished.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-047",
+      "text": "When I let go of what I am, I become what I might be.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-048",
+      "text": "Knowing others is intelligence; knowing yourself is true wisdom.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-049",
+      "text": "The journey of a thousand miles begins with a single step.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-050",
+      "text": "Silence is a source of great strength.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-051",
+      "text": "He who knows he has enough is rich.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-052",
+      "text": "Respond intelligently even to unintelligent treatment.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-053",
+      "text": "Act without expectation.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-054",
+      "text": "The soft overcomes the hard. The slow overcomes the fast.",
+      "author": "Lao Tzu",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-055",
+      "text": "Life is really simple, but we insist on making it complicated.",
+      "author": "Confucius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-056",
+      "text": "It does not matter how slowly you go as long as you do not stop.",
+      "author": "Confucius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-057",
+      "text": "Our greatest glory is not in never falling, but in rising every time we fall.",
+      "author": "Confucius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-058",
+      "text": "Wherever you go, go with all your heart.",
+      "author": "Confucius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-059",
+      "text": "The man who moves a mountain begins by carrying away small stones.",
+      "author": "Confucius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-060",
+      "text": "Everything has beauty, but not everyone sees it.",
+      "author": "Confucius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-061",
+      "text": "The only true wisdom is in knowing you know nothing.",
+      "author": "Socrates",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-062",
+      "text": "Man is not worried by real problems so much as by his imagined anxieties about real problems.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-063",
+      "text": "He who fears death will never do anything worth of a man who is alive.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-064",
+      "text": "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-065",
+      "text": "The art of living is more like wrestling than dancing.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-066",
+      "text": "How much more grievous are the consequences of anger than the causes of it.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-067",
+      "text": "Look well into thyself; there is a source of strength which will always spring up if thou wilt always look.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-068",
+      "text": "Receive without pride, let go without attachment.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-069",
+      "text": "Think of yourself as dead. You have lived your life. Now take what's left and live it properly.",
+      "author": "Marcus Aurelius",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-070",
+      "text": "No person has the power to have everything they want, but it is in their power not to want what they don't have.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-071",
+      "text": "Associate with people who are likely to improve you.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-072",
+      "text": "Sometimes even to live is an act of courage.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-073",
+      "text": "Life is long if you know how to use it.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-074",
+      "text": "He suffers more than necessary, who suffers before it is necessary.",
+      "author": "Seneca",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-075",
+      "text": "Man is not disturbed by things, but by the views he takes of them.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-076",
+      "text": "Seek not the good in external things; seek it in yourselves.",
+      "author": "Epictetus",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-077",
+      "text": "Act as if what you do makes a difference. It does.",
+      "author": "William James",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-078",
+      "text": "The greatest discovery of my generation is that a human being can alter his life by altering his attitudes.",
+      "author": "William James",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-079",
+      "text": "Believe that life is worth living and your belief will help create the fact.",
+      "author": "William James",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-080",
+      "text": "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+      "author": "Ralph Waldo Emerson",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-081",
+      "text": "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
+      "author": "Ralph Waldo Emerson",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-082",
+      "text": "Do not go where the path may lead, go instead where there is no path and leave a trail.",
+      "author": "Ralph Waldo Emerson",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-083",
+      "text": "Knowing yourself is the beginning of all wisdom.",
+      "author": "Aristotle",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-084",
+      "text": "Happiness depends upon ourselves.",
+      "author": "Aristotle",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-085",
+      "text": "It is the mark of an educated mind to be able to entertain a thought without accepting it.",
+      "author": "Aristotle",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-086",
+      "text": "Science is organized knowledge. Wisdom is organized life.",
+      "author": "Immanuel Kant",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-087",
+      "text": "Dare to know! Have the courage to use your own understanding.",
+      "author": "Immanuel Kant",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-088",
+      "text": "In law a man is guilty when he violates the rights of others. In ethics he is guilty if he only thinks of doing so.",
+      "author": "Immanuel Kant",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-089",
+      "text": "He who has a why to live can bear almost any how.",
+      "author": "Friedrich Nietzsche",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-090",
+      "text": "That which does not kill us makes us stronger.",
+      "author": "Friedrich Nietzsche",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-091",
+      "text": "There are no facts, only interpretations.",
+      "author": "Friedrich Nietzsche",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-092",
+      "text": "I think, therefore I am.",
+      "author": "Rene Descartes",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-093",
+      "text": "It is not enough to have a good mind; the main thing is to use it well.",
+      "author": "Rene Descartes",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-094",
+      "text": "Doubt is the origin of wisdom.",
+      "author": "Rene Descartes",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-095",
+      "text": "Reason is, and ought only to be the slave of the passions.",
+      "author": "David Hume",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-096",
+      "text": "Beauty in things exists merely in the mind which contemplates them.",
+      "author": "David Hume",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-097",
+      "text": "Generally speaking, the errors in religion are dangerous; those in philosophy only ridiculous.",
+      "author": "David Hume",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-098",
+      "text": "Compassion is the basis of morality.",
+      "author": "Arthur Schopenhauer",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-099",
+      "text": "Man can do what he wills but he cannot will what he wills.",
+      "author": "Arthur Schopenhauer",
+      "category": "philosophical"
+    },
+    {
+      "id": "philosophical-100",
+      "text": "In the depth of winter, I finally learned that within me there lay an invincible summer.",
+      "author": "Albert Camus",
+      "category": "philosophical"
+    },
+    {
+      "id": "scripture-001",
+      "text": "Blessed is the man that walketh not in the counsel of the ungodly, nor standeth in the way of sinners, nor sitteth in the seat of the scornful.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 1:1"
+    },
+    {
+      "id": "scripture-002",
+      "text": "But his delight is in the law of the LORD; and in his law doth he meditate day and night.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 1:2"
+    },
+    {
+      "id": "scripture-003",
+      "text": "And he shall be like a tree planted by the rivers of water, that bringeth forth his fruit in his season; his leaf also shall not wither; and whatsoever he doeth shall prosper.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 1:3"
+    },
+    {
+      "id": "scripture-004",
+      "text": "The ungodly are not so: but are like the chaff which the wind driveth away.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 1:4"
+    },
+    {
+      "id": "scripture-005",
+      "text": "Therefore the ungodly shall not stand in the judgment, nor sinners in the congregation of the righteous.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 1:5"
+    },
+    {
+      "id": "scripture-006",
+      "text": "For the LORD knoweth the way of the righteous: but the way of the ungodly shall perish.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 1:6"
+    },
+    {
+      "id": "scripture-007",
+      "text": "Why do the heathen rage, and the people imagine a vain thing?",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:1"
+    },
+    {
+      "id": "scripture-008",
+      "text": "The kings of the earth set themselves, and the rulers take counsel together, against the LORD, and against his anointed, saying,",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:2"
+    },
+    {
+      "id": "scripture-009",
+      "text": "Let us break their bands asunder, and cast away their cords from us.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:3"
+    },
+    {
+      "id": "scripture-010",
+      "text": "He that sitteth in the heavens shall laugh: the Lord shall have them in derision.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:4"
+    },
+    {
+      "id": "scripture-011",
+      "text": "Then shall he speak unto them in his wrath, and vex them in his sore displeasure.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:5"
+    },
+    {
+      "id": "scripture-012",
+      "text": "Yet have I set my king upon my holy hill of Zion.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:6"
+    },
+    {
+      "id": "scripture-013",
+      "text": "I will declare the decree: the LORD hath said unto me, Thou art my Son; this day have I begotten thee.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:7"
+    },
+    {
+      "id": "scripture-014",
+      "text": "Ask of me, and I shall give thee the heathen for thine inheritance, and the uttermost parts of the earth for thy possession.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:8"
+    },
+    {
+      "id": "scripture-015",
+      "text": "Thou shalt break them with a rod of iron; thou shalt dash them in pieces like a potter's vessel.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:9"
+    },
+    {
+      "id": "scripture-016",
+      "text": "Be wise now therefore, O ye kings: be instructed, ye judges of the earth.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:10"
+    },
+    {
+      "id": "scripture-017",
+      "text": "Serve the LORD with fear, and rejoice with trembling.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:11"
+    },
+    {
+      "id": "scripture-018",
+      "text": "Kiss the Son, lest he be angry, and ye perish from the way, when his wrath is kindled but a little. Blessed are all they that put their trust in him.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 2:12"
+    },
+    {
+      "id": "scripture-019",
+      "text": "LORD, how are they increased that trouble me! many are they that rise up against me.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:1"
+    },
+    {
+      "id": "scripture-020",
+      "text": "Many there be which say of my soul, There is no help for him in God. Selah.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:2"
+    },
+    {
+      "id": "scripture-021",
+      "text": "But thou, O LORD, art a shield for me; my glory, and the lifter up of mine head.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:3"
+    },
+    {
+      "id": "scripture-022",
+      "text": "I cried unto the LORD with my voice, and he heard me out of his holy hill. Selah.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:4"
+    },
+    {
+      "id": "scripture-023",
+      "text": "I laid me down and slept; I awaked; for the LORD sustained me.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:5"
+    },
+    {
+      "id": "scripture-024",
+      "text": "I will not be afraid of ten thousands of people, that have set themselves against me round about.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:6"
+    },
+    {
+      "id": "scripture-025",
+      "text": "Arise, O LORD; save me, O my God: for thou hast smitten all mine enemies upon the cheek bone; thou hast broken the teeth of the ungodly.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:7"
+    },
+    {
+      "id": "scripture-026",
+      "text": "Salvation belongeth unto the LORD: thy blessing is upon thy people. Selah.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 3:8"
+    },
+    {
+      "id": "scripture-027",
+      "text": "Hear me when I call, O God of my righteousness: thou hast enlarged me when I was in distress; have mercy upon me, and hear my prayer.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:1"
+    },
+    {
+      "id": "scripture-028",
+      "text": "O ye sons of men, how long will ye turn my glory into shame? how long will ye love vanity, and seek after leasing? Selah.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:2"
+    },
+    {
+      "id": "scripture-029",
+      "text": "But know that the LORD hath set apart him that is godly for himself: the LORD will hear when I call unto him.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:3"
+    },
+    {
+      "id": "scripture-030",
+      "text": "Stand in awe, and sin not: commune with your own heart upon your bed, and be still. Selah.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:4"
+    },
+    {
+      "id": "scripture-031",
+      "text": "Offer the sacrifices of righteousness, and put your trust in the LORD.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:5"
+    },
+    {
+      "id": "scripture-032",
+      "text": "There be many that say, Who will shew us any good? LORD, lift thou up the light of thy countenance upon us.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:6"
+    },
+    {
+      "id": "scripture-033",
+      "text": "Thou hast put gladness in my heart, more than in the time that their corn and their wine increased.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:7"
+    },
+    {
+      "id": "scripture-034",
+      "text": "I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 4:8"
+    },
+    {
+      "id": "scripture-035",
+      "text": "Give ear to my words, O LORD, consider my meditation.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:1"
+    },
+    {
+      "id": "scripture-036",
+      "text": "Hearken unto the voice of my cry, my King, and my God: for unto thee will I pray.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:2"
+    },
+    {
+      "id": "scripture-037",
+      "text": "My voice shalt thou hear in the morning, O LORD; in the morning will I direct my prayer unto thee, and will look up.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:3"
+    },
+    {
+      "id": "scripture-038",
+      "text": "For thou art not a God that hath pleasure in wickedness: neither shall evil dwell with thee.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:4"
+    },
+    {
+      "id": "scripture-039",
+      "text": "The foolish shall not stand in thy sight: thou hatest all workers of iniquity.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:5"
+    },
+    {
+      "id": "scripture-040",
+      "text": "Thou shalt destroy them that speak leasing: the LORD will abhor the bloody and deceitful man.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:6"
+    },
+    {
+      "id": "scripture-041",
+      "text": "But as for me, I will come into thy house in the multitude of thy mercy: and in thy fear will I worship toward thy holy temple.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:7"
+    },
+    {
+      "id": "scripture-042",
+      "text": "Lead me, O LORD, in thy righteousness because of mine enemies; make thy way straight before my face.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:8"
+    },
+    {
+      "id": "scripture-043",
+      "text": "For there is no faithfulness in their mouth; their inward part is very wickedness; their throat is an open sepulchre; they flatter with their tongue.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:9"
+    },
+    {
+      "id": "scripture-044",
+      "text": "Destroy thou them, O God; let them fall by their own counsels; cast them out in the multitude of their transgressions; for they have rebelled against thee.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:10"
+    },
+    {
+      "id": "scripture-045",
+      "text": "But let all those that put their trust in thee rejoice: let them ever shout for joy, because thou defendest them: let them also that love thy name be joyful in thee.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:11"
+    },
+    {
+      "id": "scripture-046",
+      "text": "For thou, LORD, wilt bless the righteous; with favour wilt thou compass him as with a shield.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 5:12"
+    },
+    {
+      "id": "scripture-047",
+      "text": "O LORD, rebuke me not in thine anger, neither chasten me in thy hot displeasure.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:1"
+    },
+    {
+      "id": "scripture-048",
+      "text": "Have mercy upon me, O LORD; for I am weak: O LORD, heal me; for my bones are vexed.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:2"
+    },
+    {
+      "id": "scripture-049",
+      "text": "My soul is also sore vexed: but thou, O LORD, how long?",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:3"
+    },
+    {
+      "id": "scripture-050",
+      "text": "Return, O LORD, deliver my soul: oh save me for thy mercies' sake.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:4"
+    },
+    {
+      "id": "scripture-051",
+      "text": "For in death there is no remembrance of thee: in the grave who shall give thee thanks?",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:5"
+    },
+    {
+      "id": "scripture-052",
+      "text": "I am weary with my groaning; all the night make I my bed to swim; I water my couch with my tears.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:6"
+    },
+    {
+      "id": "scripture-053",
+      "text": "Mine eye is consumed because of grief; it waxeth old because of all mine enemies.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:7"
+    },
+    {
+      "id": "scripture-054",
+      "text": "Depart from me, all ye workers of iniquity; for the LORD hath heard the voice of my weeping.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:8"
+    },
+    {
+      "id": "scripture-055",
+      "text": "The LORD hath heard my supplication; the LORD will receive my prayer.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:9"
+    },
+    {
+      "id": "scripture-056",
+      "text": "Let all mine enemies be ashamed and sore vexed: let them return and be ashamed suddenly.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 6:10"
+    },
+    {
+      "id": "scripture-057",
+      "text": "O LORD my God, in thee do I put my trust: save me from all them that persecute me, and deliver me:",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:1"
+    },
+    {
+      "id": "scripture-058",
+      "text": "Lest he tear my soul like a lion, rending it in pieces, while there is none to deliver.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:2"
+    },
+    {
+      "id": "scripture-059",
+      "text": "O LORD my God, if I have done this; if there be iniquity in my hands;",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:3"
+    },
+    {
+      "id": "scripture-060",
+      "text": "If I have rewarded evil unto him that was at peace with me; (yea, I have delivered him that without cause is mine enemy:)",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:4"
+    },
+    {
+      "id": "scripture-061",
+      "text": "Let the enemy persecute my soul, and take it; yea, let him tread down my life upon the earth, and lay mine honour in the dust. Selah.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:5"
+    },
+    {
+      "id": "scripture-062",
+      "text": "Arise, O LORD, in thine anger, lift up thyself because of the rage of mine enemies: and awake for me to the judgment that thou hast commanded.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:6"
+    },
+    {
+      "id": "scripture-063",
+      "text": "So shall the congregation of the people compass thee about: for their sakes therefore return thou on high.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:7"
+    },
+    {
+      "id": "scripture-064",
+      "text": "The LORD shall judge the people: judge me, O LORD, according to my righteousness, and according to mine integrity that is in me.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:8"
+    },
+    {
+      "id": "scripture-065",
+      "text": "Oh let the wickedness of the wicked come to an end; but establish the just: for the righteous God trieth the hearts and reins.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:9"
+    },
+    {
+      "id": "scripture-066",
+      "text": "My defence is of God, which saveth the upright in heart.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:10"
+    },
+    {
+      "id": "scripture-067",
+      "text": "God judgeth the righteous, and God is angry with the wicked every day.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:11"
+    },
+    {
+      "id": "scripture-068",
+      "text": "If he turn not, he will whet his sword; he hath bent his bow, and made it ready.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:12"
+    },
+    {
+      "id": "scripture-069",
+      "text": "He hath also prepared for him the instruments of death; he ordaineth his arrows against the persecutors.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:13"
+    },
+    {
+      "id": "scripture-070",
+      "text": "Behold, he travaileth with iniquity, and hath conceived mischief, and brought forth falsehood.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:14"
+    },
+    {
+      "id": "scripture-071",
+      "text": "He made a pit, and digged it, and is fallen into the ditch which he made.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:15"
+    },
+    {
+      "id": "scripture-072",
+      "text": "His mischief shall return upon his own head, and his violent dealing shall come down upon his own pate.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:16"
+    },
+    {
+      "id": "scripture-073",
+      "text": "I will praise the LORD according to his righteousness: and will sing praise to the name of the LORD most high.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 7:17"
+    },
+    {
+      "id": "scripture-074",
+      "text": "O LORD our Lord, how excellent is thy name in all the earth! who hast set thy glory above the heavens.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:1"
+    },
+    {
+      "id": "scripture-075",
+      "text": "Out of the mouth of babes and sucklings hast thou ordained strength because of thine enemies, that thou mightest still the enemy and the avenger.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:2"
+    },
+    {
+      "id": "scripture-076",
+      "text": "When I consider thy heavens, the work of thy fingers, the moon and the stars, which thou hast ordained;",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:3"
+    },
+    {
+      "id": "scripture-077",
+      "text": "What is man, that thou art mindful of him? and the son of man, that thou visitest him?",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:4"
+    },
+    {
+      "id": "scripture-078",
+      "text": "For thou hast made him a little lower than the angels, and hast crowned him with glory and honour.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:5"
+    },
+    {
+      "id": "scripture-079",
+      "text": "Thou madest him to have dominion over the works of thy hands; thou hast put all things under his feet:",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:6"
+    },
+    {
+      "id": "scripture-080",
+      "text": "All sheep and oxen, yea, and the beasts of the field;",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:7"
+    },
+    {
+      "id": "scripture-081",
+      "text": "The fowl of the air, and the fish of the sea, and whatsoever passeth through the paths of the seas.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:8"
+    },
+    {
+      "id": "scripture-082",
+      "text": "O LORD our Lord, how excellent is thy name in all the earth!",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 8:9"
+    },
+    {
+      "id": "scripture-083",
+      "text": "I will praise thee, O LORD, with my whole heart; I will shew forth all thy marvellous works.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:1"
+    },
+    {
+      "id": "scripture-084",
+      "text": "I will be glad and rejoice in thee: I will sing praise to thy name, O thou most High.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:2"
+    },
+    {
+      "id": "scripture-085",
+      "text": "When mine enemies are turned back, they shall fall and perish at thy presence.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:3"
+    },
+    {
+      "id": "scripture-086",
+      "text": "For thou hast maintained my right and my cause; thou satest in the throne judging right.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:4"
+    },
+    {
+      "id": "scripture-087",
+      "text": "Thou hast rebuked the heathen, thou hast destroyed the wicked, thou hast put out their name for ever and ever.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:5"
+    },
+    {
+      "id": "scripture-088",
+      "text": "O thou enemy, destructions are come to a perpetual end: and thou hast destroyed cities; their memorial is perished with them.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:6"
+    },
+    {
+      "id": "scripture-089",
+      "text": "But the LORD shall endure for ever: he hath prepared his throne for judgment.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:7"
+    },
+    {
+      "id": "scripture-090",
+      "text": "And he shall judge the world in righteousness, he shall minister judgment to the people in uprightness.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:8"
+    },
+    {
+      "id": "scripture-091",
+      "text": "The LORD also will be a refuge for the oppressed, a refuge in times of trouble.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:9"
+    },
+    {
+      "id": "scripture-092",
+      "text": "And they that know thy name will put their trust in thee: for thou, LORD, hast not forsaken them that seek thee.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:10"
+    },
+    {
+      "id": "scripture-093",
+      "text": "Sing praises to the LORD, which dwelleth in Zion: declare among the people his doings.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:11"
+    },
+    {
+      "id": "scripture-094",
+      "text": "When he maketh inquisition for blood, he remembereth them: he forgetteth not the cry of the humble.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:12"
+    },
+    {
+      "id": "scripture-095",
+      "text": "Have mercy upon me, O LORD; consider my trouble which I suffer of them that hate me, thou that liftest me up from the gates of death:",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:13"
+    },
+    {
+      "id": "scripture-096",
+      "text": "That I may shew forth all thy praise in the gates of the daughter of Zion: I will rejoice in thy salvation.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:14"
+    },
+    {
+      "id": "scripture-097",
+      "text": "The heathen are sunk down in the pit that they made: in the net which they hid is their own foot taken.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:15"
+    },
+    {
+      "id": "scripture-098",
+      "text": "The LORD is known by the judgment which he executeth: the wicked is snared in the work of his own hands. Higgaion. Selah.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:16"
+    },
+    {
+      "id": "scripture-099",
+      "text": "The wicked shall be turned into hell, and all the nations that forget God.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:17"
+    },
+    {
+      "id": "scripture-100",
+      "text": "For the needy shall not alway be forgotten: the expectation of the poor shall not perish for ever.",
+      "author": "Bible",
+      "category": "scripture",
+      "circa": "Psalms 9:18"
+    },
+    {
+      "id": "scripture-101",
+      "text": "By the morning hours",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:1"
+    },
+    {
+      "id": "scripture-102",
+      "text": "And by the night when it is stillest,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:2"
+    },
+    {
+      "id": "scripture-103",
+      "text": "Thy Lord hath not forsaken thee nor doth He hate thee,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:3"
+    },
+    {
+      "id": "scripture-104",
+      "text": "And verily the latter portion will be better for thee than the former,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:4"
+    },
+    {
+      "id": "scripture-105",
+      "text": "And verily thy Lord will give unto thee so that thou wilt be content.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:5"
+    },
+    {
+      "id": "scripture-106",
+      "text": "Did He not find thee an orphan and protect (thee)?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:6"
+    },
+    {
+      "id": "scripture-107",
+      "text": "Did He not find thee wandering and direct (thee)?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:7"
+    },
+    {
+      "id": "scripture-108",
+      "text": "Did He not find thee destitute and enrich (thee)?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:8"
+    },
+    {
+      "id": "scripture-109",
+      "text": "Therefor the orphan oppress not,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:9"
+    },
+    {
+      "id": "scripture-110",
+      "text": "Therefor the beggar drive not away,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:10"
+    },
+    {
+      "id": "scripture-111",
+      "text": "Therefor of the bounty of thy Lord be thy discourse.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 93:11"
+    },
+    {
+      "id": "scripture-112",
+      "text": "Have We not caused thy bosom to dilate,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:1"
+    },
+    {
+      "id": "scripture-113",
+      "text": "And eased thee of the burden",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:2"
+    },
+    {
+      "id": "scripture-114",
+      "text": "Which weighed down thy back;",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:3"
+    },
+    {
+      "id": "scripture-115",
+      "text": "And exalted thy fame?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:4"
+    },
+    {
+      "id": "scripture-116",
+      "text": "But lo! with hardship goeth ease,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:5"
+    },
+    {
+      "id": "scripture-117",
+      "text": "Lo! with hardship goeth ease;",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:6"
+    },
+    {
+      "id": "scripture-118",
+      "text": "So when thou art relieved, still toil",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:7"
+    },
+    {
+      "id": "scripture-119",
+      "text": "And strive to please thy Lord.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 94:8"
+    },
+    {
+      "id": "scripture-120",
+      "text": "By the fig and the olive,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:1"
+    },
+    {
+      "id": "scripture-121",
+      "text": "By Mount Sinai,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:2"
+    },
+    {
+      "id": "scripture-122",
+      "text": "And by this land made safe;",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:3"
+    },
+    {
+      "id": "scripture-123",
+      "text": "Surely We created man of the best stature",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:4"
+    },
+    {
+      "id": "scripture-124",
+      "text": "Then we reduced him to the lowest of the low,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:5"
+    },
+    {
+      "id": "scripture-125",
+      "text": "Save those who believe and do good works, and theirs is a reward unfailing.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:6"
+    },
+    {
+      "id": "scripture-126",
+      "text": "So who henceforth will give the lie to thee about the judgment?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:7"
+    },
+    {
+      "id": "scripture-127",
+      "text": "Is not Allah the most conclusive of all judges?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 95:8"
+    },
+    {
+      "id": "scripture-128",
+      "text": "Read: In the name of thy Lord Who createth,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:1"
+    },
+    {
+      "id": "scripture-129",
+      "text": "Createth man from a clot.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:2"
+    },
+    {
+      "id": "scripture-130",
+      "text": "Read: And thy Lord is the Most Bounteous,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:3"
+    },
+    {
+      "id": "scripture-131",
+      "text": "Who teacheth by the pen,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:4"
+    },
+    {
+      "id": "scripture-132",
+      "text": "Teacheth man that which he knew not.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:5"
+    },
+    {
+      "id": "scripture-133",
+      "text": "Nay, but verily man is rebellious",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:6"
+    },
+    {
+      "id": "scripture-134",
+      "text": "That he thinketh himself independent!",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:7"
+    },
+    {
+      "id": "scripture-135",
+      "text": "Lo! unto thy Lord is the return.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:8"
+    },
+    {
+      "id": "scripture-136",
+      "text": "Hast thou seen him who dissuadeth",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:9"
+    },
+    {
+      "id": "scripture-137",
+      "text": "A slave when he prayeth?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:10"
+    },
+    {
+      "id": "scripture-138",
+      "text": "Hast thou seen if he relieth on the guidance (of Allah)",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:11"
+    },
+    {
+      "id": "scripture-139",
+      "text": "Or enjoineth piety?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:12"
+    },
+    {
+      "id": "scripture-140",
+      "text": "Hast thou seen if he denieth (Allah's guidance) and is froward?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:13"
+    },
+    {
+      "id": "scripture-141",
+      "text": "Is he then unaware that Allah seeth?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:14"
+    },
+    {
+      "id": "scripture-142",
+      "text": "Nay, but if he cease not We will seize him by the forelock -",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:15"
+    },
+    {
+      "id": "scripture-143",
+      "text": "The lying, sinful forelock -",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:16"
+    },
+    {
+      "id": "scripture-144",
+      "text": "Then let him call upon his henchmen!",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:17"
+    },
+    {
+      "id": "scripture-145",
+      "text": "We will call the guards of hell.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:18"
+    },
+    {
+      "id": "scripture-146",
+      "text": "Nay, Obey not thou him. But prostrate thyself, and draw near (unto Allah).",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 96:19"
+    },
+    {
+      "id": "scripture-147",
+      "text": "Lo! We revealed it on the Night of Predestination.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 97:1"
+    },
+    {
+      "id": "scripture-148",
+      "text": "Ah, what will convey unto thee what the Night of Power is!",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 97:2"
+    },
+    {
+      "id": "scripture-149",
+      "text": "The Night of Power is better than a thousand months.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 97:3"
+    },
+    {
+      "id": "scripture-150",
+      "text": "The angels and the Spirit descend therein, by the permission of their Lord, with all decrees.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 97:4"
+    },
+    {
+      "id": "scripture-151",
+      "text": "(The night is) Peace until the rising of the dawn.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 97:5"
+    },
+    {
+      "id": "scripture-152",
+      "text": "Those who disbelieve among the People of the Scripture and the idolaters could not have left off (erring) till the clear proof came unto them,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:1"
+    },
+    {
+      "id": "scripture-153",
+      "text": "A messenger from Allah, reading purified pages",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:2"
+    },
+    {
+      "id": "scripture-154",
+      "text": "Containing correct scriptures.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:3"
+    },
+    {
+      "id": "scripture-155",
+      "text": "Nor were the People of the Scripture divided until after the clear proof came unto them.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:4"
+    },
+    {
+      "id": "scripture-156",
+      "text": "And they are ordered naught else than to serve Allah, keeping religion pure for Him, as men by nature upright, and to establish worship and to pay the poor-due. That is true religion.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:5"
+    },
+    {
+      "id": "scripture-157",
+      "text": "Lo! those who disbelieve, among the People of the Scripture and the idolaters, will abide in fire of hell. They are the worst of created beings.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:6"
+    },
+    {
+      "id": "scripture-158",
+      "text": "(And) lo! those who believe and do good works are the best of created beings.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:7"
+    },
+    {
+      "id": "scripture-159",
+      "text": "Their reward is with their Lord: Gardens of Eden underneath which rivers flow, wherein they dwell for ever. Allah hath pleasure in them and they have pleasure in Him. This is (in store) for him who feareth his Lord.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 98:8"
+    },
+    {
+      "id": "scripture-160",
+      "text": "When Earth is shaken with her (final) earthquake",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:1"
+    },
+    {
+      "id": "scripture-161",
+      "text": "And Earth yieldeth up her burdens,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:2"
+    },
+    {
+      "id": "scripture-162",
+      "text": "And man saith: What aileth her?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:3"
+    },
+    {
+      "id": "scripture-163",
+      "text": "That day she will relate her chronicles,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:4"
+    },
+    {
+      "id": "scripture-164",
+      "text": "Because thy Lord inspireth her.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:5"
+    },
+    {
+      "id": "scripture-165",
+      "text": "That day mankind will issue forth in scattered groups to be shown their deeds.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:6"
+    },
+    {
+      "id": "scripture-166",
+      "text": "And whoso doeth good an atom's weight will see it then,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:7"
+    },
+    {
+      "id": "scripture-167",
+      "text": "And whoso doeth ill an atom's weight will see it then.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 99:8"
+    },
+    {
+      "id": "scripture-168",
+      "text": "By the snorting courses,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:1"
+    },
+    {
+      "id": "scripture-169",
+      "text": "Striking sparks of fire",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:2"
+    },
+    {
+      "id": "scripture-170",
+      "text": "And scouring to the raid at dawn,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:3"
+    },
+    {
+      "id": "scripture-171",
+      "text": "Then, therewith, with their trail of dust,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:4"
+    },
+    {
+      "id": "scripture-172",
+      "text": "Cleaving, as one, the centre (of the foe),",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:5"
+    },
+    {
+      "id": "scripture-173",
+      "text": "Lo! man is an ingrate unto his Lord",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:6"
+    },
+    {
+      "id": "scripture-174",
+      "text": "And lo! he is a witness unto that;",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:7"
+    },
+    {
+      "id": "scripture-175",
+      "text": "And lo! in the love of wealth he is violent.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:8"
+    },
+    {
+      "id": "scripture-176",
+      "text": "Knoweth he not that, when the contents of the graves are poured forth",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:9"
+    },
+    {
+      "id": "scripture-177",
+      "text": "And the secrets of the breasts are made known,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:10"
+    },
+    {
+      "id": "scripture-178",
+      "text": "On that day will their Lord be perfectly informed concerning them.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 100:11"
+    },
+    {
+      "id": "scripture-179",
+      "text": "The Calamity!",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:1"
+    },
+    {
+      "id": "scripture-180",
+      "text": "What is the Calamity?",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:2"
+    },
+    {
+      "id": "scripture-181",
+      "text": "Ah, what will convey unto thee what the Calamity is!",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:3"
+    },
+    {
+      "id": "scripture-182",
+      "text": "A day wherein mankind will be as thickly-scattered moths",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:4"
+    },
+    {
+      "id": "scripture-183",
+      "text": "And the mountains will become as carded wool.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:5"
+    },
+    {
+      "id": "scripture-184",
+      "text": "Then, as for him whose scales are heavy (with good works),",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:6"
+    },
+    {
+      "id": "scripture-185",
+      "text": "He will live a pleasant life.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:7"
+    },
+    {
+      "id": "scripture-186",
+      "text": "But as for him whose scales are light,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:8"
+    },
+    {
+      "id": "scripture-187",
+      "text": "A bereft and Hungry One will be his mother,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:9"
+    },
+    {
+      "id": "scripture-188",
+      "text": "Ah, what will convey unto thee what she is! -",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:10"
+    },
+    {
+      "id": "scripture-189",
+      "text": "Raging Fire.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 101:11"
+    },
+    {
+      "id": "scripture-190",
+      "text": "Rivalry in worldly increase distracteth you",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 102:1"
+    },
+    {
+      "id": "scripture-191",
+      "text": "Until ye come to the graves.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 102:2"
+    },
+    {
+      "id": "scripture-192",
+      "text": "Nay, but ye will come to know!",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 102:3"
+    },
+    {
+      "id": "scripture-193",
+      "text": "Nay, would that ye knew (now) with a sure knowledge!",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 102:5"
+    },
+    {
+      "id": "scripture-194",
+      "text": "For ye will behold hell-fire.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 102:6"
+    },
+    {
+      "id": "scripture-195",
+      "text": "Aye, ye will behold it with sure vision.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 102:7"
+    },
+    {
+      "id": "scripture-196",
+      "text": "Then, on that day, ye will be asked concerning pleasure.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 102:8"
+    },
+    {
+      "id": "scripture-197",
+      "text": "By the declining day,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 103:1"
+    },
+    {
+      "id": "scripture-198",
+      "text": "Lo! man is a state of loss,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 103:2"
+    },
+    {
+      "id": "scripture-199",
+      "text": "Save those who believe and do good works, and exhort one another to truth and exhort one another to endurance.",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 103:3"
+    },
+    {
+      "id": "scripture-200",
+      "text": "Woe unto every slandering traducer,",
+      "author": "Quran",
+      "category": "scripture",
+      "circa": "Surah 104:1"
+    },
+    {
+      "id": "scripture-201",
+      "text": "In the beginning God created the heaven and the earth.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:1"
+    },
+    {
+      "id": "scripture-202",
+      "text": "Now the earth was unformed and void, and darkness was upon the face of the deep; and the spirit of God hovered over the face of the waters.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:2"
+    },
+    {
+      "id": "scripture-203",
+      "text": "And God said: 'Let there be light.' And there was light.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:3"
+    },
+    {
+      "id": "scripture-204",
+      "text": "And God saw the light, that it was good; and God divided the light from the darkness.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:4"
+    },
+    {
+      "id": "scripture-205",
+      "text": "And God called the light Day, and the darkness He called Night. And there was evening and there was morning, one day.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:5"
+    },
+    {
+      "id": "scripture-206",
+      "text": "And God said: 'Let there be a firmament in the midst of the waters, and let it divide the waters from the waters.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:6"
+    },
+    {
+      "id": "scripture-207",
+      "text": "And God made the firmament, and divided the waters which were under the firmament from the waters which were above the firmament; and it was so.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:7"
+    },
+    {
+      "id": "scripture-208",
+      "text": "And God called the firmament Heaven. And there was evening and there was morning, a second day.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:8"
+    },
+    {
+      "id": "scripture-209",
+      "text": "And God said: 'Let the waters under the heaven be gathered together unto one place, and let the dry land appear.' And it was so.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:9"
+    },
+    {
+      "id": "scripture-210",
+      "text": "And God called the dry land Earth, and the gathering together of the waters called He Seas; and God saw that it was good.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:10"
+    },
+    {
+      "id": "scripture-211",
+      "text": "And God said: 'Let the earth put forth grass, herb yielding seed, and fruit-tree bearing fruit after its kind, wherein is the seed thereof, upon the earth.' And it was so.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:11"
+    },
+    {
+      "id": "scripture-212",
+      "text": "And the earth brought forth grass, herb yielding seed after its kind, and tree bearing fruit, wherein is the seed thereof, after its kind; and God saw that it was good.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:12"
+    },
+    {
+      "id": "scripture-213",
+      "text": "And there was evening and there was morning, a third day.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:13"
+    },
+    {
+      "id": "scripture-214",
+      "text": "And God said: 'Let there be lights in the firmament of the heaven to divide the day from the night; and let them be for signs, and for seasons, and for days and years;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:14"
+    },
+    {
+      "id": "scripture-215",
+      "text": "and let them be for lights in the firmament of the heaven to give light upon the earth.' And it was so.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:15"
+    },
+    {
+      "id": "scripture-216",
+      "text": "And God made the two great lights: the greater light to rule the day, and the lesser light to rule the night; and the stars.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:16"
+    },
+    {
+      "id": "scripture-217",
+      "text": "And God set them in the firmament of the heaven to give light upon the earth,",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:17"
+    },
+    {
+      "id": "scripture-218",
+      "text": "and to rule over the day and over the night, and to divide the light from the darkness; and God saw that it was good.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:18"
+    },
+    {
+      "id": "scripture-219",
+      "text": "And there was evening and there was morning, a fourth day.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:19"
+    },
+    {
+      "id": "scripture-220",
+      "text": "And God said: 'Let the waters swarm with swarms of living creatures, and let fowl fly above the earth in the open firmament of heaven.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:20"
+    },
+    {
+      "id": "scripture-221",
+      "text": "And God created the great sea-monsters, and every living creature that creepeth, wherewith the waters swarmed, after its kind, and every winged fowl after its kind; and God saw that it was good.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:21"
+    },
+    {
+      "id": "scripture-222",
+      "text": "And God blessed them, saying: 'Be fruitful, and multiply, and fill the waters in the seas, and let fowl multiply in the earth.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:22"
+    },
+    {
+      "id": "scripture-223",
+      "text": "And there was evening and there was morning, a fifth day.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:23"
+    },
+    {
+      "id": "scripture-224",
+      "text": "And God said: 'Let the earth bring forth the living creature after its kind, cattle, and creeping thing, and beast of the earth after its kind.' And it was so.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:24"
+    },
+    {
+      "id": "scripture-225",
+      "text": "And God made the beast of the earth after its kind, and the cattle after their kind, and every thing that creepeth upon the ground after its kind; and God saw that it was good.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:25"
+    },
+    {
+      "id": "scripture-226",
+      "text": "And God created man in His own image, in the image of God created He him; male and female created He them.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:27"
+    },
+    {
+      "id": "scripture-227",
+      "text": "And God said: 'Behold, I have given you every herb yielding seed, which is upon the face of all the earth, and every tree, in which is the fruit of a tree yielding seed-to you it shall be for food;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:29"
+    },
+    {
+      "id": "scripture-228",
+      "text": "and to every beast of the earth, and to every fowl of the air, and to every thing that creepeth upon the earth, wherein there is a living soul, [I have given] every green herb for food.' And it was so.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:30"
+    },
+    {
+      "id": "scripture-229",
+      "text": "And God saw every thing that He had made, and, behold, it was very good. And there was evening and there was morning, the sixth day.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 1:31"
+    },
+    {
+      "id": "scripture-230",
+      "text": "And the heaven and the earth were finished, and all the host of them.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:1"
+    },
+    {
+      "id": "scripture-231",
+      "text": "And on the seventh day God finished His work which He had made; and He rested on the seventh day from all His work which He had made.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:2"
+    },
+    {
+      "id": "scripture-232",
+      "text": "And God blessed the seventh day, and hallowed it; because that in it He rested from all His work which God in creating had made.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:3"
+    },
+    {
+      "id": "scripture-233",
+      "text": "These are the generations of the heaven and of the earth when they were created, in the day that the LORD God made earth and heaven.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:4"
+    },
+    {
+      "id": "scripture-234",
+      "text": "No shrub of the field was yet in the earth, and no herb of the field had yet sprung up; for the LORD God had not caused it to rain upon the earth, and there was not a man to till the ground;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:5"
+    },
+    {
+      "id": "scripture-235",
+      "text": "but there went up a mist from the earth, and watered the whole face of the ground.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:6"
+    },
+    {
+      "id": "scripture-236",
+      "text": "Then the LORD God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:7"
+    },
+    {
+      "id": "scripture-237",
+      "text": "And the LORD God planted a garden eastward, in Eden; and there He put the man whom He had formed.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:8"
+    },
+    {
+      "id": "scripture-238",
+      "text": "And out of the ground made the LORD God to grow every tree that is pleasant to the sight, and good for food; the tree of life also in the midst of the garden, and the tree of the knowledge of good and evil.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:9"
+    },
+    {
+      "id": "scripture-239",
+      "text": "And a river went out of Eden to water the garden; and from thence it was parted, and became four heads.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:10"
+    },
+    {
+      "id": "scripture-240",
+      "text": "The name of the first is Pishon; that is it which compasseth the whole land of Havilah, where there is gold;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:11"
+    },
+    {
+      "id": "scripture-241",
+      "text": "and the gold of that land is good; there is bdellium and the onyx stone.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:12"
+    },
+    {
+      "id": "scripture-242",
+      "text": "And the name of the second river is Gihon; the same is it that compasseth the whole land of Cush.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:13"
+    },
+    {
+      "id": "scripture-243",
+      "text": "And the name of the third river is Tigris; that is it which goeth toward the east of Asshur. And the fourth river is the Euphrates.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:14"
+    },
+    {
+      "id": "scripture-244",
+      "text": "And the LORD God took the man, and put him into the garden of Eden to dress it and to keep it.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:15"
+    },
+    {
+      "id": "scripture-245",
+      "text": "And the LORD God commanded the man, saying: 'Of every tree of the garden thou mayest freely eat;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:16"
+    },
+    {
+      "id": "scripture-246",
+      "text": "but of the tree of the knowledge of good and evil, thou shalt not eat of it; for in the day that thou eatest thereof thou shalt surely die.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:17"
+    },
+    {
+      "id": "scripture-247",
+      "text": "And the LORD God said: 'It is not good that the man should be alone; I will make him a help meet for him.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:18"
+    },
+    {
+      "id": "scripture-248",
+      "text": "And the man gave names to all cattle, and to the fowl of the air, and to every beast of the field; but for Adam there was not found a help meet for him.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:20"
+    },
+    {
+      "id": "scripture-249",
+      "text": "And the LORD God caused a deep sleep to fall upon the man, and he slept; and He took one of his ribs, and closed up the place with flesh instead thereof.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:21"
+    },
+    {
+      "id": "scripture-250",
+      "text": "And the rib, which the LORD God had taken from the man, made He a woman, and brought her unto the man.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:22"
+    },
+    {
+      "id": "scripture-251",
+      "text": "And the man said: 'This is now bone of my bones, and flesh of my flesh; she shall be called Woman, because she was taken out of Man.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:23"
+    },
+    {
+      "id": "scripture-252",
+      "text": "Therefore shall a man leave his father and his mother, and shall cleave unto his wife, and they shall be one flesh.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:24"
+    },
+    {
+      "id": "scripture-253",
+      "text": "And they were both naked, the man and his wife, and were not ashamed.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 2:25"
+    },
+    {
+      "id": "scripture-254",
+      "text": "Now the serpent was more subtle than any beast of the field which the LORD God had made. And he said unto the woman: 'Yea, hath God said: Ye shall not eat of any tree of the garden?'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:1"
+    },
+    {
+      "id": "scripture-255",
+      "text": "And the woman said unto the serpent: 'Of the fruit of the trees of the garden we may eat;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:2"
+    },
+    {
+      "id": "scripture-256",
+      "text": "but of the fruit of the tree which is in the midst of the garden, God hath said: Ye shall not eat of it, neither shall ye touch it, lest ye die.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:3"
+    },
+    {
+      "id": "scripture-257",
+      "text": "And the serpent said unto the woman: 'Ye shall not surely die;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:4"
+    },
+    {
+      "id": "scripture-258",
+      "text": "for God doth know that in the day ye eat thereof, then your eyes shall be opened, and ye shall be as God, knowing good and evil.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:5"
+    },
+    {
+      "id": "scripture-259",
+      "text": "And the eyes of them both were opened, and they knew that they were naked; and they sewed fig-leaves together, and made themselves girdles.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:7"
+    },
+    {
+      "id": "scripture-260",
+      "text": "And they heard the voice of the LORD God walking in the garden toward the cool of the day; and the man and his wife hid themselves from the presence of the LORD God amongst the trees of the garden.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:8"
+    },
+    {
+      "id": "scripture-261",
+      "text": "And the LORD God called unto the man, and said unto him: 'Where art thou?'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:9"
+    },
+    {
+      "id": "scripture-262",
+      "text": "And he said: 'I heard Thy voice in the garden, and I was afraid, because I was naked; and I hid myself.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:10"
+    },
+    {
+      "id": "scripture-263",
+      "text": "And He said: 'Who told thee that thou wast naked? Hast thou eaten of the tree, whereof I commanded thee that thou shouldest not eat?'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:11"
+    },
+    {
+      "id": "scripture-264",
+      "text": "And the man said: 'The woman whom Thou gavest to be with me, she gave me of the tree, and I did eat.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:12"
+    },
+    {
+      "id": "scripture-265",
+      "text": "And the LORD God said unto the woman: 'What is this thou hast done?' And the woman said: 'The serpent beguiled me, and I did eat.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:13"
+    },
+    {
+      "id": "scripture-266",
+      "text": "And I will put enmity between thee and the woman, and between thy seed and her seed; they shall bruise thy head, and thou shalt bruise their heel.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:15"
+    },
+    {
+      "id": "scripture-267",
+      "text": "Unto the woman He said: 'I will greatly multiply thy pain and thy travail; in pain thou shalt bring forth children; and thy desire shall be to thy husband, and he shall rule over thee.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:16"
+    },
+    {
+      "id": "scripture-268",
+      "text": "Thorns also and thistles shall it bring forth to thee; and thou shalt eat the herb of the field.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:18"
+    },
+    {
+      "id": "scripture-269",
+      "text": "In the sweat of thy face shalt thou eat bread, till thou return unto the ground; for out of it wast thou taken; for dust thou art, and unto dust shalt thou return.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:19"
+    },
+    {
+      "id": "scripture-270",
+      "text": "And the man called his wife's name Eve; because she was the mother of all living.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:20"
+    },
+    {
+      "id": "scripture-271",
+      "text": "And the LORD God made for Adam and for his wife garments of skins, and clothed them.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:21"
+    },
+    {
+      "id": "scripture-272",
+      "text": "And the LORD God said: 'Behold, the man is become as one of us, to know good and evil; and now, lest he put forth his hand, and take also of the tree of life, and eat, and live for ever.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:22"
+    },
+    {
+      "id": "scripture-273",
+      "text": "Therefore the LORD God sent him forth from the garden of Eden, to till the ground from whence he was taken.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:23"
+    },
+    {
+      "id": "scripture-274",
+      "text": "So He drove out the man; and He placed at the east of the garden of Eden the cherubim, and the flaming sword which turned every way, to keep the way to the tree of life.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 3:24"
+    },
+    {
+      "id": "scripture-275",
+      "text": "And the man knew Eve his wife; and she conceived and bore Cain, and said: 'I have agotten a man with the help of the LORD.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:1"
+    },
+    {
+      "id": "scripture-276",
+      "text": "And again she bore his brother Abel. And Abel was a keeper of sheep, but Cain was a tiller of the ground.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:2"
+    },
+    {
+      "id": "scripture-277",
+      "text": "And in process of time it came to pass, that Cain brought of the fruit of the ground an offering unto the LORD.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:3"
+    },
+    {
+      "id": "scripture-278",
+      "text": "And Abel, he also brought of the firstlings of his flock and of the fat thereof. And the LORD had respect unto Abel and to his offering;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:4"
+    },
+    {
+      "id": "scripture-279",
+      "text": "but unto Cain and to his offering He had not respect. And Cain was very wroth, and his countenance fell.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:5"
+    },
+    {
+      "id": "scripture-280",
+      "text": "And the LORD said unto Cain: 'Why art thou wroth? and why is thy countenance fallen?",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:6"
+    },
+    {
+      "id": "scripture-281",
+      "text": "If thou doest well, shall it not be lifted up? and if thou doest not well, sin coucheth at the door; and unto thee is its desire, but thou mayest rule over it.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:7"
+    },
+    {
+      "id": "scripture-282",
+      "text": "And Cain spoke unto Abel his brother. And it came to pass, when they were in the field, that Cain rose up against Abel his brother, and slew him.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:8"
+    },
+    {
+      "id": "scripture-283",
+      "text": "And the LORD said unto Cain: 'Where is Abel thy brother?' And he said: 'I know not; am I my brother's keeper?'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:9"
+    },
+    {
+      "id": "scripture-284",
+      "text": "And He said: 'What hast thou done? the voice of thy brother's blood crieth unto Me from the ground.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:10"
+    },
+    {
+      "id": "scripture-285",
+      "text": "And now cursed art thou from the ground, which hath opened her mouth to receive thy brother's blood from thy hand.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:11"
+    },
+    {
+      "id": "scripture-286",
+      "text": "When thou tillest the ground, it shall not henceforth yield unto thee her strength; a fugitive and a wanderer shalt thou be in the earth.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:12"
+    },
+    {
+      "id": "scripture-287",
+      "text": "And Cain said unto the LORD: 'My punishment is greater than I can bear.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:13"
+    },
+    {
+      "id": "scripture-288",
+      "text": "And the LORD said unto him: 'Therefore whosoever slayeth Cain, vengeance shall be taken on him sevenfold.' And the LORD set a sign for Cain, lest any finding him should smite him.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:15"
+    },
+    {
+      "id": "scripture-289",
+      "text": "And Cain went out from the presence of the LORD, and dwelt in the land of Nod, on the east of Eden.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:16"
+    },
+    {
+      "id": "scripture-290",
+      "text": "And Cain knew his wife; and she conceived, and bore Enoch; and he builded a city, and called the name of the city after the name of his son Enoch.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:17"
+    },
+    {
+      "id": "scripture-291",
+      "text": "And unto Enoch was born Irad; and Irad begot Mehujael; and Mehujael begot Methushael; and Methushael begot Lamech.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:18"
+    },
+    {
+      "id": "scripture-292",
+      "text": "And Lamech took unto him two wives; the name of one was Adah, and the name of the other Zillah.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:19"
+    },
+    {
+      "id": "scripture-293",
+      "text": "And Adah bore Jabal; he was the father of such as dwell in tents and have cattle.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:20"
+    },
+    {
+      "id": "scripture-294",
+      "text": "And his brother's name was Jubal; he was the father of all such as handle the harp and pipe.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:21"
+    },
+    {
+      "id": "scripture-295",
+      "text": "And Zillah, she also bore Tubal-cain, the forger of every cutting instrument of brass and iron; and the sister of Tubal-cain was Naamah.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:22"
+    },
+    {
+      "id": "scripture-296",
+      "text": "And Lamech said unto his wives: Adah and Zillah, hear my voice; Ye wives of Lamech, hearken unto my speech; For I have slain a man for wounding me, And a young man for bruising me;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:23"
+    },
+    {
+      "id": "scripture-297",
+      "text": "If Cain shall be avenged sevenfold, Truly Lamech seventy and sevenfold.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:24"
+    },
+    {
+      "id": "scripture-298",
+      "text": "And Adam knew his wife again; and she bore a son, and called his name Seth: 'for God hath appointed me another seed instead of Abel; for Cain slew him.'",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:25"
+    },
+    {
+      "id": "scripture-299",
+      "text": "And to Seth, to him also there was born a son; and he called his name Enosh; then began men to call upon the name of the LORD.",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 4:26"
+    },
+    {
+      "id": "scripture-300",
+      "text": "This is the book of the generations of Adam. In the day that God created man, in the likeness of God made He him;",
+      "author": "Torah",
+      "category": "scripture",
+      "circa": "Genesis 5:1"
     }
   ]
 }

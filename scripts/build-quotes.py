@@ -98,6 +98,16 @@ def build_authors_meta(authors: dict) -> dict:
     return {name: parse_lifespan(lifespan) for name, lifespan in authors.items()}
 
 
+EXPECTED_COUNTS = {
+    "uplifting": 100,
+    "cunning": 100,
+    "funny": 100,
+    "strategic": 100,
+    "philosophical": 100,
+    "scripture": 300,
+}
+
+
 def main() -> None:
     categories = load_categories()
     text = read_mjs()
@@ -108,18 +118,26 @@ def main() -> None:
         if not arr:
             print(f"WARNING {name}: no quotes found (empty or missing array)", file=sys.stderr)
         by_category[name] = arr
+        expected = EXPECTED_COUNTS.get(name)
+        if expected is not None and len(arr) != expected:
+            print(
+                f"ERROR {name}: expected {expected} quotes, got {len(arr)}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
 
     quotes = []
     for category, arr in by_category.items():
         for i, q in enumerate(arr, start=1):
-            quotes.append(
-                {
-                    "id": f"{category}-{i:03d}",
-                    "text": sanitize(q["text"]),
-                    "author": q["author"],
-                    "category": category,
-                }
-            )
+            entry = {
+                "id": f"{category}-{i:03d}",
+                "text": sanitize(q["text"]),
+                "author": q["author"],
+                "category": category,
+            }
+            if q.get("ref"):
+                entry["circa"] = q["ref"]
+            quotes.append(entry)
 
     seen: dict[str, dict] = {}
     dupes = []
@@ -185,6 +203,21 @@ def main() -> None:
         "Coco Chanel": "1883–1971",
         "Thomas Mann": "1875–1955",
         "Rickson Gracie": "b. 1958",
+        "Bible": "ancient",
+        "Quran": "c. 7th century",
+        "Torah": "ancient",
+        "Aristotle": "384–322 BC",
+        "Immanuel Kant": "1724–1804",
+        "Friedrich Nietzsche": "1844–1900",
+        "René Descartes": "1596–1650",
+        "David Hume": "1711–1776",
+        "Arthur Schopenhauer": "1788–1860",
+        "Albert Camus": "1913–1960",
+        "Baruch Spinoza": "1632–1677",
+        "Jean-Paul Sartre": "1905–1980",
+        "Voltaire": "1694–1778",
+        "Heraclitus": "c. 535–475 BC",
+        "Diogenes": "c. 412–323 BC",
     }
     authors.update(extra_authors)
     authors_meta = build_authors_meta(authors)

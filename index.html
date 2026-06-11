@@ -403,6 +403,16 @@
             <button class="tab active" type="button" role="tab" aria-selected="true" data-quotes-tab="browse">Browse</button>
             <button class="tab" type="button" role="tab" aria-selected="false" data-quotes-tab="authors">Authors</button>
           </div>
+          <div id="quotes-toolbar" class="quotes-toolbar">
+            <div id="quotes-chips" class="quotes-chips" role="group" aria-label="Filter by category"></div>
+            <button id="quotes-author-clear" class="btn quotes-author-clear" type="button" hidden></button>
+          </div>
+          <div id="quotes-browse" class="quotes-pane">
+            <div id="quotes-list" class="quotes-list" role="list"></div>
+          </div>
+          <div id="quotes-authors" class="quotes-pane" hidden>
+            <div id="quotes-authors-list" class="quotes-authors-list" role="list"></div>
+          </div>
           <div id="quotes-timeline" class="quotes-timeline-section">
             <div class="quotes-timeline-wrap">
               <div class="quotes-timeline-scroll">
@@ -413,13 +423,6 @@
               </div>
               <p id="quotes-timeline-note" class="quotes-timeline-note"></p>
             </div>
-          </div>
-          <div id="quotes-browse" class="quotes-pane">
-            <div id="quotes-chips" class="quotes-chips" role="group" aria-label="Filter by category"></div>
-            <div id="quotes-list" class="quotes-list" role="list"></div>
-          </div>
-          <div id="quotes-authors" class="quotes-pane" hidden>
-            <div id="quotes-authors-list" class="quotes-authors-list" role="list"></div>
           </div>
           <p id="quotes-stats" class="quotes-stats" aria-live="polite"></p>
         </div>

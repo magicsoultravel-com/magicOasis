@@ -10,7 +10,10 @@ MJS = ROOT / "scripts" / "build-quotes.mjs"
 CATEGORIES_FILE = ROOT / "data" / "quotes-categories.json"
 OUT = ROOT / "data" / "quotes.json"
 
-QUOTE_RE = re.compile(r'\{ text: "(.*?)", author: "(.*?)" \}', re.DOTALL)
+QUOTE_RE = re.compile(
+    r'\{ text: "(.*?)", author: "(.*?)"(?:, ref: "(.*?)")? \}',
+    re.DOTALL,
+)
 CATEGORY_SLUG_RE = re.compile(r"^[a-z][a-z0-9_-]*$")
 
 
@@ -52,7 +55,14 @@ def extract_array(name: str, text: str) -> list[dict]:
     m = re.search(rf"const {re.escape(name)} = \[(.*?)\n\];", text, re.DOTALL)
     if not m:
         return []
-    return [{"text": t, "author": a} for t, a in QUOTE_RE.findall(m.group(1))]
+    out = []
+    for match in QUOTE_RE.findall(m.group(1)):
+        text, author, ref = match[0], match[1], match[2] or None
+        entry = {"text": text, "author": author}
+        if ref:
+            entry["ref"] = ref
+        out.append(entry)
+    return out
 
 
 def extract_authors(text: str) -> dict[str, str]:
@@ -94,19 +104,44 @@ def append_author(text: str, name: str, lifespan: str) -> str:
     return prefix + line + text[m.start(2) :]
 
 
-def append_quote(text: str, category: str, quote_text: str, author: str) -> str:
+def format_quote_entry(quote_text: str, author: str, ref: str | None = None) -> str:
+    parts = (
+        f'  {{ text: "{escape_js_string(quote_text)}", '
+        f'author: "{escape_js_string(author)}"'
+    )
+    if ref:
+        parts += f', ref: "{escape_js_string(ref)}"'
+    return parts + " },\n"
+
+
+def append_quote(
+    text: str,
+    category: str,
+    quote_text: str,
+    author: str,
+    ref: str | None = None,
+) -> str:
     pattern = rf"(const {re.escape(category)} = \[)(.*?)(\n\];)"
     m = re.search(pattern, text, re.DOTALL)
     if not m:
         raise SystemExit(f"Category array not found in build-quotes.mjs: {category}")
-    entry = (
-        f'  {{ text: "{escape_js_string(quote_text)}", '
-        f'author: "{escape_js_string(author)}" }},\n'
-    )
+    entry = format_quote_entry(quote_text, author, ref)
     body = m.group(2)
     if body and not body.endswith("\n"):
         body += "\n"
     replacement = m.group(1) + body + entry + m.group(3)
+    return text[: m.start()] + replacement + text[m.end() :]
+
+
+def replace_category_array(text: str, category: str, quotes: list[dict]) -> str:
+    pattern = rf"(const {re.escape(category)} = \[)(.*?)(\n\];)"
+    m = re.search(pattern, text, re.DOTALL)
+    if not m:
+        raise SystemExit(f"Category array not found in build-quotes.mjs: {category}")
+    body = "".join(
+        format_quote_entry(q["text"], q["author"], q.get("ref")) for q in quotes
+    )
+    replacement = m.group(1) + "\n" + body + m.group(3)
     return text[: m.start()] + replacement + text[m.end() :]
 
 

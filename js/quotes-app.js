@@ -5,6 +5,8 @@
     cunning: "Cunning",
     funny: "Funny",
     strategic: "Strategic",
+    philosophical: "Philosophical",
+    scripture: "Scripture",
   };
 
   const panel = document.getElementById("quotes-panel");
@@ -15,6 +17,7 @@
   const searchWrapEl = document.getElementById("quotes-menu-search-wrap");
   const searchBtnEl = document.getElementById("btn-quotes-search");
   const chipsEl = document.getElementById("quotes-chips");
+  const authorClearEl = document.getElementById("quotes-author-clear");
   const listEl = document.getElementById("quotes-list");
   const authorsListEl = document.getElementById("quotes-authors-list");
   const timelineTrackEl = document.getElementById("quotes-timeline-track");
@@ -83,6 +86,17 @@
     statsEl.textContent = `${s.total} quotes · ${cats} categories · ${s.authorCount} authors · ${s.datedCount} on timeline`;
   }
 
+  function renderToolbar() {
+    if (authorClearEl) {
+      if (state.author) {
+        authorClearEl.hidden = false;
+        authorClearEl.textContent = `Clear: ${state.author}`;
+      } else {
+        authorClearEl.hidden = true;
+      }
+    }
+  }
+
   function renderChips() {
     if (!chipsEl) return;
     chipsEl.innerHTML = "";
@@ -93,9 +107,12 @@
     allBtn.addEventListener("click", () => {
       state.category = "all";
       state.author = null;
+      state.highlightId = null;
       saveState();
+      renderToolbar();
       renderChips();
       renderBrowseList();
+      renderTimeline();
     });
     chipsEl.appendChild(allBtn);
 
@@ -108,9 +125,12 @@
       btn.addEventListener("click", () => {
         state.category = cat;
         state.author = null;
+        state.highlightId = null;
         saveState();
+        renderToolbar();
         renderChips();
         renderBrowseList();
+        renderTimeline();
       });
       chipsEl.appendChild(btn);
     }
@@ -125,21 +145,6 @@
     });
 
     listEl.innerHTML = "";
-    if (state.author) {
-      const clear = document.createElement("p");
-      clear.className = "quotes-filter-note";
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "btn";
-      btn.textContent = `Clear author: ${state.author}`;
-      btn.addEventListener("click", () => {
-        state.author = null;
-        saveState();
-        renderBrowseList();
-      });
-      clear.appendChild(btn);
-      listEl.appendChild(clear);
-    }
 
     if (items.length === 0) {
       const empty = document.createElement("p");
@@ -177,6 +182,7 @@
         article.scrollIntoView({ block: "nearest", behavior: "smooth" });
         listEl.querySelectorAll(".quotes-item").forEach((el) => el.classList.remove("is-highlighted"));
         article.classList.add("is-highlighted");
+        renderTimeline();
       });
 
       listEl.appendChild(article);
@@ -208,25 +214,55 @@
         state.tab = "browse";
         state.author = author.name;
         state.category = "all";
+        state.highlightId = null;
         saveState();
         switchTab("browse");
         syncSearchUi();
+        renderToolbar();
         renderChips();
         renderBrowseList();
+        renderTimeline();
       });
       authorsListEl.appendChild(row);
     }
   }
 
+  function timelineQuotes() {
+    let buckets = Quotes.getTimelineBuckets();
+    if (state.highlightId) {
+      const q = Quotes.getById(state.highlightId);
+      if (!q || !q.hasDate) return [];
+      return [{ year: q.midYear, quotes: [q] }];
+    }
+    if (state.author) {
+      buckets = buckets
+        .map((bucket) => ({
+          year: bucket.year,
+          quotes: bucket.quotes.filter((q) => q.author === state.author),
+        }))
+        .filter((bucket) => bucket.quotes.length > 0);
+    }
+    return buckets;
+  }
+
   function renderTimeline() {
     if (!timelineTrackEl || !timelineAxisEl || !timelineNoteEl) return;
-    const buckets = Quotes.getTimelineBuckets();
+    const buckets = timelineQuotes();
     const stats = Quotes.getStats();
     timelineTrackEl.innerHTML = "";
     timelineAxisEl.innerHTML = "";
 
     if (buckets.length === 0) {
-      timelineNoteEl.textContent = "No dated quotes to plot.";
+      if (state.highlightId) {
+        const q = Quotes.getById(state.highlightId);
+        timelineNoteEl.textContent = q && !q.hasDate
+          ? "Selected quote has no known date for the timeline."
+          : "No dated quotes match the current filter.";
+      } else if (state.author) {
+        timelineNoteEl.textContent = `No dated quotes for ${state.author}.`;
+      } else {
+        timelineNoteEl.textContent = "No dated quotes to plot.";
+      }
       return;
     }
 
@@ -251,6 +287,7 @@
         const dot = document.createElement("button");
         dot.type = "button";
         dot.className = "quotes-timeline-dot";
+        if (state.highlightId === q.id) dot.classList.add("is-active");
         dot.dataset.category = q.category;
         dot.title = `${q.author}: ${truncate(q.text, 90)}`;
         dot.setAttribute("aria-label", `${q.author}, ${formatYear(year)}: ${truncate(q.text, 60)}`);
@@ -267,17 +304,26 @@
           saveState();
           switchTab("browse");
           syncSearchUi();
+          renderToolbar();
           renderChips();
           renderBrowseList();
+          renderTimeline();
         });
         timelineTrackEl.appendChild(dot);
       });
     }
 
+    const filterNote = state.author
+      ? `Showing timeline for ${state.author}. `
+      : state.highlightId
+        ? "Showing selected quote on the timeline. "
+        : "";
+
     timelineNoteEl.textContent =
-      stats.undatedCount > 0
+      filterNote +
+      (stats.undatedCount > 0
         ? `${stats.undatedCount} quote${stats.undatedCount === 1 ? "" : "s"} without a known date (not shown).`
-        : "Tap a dot to jump to the quote in Browse.";
+        : "Tap a dot to jump to the quote in Browse.");
   }
 
   function switchTab(tab) {
@@ -309,6 +355,15 @@
   function bindControls() {
     tabButtons.forEach((btn) => {
       btn.addEventListener("click", () => switchTab(btn.dataset.quotesTab));
+    });
+
+    authorClearEl?.addEventListener("click", () => {
+      state.author = null;
+      state.highlightId = null;
+      saveState();
+      renderToolbar();
+      renderBrowseList();
+      renderTimeline();
     });
 
     searchEl?.addEventListener("input", () => {
@@ -358,11 +413,12 @@
     initialized = true;
     syncSearchUi();
     renderStats();
+    renderToolbar();
     renderChips();
-    renderTimeline();
     bindControls();
     switchTab(state.tab);
     renderBrowseList();
+    renderTimeline();
   }
 
   function saveGame() {

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 36rem;
+  max-width: 40rem;
   margin: 0 auto;
   padding: 0.5rem 0 1.5rem;
   min-height: 0;
@@ -30,6 +30,25 @@
   display: none !important;
 }
 
+.quotes-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+}
+
+.quotes-toolbar .quotes-chips {
+  flex: 1;
+  min-width: 0;
+}
+
+.quotes-author-clear {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  padding: 0.25rem 0.55rem;
+  white-space: nowrap;
+}
+
 .quotes-timeline-section {
   flex-shrink: 0;
   margin: 0 -0.75rem;
@@ -52,18 +71,24 @@
 }
 
 .quotes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
   max-height: min(52vh, 28rem);
   overflow-y: auto;
   padding-right: 0.15rem;
 }
 
+@media (min-width: 520px) {
+  .quotes-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .quotes-item {
   position: relative;
   margin: 0;
-  padding: 0.75rem 0.85rem 0.85rem;
+  padding: 0.55rem 0.6rem 0.65rem;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   background: var(--surface);
@@ -83,25 +108,32 @@
 .quotes-item-text {
   max-width: none;
   text-align: left;
-  font-size: 0.9375rem;
-  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  margin: 0 0 0.3rem;
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .quotes-item-meta {
   margin: 0;
   text-align: left;
-  font-size: 0.8125rem;
+  font-size: 0.6875rem;
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .quotes-badge {
   display: inline-block;
-  margin-top: 0.4rem;
-  padding: 0.1rem 0.45rem;
+  margin-top: 0.35rem;
+  padding: 0.08rem 0.4rem;
   border-radius: 999px;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   background: var(--accent-soft);
@@ -123,28 +155,45 @@
   color: var(--accent);
 }
 
+.quotes-badge--philosophical {
+  background: color-mix(in srgb, var(--accent) 30%, var(--surface) 70%);
+  color: var(--text);
+}
+
+.quotes-badge--scripture {
+  background: color-mix(in srgb, var(--accent) 18%, var(--bg) 82%);
+  color: var(--text-muted);
+}
+
 .quotes-filter-note,
 .quotes-empty {
   margin: 0;
+  grid-column: 1 / -1;
   font-size: 0.875rem;
   color: var(--text-muted);
 }
 
 .quotes-authors-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.35rem;
   max-height: min(52vh, 28rem);
   overflow-y: auto;
 }
 
+@media (min-width: 520px) {
+  .quotes-authors-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 .quotes-author-row {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
   width: 100%;
-  padding: 0.6rem 0.75rem;
+  padding: 0.5rem 0.6rem;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   background: var(--surface);
@@ -160,11 +209,11 @@
 
 .quotes-author-name {
   font-weight: 500;
+  font-size: 0.8125rem;
 }
 
 .quotes-author-meta {
-  flex-shrink: 0;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: var(--text-muted);
 }
 
@@ -222,7 +271,8 @@
 }
 
 .quotes-timeline-dot:hover::after,
-.quotes-timeline-dot:focus-visible::after {
+.quotes-timeline-dot:focus-visible::after,
+.quotes-timeline-dot.is-active::after {
   transform: scale(1.45);
 }
 
@@ -245,6 +295,14 @@
 
 .quotes-timeline-dot[data-category="strategic"]::after {
   background: color-mix(in srgb, var(--accent) 75%, var(--bg) 25%);
+}
+
+.quotes-timeline-dot[data-category="philosophical"]::after {
+  background: color-mix(in srgb, var(--accent) 45%, var(--surface) 55%);
+}
+
+.quotes-timeline-dot[data-category="scripture"]::after {
+  background: color-mix(in srgb, var(--accent) 25%, var(--text-muted) 75%);
 }
 
 .quotes-timeline-axis {

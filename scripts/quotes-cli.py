@@ -108,6 +108,7 @@ def add_quote(
     quote_text: str,
     author: str,
     lifespan: str | None = None,
+    ref: str | None = None,
     rebuild_after: bool = True,
 ) -> None:
     categories = load_categories()
@@ -132,7 +133,7 @@ def add_quote(
         )
         text = append_author(text, author, life)
 
-    text = append_quote(text, category, quote_text, author)
+    text = append_quote(text, category, quote_text, author, ref=ref)
     write_mjs(text)
 
     if rebuild_after:
@@ -220,6 +221,7 @@ def main() -> None:
     p_add.add_argument("--category", "-c", help="Category id")
     p_add.add_argument("--text", "-t", help="Quote text")
     p_add.add_argument("--author", "-a", help="Author name")
+    p_add.add_argument("--ref", "-r", help="Scripture reference (stored as circa in quotes.json)")
     p_add.add_argument("--lifespan", "-l", help="Author lifespan (for new authors)")
     p_add.add_argument("--no-rebuild", action="store_true")
 
@@ -245,6 +247,7 @@ def main() -> None:
             args.text,
             args.author,
             lifespan=args.lifespan,
+            ref=args.ref,
             rebuild_after=not args.no_rebuild,
         )
     elif args.command == "add-category":
