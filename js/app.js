@@ -334,6 +334,7 @@
   function initPreferences() {
     Appearance.initTheme();
     Appearance.initMenuTheme(document.getElementById("menu-themes"));
+    window.Ambience?.init?.(document.getElementById("menu-ambience"));
     menuPinned = localStorage.getItem(MENU_PIN_KEY) === "1";
     syncMenuPinButton();
     setZen(localStorage.getItem("sudoku-zen") === "1");

@@ -543,6 +543,44 @@ body {
   color: var(--text-muted);
 }
 
+.menu-ambience {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.ambience-chips {
+  gap: 0.25rem;
+}
+
+.ambience-master-row,
+.ambience-layer-row {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ambience-row-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.ambience-layer-vols {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ambience-range {
+  width: 100%;
+  min-height: 2.75rem;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 .theme-picker {
   position: relative;
   flex-shrink: 0;
