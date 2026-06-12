@@ -5,6 +5,7 @@
   const TILE_VIEW_WIDTH = 240;
   const TILE_VIEW_HEIGHT = 120;
   const TILE_ASPECT = TILE_VIEW_WIDTH / TILE_VIEW_HEIGHT;
+  const TILE_SIZE_SCALE = 1 / 3;
   const MIN_HEIGHT = 200;
   const MAX_TILE_COUNT = 40;
   const ACTIVE_GAME_KEY = "magic-active-game";
@@ -151,15 +152,16 @@
     if (strip) strip.innerHTML = "";
   }
 
-  function fillStrip(strip, tileMarkup, unitWidth, count) {
-    if (!strip || count < 1 || unitWidth < 1 || !Number.isFinite(count)) return;
+  function fillStrip(strip, tileMarkup, tileWidth, tileHeight, count) {
+    if (!strip || count < 1 || tileWidth < 1 || tileHeight < 1 || !Number.isFinite(count)) return;
     strip.innerHTML = "";
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < count; i += 1) {
       fragment.appendChild(buildTile(tileMarkup, i));
     }
     strip.appendChild(fragment);
-    strip.style.setProperty("--scenery-unit-width", `${unitWidth}px`);
+    strip.style.setProperty("--scenery-unit-width", `${tileWidth}px`);
+    strip.style.setProperty("--scenery-tile-height", `${tileHeight}px`);
   }
 
   function layoutScenery() {
@@ -173,10 +175,11 @@
       const rect = target?.rect ?? null;
       const height = Math.max(MIN_HEIGHT, rect?.height || 0, fallbackHeight);
       const top = rect?.top ?? (window.innerHeight - height) / 2;
-      const unitWidth = Math.max(1, height * TILE_ASPECT);
+      const tileHeight = Math.max(1, height * TILE_SIZE_SCALE);
+      const tileWidth = Math.max(1, tileHeight * TILE_ASPECT);
       let count = Math.min(
         MAX_TILE_COUNT,
-        Math.max(3, Math.ceil(window.innerWidth / unitWidth) + 2)
+        Math.max(3, Math.ceil(window.innerWidth / tileWidth) + 2)
       );
 
       if (!Number.isFinite(count) || count < 1 || count > MAX_TILE_COUNT) {
@@ -185,7 +188,7 @@
       }
 
       const type = getSceneryType();
-      const layoutKey = `${top}|${height}|${unitWidth}|${count}|${type}`;
+      const layoutKey = `${top}|${height}|${tileWidth}|${tileHeight}|${count}|${type}`;
       if (lastLayout === layoutKey) {
         retargetObserver(target?.main ?? null);
         return;
@@ -197,10 +200,10 @@
 
       if (type === "bamboo") {
         clearStrip(palmStrip);
-        fillStrip(bambooStrip, BAMBOO_TILE, unitWidth, count);
+        fillStrip(bambooStrip, BAMBOO_TILE, tileWidth, tileHeight, count);
       } else {
         clearStrip(bambooStrip);
-        fillStrip(palmStrip, PALM_TILE, unitWidth, count);
+        fillStrip(palmStrip, PALM_TILE, tileWidth, tileHeight, count);
       }
 
       retargetObserver(target?.main ?? null);

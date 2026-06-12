@@ -284,7 +284,8 @@ body {
   display: flex;
   width: 100%;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 
 html[data-scenery="bamboo"] .app-scenery-strip--palms {
@@ -298,7 +299,7 @@ html[data-scenery="palms"] .app-scenery-strip--bamboo {
 .app-scenery-tile {
   flex: 0 0 var(--scenery-unit-width, 10rem);
   width: var(--scenery-unit-width, 10rem);
-  height: 100%;
+  height: var(--scenery-tile-height, 33%);
   opacity: 0.14;
   transform-origin: 50% 100%;
 }
