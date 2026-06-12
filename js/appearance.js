@@ -249,6 +249,11 @@ const Appearance = (() => {
   function resetScope(context) {
     if (context.view === "hub") {
       setTheme(DEFAULT_THEME);
+      const hubDef = sections.get("hub");
+      hubDef?.choices?.forEach((choice) => {
+        if (choice.defaultValue != null) choice.set(choice.defaultValue);
+      });
+      buildPanel(panelContainer, context);
       return;
     }
 
@@ -273,6 +278,11 @@ const Appearance = (() => {
     panelContainer = container;
     panelContext = context;
     container.innerHTML = "";
+
+    if (context.view === "hub") {
+      const hubSection = buildGameSection("hub");
+      if (hubSection) container.insertBefore(hubSection, container.firstChild);
+    }
 
     if (context.view === "game" && context.gameId) {
       const gameSection = buildGameSection(context.gameId);

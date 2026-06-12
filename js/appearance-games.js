@@ -1,4 +1,21 @@
 (() => {
+  Appearance.registerSection("hub", {
+    label: "Hub",
+    choices: [
+      {
+        id: "palmMotion",
+        label: "Palm trees",
+        defaultValue: "static",
+        options: [
+          { id: "static", label: "Static" },
+          { id: "sway", label: "Sway" },
+        ],
+        get: () => window.Hub?.getPalmMotion?.() ?? "static",
+        set: (v) => window.Hub?.applyPalmMotion?.(v),
+      },
+    ],
+  });
+
   const SUDOKU_COLORS = [
     { id: "borderStrong", label: "Outer borders", var: "--board-border-strong", themeVar: "--border-strong" },
     { id: "border", label: "Grid lines", var: "--board-border", themeVar: "--border" },
