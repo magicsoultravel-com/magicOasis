@@ -259,6 +259,8 @@
     appEl.classList.remove("menu-open");
     btnMenu.classList.remove("active");
     btnMenu.setAttribute("aria-expanded", "false");
+    Appearance.closeThemePicker?.();
+    window.Ambience?.closeDialog?.();
   }
 
   function openMenu() {
@@ -285,6 +287,7 @@
     btnSettings.classList.remove("active");
     Settings.closeAllMenus();
     if (appearanceDialog.open) appearanceDialog.close();
+    window.Ambience?.closeDialog?.();
   }
 
   function showConfirm(message, onConfirm) {
@@ -332,8 +335,13 @@
 
   function initPreferences() {
     Appearance.initTheme();
-    Appearance.initMenuTheme(document.getElementById("menu-themes"));
-    window.Ambience?.init?.(document.getElementById("menu-ambience"));
+    Appearance.initThemePicker(document.getElementById("btn-theme"));
+    window.Ambience?.init?.({
+      dialog: document.getElementById("ambience-dialog"),
+      body: document.getElementById("ambience-dialog-body"),
+      openButton: document.getElementById("btn-ambience"),
+      closeButton: document.getElementById("ambience-close"),
+    });
     menuPinned = localStorage.getItem(MENU_PIN_KEY) === "1";
     syncMenuPinButton();
     setZen(localStorage.getItem("sudoku-zen") === "1");

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Re-download CC0 ambience layers from BigSoundBank.
+ * Download CC0 ambience variants from BigSoundBank.
  * Usage: node scripts/fetch-ambience.mjs
  */
 import { mkdir, writeFile } from "node:fs/promises";
@@ -11,11 +11,19 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "audio", "ambience");
 const BASE = "https://bigsoundbank.com/UPLOAD";
 
-const LAYERS = [
-  { id: "birds", num: "0097" },
-  { id: "water", num: "0823" },
-  { id: "wind", num: "0904" },
-  { id: "forest", num: "2749" },
+const TRACKS = [
+  { category: "birds", file: "dawn", num: "1906" },
+  { category: "water", file: "stream", num: "0823" },
+  { category: "water", file: "fountain", num: "0913" },
+  { category: "water", file: "beach", num: "1446" },
+  { category: "water", file: "calm-coast", num: "0698" },
+  { category: "water", file: "ocean", num: "0698" },
+  { category: "water", file: "storm", num: "0740" },
+  { category: "wind", file: "light", num: "0904" },
+  { category: "wind", file: "moderate", num: "0900" },
+  { category: "wind", file: "strong", num: "1450" },
+  { category: "wind", file: "gusts", num: "0625" },
+  { category: "forest", file: "trees", num: "0903" },
 ];
 
 async function download(url) {
@@ -26,15 +34,21 @@ async function download(url) {
 
 await mkdir(OUT, { recursive: true });
 
-for (const layer of LAYERS) {
+for (const track of TRACKS) {
+  const dir = join(OUT, track.category);
+  await mkdir(dir, { recursive: true });
   for (const ext of ["ogg", "mp3"]) {
-    const url = `${BASE}/${ext}/${layer.num}.${ext}`;
-    const dest = join(OUT, `${layer.id}.${ext}`);
-    process.stdout.write(`Fetching ${layer.id}.${ext}… `);
-    const data = await download(url);
-    await writeFile(dest, data);
-    console.log(`${(data.length / 1024 / 1024).toFixed(1)} MB`);
+    const url = `${BASE}/${ext}/${track.num}.${ext}`;
+    const dest = join(dir, `${track.file}.${ext}`);
+    process.stdout.write(`${track.category}/${track.file}.${ext}… `);
+    try {
+      const data = await download(url);
+      await writeFile(dest, data);
+      console.log(`${(data.length / 1024 / 1024).toFixed(1)} MB`);
+    } catch (err) {
+      console.log(`SKIP (${err.message})`);
+    }
   }
 }
 
-console.log("Done. See audio/ambience/SOURCES.md for license info.");
+console.log("Done. See audio/ambience/SOURCES.md");
