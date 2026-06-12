@@ -258,8 +258,6 @@ body {
 }
 
 .hub-panel {
-  position: relative;
-  overflow: hidden;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -267,57 +265,76 @@ body {
   min-height: 0;
 }
 
-.hub-scenery {
+.app-scenery {
   position: absolute;
   inset: 0;
   z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
   color: color-mix(in srgb, var(--accent) 30%, var(--text-muted));
 }
 
-.hub-palm {
-  position: absolute;
-  bottom: 0;
-  width: clamp(4.5rem, 28vw, 7rem);
+.app-scenery-strip {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.app[data-scenery="bamboo"] .app-scenery-strip--palms {
+  display: none;
+}
+
+.app[data-scenery="palms"] .app-scenery-strip--bamboo {
+  display: none;
+}
+
+.app-scenery-unit {
+  flex: 1 1 0;
+  min-width: 0;
+  width: clamp(9rem, 56vw, 16rem);
+  max-width: clamp(9rem, 56vw, 16rem);
   height: auto;
-  opacity: 0.15;
+  opacity: 0.14;
   transform-origin: 50% 100%;
 }
 
-.hub-palm--1 {
-  left: -0.5rem;
-  bottom: 1.5rem;
-  width: clamp(5rem, 32vw, 8rem);
+.app-scenery-unit:nth-child(odd) {
   opacity: 0.16;
 }
 
-.hub-palm--2 {
-  right: -0.75rem;
-  bottom: 0.5rem;
-  transform: scaleX(-1);
+.app[data-scenery-motion="sway"] .app-scenery-unit {
+  animation: scenery-sway 5.5s ease-in-out infinite;
 }
 
-.hub-palm--3 {
-  left: 50%;
-  bottom: 3rem;
-  width: clamp(3rem, 18vw, 4.5rem);
-  opacity: 0.1;
-  transform: translateX(-50%);
+.app[data-scenery-motion="sway"] .app-scenery-unit:nth-child(2) {
+  animation-duration: 6.2s;
+  animation-delay: -1.2s;
 }
 
-.hub-panel[data-palm-motion="sway"] .hub-palm--1 {
-  animation: hub-palm-sway 5.5s ease-in-out infinite;
+.app[data-scenery-motion="sway"] .app-scenery-unit:nth-child(3) {
+  animation-duration: 7s;
+  animation-delay: -2.4s;
 }
 
-.hub-panel[data-palm-motion="sway"] .hub-palm--2 {
-  animation: hub-palm-sway 6.2s ease-in-out -1.8s infinite;
+.app[data-scenery-motion="sway"] .app-scenery-unit:nth-child(4) {
+  animation-duration: 5.8s;
+  animation-delay: -0.6s;
 }
 
-.hub-panel[data-palm-motion="sway"] .hub-palm--3 {
-  animation: hub-palm-sway 7s ease-in-out -3.2s infinite;
+.app[data-scenery-motion="sway"] .app-scenery-unit:nth-child(5) {
+  animation-duration: 6.6s;
+  animation-delay: -1.8s;
 }
 
-@keyframes hub-palm-sway {
+.app[data-scenery-motion="sway"] .app-scenery-unit:nth-child(6) {
+  animation-duration: 7.2s;
+  animation-delay: -3s;
+}
+
+@keyframes scenery-sway {
   0%,
   100% {
     transform: rotate(-2deg);
@@ -328,45 +345,15 @@ body {
   }
 }
 
-.hub-panel[data-palm-motion="sway"] .hub-palm--2 {
-  animation-name: hub-palm-sway-mirror;
-}
-
-@keyframes hub-palm-sway-mirror {
-  0%,
-  100% {
-    transform: scaleX(-1) rotate(-2deg);
-  }
-
-  50% {
-    transform: scaleX(-1) rotate(2.5deg);
-  }
-}
-
-.hub-panel[data-palm-motion="sway"] .hub-palm--3 {
-  animation-name: hub-palm-sway-center;
-}
-
-@keyframes hub-palm-sway-center {
-  0%,
-  100% {
-    transform: translateX(-50%) rotate(-1.5deg);
-  }
-
-  50% {
-    transform: translateX(-50%) rotate(2deg);
-  }
+.app > .header,
+.app > #hub-panel,
+.app > [id$="-panel"] {
+  position: relative;
+  z-index: 1;
 }
 
 .hub-main {
-  position: relative;
-  z-index: 1;
   justify-content: center;
-}
-
-.hub-panel > .footer {
-  position: relative;
-  z-index: 1;
 }
 
 .hub-tagline {
@@ -446,13 +433,14 @@ body {
     transition: none;
   }
 
-  .hub-palm {
+  .app-scenery-unit {
     animation: none !important;
   }
 }
 
 .app {
   position: relative;
+  overflow: hidden;
   max-width: 380px;
   margin: 0 auto;
   padding: 0.75rem;

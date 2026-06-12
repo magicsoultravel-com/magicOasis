@@ -1,17 +1,28 @@
 (() => {
-  Appearance.registerSection("hub", {
-    label: "Hub",
+  Appearance.registerSection("scenery", {
+    label: "Scenery",
     choices: [
       {
-        id: "palmMotion",
-        label: "Palm trees",
+        id: "sceneryType",
+        label: "Style",
+        defaultValue: "palms",
+        options: [
+          { id: "palms", label: "Palms" },
+          { id: "bamboo", label: "Bamboo" },
+        ],
+        get: () => window.Scenery?.getSceneryType?.() ?? "palms",
+        set: (v) => window.Scenery?.applySceneryType?.(v),
+      },
+      {
+        id: "sceneryMotion",
+        label: "Motion",
         defaultValue: "static",
         options: [
           { id: "static", label: "Static" },
           { id: "sway", label: "Sway" },
         ],
-        get: () => window.Hub?.getPalmMotion?.() ?? "static",
-        set: (v) => window.Hub?.applyPalmMotion?.(v),
+        get: () => window.Scenery?.getSceneryMotion?.() ?? "static",
+        set: (v) => window.Scenery?.applySceneryMotion?.(v),
       },
     ],
   });

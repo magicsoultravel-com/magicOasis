@@ -2,11 +2,9 @@
   const GAME_CATALOG = window.GameCatalog?.GAME_CATALOG ?? [];
 
   const STORAGE_KEY = "magic-active-game";
-  const PALM_MOTION_KEY = "magic-hub-palm-motion";
   const BRAND_TITLE = "magicOasis";
 
   const hubGrid = document.getElementById("hub-grid");
-  const hubPanel = document.getElementById("hub-panel");
   const appEl = document.querySelector(".app");
 
   const ICONS = {
@@ -24,17 +22,6 @@
   };
 
   let hubVisible = false;
-
-  function getPalmMotion() {
-    const saved = localStorage.getItem(PALM_MOTION_KEY);
-    return saved === "sway" ? "sway" : "static";
-  }
-
-  function applyPalmMotion(mode) {
-    const value = mode === "sway" ? "sway" : "static";
-    if (hubPanel) hubPanel.dataset.palmMotion = value;
-    localStorage.setItem(PALM_MOTION_KEY, value);
-  }
 
   function shouldShowHubOnLoad() {
     return !localStorage.getItem(STORAGE_KEY);
@@ -158,7 +145,7 @@
 
   function initHubOnLoad() {
     buildGrid();
-    applyPalmMotion(getPalmMotion());
+    window.Scenery?.initScenery?.();
 
     if (shouldShowHubOnLoad()) {
       setHubView(true);
@@ -180,7 +167,5 @@
     enterGame,
     initHubOnLoad,
     isVisible: () => hubVisible,
-    getPalmMotion,
-    applyPalmMotion,
   };
 })();
