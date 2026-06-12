@@ -267,11 +267,12 @@ body {
 
 .app-scenery {
   position: fixed;
-  left: 0;
+  inset: 0;
   width: 100vw;
+  height: 100dvh;
   z-index: 0;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   pointer-events: none;
   overflow: hidden;
@@ -279,11 +280,9 @@ body {
 }
 
 .app-scenery-strip {
-  position: absolute;
-  inset: 0;
   display: flex;
   width: 100%;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-start;
   flex-wrap: nowrap;
 }
@@ -301,7 +300,7 @@ html[data-scenery="palms"] .app-scenery-strip--bamboo {
   width: var(--scenery-unit-width, 10rem);
   height: var(--scenery-tile-height, 33%);
   opacity: 0.14;
-  transform-origin: 50% 100%;
+  transform-origin: 50% 50%;
 }
 
 .app-scenery-tile:nth-child(odd) {

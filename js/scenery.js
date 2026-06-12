@@ -6,9 +6,8 @@
   const TILE_VIEW_HEIGHT = 120;
   const TILE_ASPECT = TILE_VIEW_WIDTH / TILE_VIEW_HEIGHT;
   const TILE_SIZE_SCALE = 1 / 3;
-  const MIN_HEIGHT = 200;
+  const VIEWPORT_BAND_RATIO = 0.55;
   const MAX_TILE_COUNT = 40;
-  const ACTIVE_GAME_KEY = "magic-active-game";
   const DEBOUNCE_MS = 100;
 
   const sceneryEl = document.getElementById("app-scenery");
@@ -56,8 +55,6 @@
   let layoutQueued = false;
   let debounceTimer = null;
   let sceneryInitialized = false;
-  let resizeObserver = null;
-  let observedTarget = null;
   let lastLayout = null;
 
   function readMotion() {
@@ -106,38 +103,6 @@
     }
   }
 
-  function isHubView(app) {
-    if (!app) return true;
-    if (app.dataset.view === "hub") return true;
-    try {
-      return !localStorage.getItem(ACTIVE_GAME_KEY);
-    } catch {
-      return true;
-    }
-  }
-
-  function getContentTarget() {
-    const app = document.querySelector(".app");
-    if (!app) return null;
-
-    let main = null;
-    if (isHubView(app)) {
-      main = document.querySelector("#hub-panel .hub-main");
-    } else if (app.dataset.view === "game") {
-      const panels = app.querySelectorAll('[id$="-panel"]');
-      for (const panel of panels) {
-        if (panel.hidden) continue;
-        main = panel.querySelector(".main");
-        if (main) break;
-      }
-    }
-
-    if (!main) return null;
-    const rect = main.getBoundingClientRect();
-    if (!rect.height) return null;
-    return { main, rect };
-  }
-
   function buildTile(tileMarkup, index) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("class", "app-scenery-tile");
@@ -170,12 +135,8 @@
     try {
       if (sceneryEl.hidden) return;
 
-      const fallbackHeight = Math.max(MIN_HEIGHT, window.innerHeight * 0.55);
-      const target = getContentTarget();
-      const rect = target?.rect ?? null;
-      const height = Math.max(MIN_HEIGHT, rect?.height || 0, fallbackHeight);
-      const top = rect?.top ?? (window.innerHeight - height) / 2;
-      const tileHeight = Math.max(1, height * TILE_SIZE_SCALE);
+      const bandHeight = Math.max(200, window.innerHeight * VIEWPORT_BAND_RATIO);
+      const tileHeight = Math.max(1, bandHeight * TILE_SIZE_SCALE);
       const tileWidth = Math.max(1, tileHeight * TILE_ASPECT);
       let count = Math.min(
         MAX_TILE_COUNT,
@@ -188,15 +149,11 @@
       }
 
       const type = getSceneryType();
-      const layoutKey = `${top}|${height}|${tileWidth}|${tileHeight}|${count}|${type}`;
+      const layoutKey = `${tileWidth}|${tileHeight}|${count}|${type}|${window.innerWidth}|${window.innerHeight}`;
       if (lastLayout === layoutKey) {
-        retargetObserver(target?.main ?? null);
         return;
       }
       lastLayout = layoutKey;
-
-      sceneryEl.style.top = `${top}px`;
-      sceneryEl.style.height = `${height}px`;
 
       if (type === "bamboo") {
         clearStrip(palmStrip);
@@ -205,8 +162,6 @@
         clearStrip(bambooStrip);
         fillStrip(palmStrip, PALM_TILE, tileWidth, tileHeight, count);
       }
-
-      retargetObserver(target?.main ?? null);
     } catch (err) {
       console.warn("Scenery layout failed:", err);
     }
@@ -231,21 +186,6 @@
     }, DEBOUNCE_MS);
   }
 
-  function retargetObserver(target) {
-    if (!resizeObserver || target === observedTarget) return;
-    if (observedTarget) resizeObserver.unobserve(observedTarget);
-    observedTarget = target;
-    if (target) resizeObserver.observe(target);
-  }
-
-  function initObserver() {
-    if (typeof ResizeObserver === "undefined") return;
-    resizeObserver = new ResizeObserver(debouncedQueueLayout);
-    const target = getContentTarget();
-    observedTarget = target?.main ?? null;
-    if (observedTarget) resizeObserver.observe(observedTarget);
-  }
-
   function hideScenery() {
     if (sceneryEl) sceneryEl.hidden = true;
     lastLayout = null;
@@ -267,7 +207,6 @@
 
     window.addEventListener("resize", debouncedQueueLayout);
     window.addEventListener("orientationchange", debouncedQueueLayout);
-    initObserver();
   }
 
   function relayout() {
@@ -283,5 +222,6 @@
     initScenery,
     relayout,
     hideScenery,
+    showScenery,
   };
 })();

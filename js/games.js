@@ -116,7 +116,7 @@
       const splashActive = splash && !splash.hidden;
       if (app && !app.classList.contains("is-ready") && !splashActive) {
         app.classList.add("is-ready");
-        window.Scenery?.hideScenery?.();
+        window.Scenery?.showScenery?.();
       }
     }, 2000);
   }
@@ -185,7 +185,6 @@
     Settings.applyForGame(active);
     initGame(active);
     maybeInitQuoteFooter(active);
-    window.Scenery?.relayout?.();
   }
 
   function cycle(delta) {
