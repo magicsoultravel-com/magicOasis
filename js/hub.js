@@ -24,7 +24,9 @@
   let hubVisible = false;
 
   function shouldShowHubOnLoad() {
-    return !localStorage.getItem(STORAGE_KEY);
+    const games = window.GameCatalog?.GAMES ?? [];
+    const saved = window.StorageSanitize?.getString?.(STORAGE_KEY, games, null) ?? null;
+    return saved == null;
   }
 
   function setHubView(active) {
@@ -140,7 +142,15 @@
       appEl.classList.add("is-ready");
     }
 
-    window.QuoteFooter?.init?.();
+    if (gameId !== "quotes") {
+      try {
+        if (localStorage.getItem("magic-quote-footer-enabled") !== "0") {
+          window.QuoteFooter?.init?.();
+        }
+      } catch {
+        window.QuoteFooter?.init?.();
+      }
+    }
     window.QuoteFooter?.applyVisibility?.();
   }
 

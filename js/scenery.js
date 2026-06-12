@@ -6,6 +6,7 @@
   const MIN_HEIGHT = 200;
   const MAX_TILE_COUNT = 40;
   const ACTIVE_GAME_KEY = "magic-active-game";
+  const DEBOUNCE_MS = 100;
 
   const sceneryEl = document.getElementById("app-scenery");
   const palmStrip = sceneryEl?.querySelector(".app-scenery-strip--palms");
@@ -40,7 +41,11 @@
     '<path fill="currentColor" d="M58 62 C63 58 66 52 68 46 C64 50 60 56 58 60 Z"/>';
 
   let layoutQueued = false;
+  let debounceTimer = null;
   let sceneryInitialized = false;
+  let resizeObserver = null;
+  let observedTarget = null;
+  let lastLayout = null;
 
   function readMotion() {
     const legacy = window.StorageSanitize?.getString?.(LEGACY_MOTION_KEY, ["static", "sway"], null);
@@ -74,6 +79,8 @@
     } catch {
       /* storage unavailable */
     }
+    lastLayout = null;
+    queueLayout();
   }
 
   function applySceneryMotion(mode) {
@@ -96,7 +103,7 @@
     }
   }
 
-  function getContentRect() {
+  function getContentTarget() {
     const app = document.querySelector(".app");
     if (!app) return null;
 
@@ -115,7 +122,7 @@
     if (!main) return null;
     const rect = main.getBoundingClientRect();
     if (!rect.height) return null;
-    return rect;
+    return { main, rect };
   }
 
   function buildUnit(paths, index) {
@@ -128,8 +135,12 @@
     return svg;
   }
 
+  function clearStrip(strip) {
+    if (strip) strip.innerHTML = "";
+  }
+
   function fillStrip(strip, paths, unitWidth, count) {
-    if (!strip || count < 1 || unitWidth < 1) return;
+    if (!strip || count < 1 || unitWidth < 1 || !Number.isFinite(count)) return;
     strip.innerHTML = "";
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < count; i += 1) {
@@ -143,52 +154,110 @@
     if (!sceneryEl) return;
 
     try {
+      if (sceneryEl.hidden) return;
+
       const fallbackHeight = Math.max(MIN_HEIGHT, window.innerHeight * 0.55);
-      const rect = getContentRect();
+      const target = getContentTarget();
+      const rect = target?.rect ?? null;
       const height = Math.max(MIN_HEIGHT, rect?.height || 0, fallbackHeight);
       const top = rect?.top ?? (window.innerHeight - height) / 2;
       const unitWidth = Math.max(1, height * UNIT_ASPECT);
-      const count = Math.min(
+      let count = Math.min(
         MAX_TILE_COUNT,
         Math.max(3, Math.ceil(window.innerWidth / unitWidth) + 2)
       );
 
+      if (!Number.isFinite(count) || count < 1 || count > MAX_TILE_COUNT) {
+        console.warn("Scenery layout aborted: invalid tile count", count);
+        return;
+      }
+
+      const type = getSceneryType();
+      const layoutKey = `${top}|${height}|${unitWidth}|${count}|${type}`;
+      if (lastLayout === layoutKey) {
+        retargetObserver(target?.main ?? null);
+        return;
+      }
+      lastLayout = layoutKey;
+
       sceneryEl.style.top = `${top}px`;
       sceneryEl.style.height = `${height}px`;
 
-      fillStrip(palmStrip, PALM_PATHS, unitWidth, count);
-      fillStrip(bambooStrip, BAMBOO_PATHS, unitWidth, count);
+      if (type === "bamboo") {
+        clearStrip(palmStrip);
+        fillStrip(bambooStrip, BAMBOO_PATHS, unitWidth, count);
+      } else {
+        clearStrip(bambooStrip);
+        fillStrip(palmStrip, PALM_PATHS, unitWidth, count);
+      }
+
+      retargetObserver(target?.main ?? null);
     } catch (err) {
       console.warn("Scenery layout failed:", err);
     }
   }
 
+  function runLayout() {
+    layoutQueued = false;
+    layoutScenery();
+  }
+
   function queueLayout() {
     if (layoutQueued) return;
     layoutQueued = true;
-    requestAnimationFrame(() => {
-      layoutQueued = false;
-      layoutScenery();
-    });
+    requestAnimationFrame(runLayout);
+  }
+
+  function debouncedQueueLayout() {
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      debounceTimer = null;
+      queueLayout();
+    }, DEBOUNCE_MS);
+  }
+
+  function retargetObserver(target) {
+    if (!resizeObserver || target === observedTarget) return;
+    if (observedTarget) resizeObserver.unobserve(observedTarget);
+    observedTarget = target;
+    if (target) resizeObserver.observe(target);
+  }
+
+  function initObserver() {
+    if (typeof ResizeObserver === "undefined") return;
+    resizeObserver = new ResizeObserver(debouncedQueueLayout);
+    const target = getContentTarget();
+    observedTarget = target?.main ?? null;
+    if (observedTarget) resizeObserver.observe(observedTarget);
+  }
+
+  function hideScenery() {
+    if (sceneryEl) sceneryEl.hidden = true;
+    lastLayout = null;
+  }
+
+  function showScenery() {
+    if (sceneryEl) sceneryEl.hidden = false;
+    lastLayout = null;
+    queueLayout();
   }
 
   function initScenery() {
     applySceneryType(getSceneryType());
     applySceneryMotion(getSceneryMotion());
-    layoutScenery();
+    showScenery();
 
     if (sceneryInitialized) return;
     sceneryInitialized = true;
 
-    window.addEventListener("resize", queueLayout);
-    window.addEventListener("orientationchange", queueLayout);
+    window.addEventListener("resize", debouncedQueueLayout);
+    window.addEventListener("orientationchange", debouncedQueueLayout);
+    initObserver();
+  }
 
-    const app = document.querySelector(".app");
-    if (app && typeof ResizeObserver !== "undefined") {
-      const observer = new ResizeObserver(queueLayout);
-      observer.observe(app);
-      app.querySelectorAll(".main, #hub-panel").forEach((el) => observer.observe(el));
-    }
+  function relayout() {
+    lastLayout = null;
+    queueLayout();
   }
 
   window.Scenery = {
@@ -197,6 +266,7 @@
     getSceneryMotion,
     applySceneryMotion,
     initScenery,
-    relayout: queueLayout,
+    relayout,
+    hideScenery,
   };
 })();

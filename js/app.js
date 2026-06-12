@@ -1492,8 +1492,17 @@
   });
   window.addEventListener("beforeunload", saveGame);
 
-  CatModels.mount(boardCat);
-  CatCompanion.init(boardWrap, boardCat, document.getElementById("board-cat-mouse"));
+  let sudokuUiReady = false;
+
+  function initSudokuUI() {
+    if (sudokuUiReady) return;
+    sudokuUiReady = true;
+    CatModels.mount(boardCat);
+    CatCompanion.init(boardWrap, boardCat, document.getElementById("board-cat-mouse"));
+    buildNumpad();
+    buildCellPicker();
+    startAutoSave();
+  }
 
   Settings.initPickerDialog(
     colorPickerDialog,
@@ -1505,6 +1514,7 @@
   Appearance.setOnThemeChanged(saveGame);
 
   async function startFromHub() {
+    initSudokuUI();
     await Quotes.init();
     await showQuoteSplash();
 
@@ -1517,14 +1527,13 @@
     initPreferences();
     loadStats();
     loadSeedHistory();
-    buildNumpad();
-    buildCellPicker();
-    startAutoSave();
 
-    if (!localStorage.getItem("magic-active-game")) {
+    const activeGame = localStorage.getItem("magic-active-game");
+    if (!activeGame || activeGame !== "sudoku") {
       return;
     }
 
+    initSudokuUI();
     await Quotes.init();
     await showQuoteSplash();
 

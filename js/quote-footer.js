@@ -51,26 +51,19 @@
     footerEl.hidden = !shouldShow();
   }
 
-  function setEnabled(on) {
+  async function setEnabled(on) {
     enabled = !!on;
     saveEnabled(enabled);
     syncToggleButton();
     applyVisibility();
-    if (enabled) render();
+    if (enabled) {
+      await Quotes.init();
+      render();
+    }
   }
 
-  async function init() {
-    if (initialized) {
-      applyVisibility();
-      return;
-    }
-    initialized = true;
-    enabled = loadEnabled();
-    syncToggleButton();
-
-    await Quotes.init();
-    render();
-
+  function wireControls() {
+    if (btnPrev?.dataset.ready) return;
     btnPrev?.addEventListener("click", () => {
       Quotes.footerPrev();
       render();
@@ -82,6 +75,28 @@
     btnToggle?.addEventListener("click", () => {
       setEnabled(!enabled);
     });
+    if (btnPrev) btnPrev.dataset.ready = "1";
+  }
+
+  async function init() {
+    enabled = loadEnabled();
+    syncToggleButton();
+    wireControls();
+
+    if (initialized) {
+      applyVisibility();
+      if (enabled && shouldShow()) {
+        await Quotes.init();
+        render();
+      }
+      return;
+    }
+    initialized = true;
+
+    if (enabled) {
+      await Quotes.init();
+      render();
+    }
 
     applyVisibility();
   }
