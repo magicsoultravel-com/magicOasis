@@ -2,7 +2,9 @@
   const STORAGE_TYPE_KEY = "magic-scenery-type";
   const STORAGE_MOTION_KEY = "magic-scenery-motion";
   const LEGACY_MOTION_KEY = "magic-hub-palm-motion";
-  const UNIT_ASPECT = 80 / 120;
+  const TILE_VIEW_WIDTH = 240;
+  const TILE_VIEW_HEIGHT = 120;
+  const TILE_ASPECT = TILE_VIEW_WIDTH / TILE_VIEW_HEIGHT;
   const MIN_HEIGHT = 200;
   const MAX_TILE_COUNT = 40;
   const ACTIVE_GAME_KEY = "magic-active-game";
@@ -39,6 +41,16 @@
     '<path fill="currentColor" d="M52 72 H62 V74 H52 Z"/>' +
     '<path fill="currentColor" d="M52 92 H62 V94 H52 Z"/>' +
     '<path fill="currentColor" d="M58 62 C63 58 66 52 68 46 C64 50 60 56 58 60 Z"/>';
+
+  const PALM_TILE =
+    `<g transform="translate(4, 0)">${PALM_PATHS}</g>` +
+    `<g transform="translate(92, 18) scale(0.62)" opacity="0.85">${PALM_PATHS}</g>` +
+    `<g transform="translate(236, 0) scale(-1, 1)">${PALM_PATHS}</g>`;
+
+  const BAMBOO_TILE =
+    `<g transform="translate(0, 0)">${BAMBOO_PATHS}</g>` +
+    `<g transform="translate(88, 14) scale(0.65)" opacity="0.88">${BAMBOO_PATHS}</g>` +
+    `<g transform="translate(160, 0) scale(-1, 1)">${BAMBOO_PATHS}</g>`;
 
   let layoutQueued = false;
   let debounceTimer = null;
@@ -125,13 +137,13 @@
     return { main, rect };
   }
 
-  function buildUnit(paths, index) {
+  function buildTile(tileMarkup, index) {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "app-scenery-unit");
-    svg.setAttribute("viewBox", "0 0 80 120");
+    svg.setAttribute("class", "app-scenery-tile");
+    svg.setAttribute("viewBox", `0 0 ${TILE_VIEW_WIDTH} ${TILE_VIEW_HEIGHT}`);
     svg.setAttribute("aria-hidden", "true");
     svg.style.setProperty("--unit-index", String(index));
-    svg.innerHTML = paths;
+    svg.innerHTML = tileMarkup;
     return svg;
   }
 
@@ -139,12 +151,12 @@
     if (strip) strip.innerHTML = "";
   }
 
-  function fillStrip(strip, paths, unitWidth, count) {
+  function fillStrip(strip, tileMarkup, unitWidth, count) {
     if (!strip || count < 1 || unitWidth < 1 || !Number.isFinite(count)) return;
     strip.innerHTML = "";
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < count; i += 1) {
-      fragment.appendChild(buildUnit(paths, i));
+      fragment.appendChild(buildTile(tileMarkup, i));
     }
     strip.appendChild(fragment);
     strip.style.setProperty("--scenery-unit-width", `${unitWidth}px`);
@@ -161,7 +173,7 @@
       const rect = target?.rect ?? null;
       const height = Math.max(MIN_HEIGHT, rect?.height || 0, fallbackHeight);
       const top = rect?.top ?? (window.innerHeight - height) / 2;
-      const unitWidth = Math.max(1, height * UNIT_ASPECT);
+      const unitWidth = Math.max(1, height * TILE_ASPECT);
       let count = Math.min(
         MAX_TILE_COUNT,
         Math.max(3, Math.ceil(window.innerWidth / unitWidth) + 2)
@@ -185,10 +197,10 @@
 
       if (type === "bamboo") {
         clearStrip(palmStrip);
-        fillStrip(bambooStrip, BAMBOO_PATHS, unitWidth, count);
+        fillStrip(bambooStrip, BAMBOO_TILE, unitWidth, count);
       } else {
         clearStrip(bambooStrip);
-        fillStrip(palmStrip, PALM_PATHS, unitWidth, count);
+        fillStrip(palmStrip, PALM_TILE, unitWidth, count);
       }
 
       retargetObserver(target?.main ?? null);
