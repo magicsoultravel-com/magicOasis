@@ -589,6 +589,7 @@
   }
 
   function stop() {
+    if (!boardCat) return;
     running = false;
     interaction = "patrol";
     fallAnim = null;

@@ -182,6 +182,7 @@
     localStorage.setItem(STORAGE_KEY, active);
     if (gameId === "quotes") window.SudokuApp?.setZen?.(false);
     applyVisibility();
+    window.SudokuApp?.syncCatForGameActive?.(gameId === "sudoku");
     Settings.applyForGame(active);
     initGame(active);
     maybeInitQuoteFooter(active);
@@ -227,6 +228,7 @@
     }
     if (active === "quotes") window.SudokuApp?.setZen?.(false);
     applyVisibility();
+    window.SudokuApp?.syncCatForGameActive?.(active === "sudoku");
     if (active !== "sudoku") {
       appEl?.classList.add("is-ready");
     }

@@ -9,6 +9,7 @@
         options: [
           { id: "palms", label: "Palms" },
           { id: "bamboo", label: "Bamboo" },
+          { id: "grass", label: "Grass" },
         ],
         get: () => window.Scenery?.getSceneryType?.() ?? "palms",
         set: (v) => window.Scenery?.applySceneryType?.(v),

@@ -13,6 +13,7 @@
   const sceneryEl = document.getElementById("app-scenery");
   const palmStrip = sceneryEl?.querySelector(".app-scenery-strip--palms");
   const bambooStrip = sceneryEl?.querySelector(".app-scenery-strip--bamboo");
+  const grassStrip = sceneryEl?.querySelector(".app-scenery-strip--grass");
   const rootEl = document.documentElement;
 
   const PALM_PATHS =
@@ -42,15 +43,59 @@
     '<path fill="currentColor" d="M52 92 H62 V94 H52 Z"/>' +
     '<path fill="currentColor" d="M58 62 C63 58 66 52 68 46 C64 50 60 56 58 60 Z"/>';
 
+  const GRASS_CLUSTER =
+    '<path fill="currentColor" d="M0 22 L1.5 13 L3 22 Z"/>' +
+    '<path fill="currentColor" d="M4 22 L6 7 L8 22 Z"/>' +
+    '<path fill="currentColor" d="M9 22 L10.5 15 L12 22 Z"/>' +
+    '<path fill="currentColor" d="M13 22 L15 3 L17 22 Z"/>' +
+    '<path fill="currentColor" d="M18 22 L19.5 11 L21 22 Z"/>';
+
+  const GRASS_CLUSTER_TALL =
+    '<path fill="currentColor" d="M0 28 L2 16 L4 28 Z"/>' +
+    '<path fill="currentColor" d="M5 28 L7.5 8 L10 28 Z"/>' +
+    '<path fill="currentColor" d="M11 28 L12.5 18 L14 28 Z"/>' +
+    '<path fill="currentColor" d="M15 28 L17.5 2 L20 28 Z"/>' +
+    '<path fill="currentColor" d="M21 28 L22.5 14 L24 28 Z"/>' +
+    '<path fill="currentColor" d="M25 28 L26.5 20 L28 28 Z"/>';
+
+  const GRASS_GROUND =
+    `<g transform="translate(0, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(12, 2) scale(0.9)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(26, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(40, 3) scale(0.85)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(54, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(68, 2) scale(0.92)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(82, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(96, 3) scale(0.88)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(110, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(124, 2) scale(0.9)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(138, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(152, 3) scale(0.86)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(166, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(180, 2) scale(0.9)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(194, 0)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(208, 3) scale(0.88)">${GRASS_CLUSTER}</g>` +
+    `<g transform="translate(222, 0)">${GRASS_CLUSTER}</g>`;
+
+  const TILE_GRASS = `<g class="app-scenery-grass" transform="translate(0, 96)">${GRASS_GROUND}</g>`;
+
   const PALM_TILE =
     `<g transform="translate(4, 0)">${PALM_PATHS}</g>` +
     `<g transform="translate(92, 18) scale(0.62)" opacity="0.85">${PALM_PATHS}</g>` +
-    `<g transform="translate(236, 0) scale(-1, 1)">${PALM_PATHS}</g>`;
+    `<g transform="translate(236, 0) scale(-1, 1)">${PALM_PATHS}</g>` +
+    TILE_GRASS;
 
   const BAMBOO_TILE =
     `<g transform="translate(0, 0)">${BAMBOO_PATHS}</g>` +
     `<g transform="translate(88, 14) scale(0.65)" opacity="0.88">${BAMBOO_PATHS}</g>` +
-    `<g transform="translate(160, 0) scale(-1, 1)">${BAMBOO_PATHS}</g>`;
+    `<g transform="translate(160, 0) scale(-1, 1)">${BAMBOO_PATHS}</g>` +
+    TILE_GRASS;
+
+  const GRASS_TILE =
+    `<g class="app-scenery-grass" transform="translate(0, 84)">${GRASS_GROUND}</g>` +
+    `<g class="app-scenery-grass" transform="translate(72, 72) scale(0.72)" opacity="0.9">${GRASS_CLUSTER_TALL}</g>` +
+    `<g class="app-scenery-grass" transform="translate(108, 68) scale(0.55)" opacity="0.85">${GRASS_CLUSTER_TALL}</g>` +
+    `<g class="app-scenery-grass" transform="translate(168, 84) scale(-1, 1)">${GRASS_GROUND}</g>`;
 
   let layoutQueued = false;
   let debounceTimer = null;
@@ -75,14 +120,20 @@
     return readMotion() === "sway" ? "sway" : "static";
   }
 
+  function normalizeSceneryType(type) {
+    if (type === "bamboo" || type === "grass") return type;
+    return "palms";
+  }
+
   function getSceneryType() {
-    return (
-      window.StorageSanitize?.getString?.(STORAGE_TYPE_KEY, ["palms", "bamboo"], "palms") ?? "palms"
-    );
+    const raw =
+      window.StorageSanitize?.getString?.(STORAGE_TYPE_KEY, ["palms", "bamboo", "grass"], "palms") ??
+      "palms";
+    return normalizeSceneryType(raw);
   }
 
   function applySceneryType(type) {
-    const value = type === "bamboo" ? "bamboo" : "palms";
+    const value = normalizeSceneryType(type);
     rootEl.dataset.scenery = value;
     try {
       localStorage.setItem(STORAGE_TYPE_KEY, value);
@@ -155,11 +206,15 @@
       }
       lastLayout = layoutKey;
 
+      clearStrip(palmStrip);
+      clearStrip(bambooStrip);
+      clearStrip(grassStrip);
+
       if (type === "bamboo") {
-        clearStrip(palmStrip);
         fillStrip(bambooStrip, BAMBOO_TILE, tileWidth, tileHeight, count);
+      } else if (type === "grass") {
+        fillStrip(grassStrip, GRASS_TILE, tileWidth, tileHeight, count);
       } else {
-        clearStrip(bambooStrip);
         fillStrip(palmStrip, PALM_TILE, tileWidth, tileHeight, count);
       }
     } catch (err) {

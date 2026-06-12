@@ -323,8 +323,7 @@
     btnCat.title = enabled ? "Hide companion cat" : "Companion cat";
     btnCat.setAttribute("aria-label", btnCat.title);
     localStorage.setItem("sudoku-cat", enabled ? "1" : "0");
-    if (enabled) CatCompanion.start();
-    else CatCompanion.stop();
+    syncCatCompanionRuntime();
   }
 
   function toggleCat() {
@@ -1494,6 +1493,12 @@
 
   let sudokuUiReady = false;
 
+  function syncCatCompanionRuntime() {
+    if (!sudokuUiReady) return;
+    if (catEnabled) CatCompanion.start();
+    else CatCompanion.stop();
+  }
+
   function initSudokuUI() {
     if (sudokuUiReady) return;
     sudokuUiReady = true;
@@ -1502,6 +1507,16 @@
     buildNumpad();
     buildCellPicker();
     startAutoSave();
+    syncCatCompanionRuntime();
+  }
+
+  function syncCatForGameActive(isSudokuActive) {
+    if (!isSudokuActive) {
+      CatCompanion.stop();
+      return;
+    }
+    initSudokuUI();
+    syncCatCompanionRuntime();
   }
 
   Settings.initPickerDialog(
@@ -1514,7 +1529,7 @@
   Appearance.setOnThemeChanged(saveGame);
 
   async function startFromHub() {
-    initSudokuUI();
+    syncCatForGameActive(true);
     await Quotes.init();
     await showQuoteSplash();
 
@@ -1530,10 +1545,11 @@
 
     const activeGame = localStorage.getItem("magic-active-game");
     if (!activeGame || activeGame !== "sudoku") {
+      syncCatForGameActive(false);
       return;
     }
 
-    initSudokuUI();
+    syncCatForGameActive(true);
     await Quotes.init();
     await showQuoteSplash();
 
@@ -1551,5 +1567,6 @@
     openSettings,
     startFromHub,
     setZen,
+    syncCatForGameActive,
   };
 })();

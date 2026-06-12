@@ -287,12 +287,16 @@ body {
   flex-wrap: nowrap;
 }
 
-html[data-scenery="bamboo"] .app-scenery-strip--palms {
+.app-scenery-strip--palms,
+.app-scenery-strip--bamboo,
+.app-scenery-strip--grass {
   display: none;
 }
 
-html[data-scenery="palms"] .app-scenery-strip--bamboo {
-  display: none;
+html[data-scenery="palms"] .app-scenery-strip--palms,
+html[data-scenery="bamboo"] .app-scenery-strip--bamboo,
+html[data-scenery="grass"] .app-scenery-strip--grass {
+  display: flex;
 }
 
 .app-scenery-tile {
@@ -305,6 +309,18 @@ html[data-scenery="palms"] .app-scenery-strip--bamboo {
 
 .app-scenery-tile:nth-child(odd) {
   opacity: 0.16;
+}
+
+.app-scenery-grass {
+  color: color-mix(in srgb, #3d9a52 40%, currentColor);
+}
+
+html[data-scenery="grass"] .app-scenery-tile {
+  opacity: 0.18;
+}
+
+html[data-scenery="grass"] .app-scenery-tile:nth-child(odd) {
+  opacity: 0.2;
 }
 
 html[data-scenery-motion="sway"] .app-scenery-tile {
