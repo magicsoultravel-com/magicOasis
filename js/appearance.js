@@ -19,9 +19,17 @@ const Appearance = (() => {
   }
 
   function getTheme() {
-    let saved = localStorage.getItem(THEME_KEY);
-    if (saved === "dark") saved = "oled";
-    return THEMES.some((t) => t.id === saved) ? saved : DEFAULT_THEME;
+    try {
+      if (localStorage.getItem(THEME_KEY) === "dark") {
+        localStorage.setItem(THEME_KEY, "oled");
+      }
+    } catch {
+      /* storage unavailable */
+    }
+    const allowed = THEMES.map((t) => t.id);
+    return (
+      window.StorageSanitize?.getString?.(THEME_KEY, allowed, DEFAULT_THEME) ?? DEFAULT_THEME
+    );
   }
 
   function setTheme(themeId) {

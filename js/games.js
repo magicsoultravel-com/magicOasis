@@ -43,8 +43,7 @@
     quotes: quotesPanel,
   };
 
-  let active = localStorage.getItem(STORAGE_KEY);
-  if (active && !GAMES.includes(active)) active = null;
+  let active = window.StorageSanitize?.getString?.(STORAGE_KEY, GAMES, null) ?? null;
 
   function gameIndex(id) {
     return GAMES.indexOf(id);
@@ -146,11 +145,13 @@
     }
     if (active === "quotes") window.SudokuApp?.setZen?.(false);
     applyVisibility();
+    if (active !== "sudoku") {
+      appEl?.classList.add("is-ready");
+    }
+    window.Scenery?.initScenery?.();
     Settings.applyForGame(active);
     initGame(active);
     window.QuoteFooter?.init?.();
     window.QuoteFooter?.applyVisibility?.();
   }
-
-  window.Scenery?.relayout?.();
 })();

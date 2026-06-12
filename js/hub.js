@@ -146,10 +146,10 @@
 
   function initHubOnLoad() {
     buildGrid();
-    window.Scenery?.initScenery?.();
 
     if (shouldShowHubOnLoad()) {
       setHubView(true);
+      window.Scenery?.initScenery?.();
       return true;
     }
 
