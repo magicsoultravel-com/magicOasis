@@ -36,6 +36,7 @@
       document.title = BRAND_TITLE;
     }
     hubVisible = active;
+    window.Scenery?.relayout?.();
   }
 
   function buildGrid() {

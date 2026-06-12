@@ -105,6 +105,7 @@
     initGame(active);
     window.QuoteFooter?.init?.();
     window.QuoteFooter?.applyVisibility?.();
+    window.Scenery?.relayout?.();
   }
 
   function cycle(delta) {
@@ -150,4 +151,6 @@
     window.QuoteFooter?.init?.();
     window.QuoteFooter?.applyVisibility?.();
   }
+
+  window.Scenery?.relayout?.();
 })();
