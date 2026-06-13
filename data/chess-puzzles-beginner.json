@@ -1,0 +1,17 @@
+[
+  {"id": "00sHx", "fen": "q3k1nr/1pp1nQpp/3p4/1P2p3/4P3/B1PP1b2/B5PP/5K2 b k - 0 17", "moves": ["e8d7", "a2e6", "d7d8", "f7f8"], "r": 1760, "themes": ["mate", "mateIn2"], "pop": 83},
+  {"id": "00sO1", "fen": "1k1r4/pp3pp1/2p1p3/4b3/P3n1P1/8/KPP2PN1/3rBR1R b - - 2 31", "moves": ["b8c7", "e1a5", "b7b6", "f1d1"], "r": 998, "themes": ["advantage", "discoveredAttack"], "pop": 94},
+  {"id": "00t0C", "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4", "moves": ["h5f7"], "r": 642, "themes": ["mate", "mateIn1", "opening"], "pop": 100},
+  {"id": "00t1a", "fen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2", "moves": ["d1h5", "g8f6", "h5f7"], "r": 580, "themes": ["mate", "scholarMate"], "pop": 95},
+  {"id": "00t2K", "fen": "6k1/5ppp/8/8/8/8/5PPP/5RK1 w - - 0 1", "moves": ["f1f8"], "r": 420, "themes": ["mate", "mateIn1", "backRankMate"], "pop": 98},
+  {"id": "00t3B", "fen": "4r1k1/5ppp/8/8/8/5R2/5PPP/6K1 w - - 0 1", "moves": ["f3f8", "e8f8"], "r": 750, "themes": ["mate", "sacrifice"], "pop": 90},
+  {"id": "00t4M", "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 4 5", "moves": ["c4f7", "e8f7", "f3g5"], "r": 890, "themes": ["fork", "opening"], "pop": 88},
+  {"id": "00t5P", "fen": "8/8/8/8/4K3/8/4p3/4k3 w - - 0 1", "moves": ["e4d3", "e1d2", "d3c2"], "r": 520, "themes": ["endgame", "pawnEndgame"], "pop": 92},
+  {"id": "00t6R", "fen": "6k1/5ppp/8/8/1r6/8/5PPP/1R4K1 w - - 0 1", "moves": ["b1b8", "g8f7", "b8b7"], "r": 680, "themes": ["pin", "skewer"], "pop": 87},
+  {"id": "00t7S", "fen": "r2qkb1r/ppp2ppp/2n1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 0 6", "moves": ["c4d5", "c6d4", "e3d4"], "r": 720, "themes": ["opening", "advantage"], "pop": 85},
+  {"id": "00t8T", "fen": "8/8/8/4k3/8/8/3K4/3Q4 w - - 0 1", "moves": ["d2c3", "e5d6", "d1d5"], "r": 610, "themes": ["endgame", "fork"], "pop": 91},
+  {"id": "00t9U", "fen": "5rk1/5ppp/8/8/8/5B2/5PPP/4R1K1 w - - 0 1", "moves": ["e1e8", "f8e8", "f3c6"], "r": 940, "themes": ["deflection", "mateIn2"], "pop": 86},
+  {"id": "00taV", "fen": "8/8/8/8/8/3K4/3p4/3k4 w - - 0 1", "moves": ["d3c2"], "r": 480, "themes": ["endgame", "pawnEndgame"], "pop": 96},
+  {"id": "00tbW", "fen": "r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 3 3", "moves": ["f6e4", "h5e5", "e4d2", "e5e8"], "r": 1100, "themes": ["opening", "trappedPiece"], "pop": 82},
+  {"id": "00tcX", "fen": "8/8/8/8/3K4/8/3p4/3k4 w - - 0 1", "moves": ["d4c3", "d1c1", "c3d2"], "r": 550, "themes": ["endgame"], "pop": 89}
+]

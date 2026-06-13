@@ -1974,6 +1974,7 @@ body > .app {
   .slitherlink-only,
   .kakuro-only,
   .reversi-only,
+  .chess-only,
   .quotes-only
 ) {
   display: none !important;
@@ -1988,6 +1989,7 @@ body > .app {
 .app[data-game="slitherlink"] .slitherlink-only,
 .app[data-game="kakuro"] .kakuro-only,
 .app[data-game="reversi"] .reversi-only,
+.app[data-game="chess"] .chess-only,
 .app[data-game="quotes"] .quotes-only {
   display: revert !important;
 }
@@ -2003,6 +2005,7 @@ body > .app {
   .slitherlink-only,
   .kakuro-only,
   .reversi-only,
+  .chess-only,
   .quotes-only
 ) {
   display: none !important;

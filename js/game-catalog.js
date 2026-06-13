@@ -11,6 +11,7 @@
     { id: "slitherlink", label: "Slitherlink", available: true },
     { id: "kakuro", label: "Kakuro", available: true },
     { id: "reversi", label: "Reversi", available: true },
+    { id: "chess", label: "Chess", available: true },
     { id: "quotes", label: "Quotes", available: true },
   ];
 
@@ -24,6 +25,7 @@
     slitherlink: "magicSlitherlink",
     kakuro: "magicKakuro",
     reversi: "magicReversi",
+    chess: "magicChess",
     quotes: "magicQuotes",
   };
 

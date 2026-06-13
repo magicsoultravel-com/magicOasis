@@ -1,0 +1,12 @@
+[
+  {"id": "00sJb", "fen": "Q1b2r1k/p2np2p/5bp1/q7/5P2/4B3/PPP3PP/2KR1B1R w - - 1 17", "moves": ["d1d7", "a5e1", "d7d1", "e1e3", "c1b1", "e3b6"], "r": 2235, "themes": ["advantage", "fork"], "pop": 97},
+  {"id": "00sJ9", "fen": "r3r1k1/p4ppp/2p2n2/1p6/3P1qb1/2NQR3/PPB2PP1/R1B3K1 w - - 5 18", "moves": ["e3g3", "e8e1", "g1h2", "e1c1", "a1c1", "f4h6", "h2g1", "h6c1"], "r": 2671, "themes": ["advantage", "sacrifice"], "pop": 87},
+  {"id": "00u1A", "fen": "2r3k1/1p3ppp/p3p3/4P3/8/2P5/PP3PPP/2R3K1 w - - 0 1", "moves": ["c1c8", "g8f7", "c8b8"], "r": 1250, "themes": ["skewer"], "pop": 90},
+  {"id": "00u2B", "fen": "4r1k1/5ppp/8/8/8/5R2/5PPP/6K1 w - - 0 1", "moves": ["f3f8", "e8f8", "g2g4"], "r": 1180, "themes": ["advantage"], "pop": 88},
+  {"id": "00u3C", "fen": "r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/3P1N2/PPP2PPP/RNBQK2R w KQkq - 4 5", "moves": ["c4f7", "e8f7", "f3g5", "f7g8", "g5h7"], "r": 1420, "themes": ["fork", "opening"], "pop": 85},
+  {"id": "00u4D", "fen": "6k1/5ppp/8/8/8/8/5PPP/5RK1 w - - 0 1", "moves": ["f1f8", "g8h7", "f8f7"], "r": 1050, "themes": ["mate", "backRankMate"], "pop": 92},
+  {"id": "00u5E", "fen": "8/8/8/4k3/8/8/3K4/3Q4 w - - 0 1", "moves": ["d2c3", "e5d6", "d1d5", "d6c7", "d5d7"], "r": 1320, "themes": ["endgame", "fork"], "pop": 86},
+  {"id": "00u6F", "fen": "5rk1/5ppp/8/8/8/5B2/5PPP/4R1K1 w - - 0 1", "moves": ["e1e8", "f8e8", "f3c6", "e8f8", "c6d7"], "r": 1580, "themes": ["deflection"], "pop": 84},
+  {"id": "00u7G", "fen": "r2qkb1r/ppp2ppp/2n1pn2/3p4/2PP4/2N1PN2/PP3PPP/R1BQKB1R w KQkq - 0 6", "moves": ["c4d5", "c6d4", "e3d4", "e6d5", "c1g5"], "r": 1450, "themes": ["opening", "pin"], "pop": 83},
+  {"id": "00u8H", "fen": "6k1/5ppp/8/8/1r6/8/5PPP/1R4K1 w - - 0 1", "moves": ["b1b8", "g8f7", "b8b7", "f7f6", "b7b6"], "r": 1380, "themes": ["pin", "skewer"], "pop": 81}
+]

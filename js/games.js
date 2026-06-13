@@ -10,13 +10,14 @@
     slitherlink: "magicSlitherlink",
     kakuro: "magicKakuro",
     reversi: "magicReversi",
+    chess: "magicChess",
     quotes: "magicQuotes",
   };
 
   const STORAGE_KEY = "magic-active-game";
   const QUOTE_FOOTER_KEY = "magic-quote-footer-enabled";
 
-  const MINI_GAMES = new Set(["snake", "minesweeper", "game2048", "slitherlink", "kakuro", "reversi"]);
+  const MINI_GAMES = new Set(["snake", "minesweeper", "game2048", "slitherlink", "kakuro", "reversi", "chess"]);
 
   const titleEl = document.getElementById("game-title");
   const btnPrev = document.getElementById("game-prev");
@@ -31,6 +32,7 @@
   const slitherlinkPanel = document.getElementById("slitherlink-panel");
   const kakuroPanel = document.getElementById("kakuro-panel");
   const reversiPanel = document.getElementById("reversi-panel");
+  const chessPanel = document.getElementById("chess-panel");
   const quotesPanel = document.getElementById("quotes-panel");
 
   const PANELS = {
@@ -43,6 +45,7 @@
     slitherlink: slitherlinkPanel,
     kakuro: kakuroPanel,
     reversi: reversiPanel,
+    chess: chessPanel,
     quotes: quotesPanel,
   };
 
@@ -88,6 +91,9 @@
     ensureGameStyles(gameId);
     if (gameId === "kakuro" && !window.KakuroPuzzles) {
       return injectScript("js/kakuro-puzzles.js");
+    }
+    if (gameId === "chess" && !window.ChessEngine) {
+      return injectScript("js/chess-engine.js");
     }
     return Promise.resolve();
   }
@@ -135,6 +141,7 @@
     if (active === "slitherlink") window.SlitherlinkApp?.saveGame?.();
     if (active === "kakuro") window.KakuroApp?.saveGame?.();
     if (active === "reversi") window.ReversiApp?.saveGame?.();
+    if (active === "chess") window.ChessApp?.saveGame?.();
     if (active === "quotes") window.QuotesApp?.saveGame?.();
   }
 
@@ -147,6 +154,7 @@
     if (id === "slitherlink") window.SlitherlinkApp?.init?.();
     if (id === "kakuro") window.KakuroApp?.init?.();
     if (id === "reversi") window.ReversiApp?.init?.();
+    if (id === "chess") window.ChessApp?.init?.();
     if (id === "quotes") window.QuotesApp?.init?.();
   }
 
@@ -214,6 +222,7 @@
     isSlitherlink: () => active === "slitherlink",
     isKakuro: () => active === "kakuro",
     isReversi: () => active === "reversi",
+    isChess: () => active === "chess",
     isQuotes: () => active === "quotes",
   };
 
