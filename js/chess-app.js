@@ -27,6 +27,11 @@
 
   const promoteDialog = document.getElementById("chess-promote-dialog");
 
+  const loadOverlay = document.getElementById("chess-load-overlay");
+  const loadLabel = document.getElementById("chess-load-label");
+  const loadProgress = document.getElementById("chess-load-progress");
+  const loadBar = document.getElementById("chess-load-bar");
+
   const STATE_KEY = "chess-game";
   const GAMES_KEY = "chess-games";
   const STATS_KEY = "chess-stats";
@@ -36,6 +41,7 @@
   const HISTORY_LIMIT = 80;
 
   const DIFF_MS = { casual: 400, club: 1500, strong: 3000 };
+  const LOAD_DELAY_MS = 200;
 
   const PIECES = {
     wk: "♔", wq: "♕", wr: "♖", wb: "♗", wn: "♘", wp: "♙",
@@ -71,7 +77,7 @@
   let openings = [];
 
   let stats = { played: 0, won: 0, lost: 0, drawn: 0 };
-  let puzzleStats = { solved: [], bestStreak: 0, attempts: 0 };
+  let puzzleStats = { solved: [], bestStreak: 0, currentStreak: 0, attempts: 0 };
   let archive = [];
   let selectedArchiveId = null;
 
@@ -79,6 +85,71 @@
 
   function setStatus(msg) {
     if (statusEl) statusEl.textContent = msg;
+  }
+
+  function setChessLoadProgress(p, label) {
+    const pct = Math.round(p * 100);
+    if (loadBar) loadBar.style.width = `${pct}%`;
+    loadProgress?.setAttribute("aria-valuenow", String(pct));
+    if (label && loadLabel) loadLabel.textContent = label;
+  }
+
+  function hideChessLoad() {
+    if (!loadOverlay) return;
+    loadOverlay.classList.remove("is-visible");
+    loadOverlay.hidden = true;
+    loadOverlay.setAttribute("aria-hidden", "true");
+    setChessLoadProgress(0, "Loading…");
+  }
+
+  function showChessLoad(label, progress = 0.08) {
+    if (!loadOverlay) return;
+    setChessLoadProgress(progress, label);
+    loadOverlay.hidden = false;
+    loadOverlay.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => {
+      loadOverlay.classList.add("is-visible");
+    });
+  }
+
+  function withChessLoad(label, workFn) {
+    let overlayShown = false;
+    let progress = 0.08;
+    let progressTimer = null;
+    let tickTimer = null;
+    const reveal = () => {
+      if (overlayShown) return;
+      overlayShown = true;
+      showChessLoad(label, progress);
+    };
+    progressTimer = setTimeout(reveal, LOAD_DELAY_MS);
+    tickTimer = setInterval(() => {
+      progress = Math.min(0.92, progress + 0.06);
+      if (overlayShown) setChessLoadProgress(progress, label);
+    }, 180);
+
+    return Promise.resolve()
+      .then(workFn)
+      .then((result) => {
+        clearTimeout(progressTimer);
+        clearInterval(tickTimer);
+        if (overlayShown) {
+          setChessLoadProgress(1, "Ready");
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              hideChessLoad();
+              resolve(result);
+            }, 120);
+          });
+        }
+        return result;
+      })
+      .catch((err) => {
+        clearTimeout(progressTimer);
+        clearInterval(tickTimer);
+        hideChessLoad();
+        throw err;
+      });
   }
 
   function updateStatsLine() {
@@ -94,13 +165,14 @@
       const p = localStorage.getItem(PUZZLE_STATS_KEY);
       if (p) {
         puzzleStats = { ...puzzleStats, ...JSON.parse(p) };
-        puzzleStreak = puzzleStats.bestStreak || 0;
+        puzzleStreak = puzzleStats.currentStreak || 0;
       }
     } catch { /* ignore */ }
     updateStatsLine();
   }
 
   function saveStats() {
+    puzzleStats.currentStreak = puzzleStreak;
     try {
       localStorage.setItem(STATS_KEY, JSON.stringify(stats));
       localStorage.setItem(PUZZLE_STATS_KEY, JSON.stringify(puzzleStats));
@@ -146,7 +218,7 @@
 
   function fetchPuzzlePack(tier) {
     return fetch(`data/chess-puzzles-${tier}.json`)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : []))
       .catch(() => []);
   }
 
@@ -301,10 +373,16 @@
   }
 
   function applyMove(move, silent) {
+    if (!silent) pushUndo();
     const res = game.move(move);
-    if (!res) return null;
+    if (!res) {
+      if (!silent) {
+        undoStack.pop();
+        updateUndoButtons();
+      }
+      return null;
+    }
     if (!silent) {
-      pushUndo();
       renderBoard();
       renderMoves();
       afterMove();
@@ -441,10 +519,21 @@
 
   function runAI() {
     if (thinking || gameOver || mode !== "ai") return;
+    const engine = window.ChessEngine;
+    if (!engine) {
+      setStatus("Engine unavailable");
+      return;
+    }
     thinking = true;
     refreshStatus();
     const ms = DIFF_MS[difficulty] || 1500;
-    window.ChessEngine?.getBestMove(game.fen(), ms)
+
+    const ensureReady = engine.isReady()
+      ? Promise.resolve()
+      : withChessLoad("Loading engine…", () => engine.init());
+
+    ensureReady
+      .then(() => engine.getBestMove(game.fen(), ms))
       .then((uci) => {
         thinking = false;
         if (!uci || gameOver) {
@@ -470,6 +559,12 @@
         if (pick && pick.flags.includes("p")) {
           pendingPromote = { from: selected, to: sq };
           promoteDialog?.showModal();
+          return;
+        }
+        if (!pick) {
+          selected = null;
+          legalTargets = [];
+          renderBoard();
           return;
         }
         selected = null;
@@ -527,8 +622,7 @@
 
   function pickPuzzle() {
     if (!puzzlePool.length) {
-      setStatus("Loading puzzles…");
-      return fetchPuzzlePack(puzzleTier).then((pack) => {
+      return withChessLoad("Loading puzzles…", () => fetchPuzzlePack(puzzleTier).then((pack) => {
         puzzlePool = pack;
         if (!pack.length) {
           setStatus("No puzzles in pack");
@@ -537,7 +631,7 @@
         const unsolved = pack.filter((p) => !puzzleStats.solved.includes(p.id));
         const pool = unsolved.length ? unsolved : pack;
         startPuzzle(pool[Math.floor(Math.random() * pool.length)]);
-      });
+      }));
     }
     const unsolved = puzzlePool.filter((p) => !puzzleStats.solved.includes(p.id));
     const pool = unsolved.length ? unsolved : puzzlePool;
@@ -616,9 +710,9 @@
   function tryLoadGame() {
     try {
       const raw = localStorage.getItem(STATE_KEY);
-      if (!raw) return false;
+      if (!raw) return Promise.resolve(false);
       const s = JSON.parse(raw);
-      if (s.v !== 1) return false;
+      if (s.v !== 1) return Promise.resolve(false);
       mode = s.mode || "ai";
       humanColor = s.humanColor || "w";
       difficulty = s.difficulty || "club";
@@ -634,10 +728,10 @@
       updateModeUI();
 
       if (mode === "puzzle" && s.puzzle) {
-        return fetchPuzzlePack(puzzleTier).then((pack) => {
+        return withChessLoad("Loading puzzles…", () => fetchPuzzlePack(puzzleTier).then((pack) => {
           puzzlePool = pack;
           const p = pack.find((x) => x.id === s.puzzle.id);
-          if (!p) return newGame();
+          if (!p) return newGame().then(() => false);
           puzzle = p;
           puzzleStep = s.puzzle.step || 1;
           game = new Chess(s.fen);
@@ -646,7 +740,7 @@
           renderMoves();
           refreshStatus();
           return true;
-        });
+        }));
       }
 
       game = new Chess();
@@ -804,6 +898,15 @@
     });
   }
 
+  async function bootstrap() {
+    try {
+      const loaded = await tryLoadGame();
+      if (!loaded) await newGame();
+    } catch {
+      await newGame();
+    }
+  }
+
   function init() {
     if (initialized) return;
     initialized = true;
@@ -811,9 +914,7 @@
     loadArchive();
     fetchOpenings();
     wireEvents();
-    tryLoadGame().then((loaded) => {
-      if (!loaded) newGame();
-    });
+    void bootstrap();
   }
 
   window.ChessApp = {

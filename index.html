@@ -433,7 +433,17 @@
       </div>
       <main class="main chess-only">
         <div class="ch-shell">
-          <div id="chess-board" class="ch-board" role="grid" aria-label="Chess board"></div>
+          <div class="ch-board-wrap">
+            <div id="chess-load-overlay" class="generate-overlay" hidden aria-hidden="true">
+              <div class="generate-panel">
+                <p id="chess-load-label" class="generate-label">Loading…</p>
+                <div id="chess-load-progress" class="generate-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="chess-load-label">
+                  <div id="chess-load-bar" class="generate-bar"></div>
+                </div>
+              </div>
+            </div>
+            <div id="chess-board" class="ch-board" role="grid" aria-label="Chess board"></div>
+          </div>
           <div class="ch-side">
             <ol id="chess-moves" class="ch-moves" aria-label="Move list"></ol>
             <div id="chess-puzzle-meta" class="ch-puzzle-meta" hidden></div>

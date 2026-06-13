@@ -686,16 +686,24 @@
   min-height: 0;
 }
 
+.ch-board-wrap {
+  position: relative;
+  width: min(100%, 20rem);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.ch-board-wrap .ch-board {
+  width: 100%;
+}
+
 .ch-board {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   gap: 0;
-  width: min(100%, 20rem);
-  aspect-ratio: 1;
   border: 1px solid var(--border);
   border-radius: 6px;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .ch-cell {
