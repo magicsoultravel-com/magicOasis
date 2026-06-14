@@ -366,6 +366,12 @@
     }
   }
 
+  function ensureBoardRendered() {
+    if (game && boardEl && boardEl.childElementCount !== 64) {
+      renderBoard();
+    }
+  }
+
   function uciToMove(uci) {
     const m = { from: uci.slice(0, 2), to: uci.slice(2, 4) };
     if (uci.length > 4) m.promotion = uci[4];
@@ -669,6 +675,7 @@
     renderMoves();
     refreshStatus();
     saveGame();
+    ensureBoardRendered();
 
     if (mode === "ai" && humanColor === "b") {
       runAI();
@@ -713,7 +720,13 @@
       if (!raw) return Promise.resolve(false);
       const s = JSON.parse(raw);
       if (s.v !== 1) return Promise.resolve(false);
-      mode = s.mode || "ai";
+
+      const savedMode = s.mode || "ai";
+      if (!["ai", "hotseat", "puzzle"].includes(savedMode)) {
+        return Promise.resolve(false);
+      }
+
+      mode = savedMode;
       humanColor = s.humanColor || "w";
       difficulty = s.difficulty || "club";
       puzzleTier = s.puzzleTier || "beginner";
@@ -727,7 +740,8 @@
       if (puzzleTierSelect) puzzleTierSelect.value = puzzleTier;
       updateModeUI();
 
-      if (mode === "puzzle" && s.puzzle) {
+      if (mode === "puzzle") {
+        if (!s.puzzle) return Promise.resolve(false);
         return withChessLoad("Loading puzzles…", () => fetchPuzzlePack(puzzleTier).then((pack) => {
           puzzlePool = pack;
           const p = pack.find((x) => x.id === s.puzzle.id);
@@ -739,16 +753,22 @@
           renderBoard();
           renderMoves();
           refreshStatus();
+          ensureBoardRendered();
           return true;
         }));
       }
 
-      game = new Chess();
-      const hist = s.history || [];
-      for (const san of hist) game.move(san, { sloppy: true });
+      if (s.fen) {
+        game = new Chess(s.fen);
+      } else {
+        game = new Chess();
+        const hist = s.history || [];
+        for (const san of hist) game.move(san, { sloppy: true });
+      }
       renderBoard();
       renderMoves();
       refreshStatus();
+      ensureBoardRendered();
       if (mode === "ai" && !gameOver && game.turn() !== humanColor) runAI();
       return Promise.resolve(true);
     } catch {
@@ -899,12 +919,14 @@
   }
 
   async function bootstrap() {
+    hideChessLoad();
     try {
       const loaded = await tryLoadGame();
       if (!loaded) await newGame();
     } catch {
       await newGame();
     }
+    ensureBoardRendered();
   }
 
   function init() {
