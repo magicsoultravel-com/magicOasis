@@ -27,6 +27,11 @@
 
   const promoteDialog = document.getElementById("chess-promote-dialog");
 
+  const startDialog = document.getElementById("chess-start-dialog");
+  const startMessageEl = document.getElementById("chess-start-message");
+  const btnStartNew = document.getElementById("chess-start-new");
+  const btnStartResume = document.getElementById("chess-start-resume");
+
   const loadOverlay = document.getElementById("chess-load-overlay");
   const loadLabel = document.getElementById("chess-load-label");
   const loadProgress = document.getElementById("chess-load-progress");
@@ -42,6 +47,7 @@
 
   const DIFF_MS = { casual: 400, club: 1500, strong: 3000 };
   const LOAD_DELAY_MS = 200;
+  const RESTORE_AI_DELAY_MS = 500;
 
   const PIECES = {
     wk: "♔", wq: "♕", wr: "♖", wb: "♗", wn: "♘", wp: "♙",
@@ -497,7 +503,9 @@
       else setStatus(`Game over${openTxt}`);
     });
     updateUndoButtons();
-    saveGame();
+    try {
+      localStorage.removeItem(STATE_KEY);
+    } catch { /* ignore */ }
   }
 
   function refreshStatus() {
@@ -531,14 +539,11 @@
       return;
     }
     thinking = true;
-    refreshStatus();
+    if (!engine.isReady()) setStatus("Loading engine…");
+    else refreshStatus();
     const ms = DIFF_MS[difficulty] || 1500;
 
-    const ensureReady = engine.isReady()
-      ? Promise.resolve()
-      : withChessLoad("Loading engine…", () => engine.init());
-
-    ensureReady
+    engine.init()
       .then(() => engine.getBestMove(game.fen(), ms))
       .then((uci) => {
         thinking = false;
@@ -550,7 +555,9 @@
       })
       .catch(() => {
         thinking = false;
+        hideChessLoad();
         setStatus("Engine unavailable");
+        refreshStatus();
       });
   }
 
@@ -695,7 +702,7 @@
   }
 
   function saveGame() {
-    if (!game) return;
+    if (!game || gameOver) return;
     const payload = {
       v: 1,
       mode,
@@ -704,14 +711,82 @@
       puzzleTier,
       flipped,
       fen: game.fen(),
-      history: game.history(),
-      gameOver,
-      result,
       puzzle: puzzle ? { id: puzzle.id, step: puzzleStep } : null,
     };
     try {
       localStorage.setItem(STATE_KEY, JSON.stringify(payload));
     } catch { /* ignore */ }
+  }
+
+  function moveLabelFromFen(fen) {
+    const parts = (fen || "").split(/\s+/);
+    const n = parseInt(parts[5], 10);
+    return Number.isFinite(n) && n > 0 ? n : 1;
+  }
+
+  function buildResumeMessage(s) {
+    const savedMode = s.mode || "ai";
+    if (savedMode === "puzzle") {
+      return `Resume puzzle (${s.puzzleTier || "beginner"})`;
+    }
+    if (savedMode === "hotseat") {
+      return `Resume 2-player game · move ${moveLabelFromFen(s.fen)}`;
+    }
+    const side = s.humanColor === "b" ? "Black" : "White";
+    return `Resume Vs AI · ${side} · move ${moveLabelFromFen(s.fen)}`;
+  }
+
+  function peekSave() {
+    try {
+      const raw = localStorage.getItem(STATE_KEY);
+      if (!raw) return null;
+      const s = JSON.parse(raw);
+      if (s.v !== 1 || s.gameOver) return null;
+      const savedMode = s.mode || "ai";
+      if (!["ai", "hotseat", "puzzle"].includes(savedMode)) return null;
+      if (savedMode === "puzzle" && !s.puzzle) return null;
+      if (!s.fen && !(s.history && s.history.length)) return null;
+      return { save: s, message: buildResumeMessage(s) };
+    } catch {
+      return null;
+    }
+  }
+
+  function showStartDialog(message) {
+    return new Promise((resolve) => {
+      if (!startDialog || !startMessageEl) {
+        resolve("new");
+        return;
+      }
+      startMessageEl.textContent = message;
+      const onNew = () => {
+        cleanup();
+        resolve("new");
+      };
+      const onResume = () => {
+        cleanup();
+        resolve("resume");
+      };
+      const cleanup = () => {
+        startDialog.close();
+        btnStartNew?.removeEventListener("click", onNew);
+        btnStartResume?.removeEventListener("click", onResume);
+      };
+      btnStartNew?.addEventListener("click", onNew);
+      btnStartResume?.addEventListener("click", onResume);
+      startDialog.showModal();
+    });
+  }
+
+  function preloadEngine() {
+    if (mode === "ai" && window.ChessEngine) {
+      void window.ChessEngine.init().catch(() => {});
+    }
+  }
+
+  function scheduleRestoreAI() {
+    if (mode !== "ai" || gameOver || !game || game.turn() === humanColor) return;
+    setTimeout(() => runAI(), RESTORE_AI_DELAY_MS);
   }
 
   function tryLoadGame() {
@@ -745,7 +820,7 @@
         return withChessLoad("Loading puzzles…", () => fetchPuzzlePack(puzzleTier).then((pack) => {
           puzzlePool = pack;
           const p = pack.find((x) => x.id === s.puzzle.id);
-          if (!p) return newGame().then(() => false);
+          if (!p) return Promise.resolve(false);
           puzzle = p;
           puzzleStep = s.puzzle.step || 1;
           game = new Chess(s.fen);
@@ -769,7 +844,6 @@
       renderMoves();
       refreshStatus();
       ensureBoardRendered();
-      if (mode === "ai" && !gameOver && game.turn() !== humanColor) runAI();
       return Promise.resolve(true);
     } catch {
       return Promise.resolve(false);
@@ -920,13 +994,28 @@
 
   async function bootstrap() {
     hideChessLoad();
+    const peeked = peekSave();
     try {
-      const loaded = await tryLoadGame();
-      if (!loaded) await newGame();
+      if (peeked) {
+        const choice = await showStartDialog(peeked.message);
+        if (choice === "resume") {
+          const loaded = await tryLoadGame();
+          if (!loaded) await newGame();
+          else scheduleRestoreAI();
+        } else {
+          try {
+            localStorage.removeItem(STATE_KEY);
+          } catch { /* ignore */ }
+          await newGame();
+        }
+      } else {
+        await newGame();
+      }
     } catch {
       await newGame();
     }
     ensureBoardRendered();
+    preloadEngine();
   }
 
   function init() {

@@ -1,7 +1,9 @@
 // Stockfish UCI bridge — lazy Web Worker
 (() => {
   const WORKER_URL = "vendor/stockfish/stockfish-lite.js#,worker";
-  const READY_TIMEOUT_MS = 15000;
+  const INIT_TIMEOUT_MS = 60000;
+  const READY_TIMEOUT_MS = 60000;
+  const SEARCH_EXTRA_MS = 15000;
 
   let worker = null;
   let ready = false;
@@ -10,18 +12,26 @@
   let pending = null;
 
   function handleLine(line) {
-    if (!line || typeof line !== "string") return;
-    if (line === "uciok" || line === "readyok") ready = true;
-    if (line.startsWith("bestmove ") && pending) {
-      const match = line.match(/bestmove (\S+)/);
+    if (!line) return;
+    const text = String(line).trim();
+    if (!text) return;
+    if (text.startsWith("uciok") || text.startsWith("readyok")) ready = true;
+    if (text.startsWith("bestmove ") && pending) {
+      const match = text.match(/bestmove (\S+)/);
       const resolve = pending.resolve;
+      clearTimeout(pending.timer);
       pending = null;
       resolve(match && match[1] !== "(none)" ? match[1] : null);
     }
   }
 
+  function handleMessage(data) {
+    String(data).split(/\r?\n/).forEach((raw) => handleLine(raw));
+  }
+
   function failEngine(err) {
     if (pending) {
+      clearTimeout(pending.timer);
       pending.reject(err);
       pending = null;
     }
@@ -35,7 +45,7 @@
   function spawnWorker() {
     if (worker) return;
     worker = new Worker(WORKER_URL);
-    worker.onmessage = (e) => handleLine(e.data);
+    worker.onmessage = (e) => handleMessage(e.data);
     worker.onerror = () => {
       failEngine(new Error("Engine worker failed"));
     };
@@ -68,7 +78,7 @@
       initReject = reject;
       const timeout = setTimeout(() => {
         failEngine(new Error("Engine init timeout"));
-      }, READY_TIMEOUT_MS);
+      }, INIT_TIMEOUT_MS);
 
       try {
         spawnWorker();
@@ -102,20 +112,29 @@
   }
 
   function getBestMove(fen, movetimeMs = 1000) {
+    const searchMs = Math.max(100, movetimeMs | 0);
     return init().then(() => new Promise((resolve, reject) => {
       if (pending) {
         send("stop");
+        clearTimeout(pending.timer);
         pending.reject(new Error("Interrupted"));
       }
-      pending = { resolve, reject };
+      const timer = setTimeout(() => {
+        if (!pending) return;
+        send("stop");
+        pending.reject(new Error("Search timeout"));
+        pending = null;
+      }, searchMs + SEARCH_EXTRA_MS);
+      pending = { resolve, reject, timer };
       send(`position fen ${fen}`);
-      send(`go movetime ${Math.max(100, movetimeMs | 0)}`);
+      send(`go movetime ${searchMs}`);
     }));
   }
 
   function stop() {
     if (worker) send("stop");
     if (pending) {
+      clearTimeout(pending.timer);
       pending.resolve(null);
       pending = null;
     }
