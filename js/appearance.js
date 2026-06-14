@@ -38,6 +38,7 @@ const Appearance = (() => {
     localStorage.setItem(THEME_KEY, theme.id);
     syncThemeChips(theme.id);
     Settings.onThemeChange();
+    window.Scenery?.relayout?.();
     onThemeChanged?.();
   }
 
@@ -191,13 +192,19 @@ const Appearance = (() => {
     themePickerBtn.dataset.ready = "1";
   }
 
+  function buildThemeSection() {
+    const section = document.createElement("section");
+    section.className = "appearance-section appearance-theme-section";
+    const heading = document.createElement("h3");
+    heading.className = "appearance-section-label";
+    heading.textContent = "Theme";
+    section.append(heading, buildThemeChips());
+    return section;
+  }
+
   function initMenuTheme(container) {
     if (!container || container.dataset.ready) return;
-    const label = document.createElement("span");
-    label.className = "menu-themes-label";
-    label.textContent = "Theme";
-    container.appendChild(label);
-    container.appendChild(buildThemeChips());
+    container.appendChild(buildThemeSection());
     container.dataset.ready = "1";
   }
 
@@ -374,6 +381,8 @@ const Appearance = (() => {
     panelContainer = container;
     panelContext = context;
     container.innerHTML = "";
+
+    container.appendChild(buildThemeSection());
 
     const scenerySection = buildGameSection("scenery");
     if (scenerySection) container.insertBefore(scenerySection, container.firstChild);

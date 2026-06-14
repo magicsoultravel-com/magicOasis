@@ -263,13 +263,15 @@ const Settings = (() => {
   }
 
   function onThemeChange() {
+    if (activeGameId) {
+      applyForGame(activeGameId);
+    }
     if (panelContainer) {
-      const section = panelContainer.querySelector(".appearance-game-section");
-      if (section) {
+      panelContainer.querySelectorAll(".appearance-game-section[data-game]").forEach((section) => {
         const gameId = section.dataset.game;
-        const fields = window.Appearance?.getSectionFields?.(gameId) || activeFields;
-        syncColorRowsForGame(panelContainer, gameId, fields);
-      }
+        const fields = window.Appearance?.getSectionFields?.(gameId) || [];
+        if (fields.length) syncColorRowsForGame(panelContainer, gameId, fields);
+      });
     }
     if (activeField && activePickerGameId && pickerDialog?.open) {
       buildPickerContent(activePickerGameId, activeField);

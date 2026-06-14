@@ -30,22 +30,23 @@
     '<path fill="currentColor" d="M41 50 C70 52 80 64 80 76 C66 58 52 52 41 50 Z"/>';
 
   const BAMBOO_PATHS =
-    '<path fill="currentColor" d="M13 118 L23 118 L22 44 L12 44 Z"/>' +
-    '<path fill="currentColor" d="M10 60 H26 V64 H10 Z"/>' +
-    '<path fill="currentColor" d="M10 80 H26 V84 H10 Z"/>' +
-    '<path fill="currentColor" d="M10 100 H26 V104 H10 Z"/>' +
-    '<path fill="currentColor" d="M22 50 C28 44 34 36 36 26 C30 34 24 42 20 48 Z"/>' +
-    '<path fill="currentColor" d="M31 118 L41 118 L40 28 L30 28 Z"/>' +
-    '<path fill="currentColor" d="M28 44 H44 V48 H28 Z"/>' +
-    '<path fill="currentColor" d="M28 64 H44 V68 H28 Z"/>' +
-    '<path fill="currentColor" d="M28 84 H44 V88 H28 Z"/>' +
-    '<path fill="currentColor" d="M28 104 H44 V108 H28 Z"/>' +
-    '<path fill="currentColor" d="M40 34 C46 28 52 20 54 10 C48 18 42 26 38 32 Z"/>' +
-    '<path fill="currentColor" d="M40 22 C48 16 56 8 58 0 C52 8 44 16 38 22 Z"/>' +
-    '<path fill="currentColor" d="M51 118 L61 118 L60 50 L50 50 Z"/>' +
-    '<path fill="currentColor" d="M48 68 H64 V72 H48 Z"/>' +
-    '<path fill="currentColor" d="M48 88 H64 V92 H48 Z"/>' +
-    '<path fill="currentColor" d="M58 58 C64 52 70 44 72 34 C66 42 60 50 56 56 Z"/>';
+    '<path fill="currentColor" d="M9 118 L25 118 L24 38 L10 38 Z"/>' +
+    '<path fill="currentColor" d="M7 54 H27 V58 H7 Z"/>' +
+    '<path fill="currentColor" d="M7 74 H27 V78 H7 Z"/>' +
+    '<path fill="currentColor" d="M7 94 H27 V98 H7 Z"/>' +
+    '<path fill="currentColor" d="M18 44 C26 34 34 22 40 10 C30 24 22 36 14 46 Z"/>' +
+    '<path fill="currentColor" d="M18 32 C28 22 36 10 42 0 C32 12 24 24 16 34 Z"/>' +
+    '<path fill="currentColor" d="M27 118 L43 118 L42 22 L26 22 Z"/>' +
+    '<path fill="currentColor" d="M24 38 H44 V42 H24 Z"/>' +
+    '<path fill="currentColor" d="M24 58 H44 V62 H24 Z"/>' +
+    '<path fill="currentColor" d="M24 78 H44 V82 H24 Z"/>' +
+    '<path fill="currentColor" d="M24 98 H44 V102 H24 Z"/>' +
+    '<path fill="currentColor" d="M36 28 C44 18 52 8 56 0 C46 10 38 20 32 30 Z"/>' +
+    '<path fill="currentColor" d="M36 16 C46 6 56 0 62 0 C52 8 42 16 34 24 Z"/>' +
+    '<path fill="currentColor" d="M47 118 L63 118 L62 46 L46 46 Z"/>' +
+    '<path fill="currentColor" d="M44 64 H64 V68 H44 Z"/>' +
+    '<path fill="currentColor" d="M44 84 H64 V88 H44 Z"/>' +
+    '<path fill="currentColor" d="M54 54 C62 44 70 32 74 20 C64 32 56 44 50 54 Z"/>';
 
   const GRASS_BLADE =
     'fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"';
@@ -95,32 +96,36 @@
     '<path fill="currentColor" d="M66 118 C66 100 62 88 60 88 C58 88 56 100 56 118 Z"/>';
 
   const SKY_STARS_TILE =
-    '<circle fill="currentColor" cx="18" cy="16" r="1.2"/>' +
-    '<circle fill="currentColor" cx="42" cy="28" r="0.9"/>' +
-    '<circle fill="currentColor" cx="68" cy="14" r="1.1"/>' +
-    '<circle fill="currentColor" cx="96" cy="32" r="0.8"/>' +
-    '<circle fill="currentColor" cx="124" cy="18" r="1"/>' +
-    '<circle fill="currentColor" cx="152" cy="26" r="1.2"/>' +
-    '<circle fill="currentColor" cx="178" cy="12" r="0.9"/>' +
-    '<circle fill="currentColor" cx="206" cy="30" r="1.1"/>' +
-    '<circle fill="currentColor" cx="228" cy="20" r="0.8"/>';
+    '<circle fill="currentColor" cx="18" cy="16" r="2.2"/>' +
+    '<circle fill="currentColor" cx="42" cy="28" r="1.8"/>' +
+    '<circle fill="currentColor" cx="68" cy="14" r="2"/>' +
+    '<circle fill="currentColor" cx="96" cy="32" r="1.6"/>' +
+    '<circle fill="currentColor" cx="124" cy="18" r="2.1"/>' +
+    '<circle fill="currentColor" cx="152" cy="26" r="2.3"/>' +
+    '<circle fill="currentColor" cx="178" cy="12" r="1.8"/>' +
+    '<circle fill="currentColor" cx="206" cy="30" r="2"/>' +
+    '<circle fill="currentColor" cx="228" cy="20" r="1.7"/>' +
+    '<circle fill="currentColor" cx="32" cy="42" r="1.5"/>' +
+    '<circle fill="currentColor" cx="110" cy="8" r="1.6"/>' +
+    '<circle fill="currentColor" cx="190" cy="44" r="1.8"/>';
 
   const SKY_CLOUDS_TILE =
-    '<path fill="currentColor" d="M8 42 C8 32 18 26 30 28 C32 18 46 14 58 20 C70 16 84 24 82 36 C90 36 98 42 96 50 C94 58 82 60 70 58 L18 58 C10 58 6 50 8 42 Z"/>' +
-    '<path fill="currentColor" opacity="0.75" d="M120 36 C120 28 128 24 138 26 C140 18 154 16 164 22 C174 18 186 26 184 36 C192 36 198 42 196 48 C194 54 184 56 174 54 L126 54 C118 54 114 48 120 36 Z"/>' +
-    '<path fill="currentColor" opacity="0.6" d="M188 44 C188 36 196 32 206 34 C208 26 220 24 228 30 C234 28 240 34 238 42 C242 44 244 48 242 52 C240 56 232 58 224 56 L192 56 C186 56 184 50 188 44 Z"/>';
+    '<path fill="currentColor" d="M6 48 C6 34 20 24 36 26 C38 14 56 10 72 18 C88 12 108 22 106 38 C118 38 128 46 126 56 C124 66 108 68 92 66 L14 66 C4 66 0 56 6 48 Z"/>' +
+    '<path fill="currentColor" opacity="0.8" d="M112 34 C112 24 124 18 138 20 C140 10 158 8 172 16 C186 10 204 20 202 34 C214 34 222 42 220 52 C218 62 204 64 188 62 L118 62 C108 62 104 52 112 34 Z"/>' +
+    '<path fill="currentColor" opacity="0.65" d="M178 42 C178 32 190 26 204 28 C206 18 222 16 234 24 C242 22 240 34 238 42 C244 44 246 50 244 56 C242 62 230 64 218 62 L184 62 C176 62 174 52 178 42 Z"/>';
 
   const SKY_MOON_TILE =
-    '<path fill="currentColor" d="M120 24 A20 20 0 1 1 120 68 A15 15 0 1 0 120 24 Z"/>' +
-    '<circle fill="currentColor" cx="48" cy="20" r="1"/>' +
-    '<circle fill="currentColor" cx="72" cy="34" r="0.8"/>' +
-    '<circle fill="currentColor" cx="168" cy="18" r="1.1"/>' +
-    '<circle fill="currentColor" cx="192" cy="32" r="0.9"/>' +
-    '<circle fill="currentColor" cx="210" cy="22" r="0.8"/>';
+    '<path fill="currentColor" d="M118 20 A24 24 0 1 1 118 72 A18 18 0 1 0 118 20 Z"/>' +
+    '<circle fill="currentColor" cx="44" cy="18" r="1.8"/>' +
+    '<circle fill="currentColor" cx="72" cy="36" r="1.5"/>' +
+    '<circle fill="currentColor" cx="164" cy="16" r="2"/>' +
+    '<circle fill="currentColor" cx="192" cy="34" r="1.7"/>' +
+    '<circle fill="currentColor" cx="214" cy="22" r="1.6"/>';
 
   const SKY_SUNSET_TILE =
-    '<path fill="currentColor" opacity="0.5" d="M0 52 C40 48 80 54 120 50 C160 46 200 52 240 48 L240 60 L0 60 Z"/>' +
-    '<path fill="currentColor" opacity="0.35" d="M20 44 C60 40 100 46 140 42 C180 38 210 44 240 40 L240 52 L20 52 Z"/>';
+    '<path fill="currentColor" opacity="0.55" d="M0 56 C44 50 88 58 132 52 C176 46 212 54 240 48 L240 62 L0 62 Z"/>' +
+    '<path fill="currentColor" opacity="0.4" d="M16 46 C56 40 96 48 136 42 C176 36 208 44 240 38 L240 52 L16 52 Z"/>' +
+    '<circle fill="currentColor" opacity="0.45" cx="120" cy="38" r="10"/>';
 
   function composeThreeTree(paths, includeGrass = true) {
     return (
