@@ -15,6 +15,8 @@
   const modeSelect = document.getElementById("chess-mode");
   const sideSelect = document.getElementById("chess-side");
   const diffSelect = document.getElementById("chess-difficulty");
+  const pieceSetSelect = document.getElementById("chess-piece-set");
+  const boardStyleSelect = document.getElementById("chess-board-style");
   const puzzleTierSelect = document.getElementById("chess-puzzle-tier");
 
   const gamesDialog = document.getElementById("chess-games-dialog");
@@ -35,15 +37,11 @@
 
   const STATE_KEY = "chess-game";
   const STATS_KEY = "chess-stats";
+  const PREFS_KEY = "chess-prefs";
   const HISTORY_LIMIT = 80;
   const LOAD_DELAY_MS = 200;
 
   const DIFF_MS = { casual: 400, club: 1500, strong: 3000 };
-
-  const PIECES = {
-    wk: "♔", wq: "♕", wr: "♖", wb: "♗", wn: "♘", wp: "♙",
-    bk: "♚", bq: "♛", br: "♜", bb: "♝", bn: "♞", bp: "♟",
-  };
 
   const FILES = "abcdefgh";
   const RANKS = "87654321";
@@ -52,6 +50,8 @@
   let mode = "ai";
   let humanColor = "w";
   let difficulty = "club";
+  let pieceSet = "solid";
+  let boardStyle = "classic";
   let flipped = false;
   let selected = null;
   let legalTargets = [];
@@ -154,6 +154,51 @@
     updateStatsLine();
   }
 
+  function loadPrefs() {
+    try {
+      const raw = localStorage.getItem(PREFS_KEY);
+      if (!raw) return;
+      const prefs = JSON.parse(raw);
+      if (window.ChessPieces?.sets?.includes(prefs.pieceSet)) pieceSet = prefs.pieceSet;
+      if (window.ChessPieces?.boards?.includes(prefs.boardStyle)) boardStyle = prefs.boardStyle;
+    } catch { /* ignore */ }
+    if (pieceSetSelect) pieceSetSelect.value = pieceSet;
+    if (boardStyleSelect) boardStyleSelect.value = boardStyle;
+    applyAppearance();
+  }
+
+  function savePrefs() {
+    try {
+      localStorage.setItem(PREFS_KEY, JSON.stringify({ pieceSet, boardStyle }));
+    } catch { /* ignore */ }
+  }
+
+  function applyAppearance() {
+    if (boardEl) {
+      boardEl.dataset.pieceSet = pieceSet;
+      boardEl.dataset.boardStyle = boardStyle;
+    }
+    updatePromoteButtons();
+  }
+
+  function renderPieceMarkup(color, type) {
+    if (window.ChessPieces?.render) {
+      return window.ChessPieces.render(color, type, pieceSet);
+    }
+    return "";
+  }
+
+  function updatePromoteButtons() {
+    if (!promoteDialog) return;
+    const color = game?.turn() || humanColor || "w";
+    promoteDialog.querySelectorAll(".ch-promote-btn").forEach((btn) => {
+      const type = btn.dataset.piece;
+      if (!type) return;
+      btn.innerHTML = renderPieceMarkup(color, type);
+      btn.classList.toggle("ch-promote-btn--unicode", pieceSet === "unicode");
+    });
+  }
+
   function saveStats() {
     try {
       localStorage.setItem(STATS_KEY, JSON.stringify(stats));
@@ -191,6 +236,8 @@
 
   function renderBoard() {
     if (!boardEl || !game) return;
+    boardEl.dataset.pieceSet = pieceSet;
+    boardEl.dataset.boardStyle = boardStyle;
     boardEl.innerHTML = "";
     for (const r of displayRanks()) {
       for (const f of displayFiles()) {
@@ -212,8 +259,10 @@
         if (piece) {
           const span = document.createElement("span");
           span.className = "ch-piece";
-          span.textContent = PIECES[piece.color + piece.type] || "";
           if (piece.color === "b") span.classList.add("ch-piece--black");
+          else span.classList.add("ch-piece--white");
+          if (pieceSet === "unicode") span.classList.add("ch-piece--unicode");
+          span.innerHTML = renderPieceMarkup(piece.color, piece.type);
           btn.appendChild(span);
         }
         btn.addEventListener("click", () => onSquareClick(sq));
@@ -426,6 +475,7 @@
         const pick = moves.find((m) => m.to === sq);
         if (pick && pick.flags.includes("p")) {
           pendingPromote = { from: selected, to: sq };
+          updatePromoteButtons();
           promoteDialog?.showModal();
           return;
         }
@@ -490,6 +540,7 @@
 
     humanColor = sideSelect?.value || "w";
     difficulty = diffSelect?.value || "club";
+    flipped = humanColor === "b";
     gameOver = false;
     thinking = false;
     pendingAITurn = false;
@@ -718,6 +769,20 @@
       saveGame();
     });
 
+    pieceSetSelect?.addEventListener("change", () => {
+      pieceSet = pieceSetSelect.value;
+      savePrefs();
+      applyAppearance();
+      syncUI();
+    });
+
+    boardStyleSelect?.addEventListener("change", () => {
+      boardStyle = boardStyleSelect.value;
+      savePrefs();
+      applyAppearance();
+      syncUI();
+    });
+
     gamesCloseBtn?.addEventListener("click", () => gamesDialog?.close());
     gamesDialog?.addEventListener("click", (e) => {
       if (e.target === gamesDialog) gamesDialog.close();
@@ -742,6 +807,7 @@
     if (initialized) return;
     initialized = true;
     loadStats();
+    loadPrefs();
     wireEvents();
     void bootstrap();
   }
