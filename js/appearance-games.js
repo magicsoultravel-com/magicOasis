@@ -9,7 +9,6 @@
         options: [
           { id: "palms", label: "Palms" },
           { id: "bamboo", label: "Bamboo" },
-          { id: "grass", label: "Grass" },
           { id: "evergreen", label: "Evergreen" },
           { id: "cherry", label: "Cherry" },
           { id: "autumn", label: "Autumn" },

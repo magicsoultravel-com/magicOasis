@@ -14,7 +14,7 @@
   const MAX_TILE_COUNT = 40;
   const DEBOUNCE_MS = 100;
 
-  const BIOME_IDS = ["palms", "bamboo", "grass", "evergreen", "cherry", "autumn", "desert", "none"];
+  const BIOME_IDS = ["palms", "bamboo", "evergreen", "cherry", "autumn", "desert", "none"];
   const SKY_IDS = ["none", "stars", "clouds", "moon", "sunset"];
 
   const sceneryEl = document.getElementById("app-scenery");
@@ -47,14 +47,15 @@
     '<path fill="currentColor" d="M48 88 H64 V92 H48 Z"/>' +
     '<path fill="currentColor" d="M58 58 C64 52 70 44 72 34 C66 42 60 50 56 56 Z"/>';
 
-  const GRASS_TUFT =
-    '<path fill="currentColor" d="M2 14 C3 9 4 5 5 2 C6 6 7 10 8 14 Z"/>' +
-    '<path fill="currentColor" d="M9 14 C10 8 11 4 13 0 C14 5 15 9 16 14 Z"/>';
+  const GRASS_BLADE =
+    'fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"';
 
-  const GRASS_TUFT_TALL =
-    '<path fill="currentColor" d="M2 22 C4 14 5 8 7 2 C8 8 10 14 12 22 Z"/>' +
-    '<path fill="currentColor" d="M13 22 C15 12 17 6 20 0 C21 7 23 14 25 22 Z"/>' +
-    '<path fill="currentColor" d="M26 22 C27 16 28 10 29 6 C30 10 31 16 32 22 Z"/>';
+  const GRASS_TUFT =
+    `<path ${GRASS_BLADE} d="M1 14 Q2 9 3 4"/>` +
+    `<path ${GRASS_BLADE} d="M5 14 Q6 7 7 1"/>` +
+    `<path ${GRASS_BLADE} d="M9 14 Q10 10 11 6"/>` +
+    `<path ${GRASS_BLADE} d="M13 14 Q13 8 14 3"/>` +
+    `<path ${GRASS_BLADE} d="M16 14 Q17 9 18 5"/>`;
 
   const TILE_GRASS =
     `<g class="app-scenery-grass" transform="translate(34, 106)">${GRASS_TUFT}</g>` +
@@ -137,15 +138,9 @@
   const AUTUMN_TILE = composeThreeTree(AUTUMN_PATHS);
   const DESERT_TILE = composeThreeTree(DESERT_PATHS, false);
 
-  const GRASS_TILE =
-    `<g transform="translate(34, 100)">${GRASS_TUFT_TALL}</g>` +
-    `<g transform="translate(118, 96) scale(0.75)" opacity="0.9">${GRASS_TUFT_TALL}</g>` +
-    `<g transform="translate(200, 100) scale(-1, 1)">${GRASS_TUFT_TALL}</g>`;
-
   const biomeStrips = {
     palms: sceneryEl?.querySelector(".app-scenery-strip--palms"),
     bamboo: sceneryEl?.querySelector(".app-scenery-strip--bamboo"),
-    grass: sceneryEl?.querySelector(".app-scenery-strip--grass"),
     evergreen: sceneryEl?.querySelector(".app-scenery-strip--evergreen"),
     cherry: sceneryEl?.querySelector(".app-scenery-strip--cherry"),
     autumn: sceneryEl?.querySelector(".app-scenery-strip--autumn"),
@@ -162,7 +157,6 @@
   const BIOME_TILES = {
     palms: PALM_TILE,
     bamboo: BAMBOO_TILE,
-    grass: GRASS_TILE,
     evergreen: EVERGREEN_TILE,
     cherry: CHERRY_TILE,
     autumn: AUTUMN_TILE,
@@ -202,19 +196,28 @@
 
   function migrateBiomeStorage() {
     try {
-      if (localStorage.getItem(STORAGE_BIOME_KEY)) return;
+      const current = localStorage.getItem(STORAGE_BIOME_KEY);
+      if (current === "grass") {
+        localStorage.setItem(STORAGE_BIOME_KEY, "palms");
+        return;
+      }
+      if (current) return;
       const legacy = window.StorageSanitize?.getString?.(
         STORAGE_TYPE_KEY,
         ["palms", "bamboo", "grass", "evergreen", "cherry", "autumn", "desert"],
         null
       );
-      if (legacy) localStorage.setItem(STORAGE_BIOME_KEY, legacy);
+      if (legacy) {
+        const migrated = legacy === "grass" ? "palms" : legacy;
+        localStorage.setItem(STORAGE_BIOME_KEY, migrated);
+      }
     } catch {
       /* storage unavailable */
     }
   }
 
   function normalizeBiome(value) {
+    if (value === "grass") return "palms";
     if (value === "none" || BIOME_IDS.includes(value)) return value;
     return "palms";
   }

@@ -313,7 +313,6 @@ html[data-scenery-biome="none"] .app-scenery-biome {
 
 html[data-scenery-biome="palms"] .app-scenery-strip--palms,
 html[data-scenery-biome="bamboo"] .app-scenery-strip--bamboo,
-html[data-scenery-biome="grass"] .app-scenery-strip--grass,
 html[data-scenery-biome="evergreen"] .app-scenery-strip--evergreen,
 html[data-scenery-biome="cherry"] .app-scenery-strip--cherry,
 html[data-scenery-biome="autumn"] .app-scenery-strip--autumn,
@@ -357,7 +356,7 @@ html[data-scenery-sky="sunset"] .app-scenery-strip--sky-sunset {
 }
 
 .app-scenery-grass {
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 html[data-scenery-motion="sway"] .app-scenery-tile {
