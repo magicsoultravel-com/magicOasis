@@ -186,9 +186,7 @@
 
   function boardSquare(rank, file) {
     const b = game.board();
-    const row = flipped ? rank : 7 - rank;
-    const col = flipped ? 7 - file : file;
-    return b[row][col];
+    return b[rank][file];
   }
 
   function renderBoard() {
