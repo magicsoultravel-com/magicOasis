@@ -950,10 +950,14 @@
     max-height: none;
     flex: 1;
   }
+
+  .ch-cell {
+    font-size: clamp(1.65rem, 2.4vw, 2.35rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ch-cell {
-    font-size: clamp(1.65rem, 2.4vw, 2.35rem);
+    transition: none;
   }
 }
