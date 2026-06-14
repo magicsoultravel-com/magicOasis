@@ -1,7 +1,7 @@
 // Stockfish UCI bridge — minimal state machine
 (() => {
   const WORKER_URL = `${new URL("vendor/stockfish/stockfish-lite.js", document.baseURI).href}#,worker`;
-  const INIT_TIMEOUT_MS = 60000;
+  const INIT_TIMEOUT_MS = 20000;
   const READY_TIMEOUT_MS = 60000;
   const SEARCH_EXTRA_MS = 15000;
 
@@ -9,6 +9,7 @@
   let uciOk = false;
   let engineReady = false;
   let initPromise = null;
+  let initReject = null;
   let pending = null;
   let searchGen = 0;
 
@@ -43,6 +44,20 @@
     });
   }
 
+  function failInit(err) {
+    if (initReject) {
+      initReject(err);
+      initReject = null;
+    }
+    initPromise = null;
+    if (pending) {
+      clearTimeout(pending.timer);
+      pending.reject(err);
+      pending = null;
+    }
+    terminateWorker();
+  }
+
   function terminateWorker() {
     if (!worker) return;
     worker.terminate();
@@ -56,13 +71,7 @@
     worker = new Worker(WORKER_URL);
     worker.onmessage = (e) => handleMessage(e.data);
     worker.onerror = () => {
-      initPromise = null;
-      terminateWorker();
-      if (pending) {
-        clearTimeout(pending.timer);
-        pending.reject(new Error("Worker failed"));
-        pending = null;
-      }
+      failInit(new Error("Worker failed"));
     };
   }
 
@@ -74,10 +83,9 @@
   function init() {
     if (initPromise) return initPromise;
     initPromise = new Promise((resolve, reject) => {
+      initReject = reject;
       const timeout = setTimeout(() => {
-        initPromise = null;
-        terminateWorker();
-        reject(new Error("Engine init timeout"));
+        failInit(new Error("Engine init timeout"));
       }, INIT_TIMEOUT_MS);
 
       try {
@@ -94,19 +102,16 @@
           })
           .then(() => {
             clearTimeout(timeout);
+            initReject = null;
             resolve();
           })
           .catch((err) => {
             clearTimeout(timeout);
-            initPromise = null;
-            terminateWorker();
-            reject(err);
+            failInit(err);
           });
       } catch (err) {
         clearTimeout(timeout);
-        initPromise = null;
-        terminateWorker();
-        reject(err);
+        failInit(err);
       }
     });
     return initPromise;

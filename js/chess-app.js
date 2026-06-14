@@ -28,9 +28,15 @@
   const btnStartNew = document.getElementById("chess-start-new");
   const btnStartResume = document.getElementById("chess-start-resume");
 
+  const loadOverlay = document.getElementById("chess-load-overlay");
+  const loadLabel = document.getElementById("chess-load-label");
+  const loadProgress = document.getElementById("chess-load-progress");
+  const loadBar = document.getElementById("chess-load-bar");
+
   const STATE_KEY = "chess-game";
   const STATS_KEY = "chess-stats";
   const HISTORY_LIMIT = 80;
+  const LOAD_DELAY_MS = 200;
 
   const DIFF_MS = { casual: 400, club: 1500, strong: 3000 };
 
@@ -50,7 +56,9 @@
   let selected = null;
   let legalTargets = [];
   let thinking = false;
-  let engineReady = false;
+  let engineState = "idle";
+  let engineLoadPromise = null;
+  let pendingAITurn = false;
   let gameOver = false;
   let initialized = false;
   let aiTurnId = 0;
@@ -63,6 +71,73 @@
 
   function setStatus(msg) {
     if (statusEl) statusEl.textContent = msg;
+  }
+
+  function setChessLoadProgress(p, label) {
+    const pct = Math.round(p * 100);
+    if (loadBar) loadBar.style.width = `${pct}%`;
+    loadProgress?.setAttribute("aria-valuenow", String(pct));
+    if (label && loadLabel) loadLabel.textContent = label;
+  }
+
+  function hideChessLoad() {
+    if (!loadOverlay) return;
+    loadOverlay.classList.remove("is-visible");
+    loadOverlay.hidden = true;
+    loadOverlay.setAttribute("aria-hidden", "true");
+    setChessLoadProgress(0, "Loading…");
+  }
+
+  function showChessLoad(label, progress = 0.08) {
+    if (!loadOverlay) return;
+    setChessLoadProgress(progress, label);
+    loadOverlay.hidden = false;
+    loadOverlay.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(() => {
+      loadOverlay.classList.add("is-visible");
+    });
+  }
+
+  function withChessLoad(label, workFn) {
+    let overlayShown = false;
+    let progress = 0.08;
+    let progressTimer = null;
+    let tickTimer = null;
+
+    const reveal = () => {
+      if (overlayShown) return;
+      overlayShown = true;
+      showChessLoad(label, progress);
+    };
+
+    progressTimer = setTimeout(reveal, LOAD_DELAY_MS);
+    tickTimer = setInterval(() => {
+      progress = Math.min(0.92, progress + 0.06);
+      if (overlayShown) setChessLoadProgress(progress, label);
+    }, 180);
+
+    return Promise.resolve()
+      .then(workFn)
+      .then((result) => {
+        clearTimeout(progressTimer);
+        clearInterval(tickTimer);
+        if (overlayShown) {
+          setChessLoadProgress(1, "Ready");
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              hideChessLoad();
+              resolve(result);
+            }, 120);
+          });
+        }
+        return result;
+      })
+      .catch((err) => {
+        clearTimeout(progressTimer);
+        clearInterval(tickTimer);
+        hideChessLoad();
+        throw err;
+      });
   }
 
   function updateStatsLine() {
@@ -170,8 +245,12 @@
 
   function refreshStatus() {
     if (gameOver) return;
-    if (!engineReady && mode === "ai") {
+    if (mode === "ai" && engineState === "loading") {
       setStatus("Loading engine…");
+      return;
+    }
+    if (mode === "ai" && engineState === "error") {
+      setStatus("Engine unavailable — tap New to retry");
       return;
     }
     if (thinking) {
@@ -219,6 +298,7 @@
   function finishGame(resignResult) {
     gameOver = true;
     thinking = false;
+    pendingAITurn = false;
     window.ChessEngine?.cancel?.();
 
     let res = resignResult;
@@ -253,6 +333,16 @@
     } catch { /* ignore */ }
   }
 
+  function maybeRunAI() {
+    if (mode !== "ai" || gameOver || game.turn() === humanColor) return;
+    if (engineState === "ready") {
+      pendingAITurn = false;
+      runAI();
+    } else if (engineState === "loading" || engineState === "idle") {
+      pendingAITurn = true;
+    }
+  }
+
   function onTurnEnd() {
     saveGame();
     if (game.game_over()) {
@@ -260,7 +350,7 @@
       return;
     }
     if (mode === "ai" && game.turn() !== humanColor) {
-      runAI();
+      maybeRunAI();
     } else {
       refreshStatus();
     }
@@ -282,10 +372,11 @@
   }
 
   function runAI() {
-    if (thinking || gameOver || mode !== "ai" || !engineReady) return;
+    if (thinking || gameOver || mode !== "ai" || engineState !== "ready") return;
     const engine = window.ChessEngine;
     if (!engine) {
-      setStatus("Engine unavailable");
+      engineState = "error";
+      syncUI();
       return;
     }
 
@@ -294,6 +385,7 @@
     const ms = DIFF_MS[difficulty] || 1500;
 
     thinking = true;
+    pendingAITurn = false;
     syncUI();
 
     engine.search(uciMoves, ms)
@@ -324,7 +416,7 @@
   }
 
   function canInteract() {
-    return game && !gameOver && !thinking && (mode !== "ai" || engineReady);
+    return game && !gameOver && !thinking;
   }
 
   function onSquareClick(sq) {
@@ -402,6 +494,7 @@
     difficulty = diffSelect?.value || "club";
     gameOver = false;
     thinking = false;
+    pendingAITurn = false;
     selected = null;
     legalTargets = [];
     undoStack = [];
@@ -415,8 +508,12 @@
     syncUI();
     saveGame();
 
-    if (mode === "ai" && humanColor === "b" && engineReady) {
-      runAI();
+    if (mode !== "ai") {
+      engineState = "ready";
+    } else if (engineState === "error" || engineState === "idle") {
+      void ensureEngine().then(() => maybeRunAI());
+    } else if (humanColor === "b") {
+      maybeRunAI();
     }
   }
 
@@ -444,9 +541,7 @@
     legalTargets = [];
     syncUI();
     saveGame();
-    if (mode === "ai" && game.turn() !== humanColor && engineReady) {
-      runAI();
-    }
+    maybeRunAI();
   }
 
   function peekSave() {
@@ -477,13 +572,20 @@
       startMessageEl.textContent = message;
       const onNew = () => { cleanup(); resolve("new"); };
       const onResume = () => { cleanup(); resolve("resume"); };
+      const onCancel = (e) => {
+        e.preventDefault();
+        cleanup();
+        resolve("new");
+      };
       const cleanup = () => {
         startDialog.close();
         btnStartNew?.removeEventListener("click", onNew);
         btnStartResume?.removeEventListener("click", onResume);
+        startDialog.removeEventListener("cancel", onCancel);
       };
       btnStartNew?.addEventListener("click", onNew);
       btnStartResume?.addEventListener("click", onResume);
+      startDialog.addEventListener("cancel", onCancel);
       startDialog.showModal();
     });
   }
@@ -518,24 +620,43 @@
     return true;
   }
 
-  async function ensureEngine() {
+  function ensureEngine() {
     if (mode !== "ai") {
-      engineReady = true;
-      return;
+      engineState = "ready";
+      return Promise.resolve();
     }
-    engineReady = false;
-    syncUI();
-    try {
-      await window.ChessEngine?.init?.();
-      engineReady = true;
-    } catch {
-      engineReady = false;
-      setStatus("Engine unavailable");
+    if (engineState === "ready") return Promise.resolve();
+    if (engineLoadPromise) return engineLoadPromise;
+
+    if (!window.ChessEngine?.init) {
+      engineState = "error";
+      syncUI();
+      return Promise.resolve();
     }
+
+    engineState = "loading";
     syncUI();
+
+    engineLoadPromise = withChessLoad("Loading engine…", () => window.ChessEngine.init())
+      .then(() => {
+        engineState = "ready";
+        if (pendingAITurn) maybeRunAI();
+      })
+      .catch(() => {
+        engineState = "error";
+      })
+      .finally(() => {
+        engineLoadPromise = null;
+        hideChessLoad();
+        syncUI();
+        if (pendingAITurn && engineState === "ready") maybeRunAI();
+      });
+
+    return engineLoadPromise;
   }
 
   async function bootstrap() {
+    hideChessLoad();
     const peeked = peekSave();
     if (peeked) {
       const choice = await showStartDialog(peeked.message);
@@ -552,11 +673,7 @@
       newGame();
     }
 
-    await ensureEngine();
-
-    if (mode === "ai" && !gameOver && game.turn() !== humanColor && engineReady) {
-      runAI();
-    }
+    void ensureEngine().then(() => maybeRunAI());
   }
 
   function openGamesDialog() {

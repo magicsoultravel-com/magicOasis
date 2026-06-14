@@ -159,7 +159,14 @@
   }
 
   function initGame(id) {
-    void ensureGameAssets(id).then(() => runGameInit(id));
+    void ensureGameAssets(id)
+      .then(() => runGameInit(id))
+      .catch(() => {
+        if (id === "chess") {
+          const statusEl = document.getElementById("chess-status");
+          if (statusEl) statusEl.textContent = "Engine failed to load";
+        }
+      });
   }
 
   function applyVisibility() {

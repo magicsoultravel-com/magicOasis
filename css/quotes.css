@@ -108,24 +108,17 @@
 .quotes-item-text {
   max-width: none;
   text-align: left;
-  font-size: 0.8125rem;
+  font-size: 0.6875rem;
   margin: 0 0 0.3rem;
   color: var(--text);
   line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .quotes-item-meta {
   margin: 0;
   text-align: left;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .quotes-badge {

@@ -289,7 +289,6 @@
         dot.className = "quotes-timeline-dot";
         if (state.highlightId === q.id) dot.classList.add("is-active");
         dot.dataset.category = q.category;
-        dot.title = `${q.author}: ${truncate(q.text, 90)}`;
         dot.setAttribute("aria-label", `${q.author}, ${formatYear(year)}: ${truncate(q.text, 60)}`);
         const jitter = (index % 3 - 1) * 0.15;
         const stack = Math.floor(index / 3) * 12;
@@ -309,6 +308,13 @@
           renderBrowseList();
           renderTimeline();
         });
+
+        QuoteTooltip.bind(dot, () => ({
+          text: q.text,
+          category: q.category,
+          attribution: q.attribution,
+        }));
+
         timelineTrackEl.appendChild(dot);
       });
     }
