@@ -1,6 +1,6 @@
 // Stockfish UCI bridge — minimal state machine
 (() => {
-  const WORKER_URL = `${new URL("vendor/stockfish/stockfish-lite.js", document.baseURI).href}#,worker`;
+  const WORKER_URL = new URL("vendor/stockfish/stockfish-lite.js", document.baseURI).href;
   const INIT_TIMEOUT_MS = 20000;
   const READY_TIMEOUT_MS = 60000;
   const SEARCH_EXTRA_MS = 15000;

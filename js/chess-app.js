@@ -642,7 +642,8 @@
         engineState = "ready";
         if (pendingAITurn) maybeRunAI();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.warn("Chess engine init failed:", err?.message || err);
         engineState = "error";
       })
       .finally(() => {
