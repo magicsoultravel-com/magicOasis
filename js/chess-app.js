@@ -50,7 +50,7 @@
   let mode = "ai";
   let humanColor = "w";
   let difficulty = "club";
-  let pieceSet = "clear";
+  let pieceSet = "standard";
   let boardStyle = "classic";
   let flipped = false;
   let selected = null;
@@ -159,7 +159,11 @@
       const raw = localStorage.getItem(PREFS_KEY);
       if (!raw) return;
       const prefs = JSON.parse(raw);
-      if (window.ChessPieces?.sets?.includes(prefs.pieceSet)) pieceSet = prefs.pieceSet;
+      if (window.ChessPieces?.sets?.includes(prefs.pieceSet)) {
+        pieceSet = prefs.pieceSet;
+      } else if (prefs.pieceSet === "clear" || prefs.pieceSet === "solid") {
+        pieceSet = "standard";
+      }
       if (window.ChessPieces?.boards?.includes(prefs.boardStyle)) boardStyle = prefs.boardStyle;
     } catch { /* ignore */ }
     if (pieceSetSelect) pieceSetSelect.value = pieceSet;
@@ -234,11 +238,12 @@
     return b[rank][file];
   }
 
-  function renderBoard() {
+  function renderBoard(opts = {}) {
     if (!boardEl || !game) return;
     boardEl.dataset.pieceSet = pieceSet;
     boardEl.dataset.boardStyle = boardStyle;
     boardEl.innerHTML = "";
+    const hideAt = opts.hideAt || null;
     for (const r of displayRanks()) {
       for (const f of displayFiles()) {
         const rank = RANKS.indexOf(r);
@@ -256,17 +261,19 @@
         else btn.classList.add("ch-cell--dark");
         if (selected === sq) btn.classList.add("ch-cell--selected");
         if (legalTargets.includes(sq)) btn.classList.add("ch-cell--target");
-        if (piece) {
+        if (piece && sq !== hideAt) {
           const span = document.createElement("span");
           span.className = "ch-piece";
           if (piece.color === "b") span.classList.add("ch-piece--black");
           else span.classList.add("ch-piece--white");
           if (pieceSet === "unicode") span.classList.add("ch-piece--unicode");
-          if (pieceSet === "clear") span.classList.add("ch-piece--clear");
           span.innerHTML = renderPieceMarkup(piece.color, piece.type);
           btn.appendChild(span);
         }
-        btn.addEventListener("click", () => onSquareClick(sq));
+        btn.addEventListener("click", () => {
+          window.ChessSfx?.unlock?.();
+          onSquareClick(sq);
+        });
         boardEl.appendChild(btn);
       }
     }
@@ -314,11 +321,75 @@
     setStatus(msg);
   }
 
-  function syncUI() {
-    renderBoard();
+  function syncUI(opts = {}) {
     renderMoves();
     refreshStatus();
     updateUndoButtons();
+    if (opts.anim && shouldAnimateMoves()) {
+      renderBoard({ hideAt: opts.anim.to });
+      requestAnimationFrame(() => {
+        animatePieceMove(opts.anim, () => {
+          renderBoard();
+          opts.onDone?.();
+        });
+      });
+    } else {
+      renderBoard();
+      opts.onDone?.();
+    }
+  }
+
+  function shouldAnimateMoves() {
+    return !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function animatePieceMove(anim, onDone) {
+    const wrap = boardEl?.parentElement;
+    const fromCell = boardEl?.querySelector(`[data-square="${anim.from}"]`);
+    const toCell = boardEl?.querySelector(`[data-square="${anim.to}"]`);
+    if (!wrap || !fromCell || !toCell || !anim.markup) {
+      onDone();
+      return;
+    }
+
+    const wr = wrap.getBoundingClientRect();
+    const fr = fromCell.getBoundingClientRect();
+    const tr = toCell.getBoundingClientRect();
+    const size = Math.min(fr.width, fr.height) * (pieceSet === "large" ? 0.9 : 0.82);
+
+    const ghost = document.createElement("div");
+    ghost.className = "ch-move-ghost";
+    ghost.dataset.pieceSet = pieceSet;
+    const sideClass = anim.color === "b" ? "ch-piece--black" : "ch-piece--white";
+    ghost.innerHTML = `<span class="ch-piece ch-piece--ghost ${sideClass}">${anim.markup}</span>`;
+    ghost.style.width = `${size}px`;
+    ghost.style.height = `${size}px`;
+    ghost.style.left = `${fr.left - wr.left + fr.width / 2}px`;
+    ghost.style.top = `${fr.top - wr.top + fr.height / 2}px`;
+    wrap.appendChild(ghost);
+
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      ghost.remove();
+      onDone();
+    };
+
+    const onEnd = (e) => {
+      if (e.propertyName !== "left" && e.propertyName !== "top") return;
+      ghost.removeEventListener("transitionend", onEnd);
+      finish();
+    };
+    ghost.addEventListener("transitionend", onEnd);
+
+    requestAnimationFrame(() => {
+      ghost.classList.add("ch-move-ghost--active");
+      ghost.style.left = `${tr.left - wr.left + tr.width / 2}px`;
+      ghost.style.top = `${tr.top - wr.top + tr.height / 2}px`;
+    });
+
+    window.setTimeout(finish, 300);
   }
 
   function pushUndo() {
@@ -404,8 +475,14 @@
     }
   }
 
-  function playMove(move, { recordUndo = true } = {}) {
+  function playMove(move, { recordUndo = true, animate = true } = {}) {
     if (recordUndo) pushUndo();
+    const fromSq = typeof move === "object" ? move.from : null;
+    const pieceBefore = fromSq ? game.get(fromSq) : null;
+    const moveMarkup = pieceBefore
+      ? renderPieceMarkup(pieceBefore.color, pieceBefore.type)
+      : "";
+
     const res = game.move(move);
     if (!res) {
       if (recordUndo) {
@@ -414,8 +491,24 @@
       }
       return null;
     }
-    syncUI();
-    onTurnEnd();
+
+    window.ChessSfx?.playMove?.(!!res.captured);
+
+    const afterMove = () => onTurnEnd();
+    if (animate && moveMarkup && shouldAnimateMoves()) {
+      syncUI({
+        anim: {
+          from: res.from,
+          to: res.to,
+          markup: moveMarkup,
+          color: pieceBefore.color,
+        },
+        onDone: afterMove,
+      });
+    } else {
+      syncUI();
+      afterMove();
+    }
     return res;
   }
 
@@ -746,6 +839,7 @@
   }
 
   function wireEvents() {
+    window.ChessSfx?.unlock?.();
     btnNew?.addEventListener("click", () => newGame());
     btnRestart?.addEventListener("click", () => newGame());
     btnUndo?.addEventListener("click", undo);
