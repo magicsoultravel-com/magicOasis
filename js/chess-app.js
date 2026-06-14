@@ -50,7 +50,7 @@
   let mode = "ai";
   let humanColor = "w";
   let difficulty = "club";
-  let pieceSet = "solid";
+  let pieceSet = "clear";
   let boardStyle = "classic";
   let flipped = false;
   let selected = null;
@@ -262,6 +262,7 @@
           if (piece.color === "b") span.classList.add("ch-piece--black");
           else span.classList.add("ch-piece--white");
           if (pieceSet === "unicode") span.classList.add("ch-piece--unicode");
+          if (pieceSet === "clear") span.classList.add("ch-piece--clear");
           span.innerHTML = renderPieceMarkup(piece.color, piece.type);
           btn.appendChild(span);
         }

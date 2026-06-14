@@ -785,6 +785,11 @@
   user-select: none;
 }
 
+.ch-board[data-piece-set="clear"] .ch-piece {
+  width: 94%;
+  height: 94%;
+}
+
 .ch-board[data-piece-set="large"] .ch-piece {
   width: 90%;
   height: 90%;
@@ -855,6 +860,60 @@
 
 .ch-piece--black .ch-piece-cross {
   stroke: #f0f0f0;
+}
+
+.ch-piece-svg--clear {
+  overflow: visible;
+}
+
+.ch-icon-plate {
+  opacity: 1;
+}
+
+.ch-icon-plate--white {
+  fill: #ffffff;
+  stroke: #141414;
+  stroke-width: 2.25;
+}
+
+.ch-icon-plate--black {
+  fill: #141414;
+  stroke: #f5f5f5;
+  stroke-width: 2.25;
+}
+
+.ch-icon-glyph {
+  opacity: 1;
+  stroke: none;
+}
+
+.ch-icon-glyph--on-white {
+  fill: #141414;
+}
+
+.ch-icon-glyph--on-black {
+  fill: #f5f5f5;
+}
+
+.ch-icon-cross {
+  stroke-width: 2.75;
+  stroke-linecap: round;
+}
+
+.ch-icon-cross.ch-icon-glyph--on-white {
+  stroke: #141414;
+}
+
+.ch-icon-cross.ch-icon-glyph--on-black {
+  stroke: #f5f5f5;
+}
+
+.ch-board[data-piece-set="clear"] .ch-piece--white .ch-icon-plate--white {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+}
+
+.ch-board[data-piece-set="clear"] .ch-piece--black .ch-icon-plate--black {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
 }
 
 .ch-side {
