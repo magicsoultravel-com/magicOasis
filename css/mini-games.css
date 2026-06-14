@@ -682,14 +682,14 @@
   flex-direction: column;
   align-items: center;
   gap: 0.65rem;
-  width: min(100%, 22rem);
+  width: min(100%, 26rem);
   flex: 1;
   min-height: 0;
 }
 
 .ch-board-wrap {
   position: relative;
-  width: min(100%, 20rem, calc(100dvh - 11rem));
+  width: min(100%, 24rem, calc(100dvh - 10rem));
   max-width: 100%;
   flex-shrink: 0;
   align-self: center;
@@ -754,10 +754,12 @@
 .ch-side {
   width: 100%;
   flex: 1;
+  min-width: 0;
   min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  overflow: hidden;
 }
 
 .ch-moves {
@@ -765,6 +767,7 @@
   margin: 0;
   padding: 0.5rem 0.65rem;
   max-height: 6.5rem;
+  overflow-x: hidden;
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -772,6 +775,7 @@
   font-size: 0.8125rem;
   line-height: 1.5;
   color: var(--text-muted);
+  word-break: break-word;
 }
 
 .ch-moves li + li {
@@ -811,12 +815,18 @@
   .ch-shell {
     flex-direction: row;
     align-items: flex-start;
-    width: min(100%, 32rem);
+    width: min(100%, 42rem);
+  }
+
+  .ch-board-wrap {
+    flex: 0 0 min(24rem, 55%);
+    width: min(24rem, 55%);
   }
 
   .ch-side {
     flex: 1;
-    max-height: 20rem;
+    min-width: 0;
+    max-height: 24rem;
   }
 
   .ch-moves {

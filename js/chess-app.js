@@ -384,11 +384,13 @@
     return m;
   }
 
-  function applyMove(move, silent) {
-    if (!silent) pushUndo();
+  function applyMove(move, opts) {
+    const silent = opts === true || (opts && opts.silent);
+    const recordUndo = opts !== true && (!opts || opts.recordUndo !== false);
+    if (recordUndo && !silent) pushUndo();
     const res = game.move(move);
     if (!res) {
-      if (!silent) {
+      if (recordUndo && !silent) {
         undoStack.pop();
         updateUndoButtons();
       }
@@ -539,25 +541,43 @@
       return;
     }
     thinking = true;
+    updateUndoButtons();
     if (!engine.isReady()) setStatus("Loading engine…");
     else refreshStatus();
     const ms = DIFF_MS[difficulty] || 1500;
+    const fenAtRequest = game.fen();
 
     engine.init()
-      .then(() => engine.getBestMove(game.fen(), ms))
+      .then(() => engine.getBestMove(fenAtRequest, ms))
       .then((uci) => {
         thinking = false;
-        if (!uci || gameOver) {
+        if (gameOver || game.fen() !== fenAtRequest) {
           refreshStatus();
+          updateUndoButtons();
           return;
         }
-        applyMove(uciToMove(uci));
+        if (!uci) {
+          refreshStatus();
+          updateUndoButtons();
+          return;
+        }
+        const res = applyMove(uciToMove(uci), { recordUndo: false });
+        if (!res) {
+          renderBoard();
+          renderMoves();
+          setStatus("Engine returned an invalid move");
+          refreshStatus();
+          updateUndoButtons();
+        }
       })
       .catch(() => {
         thinking = false;
         hideChessLoad();
+        renderBoard();
+        renderMoves();
         setStatus("Engine unavailable");
         refreshStatus();
+        updateUndoButtons();
       });
   }
 

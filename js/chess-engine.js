@@ -6,22 +6,26 @@
   const SEARCH_EXTRA_MS = 15000;
 
   let worker = null;
-  let ready = false;
+  let uciOk = false;
+  let engineReady = false;
   let initPromise = null;
   let initReject = null;
   let pending = null;
+  let activeSearchId = 0;
 
   function handleLine(line) {
     if (!line) return;
     const text = String(line).trim();
     if (!text) return;
-    if (text.startsWith("uciok") || text.startsWith("readyok")) ready = true;
+    if (text.startsWith("uciok")) uciOk = true;
+    if (text.startsWith("readyok")) engineReady = true;
     if (text.startsWith("bestmove ") && pending) {
       const match = text.match(/bestmove (\S+)/);
-      const resolve = pending.resolve;
-      clearTimeout(pending.timer);
+      const job = pending;
+      if (job.id !== activeSearchId) return;
       pending = null;
-      resolve(match && match[1] !== "(none)" ? match[1] : null);
+      clearTimeout(job.timer);
+      job.resolve(match && match[1] !== "(none)" ? match[1] : null);
     }
   }
 
@@ -29,7 +33,7 @@
     String(data).split(/\r?\n/).forEach((raw) => handleLine(raw));
   }
 
-  function failEngine(err) {
+  function failInit(err) {
     if (pending) {
       clearTimeout(pending.timer);
       pending.reject(err);
@@ -39,7 +43,20 @@
       initReject(err);
       initReject = null;
     }
+    initPromise = null;
     terminate();
+  }
+
+  function waitFor(condFn, timeoutMs = READY_TIMEOUT_MS) {
+    return new Promise((resolve, reject) => {
+      const deadline = Date.now() + timeoutMs;
+      const tick = () => {
+        if (condFn()) resolve();
+        else if (Date.now() >= deadline) reject(new Error("Engine ready timeout"));
+        else setTimeout(tick, 20);
+      };
+      tick();
+    });
   }
 
   function spawnWorker() {
@@ -47,7 +64,7 @@
     worker = new Worker(WORKER_URL);
     worker.onmessage = (e) => handleMessage(e.data);
     worker.onerror = () => {
-      failEngine(new Error("Engine worker failed"));
+      failInit(new Error("Engine worker failed"));
     };
   }
 
@@ -56,39 +73,25 @@
     worker.postMessage(cmd);
   }
 
-  function waitReady(timeoutMs = READY_TIMEOUT_MS) {
-    return new Promise((resolve, reject) => {
-      if (ready) {
-        resolve();
-        return;
-      }
-      const deadline = Date.now() + timeoutMs;
-      const tick = () => {
-        if (ready) resolve();
-        else if (Date.now() >= deadline) reject(new Error("Engine ready timeout"));
-        else setTimeout(tick, 20);
-      };
-      tick();
-    });
-  }
-
   function init() {
     if (initPromise) return initPromise;
     initPromise = new Promise((resolve, reject) => {
       initReject = reject;
       const timeout = setTimeout(() => {
-        failEngine(new Error("Engine init timeout"));
+        failInit(new Error("Engine init timeout"));
       }, INIT_TIMEOUT_MS);
 
       try {
         spawnWorker();
-        ready = false;
+        uciOk = false;
+        engineReady = false;
         send("uci");
-        waitReady()
+        waitFor(() => uciOk)
           .then(() => {
-            ready = false;
+            send("ucinewgame");
+            engineReady = false;
             send("isready");
-            return waitReady();
+            return waitFor(() => engineReady);
           })
           .then(() => {
             clearTimeout(timeout);
@@ -97,15 +100,11 @@
           })
           .catch((err) => {
             clearTimeout(timeout);
-            initReject = null;
-            initPromise = null;
-            reject(err);
+            failInit(err);
           });
       } catch (err) {
         clearTimeout(timeout);
-        initReject = null;
-        initPromise = null;
-        reject(err);
+        failInit(err);
       }
     });
     return initPromise;
@@ -114,18 +113,22 @@
   function getBestMove(fen, movetimeMs = 1000) {
     const searchMs = Math.max(100, movetimeMs | 0);
     return init().then(() => new Promise((resolve, reject) => {
+      const id = ++activeSearchId;
       if (pending) {
         send("stop");
         clearTimeout(pending.timer);
-        pending.reject(new Error("Interrupted"));
+        const prev = pending;
+        pending = null;
+        prev.reject(new Error("Interrupted"));
       }
       const timer = setTimeout(() => {
-        if (!pending) return;
+        if (!pending || pending.id !== id) return;
         send("stop");
-        pending.reject(new Error("Search timeout"));
+        const job = pending;
         pending = null;
+        job.reject(new Error("Search timeout"));
       }, searchMs + SEARCH_EXTRA_MS);
-      pending = { resolve, reject, timer };
+      pending = { id, resolve, reject, timer };
       send(`position fen ${fen}`);
       send(`go movetime ${searchMs}`);
     }));
@@ -146,10 +149,17 @@
       worker.terminate();
       worker = null;
     }
-    ready = false;
+    uciOk = false;
+    engineReady = false;
     initPromise = null;
     initReject = null;
   }
 
-  window.ChessEngine = { init, getBestMove, stop, terminate, isReady: () => ready };
+  window.ChessEngine = {
+    init,
+    getBestMove,
+    stop,
+    terminate,
+    isReady: () => engineReady,
+  };
 })();
