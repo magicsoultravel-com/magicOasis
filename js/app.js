@@ -78,6 +78,7 @@
   let settingsOpen = false;
   let menuOpen = false;
   let menuPinned = false;
+  let menuSelectPending = false;
   let confirmCallback = null;
   let quoteSplashActive = false;
   let cellPickerOpen = false;
@@ -1190,7 +1191,6 @@
   }
 
   function openSeeds() {
-    closeMenu();
     renderSeeds();
     seedsDialog.showModal();
   }
@@ -1326,7 +1326,6 @@
   }
 
   function openLessons() {
-    closeMenu();
     if (!lessonsBasics.childElementCount) {
       fillLessons(lessonsBasics, LessonsBasics);
       fillLessons(lessonsAdvanced, LessonsAdvanced);
@@ -1337,7 +1336,6 @@
 
   function openSettings(context) {
     if (settingsOpen) return;
-    closeMenu();
     const ctx = context || getSettingsContext();
     settingsOpen = true;
     if (btnSettings && ctx.view === "game") btnSettings.classList.add("active");
@@ -1412,9 +1410,21 @@
     selectCell(nr, nc);
   }
 
-  btnMenu.addEventListener("click", toggleMenu);
+  btnMenu?.addEventListener("click", toggleMenu);
   btnMenuPin?.addEventListener("click", () => {
     setMenuPinned(!menuPinned);
+  });
+  navMenu?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!e.target.closest(".theme-picker")) {
+      Appearance.closeThemePicker?.();
+    }
+  });
+  navMenu?.addEventListener("pointerdown", (e) => {
+    if (e.target.closest("select")) menuSelectPending = true;
+  });
+  navMenu?.addEventListener("change", (e) => {
+    if (e.target.closest("select")) menuSelectPending = false;
   });
   btnZen?.addEventListener("click", () => {
     setZen(true);
@@ -1472,11 +1482,17 @@
     if (e.target === seedsDialog) seedsDialog.close();
   });
   document.addEventListener("click", (e) => {
+    if (menuSelectPending) {
+      menuSelectPending = false;
+      return;
+    }
     if (
       menuOpen &&
       !menuPinned &&
       !e.target.closest("#nav-menu") &&
-      !e.target.closest("#btn-menu")
+      !e.target.closest("#btn-menu") &&
+      !e.target.closest(".theme-picker-menu") &&
+      !e.target.closest("dialog[open]")
     ) {
       closeMenu();
     }

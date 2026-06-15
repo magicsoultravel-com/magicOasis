@@ -158,7 +158,8 @@ const Appearance = (() => {
       opt.innerHTML = `<span class="theme-option-swatch" style="background:${theme.swatch}" aria-hidden="true"></span><span>${theme.label}</span>`;
       opt.classList.toggle("active", theme.id === activeId);
       opt.setAttribute("aria-selected", theme.id === activeId ? "true" : "false");
-      opt.addEventListener("click", () => {
+      opt.addEventListener("click", (e) => {
+        e.stopPropagation();
         setTheme(theme.id);
         closeThemePicker();
       });
