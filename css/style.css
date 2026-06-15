@@ -346,6 +346,26 @@ html[data-scenery-sky="sunset"] .app-scenery-strip--sky-sunset {
   opacity: 0.16;
 }
 
+html[data-scenery-biome="bamboo"] .app-scenery {
+  color: color-mix(in srgb, var(--accent) 42%, var(--text-muted));
+}
+
+html[data-scenery-biome="bamboo"] .app-scenery-tile {
+  opacity: 0.22;
+}
+
+html[data-scenery-biome="bamboo"] .app-scenery-tile:nth-child(odd) {
+  opacity: 0.24;
+}
+
+html[data-scenery-biome="evergreen"] .app-scenery-tile {
+  opacity: 0.2;
+}
+
+html[data-scenery-biome="evergreen"] .app-scenery-tile:nth-child(odd) {
+  opacity: 0.22;
+}
+
 .app-scenery-tile--sky {
   opacity: 0.18;
 }
@@ -663,14 +683,6 @@ body > .app {
 .quotes-menu-search:focus {
   outline: 2px solid var(--accent-soft);
   border-color: var(--accent);
-}
-
-.menu-themes-label {
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-muted);
 }
 
 .ambience-body {

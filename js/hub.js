@@ -163,7 +163,7 @@
 
     if (shouldShowHubOnLoad()) {
       setHubView(true);
-      window.Scenery?.initScenery?.();
+      window.Scenery?.ensureReady?.();
       return true;
     }
 

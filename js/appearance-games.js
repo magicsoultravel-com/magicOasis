@@ -17,6 +17,7 @@
         ],
         get: () => window.Scenery?.getSceneryBiome?.() ?? "palms",
         set: (v) => window.Scenery?.applySceneryBiome?.(v),
+        onChange: () => window.Scenery?.relayout?.(),
       },
       {
         id: "scenerySky",
@@ -31,6 +32,7 @@
         ],
         get: () => window.Scenery?.getScenerySky?.() ?? "none",
         set: (v) => window.Scenery?.applyScenerySky?.(v),
+        onChange: () => window.Scenery?.relayout?.(),
       },
       {
         id: "sceneryMotion",

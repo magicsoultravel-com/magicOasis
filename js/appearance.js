@@ -203,12 +203,6 @@ const Appearance = (() => {
     return section;
   }
 
-  function initMenuTheme(container) {
-    if (!container || container.dataset.ready) return;
-    container.appendChild(buildThemeSection());
-    container.dataset.ready = "1";
-  }
-
   function buildChoiceRow(gameId, choice) {
     const row = document.createElement("div");
     row.className = "appearance-choice-row";
@@ -235,6 +229,7 @@ const Appearance = (() => {
         chips.querySelectorAll(".appearance-chip").forEach((chip) => {
           chip.classList.toggle("active", chip.dataset.value === opt.id);
         });
+        choice.onChange?.();
         onThemeChanged?.();
       });
       chips.appendChild(btn);
@@ -424,7 +419,6 @@ const Appearance = (() => {
     setTheme,
     getTheme,
     initTheme,
-    initMenuTheme,
     initThemePicker,
     closeThemePicker,
     setOnThemeChanged,

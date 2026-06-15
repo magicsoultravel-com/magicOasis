@@ -30,23 +30,24 @@
     '<path fill="currentColor" d="M41 50 C70 52 80 64 80 76 C66 58 52 52 41 50 Z"/>';
 
   const BAMBOO_PATHS =
-    '<path fill="currentColor" d="M9 118 L25 118 L24 38 L10 38 Z"/>' +
-    '<path fill="currentColor" d="M7 54 H27 V58 H7 Z"/>' +
-    '<path fill="currentColor" d="M7 74 H27 V78 H7 Z"/>' +
-    '<path fill="currentColor" d="M7 94 H27 V98 H7 Z"/>' +
-    '<path fill="currentColor" d="M18 44 C26 34 34 22 40 10 C30 24 22 36 14 46 Z"/>' +
-    '<path fill="currentColor" d="M18 32 C28 22 36 10 42 0 C32 12 24 24 16 34 Z"/>' +
-    '<path fill="currentColor" d="M27 118 L43 118 L42 22 L26 22 Z"/>' +
-    '<path fill="currentColor" d="M24 38 H44 V42 H24 Z"/>' +
-    '<path fill="currentColor" d="M24 58 H44 V62 H24 Z"/>' +
-    '<path fill="currentColor" d="M24 78 H44 V82 H24 Z"/>' +
-    '<path fill="currentColor" d="M24 98 H44 V102 H24 Z"/>' +
-    '<path fill="currentColor" d="M36 28 C44 18 52 8 56 0 C46 10 38 20 32 30 Z"/>' +
-    '<path fill="currentColor" d="M36 16 C46 6 56 0 62 0 C52 8 42 16 34 24 Z"/>' +
-    '<path fill="currentColor" d="M47 118 L63 118 L62 46 L46 46 Z"/>' +
-    '<path fill="currentColor" d="M44 64 H64 V68 H44 Z"/>' +
-    '<path fill="currentColor" d="M44 84 H64 V88 H44 Z"/>' +
-    '<path fill="currentColor" d="M54 54 C62 44 70 32 74 20 C64 32 56 44 50 54 Z"/>';
+    '<path fill="currentColor" d="M6 118 L28 118 L27 28 L7 28 Z"/>' +
+    '<path fill="currentColor" d="M4 48 H30 V54 H4 Z"/>' +
+    '<path fill="currentColor" d="M4 68 H30 V74 H4 Z"/>' +
+    '<path fill="currentColor" d="M4 88 H30 V94 H4 Z"/>' +
+    '<path fill="currentColor" d="M4 108 H30 V114 H4 Z"/>' +
+    '<path fill="currentColor" d="M16 42 C26 30 36 16 42 2 C32 16 22 30 12 44 Z"/>' +
+    '<path fill="currentColor" d="M16 28 C28 16 38 4 46 0 C34 12 24 24 14 36 Z"/>' +
+    '<path fill="currentColor" d="M25 118 L47 118 L46 16 L24 16 Z"/>' +
+    '<path fill="currentColor" d="M22 32 H48 V38 H22 Z"/>' +
+    '<path fill="currentColor" d="M22 52 H48 V58 H22 Z"/>' +
+    '<path fill="currentColor" d="M22 72 H48 V78 H22 Z"/>' +
+    '<path fill="currentColor" d="M22 92 H48 V98 H22 Z"/>' +
+    '<path fill="currentColor" d="M34 24 C44 14 54 4 60 0 C48 10 38 20 30 32 Z"/>' +
+    '<path fill="currentColor" d="M34 10 C46 2 58 0 66 0 C54 8 42 16 32 26 Z"/>' +
+    '<path fill="currentColor" d="M46 118 L68 118 L67 40 L45 40 Z"/>' +
+    '<path fill="currentColor" d="M42 58 H68 V64 H42 Z"/>' +
+    '<path fill="currentColor" d="M42 78 H68 V84 H42 Z"/>' +
+    '<path fill="currentColor" d="M52 48 C62 38 72 26 78 14 C68 26 58 38 48 50 Z"/>';
 
   const GRASS_BLADE =
     'fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" vector-effect="non-scaling-stroke"';
@@ -244,11 +245,6 @@
     return normalizeSky(raw);
   }
 
-  function getSceneryType() {
-    const biome = getSceneryBiome();
-    return biome === "none" ? "palms" : biome;
-  }
-
   function applySceneryBiome(value) {
     const biome = normalizeBiome(value);
     rootEl.dataset.sceneryBiome = biome;
@@ -258,8 +254,9 @@
     } catch {
       /* storage unavailable */
     }
+    showScenery();
     lastBiomeLayout = null;
-    queueLayout();
+    scheduleLayout(true);
   }
 
   function applyScenerySky(value) {
@@ -270,12 +267,9 @@
     } catch {
       /* storage unavailable */
     }
+    showScenery();
     lastSkyLayout = null;
-    queueLayout();
-  }
-
-  function applySceneryType(type) {
-    applySceneryBiome(type === "none" ? "none" : normalizeBiome(type));
+    scheduleLayout(true);
   }
 
   function applySceneryMotion(mode) {
@@ -306,12 +300,24 @@
     Object.values(biomeStrips).forEach(clearStrip);
   }
 
+  function clearInactiveBiomeStrips(activeBiome) {
+    Object.entries(biomeStrips).forEach(([id, strip]) => {
+      if (id !== activeBiome) clearStrip(strip);
+    });
+  }
+
   function clearAllSkyStrips() {
     Object.values(skyStrips).forEach(clearStrip);
   }
 
+  function clearInactiveSkyStrips(activeSky) {
+    Object.entries(skyStrips).forEach(([id, strip]) => {
+      if (id !== activeSky) clearStrip(strip);
+    });
+  }
+
   function fillStrip(strip, tileMarkup, tileWidth, tileHeight, count, layer) {
-    if (!strip || count < 1 || tileWidth < 1 || tileHeight < 1 || !Number.isFinite(count)) return;
+    if (!strip || count < 1 || tileWidth < 1 || tileHeight < 1 || !Number.isFinite(count)) return false;
     strip.innerHTML = "";
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < count; i += 1) {
@@ -320,6 +326,7 @@
     strip.appendChild(fragment);
     strip.style.setProperty("--scenery-unit-width", `${tileWidth}px`);
     strip.style.setProperty("--scenery-tile-height", `${tileHeight}px`);
+    return true;
   }
 
   function tileCount(tileWidth) {
@@ -346,10 +353,13 @@
     if (lastBiomeLayout === layoutKey) return;
     lastBiomeLayout = layoutKey;
 
-    clearAllBiomeStrips();
+    clearInactiveBiomeStrips(biome);
     const strip = biomeStrips[biome];
     const tile = BIOME_TILES[biome];
-    if (strip && tile) fillStrip(strip, tile, tileWidth, tileHeight, count, "biome");
+    if (strip && tile) {
+      const filled = fillStrip(strip, tile, tileWidth, tileHeight, count, "biome");
+      if (!filled) console.warn(`Scenery: failed to fill biome strip "${biome}"`);
+    }
   }
 
   function layoutSkyBand() {
@@ -370,10 +380,13 @@
     if (lastSkyLayout === layoutKey) return;
     lastSkyLayout = layoutKey;
 
-    clearAllSkyStrips();
+    clearInactiveSkyStrips(sky);
     const strip = skyStrips[sky];
     const tile = SKY_TILES[sky];
-    if (strip && tile) fillStrip(strip, tile, tileWidth, tileHeight, count, "sky");
+    if (strip && tile) {
+      const filled = fillStrip(strip, tile, tileWidth, tileHeight, count, "sky");
+      if (!filled) console.warn(`Scenery: failed to fill sky strip "${sky}"`);
+    }
   }
 
   function layoutScenery() {
@@ -393,17 +406,18 @@
     layoutScenery();
   }
 
-  function queueLayout() {
+  function scheduleLayout(force = false) {
+    if (force) layoutQueued = false;
     if (layoutQueued) return;
     layoutQueued = true;
     requestAnimationFrame(runLayout);
   }
 
-  function debouncedQueueLayout() {
+  function debouncedScheduleLayout() {
     if (debounceTimer) clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       debounceTimer = null;
-      queueLayout();
+      scheduleLayout();
     }, DEBOUNCE_MS);
   }
 
@@ -415,9 +429,6 @@
 
   function showScenery() {
     if (sceneryEl) sceneryEl.hidden = false;
-    lastBiomeLayout = null;
-    lastSkyLayout = null;
-    queueLayout();
   }
 
   function initScenery() {
@@ -425,18 +436,23 @@
     applyScenerySky(getScenerySky());
     applySceneryMotion(getSceneryMotion());
     showScenery();
+    scheduleLayout(true);
 
     if (sceneryInitialized) return;
     sceneryInitialized = true;
 
-    window.addEventListener("resize", debouncedQueueLayout);
-    window.addEventListener("orientationchange", debouncedQueueLayout);
+    window.addEventListener("resize", debouncedScheduleLayout);
+    window.addEventListener("orientationchange", debouncedScheduleLayout);
+  }
+
+  function ensureReady() {
+    initScenery();
   }
 
   function relayout() {
     lastBiomeLayout = null;
     lastSkyLayout = null;
-    queueLayout();
+    scheduleLayout(true);
   }
 
   window.Scenery = {
@@ -444,11 +460,10 @@
     applySceneryBiome,
     getScenerySky,
     applyScenerySky,
-    getSceneryType,
-    applySceneryType,
     getSceneryMotion,
     applySceneryMotion,
     initScenery,
+    ensureReady,
     relayout,
     hideScenery,
     showScenery,

@@ -122,7 +122,7 @@
       const splashActive = splash && !splash.hidden;
       if (app && !app.classList.contains("is-ready") && !splashActive) {
         app.classList.add("is-ready");
-        window.Scenery?.showScenery?.();
+        window.Scenery?.ensureReady?.();
       }
     }, 2000);
   }
@@ -248,7 +248,7 @@
     if (active !== "sudoku") {
       appEl?.classList.add("is-ready");
     }
-    window.Scenery?.initScenery?.();
+    window.Scenery?.ensureReady?.();
     Settings.applyForGame(active);
     initGame(active);
     maybeInitQuoteFooter(active);

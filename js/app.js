@@ -78,7 +78,6 @@
   let settingsOpen = false;
   let menuOpen = false;
   let menuPinned = false;
-  let menuSelectPending = false;
   let confirmCallback = null;
   let quoteSplashActive = false;
   let cellPickerOpen = false;
@@ -253,11 +252,16 @@
     syncMenuPinButton();
   }
 
+  function shouldDismissMenu(target) {
+    if (!target) return false;
+    if (target.closest("#nav-menu, #btn-menu, .theme-picker-menu, dialog[open]")) return false;
+    return true;
+  }
+
   function closeMenu() {
     if (!menuOpen) return;
     menuOpen = false;
     navMenu.hidden = true;
-    appEl.classList.remove("menu-open");
     btnMenu.classList.remove("active");
     btnMenu.setAttribute("aria-expanded", "false");
     Appearance.closeThemePicker?.();
@@ -269,7 +273,6 @@
     closeSettings();
     menuOpen = true;
     navMenu.hidden = false;
-    appEl.classList.add("menu-open");
     btnMenu.classList.add("active");
     btnMenu.setAttribute("aria-expanded", "true");
   }
@@ -1420,12 +1423,6 @@
       Appearance.closeThemePicker?.();
     }
   });
-  navMenu?.addEventListener("pointerdown", (e) => {
-    if (e.target.closest("select")) menuSelectPending = true;
-  });
-  navMenu?.addEventListener("change", (e) => {
-    if (e.target.closest("select")) menuSelectPending = false;
-  });
   btnZen?.addEventListener("click", () => {
     setZen(true);
     saveGame();
@@ -1482,18 +1479,7 @@
     if (e.target === seedsDialog) seedsDialog.close();
   });
   document.addEventListener("click", (e) => {
-    if (menuSelectPending) {
-      menuSelectPending = false;
-      return;
-    }
-    if (
-      menuOpen &&
-      !menuPinned &&
-      !e.target.closest("#nav-menu") &&
-      !e.target.closest("#btn-menu") &&
-      !e.target.closest(".theme-picker-menu") &&
-      !e.target.closest("dialog[open]")
-    ) {
+    if (menuOpen && !menuPinned && shouldDismissMenu(e.target)) {
       closeMenu();
     }
     if (
